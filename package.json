@@ -1,6 +1,12 @@
 {
   "name": "mikhailbalin.github.io",
   "packageManager": "yarn@4.1.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "devDependencies": {
     "typescript": "^5.4.3"
   },
