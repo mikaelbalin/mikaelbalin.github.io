@@ -1,5 +1,10 @@
 import React from "react";
+import Counter from "./counter";
 
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return (
+    <main>
+      Hello, Next.js! <Counter />
+    </main>
+  );
 }
