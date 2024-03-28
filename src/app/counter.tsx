@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import stylex from "@stylexjs/stylex";
+import { Checkbox } from "@mantine/core";
 
 const styles = stylex.create({
   foo: {
@@ -25,6 +26,7 @@ export default function Counter() {
       >
         Click me
       </button>
+      <Checkbox defaultChecked label="I agree to sell my privacy" />
     </div>
   );
 }
