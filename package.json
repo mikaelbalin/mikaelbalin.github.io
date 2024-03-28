@@ -8,12 +8,17 @@
     "lint": "next lint"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.24.1",
+    "@stylexjs/babel-plugin": "^0.5.1",
+    "@stylexjs/eslint-plugin": "^0.5.1",
+    "@stylexjs/nextjs-plugin": "^0.5.1",
     "@types/eslint": "^8",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.72",
     "@types/react-dom": "^18.2.22",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.4",
+    "postcss-value-parser": "^4.2.0",
     "typescript": "^5.4.3"
   },
   "dependencies": {
@@ -21,6 +26,8 @@
     "@mantine/core": "^7.7.0",
     "@mantine/form": "^7.7.0",
     "@mantine/hooks": "^7.7.0",
+    "@stylexjs/shared": "^0.5.1",
+    "@stylexjs/stylex": "^0.5.1",
     "next": "^14.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
