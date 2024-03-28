@@ -5,10 +5,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true yarn build"
   },
   "devDependencies": {
     "@babel/runtime": "^7.24.1",
+    "@next/bundle-analyzer": "^14.1.4",
     "@stylexjs/babel-plugin": "^0.5.1",
     "@stylexjs/eslint-plugin": "^0.5.1",
     "@stylexjs/nextjs-plugin": "^0.5.1",
