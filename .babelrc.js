@@ -9,18 +9,11 @@ module.exports = {
       // https://stylexjs.com/docs/api/configuration/babel-plugin/
       {
         dev: process.env.NODE_ENV === "development",
-        runtimeInjection: false,
+        runtimeInjection: true,
         genConditionalClasses: true,
         treeshakeCompensation: true,
-        // aliases: {
-        //   "@/*": [path.join(__dirname, "*")],
-        // },
-        // Required for CSS variable support
         unstable_moduleResolution: {
-          // type: 'commonJS' | 'haste'
-          // default: 'commonJS'
           type: "commonJS",
-          // The absolute path to the root directory of your project
           rootDir: __dirname,
         },
       },

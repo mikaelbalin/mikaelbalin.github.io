@@ -2,7 +2,9 @@ const stylexPlugin = require("@stylexjs/nextjs-plugin");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ["js", "jsx", "ts", "tsx"],
+  devIndicators: {
+    buildActivityPosition: "bottom-right",
+  },
 };
 
 module.exports = stylexPlugin({
