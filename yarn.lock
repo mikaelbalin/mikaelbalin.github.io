@@ -57,7 +57,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.12.3, @babel/core@npm:^7.18.9, @babel/core@npm:^7.23.0, @babel/core@npm:^7.23.2, @babel/core@npm:^7.23.6, @babel/core@npm:^7.23.9":
+"@babel/core@npm:^7.12.3, @babel/core@npm:^7.18.9, @babel/core@npm:^7.23.0, @babel/core@npm:^7.23.2, @babel/core@npm:^7.23.9":
   version: 7.24.3
   resolution: "@babel/core@npm:7.24.3"
   dependencies:
@@ -473,7 +473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-flow@npm:^7.22.5, @babel/plugin-syntax-flow@npm:^7.24.1":
+"@babel/plugin-syntax-flow@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-syntax-flow@npm:7.24.1"
   dependencies:
@@ -528,7 +528,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-jsx@npm:^7.22.5, @babel/plugin-syntax-jsx@npm:^7.23.3, @babel/plugin-syntax-jsx@npm:^7.24.1":
+"@babel/plugin-syntax-jsx@npm:^7.23.3, @babel/plugin-syntax-jsx@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-syntax-jsx@npm:7.24.1"
   dependencies:
@@ -627,7 +627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-typescript@npm:^7.22.5, @babel/plugin-syntax-typescript@npm:^7.24.1":
+"@babel/plugin-syntax-typescript@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/plugin-syntax-typescript@npm:7.24.1"
   dependencies:
@@ -1489,7 +1489,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.24.1, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.20.13, @babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.24.1
   resolution: "@babel/runtime@npm:7.24.1"
   dependencies:
@@ -1509,7 +1509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.18.9, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.23.6, @babel/traverse@npm:^7.24.1":
+"@babel/traverse@npm:^7.18.9, @babel/traverse@npm:^7.23.2, @babel/traverse@npm:^7.24.1":
   version: 7.24.1
   resolution: "@babel/traverse@npm:7.24.1"
   dependencies:
@@ -1527,7 +1527,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.18.9, @babel/types@npm:^7.20.7, @babel/types@npm:^7.22.15, @babel/types@npm:^7.22.19, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.23.4, @babel/types@npm:^7.23.6, @babel/types@npm:^7.24.0, @babel/types@npm:^7.4.4, @babel/types@npm:^7.8.3":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.18.9, @babel/types@npm:^7.20.7, @babel/types@npm:^7.22.15, @babel/types@npm:^7.22.19, @babel/types@npm:^7.22.5, @babel/types@npm:^7.23.0, @babel/types@npm:^7.23.4, @babel/types@npm:^7.24.0, @babel/types@npm:^7.4.4, @babel/types@npm:^7.8.3":
   version: 7.24.0
   resolution: "@babel/types@npm:7.24.0"
   dependencies:
@@ -3146,65 +3146,6 @@ __metadata:
     "@types/express": "npm:^4.7.0"
     file-system-cache: "npm:2.3.0"
   checksum: 10c0/2edaac05b08f5d93081af97434cdc479a30b236c6b4c3b713a2f0c821a31e64fbcf32e23417eea86b6f68057db684eb35061340b0597f893ba02bd6c22d4a059
-  languageName: node
-  linkType: hard
-
-"@stylexjs/babel-plugin@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@stylexjs/babel-plugin@npm:0.5.1"
-  dependencies:
-    "@babel/core": "npm:^7.23.6"
-    "@babel/helper-module-imports": "npm:^7.22.15"
-    "@babel/traverse": "npm:^7.23.6"
-    "@babel/types": "npm:^7.23.6"
-    "@stylexjs/shared": "npm:0.5.1"
-    "@stylexjs/stylex": "npm:0.5.1"
-  checksum: 10c0/53763efb3195a86af708f68eb9db70fb47a4e4cf40c1c6e50018add39b7802b1a89a35d62ff99282bd7a8bef9d99c824516c2526f1b19ed71941883a520bc2ac
-  languageName: node
-  linkType: hard
-
-"@stylexjs/eslint-plugin@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@stylexjs/eslint-plugin@npm:0.5.1"
-  dependencies:
-    micromatch: "npm:^4.0.5"
-  checksum: 10c0/9c83927def3b8537030c4e34db9ec3cbde82181dbb7acb552592e27414b632167b9954ed9d53a41089d1212c54267abdb40daf93bd6a8a44204d4401b0efd002
-  languageName: node
-  linkType: hard
-
-"@stylexjs/nextjs-plugin@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@stylexjs/nextjs-plugin@npm:0.5.1"
-  dependencies:
-    "@babel/core": "npm:^7.23.6"
-    "@babel/plugin-syntax-flow": "npm:^7.22.5"
-    "@babel/plugin-syntax-jsx": "npm:^7.22.5"
-    "@babel/plugin-syntax-typescript": "npm:^7.22.5"
-    "@stylexjs/babel-plugin": "npm:^0.5.1"
-  peerDependencies:
-    next: ">=14.0.1"
-  checksum: 10c0/9295c7ee408f29d7a201af7493efba077208c63c89ed0986a846b0b80b192632a1baa3ecdce7370e24acd390b254a1c30054b0dde1439559180d5b6d2db6fe7b
-  languageName: node
-  linkType: hard
-
-"@stylexjs/shared@npm:0.5.1, @stylexjs/shared@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@stylexjs/shared@npm:0.5.1"
-  dependencies:
-    postcss-value-parser: "npm:^4.1.0"
-  checksum: 10c0/3d6968251951f18072c4d186111b7715050683548da84247f48fe8b65884574543100fc4a01c4741e0df6747badc6286330e253e5836edaa87f2a64a9a52e00b
-  languageName: node
-  linkType: hard
-
-"@stylexjs/stylex@npm:0.5.1, @stylexjs/stylex@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@stylexjs/stylex@npm:0.5.1"
-  dependencies:
-    css-mediaquery: "npm:^0.1.2"
-    invariant: "npm:^2.2.4"
-    styleq: "npm:0.1.3"
-    utility-types: "npm:^3.10.0"
-  checksum: 10c0/047d2362c351f3886e4a09956644e0a8fcccad639963515cf4ca1c952297b544e9569f87828d08808372b870b7c4bca9da67a3a664b4513d82194a98185e80d5
   languageName: node
   linkType: hard
 
@@ -5548,13 +5489,6 @@ __metadata:
     webpack:
       optional: true
   checksum: 10c0/acadd2a93f505bf8a8d1c6912a476ef953585f195412b6aa1f2581053bcce8563b833f2a6666c1e1521f4b35fb315176563495a38933becc89e3143cfa7dce45
-  languageName: node
-  linkType: hard
-
-"css-mediaquery@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "css-mediaquery@npm:0.1.2"
-  checksum: 10c0/b7825a78f52ce8a8198e004fcad0d7be1d3c9a0463ecd05ba31a0f2c94fb81468ad6f4d7bf715a6ca775696e7a17500c2a339b5216a6d0f789cbf78f9454d048
   languageName: node
   linkType: hard
 
@@ -9040,7 +8974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
+"micromatch@npm:^4.0.2, micromatch@npm:^4.0.4":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
   dependencies:
@@ -9054,7 +8988,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikhailbalin.github.io@workspace:."
   dependencies:
-    "@babel/runtime": "npm:^7.24.1"
     "@chromatic-com/storybook": "npm:^1.2.25"
     "@mantine/code-highlight": "npm:^7.7.0"
     "@mantine/core": "npm:^7.7.0"
@@ -9069,11 +9002,6 @@ __metadata:
     "@storybook/nextjs": "npm:^8.0.5"
     "@storybook/react": "npm:^8.0.5"
     "@storybook/test": "npm:^8.0.5"
-    "@stylexjs/babel-plugin": "npm:^0.5.1"
-    "@stylexjs/eslint-plugin": "npm:^0.5.1"
-    "@stylexjs/nextjs-plugin": "npm:^0.5.1"
-    "@stylexjs/shared": "npm:^0.5.1"
-    "@stylexjs/stylex": "npm:^0.5.1"
     "@types/eslint": "npm:^8"
     "@types/node": "npm:^20.11.30"
     "@types/react": "npm:^18.2.72"
@@ -9082,7 +9010,6 @@ __metadata:
     eslint-config-next: "npm:^14.1.4"
     eslint-plugin-storybook: "npm:^0.8.0"
     next: "npm:^14.1.4"
-    postcss-value-parser: "npm:^4.2.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     storybook: "npm:^8.0.5"
@@ -11945,13 +11872,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styleq@npm:0.1.3":
-  version: 0.1.3
-  resolution: "styleq@npm:0.1.3"
-  checksum: 10c0/975d951792e65052f1f6e41aaad46492642ce4922b3dc36d4b49b37c8509f9a776794d8f275360f00116a5e6ab1e31514bdcd5840656c4e3213da6803fa12941
-  languageName: node
-  linkType: hard
-
 "supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
@@ -12752,13 +12672,6 @@ __metadata:
   version: 0.4.0
   resolution: "utila@npm:0.4.0"
   checksum: 10c0/2791604e09ca4f77ae314df83e80d1805f867eb5c7e13e7413caee01273c278cf2c9a3670d8d25c889a877f7b149d892fe61b0181a81654b425e9622ab23d42e
-  languageName: node
-  linkType: hard
-
-"utility-types@npm:^3.10.0":
-  version: 3.11.0
-  resolution: "utility-types@npm:3.11.0"
-  checksum: 10c0/2f1580137b0c3e6cf5405f37aaa8f5249961a76d26f1ca8efc0ff49a2fc0e0b2db56de8e521a174d075758e0c7eb3e590edec0832eb44478b958f09914920f19
   languageName: node
   linkType: hard
 

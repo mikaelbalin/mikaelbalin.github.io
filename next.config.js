@@ -1,4 +1,3 @@
-const stylexPlugin = require("@stylexjs/nextjs-plugin");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -14,6 +13,4 @@ const nextConfig = {
   },
 };
 
-module.exports = stylexPlugin({
-  rootDir: __dirname,
-})(withBundleAnalyzer(nextConfig));
+module.exports = withBundleAnalyzer(nextConfig);
