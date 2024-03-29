@@ -1,23 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import stylex from "@stylexjs/stylex";
 import { Checkbox } from "@mantine/core";
 
-const styles = stylex.create({
-  foo: {
-    color: "green",
-  },
-  bar: {
-    backgroundColor: "blanchedalmond",
-  },
-});
-
-export default function Counter() {
+export const Counter = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <div {...stylex.props(styles.foo, styles.bar)}>
+    <div>
       <p>You clicked {count} times</p>
       <button
         onClick={() => {
@@ -29,4 +19,4 @@ export default function Counter() {
       <Checkbox defaultChecked label="I agree to sell my privacy" />
     </div>
   );
-}
+};
