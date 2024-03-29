@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Checkbox } from "@mantine/core";
+import styles from "./counter.module.css";
 
 export const Counter = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <div className={styles.root}>
       <p>You clicked {count} times</p>
       <button
         onClick={() => {
