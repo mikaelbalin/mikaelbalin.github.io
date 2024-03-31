@@ -5,5 +5,9 @@
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.nodePath": ".yarn/sdks"
+  "eslint.nodePath": ".yarn/sdks",
+  "cssVariables.lookupFiles": [
+    "**/*.css",
+    "node_modules/@mantine/core/styles.css"
+  ]
 }

@@ -28,6 +28,9 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.4",
     "eslint-plugin-storybook": "^0.8.0",
+    "postcss": "^8.4.38",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1",
     "storybook": "^8.0.5",
     "typescript": "^5.4.3",
     "webpack": "^5.91.0"
