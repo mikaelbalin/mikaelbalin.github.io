@@ -1,6 +1,6 @@
 "use client";
 
-import { AppShell, AppShellFooter, Burger } from "@mantine/core";
+import { Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HeaderMenu } from "../components/HeaderMenu";
 import { Footer } from "../components/Footer";
@@ -10,14 +10,14 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
-    <AppShell header={{ height: 60 }} padding="md">
-      <AppShell.Header>
+    <div className={styles.container}>
+      <header className={styles.header}>
         <HeaderMenu />
-      </AppShell.Header>
-      <AppShell.Main>{children}</AppShell.Main>
-      <AppShellFooter className={styles.footer}>
+      </header>
+      <main className={styles.main}>{children}</main>
+      <footer className={styles.footer}>
         <Footer />
-      </AppShellFooter>
-    </AppShell>
+      </footer>
+    </div>
   );
 }

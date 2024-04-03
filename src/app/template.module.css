@@ -1,3 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  border-bottom: 1px solid #ccc;
+}
+
+.main {
+  /* Styles for main content area */
+}
+
 .footer {
-  position: static;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
 }
