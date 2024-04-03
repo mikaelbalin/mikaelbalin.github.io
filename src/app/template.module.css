@@ -2,17 +2,19 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 .header {
   border-bottom: 1px solid #ccc;
+  position: absolute;
+  width: 100%;
 }
 
 .main {
-  /* Styles for main content area */
+  flex: 1;
 }
 
 .footer {
   border-top: 1px solid #ccc;
-  margin-top: auto;
 }
