@@ -22,11 +22,9 @@ export function Footer() {
   ));
 
   return (
-    <div className={classes.footer}>
-      <Container className={classes.inner}>
-        Mikhail Balin
-        <Group className={classes.links}>{items}</Group>
-      </Container>
-    </div>
+    <Container className={classes.inner}>
+      Mikhail Balin
+      <Group className={classes.links}>{items}</Group>
+    </Container>
   );
 }

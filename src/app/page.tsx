@@ -1,10 +1,10 @@
 import React from "react";
-import { Counter } from "./counter";
+import { HeaderBackground } from "../components/HeaderBackground";
 
 export default function Page() {
   return (
-    <main>
-      Hello, Next.js! <Counter />
-    </main>
+    <div>
+      <HeaderBackground />
+    </div>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
-import { AppShell, Burger } from "@mantine/core";
+import { AppShell, AppShellFooter, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { HeaderMenu } from "../components/HeaderMenu";
 import { Footer } from "../components/Footer";
+import styles from "./template.module.css";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const [opened, { toggle }] = useDisclosure();
@@ -14,9 +15,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         <HeaderMenu />
       </AppShell.Header>
       <AppShell.Main>{children}</AppShell.Main>
-      <AppShell.Footer>
+      <AppShellFooter className={styles.footer}>
         <Footer />
-      </AppShell.Footer>
+      </AppShellFooter>
     </AppShell>
   );
 }
