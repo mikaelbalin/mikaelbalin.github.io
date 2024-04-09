@@ -1,10 +1,10 @@
 import React from "react";
-import { HeaderBackground } from "../components/HeaderBackground";
+import { HeroBackground } from "../components/HeroBackground";
 
 export default function Page() {
   return (
     <div>
-      <HeaderBackground />
+      <HeroBackground />
     </div>
   );
 }
