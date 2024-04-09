@@ -5,6 +5,14 @@ import React, { useEffect, useRef } from "react";
 const SQUARE_SIZE = 60;
 const ANIMATION_DURATION = 2000;
 
+/**
+ * Linearly interpolates between two values.
+ *
+ * @param start - The starting value.
+ * @param end - The ending value.
+ * @param t - The interpolation factor, ranging from 0 to 1.
+ * @returns The interpolated value.
+ */
 const lerp = (start: number, end: number, t: number) =>
   start * (1 - t) + end * t;
 
@@ -28,6 +36,11 @@ class Square {
   }
 }
 
+/**
+ * Returns a random selection of squares from the given array.
+ * @param squares - An array of squares.
+ * @returns A random selection of squares.
+ */
 const getRandomSquares = (squares: Square[]) => {
   let squaresCopy = [...squares];
   for (let i = squaresCopy.length - 1; i > 0; i--) {
@@ -37,6 +50,13 @@ const getRandomSquares = (squares: Square[]) => {
   return squaresCopy.slice(0, Math.floor(Math.random() * 11));
 };
 
+/**
+ * Draws squares on the canvas.
+ *
+ * @param ctx - The rendering context of the canvas.
+ * @param canvas - The HTML canvas element.
+ * @returns An array of Square objects that were drawn on the canvas.
+ */
 const drawSquares = (
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement
@@ -53,6 +73,13 @@ const drawSquares = (
   });
 };
 
+/**
+ * Resizes the canvas element and redraws the squares.
+ *
+ * @param canvas - The canvas element to resize.
+ * @param ctx - The 2D rendering context of the canvas.
+ * @returns The result of the drawSquares function.
+ */
 const resizeCanvas = (
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D
@@ -63,6 +90,11 @@ const resizeCanvas = (
   return drawSquares(ctx, canvas);
 };
 
+/**
+ * Renders a hero background with animated squares on a canvas element.
+ *
+ * @returns The HeroBackground component.
+ */
 export const HeroBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
