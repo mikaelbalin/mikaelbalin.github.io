@@ -99,6 +99,7 @@ export const HeroBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const squares = useRef<Square[]>([]);
   const animationFrameId = useRef<number | null>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -155,23 +156,68 @@ export const HeroBackground = () => {
     };
   }, []);
 
-  function update(x: number, y: number) {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+  useEffect(() => {
+    let previousSquare: {
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+    } | null = null;
 
-    if (!ctx || !canvas) return;
+    const update = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext("2d");
 
-    ctx.fillStyle = `rgb(240, 237, 231)`;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      if (!ctx || !canvas) return;
 
-    ctx.beginPath();
-    ctx.arc(x, y, 50, 0, 2 * Math.PI, true);
-    ctx.fillStyle = "#FF6A6A";
-    ctx.fill();
-  }
+      const { x, y } = mousePos.current;
+
+      squares.current.forEach((square, index) => {
+        const isWithinSquareXRange =
+          x >= square.xPos && x <= square.xPos + square.width;
+        const isWithinSquareYRange =
+          y >= square.yPos && y <= square.yPos + square.height;
+
+        if (isWithinSquareXRange && isWithinSquareYRange) {
+          if (previousSquare) {
+            ctx.fillStyle = `rgb(240, 237, 231)`;
+            ctx.fillRect(
+              previousSquare.x,
+              previousSquare.y,
+              previousSquare.w,
+              previousSquare.h
+            );
+          }
+
+          previousSquare = {
+            x: square.xPos,
+            y: square.yPos - SQUARE_SIZE,
+            w: square.width,
+            h: square.height + SQUARE_SIZE,
+          };
+
+          ctx.fillStyle = `rgba(203, 193, 174, 1)`;
+          ctx.fillRect(square.xPos, square.yPos, square.width, square.height);
+
+          ctx.fillStyle = `rgba(203, 193, 174, 0.8)`;
+          ctx.fillRect(
+            square.xPos,
+            square.yPos - SQUARE_SIZE,
+            square.width,
+            square.height
+          );
+        }
+      });
+
+      requestAnimationFrame(update);
+    };
+
+    update();
+  }, []);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    update(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    const { nativeEvent } = event;
+    mousePos.current = { x: nativeEvent.offsetX, y: nativeEvent.offsetY };
   };
 
   return <canvas ref={canvasRef} onMouseMove={handleMouseMove} />;
