@@ -3548,12 +3548,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.12.6":
-  version: 20.12.6
-  resolution: "@types/node@npm:20.12.6"
+"@types/node@npm:^20.12.7":
+  version: 20.12.7
+  resolution: "@types/node@npm:20.12.7"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/48ce732162cd6c02656aa5f996f0e695b57fdeb1ae762fbaa966afac2dcdcf52cb56be5ce1efb4babf8f97c2de545889aebc7f43c2e86f033487245c41fa1e6b
+  checksum: 10c0/dce80d63a3b91892b321af823d624995c61e39c6a223cc0ac481a44d337640cc46931d33efb3beeed75f5c85c3bda1d97cef4c5cd4ec333caf5dee59cff6eca0
   languageName: node
   linkType: hard
 
@@ -9088,7 +9088,7 @@ __metadata:
     "@storybook/test": "npm:^8.0.6"
     "@tabler/icons-react": "npm:^3.1.0"
     "@types/eslint": "npm:^8.56.7"
-    "@types/node": "npm:^20.12.6"
+    "@types/node": "npm:^20.12.7"
     "@types/react": "npm:^18.2.75"
     "@types/react-dom": "npm:^18.2.24"
     clsx: "npm:^2.1.0"
@@ -9097,7 +9097,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.8.0"
     next: "npm:^14.1.4"
     postcss: "npm:^8.4.38"
-    postcss-preset-mantine: "npm:^1.13.0"
+    postcss-preset-mantine: "npm:^1.14.0"
     postcss-simple-vars: "npm:^7.0.1"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -10319,15 +10319,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-preset-mantine@npm:^1.13.0":
-  version: 1.13.0
-  resolution: "postcss-preset-mantine@npm:1.13.0"
+"postcss-preset-mantine@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "postcss-preset-mantine@npm:1.14.0"
   dependencies:
     postcss-mixins: "npm:^9.0.4"
     postcss-nested: "npm:^6.0.1"
   peerDependencies:
     postcss: ">=8.0.0"
-  checksum: 10c0/750c9b0b8350320ec5ddf77a4a8cdf4c88ce41609ca7d4648afd5d7feedfe4e6d778a84e722233ed99f7487de7558c7b9cd3a25f92be2460ec5d4cd26e23ceb2
+  checksum: 10c0/f2e3ac62a9d2dc64b955f0fbd6ce922183cab5caa747f7f12245ff335be2350c8a53fefa086c25e8dd83065a5d4a0ae80c0bd75af7a859fd942891b368233539
   languageName: node
   linkType: hard
 
