@@ -97,6 +97,7 @@ const resizeCanvas = (
  */
 export const HeroBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const squares = useRef<Square[]>([]);
   const animationFrameId = useRef<number | null>(null);
 
   useEffect(() => {
@@ -105,11 +106,11 @@ export const HeroBackground = () => {
 
     if (!canvas || !ctx) return;
 
-    let squares = resizeCanvas(canvas, ctx);
+    squares.current = resizeCanvas(canvas, ctx);
 
     const animate = () => {
       let start: DOMHighResTimeStamp | null = null;
-      let randomSquares: Square[] = getRandomSquares(squares);
+      let randomSquares: Square[] = getRandomSquares(squares.current);
 
       const redraw = (time: DOMHighResTimeStamp = 0) => {
         if (!start) {
@@ -131,7 +132,7 @@ export const HeroBackground = () => {
         if (elapsed < ANIMATION_DURATION) {
           animationFrameId.current = requestAnimationFrame(redraw);
         } else {
-          randomSquares = getRandomSquares(squares);
+          randomSquares = getRandomSquares(squares.current);
           start = null;
           redraw();
         }
@@ -141,7 +142,7 @@ export const HeroBackground = () => {
     };
 
     const handleResize = () => {
-      squares = resizeCanvas(canvas, ctx);
+      squares.current = resizeCanvas(canvas, ctx);
     };
     animate();
 
@@ -154,5 +155,24 @@ export const HeroBackground = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} />;
+  function update(x: number, y: number) {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+
+    if (!ctx || !canvas) return;
+
+    ctx.fillStyle = `rgb(240, 237, 231)`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 50, 0, 2 * Math.PI, true);
+    ctx.fillStyle = "#FF6A6A";
+    ctx.fill();
+  }
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    update(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+  };
+
+  return <canvas ref={canvasRef} onMouseMove={handleMouseMove} />;
 };
