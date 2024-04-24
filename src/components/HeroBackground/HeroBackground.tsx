@@ -30,9 +30,23 @@ class Square {
     this.y = y;
   }
 
-  draw(context: CanvasRenderingContext2D, rgb: string = "240, 237, 231") {
-    context.fillStyle = `rgba(${rgb}, ${this.opacity})`;
-    context.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+  draw(ctx: CanvasRenderingContext2D, rgb: string = "240, 237, 231") {
+    ctx.fillStyle = `rgba(${rgb}, ${this.opacity})`;
+    ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+  }
+
+  animate(ctx: CanvasRenderingContext2D, elapsed: number) {
+    if (this.opacity !== "0.00") return;
+
+    ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+
+    this.opacity = lerp(
+      0,
+      1,
+      Math.min(1, elapsed / ANIMATION_DURATION)
+    ).toFixed(2);
+
+    this.draw(ctx);
   }
 }
 
@@ -93,6 +107,51 @@ const resizeCanvas = (
 };
 
 /**
+ * Draws the hover effect on the canvas.
+ *
+ * @param ctx - The canvas rendering context.
+ * @param canvas - The HTML canvas element.
+ * @param mousePos - A mutable ref object containing the current mouse position.
+ * @param squares - A mutable ref object containing an array of Square objects.
+ */
+const drawHover = (
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  mousePos: React.MutableRefObject<{ x: number; y: number }>,
+  squares: React.MutableRefObject<Square[]>
+) => {
+  ctx.fillStyle = `rgba(240, 237, 231, 1)`;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const { x, y } = mousePos.current;
+
+  squares.current.forEach((square) => {
+    // Calculate the distance between the mouse and the center of the square.
+    const dx = (x - square.xPos - SQUARE_SIZE / 2) / 1.5;
+    const dy = (y - square.yPos - SQUARE_SIZE / 2) / 1.5;
+
+    // Calculate the distance between two points using the Pythagorean theorem.
+    const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
+
+    // Calculate the opacity based on the distance
+    const opacity = Math.max(0, 1 - distance / 100).toFixed(2);
+
+    square.opacity = opacity;
+    square.draw(ctx, "203, 193, 174");
+  });
+};
+
+const animateRandomSquares = (
+  randomSquares: Square[],
+  ctx: CanvasRenderingContext2D,
+  elapsed: number
+) => {
+  randomSquares.forEach((square) => {
+    square.animate(ctx, elapsed);
+  });
+};
+
+/**
  * Renders a hero background with animated squares on a canvas element.
  *
  * @returns The HeroBackground component.
@@ -107,95 +166,34 @@ export const HeroBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
 
-    const clearCanvas = () => {
-      if (!ctx || !canvas) return;
-
-      ctx.fillStyle = `rgba(240, 237, 231, 1)`;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    };
-
-    const drawHover = (opacity: string, square: Square) => {
-      if (!ctx) return;
-
-      square.opacity = opacity;
-      square.draw(ctx, "203, 193, 174");
-    };
-
-    const update = () => {
-      if (!ctx || !canvas) return;
-
-      clearCanvas();
-
-      const { x, y } = mousePos.current;
-
-      squares.current.forEach((square) => {
-        // Calculate the distance between the mouse and the center of the square.
-        const dx = (x - square.xPos - SQUARE_SIZE / 2) / 1.5;
-        const dy = (y - square.yPos - SQUARE_SIZE / 2) / 1.5;
-
-        // Calculates the distance between two points using the Pythagorean theorem.
-        const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
-
-        // Calculate the opacity based on the distance
-        const opacity = Math.max(0, 1 - distance / 100).toFixed(2);
-
-        drawHover(opacity, square);
-      });
-
-      requestAnimationFrame(update);
-    };
-
-    update();
-  }, []);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-
     if (!canvas || !ctx) return;
 
     squares.current = resizeCanvas(canvas, ctx);
-
-    const animate = () => {
-      let start: DOMHighResTimeStamp | null = null;
-      let randomSquares: Square[] = getRandomSquares(squares.current);
-
-      const redraw = (time: DOMHighResTimeStamp = 0) => {
-        if (!start) {
-          start = time;
-        }
-
-        const elapsed = time - start;
-
-        randomSquares.forEach((square) => {
-          if (square.opacity !== "0.00") return;
-
-          ctx.clearRect(square.xPos, square.yPos, SQUARE_SIZE, SQUARE_SIZE);
-
-          square.opacity = lerp(
-            0,
-            1,
-            Math.min(1, elapsed / ANIMATION_DURATION)
-          ).toFixed(2);
-          square.draw(ctx);
-        });
-
-        if (elapsed < ANIMATION_DURATION) {
-          animationFrameId.current = requestAnimationFrame(redraw);
-        } else {
-          start = null;
-          randomSquares = getRandomSquares(squares.current);
-          redraw();
-        }
-      };
-
-      redraw();
-    };
-
     const handleResize = () => {
       squares.current = resizeCanvas(canvas, ctx);
     };
-    animate();
+
+    let start: DOMHighResTimeStamp | null = null;
+    let randomSquares: Square[] = getRandomSquares(squares.current);
+
+    (function redraw(time: DOMHighResTimeStamp = 0) {
+      if (!start) {
+        start = time;
+      }
+
+      const elapsed = time - start;
+
+      drawHover(ctx, canvas, mousePos, squares);
+      animateRandomSquares(randomSquares, ctx, elapsed);
+
+      if (elapsed < ANIMATION_DURATION) {
+        animationFrameId.current = requestAnimationFrame(redraw);
+      } else {
+        start = null;
+        randomSquares = getRandomSquares(squares.current);
+        redraw();
+      }
+    })();
 
     window.addEventListener("resize", handleResize, false);
     return () => {
