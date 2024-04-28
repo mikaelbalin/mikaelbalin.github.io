@@ -1,32 +1,46 @@
-import { useState } from "react";
-import { Switch, useMantineTheme, rem } from "@mantine/core";
-import { IconCheck, IconX } from "@tabler/icons-react";
+import {
+  Switch,
+  useMantineTheme,
+  rem,
+  useMantineColorScheme,
+  useComputedColorScheme,
+} from "@mantine/core";
+import { IconSunHigh, IconMoon } from "@tabler/icons-react";
+import classes from "./ColorSchemeToggle.module.css";
 
-function Demo() {
+export const ColorSchemeToggle = () => {
   const theme = useMantineTheme();
-  const [checked, setChecked] = useState(false);
+  const { setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
+
+  const isLightScheme = computedColorScheme === "light";
+
   return (
     <Switch
-      checked={checked}
-      onChange={(event) => setChecked(event.currentTarget.checked)}
-      color="teal"
+      checked={!isLightScheme}
+      onChange={(event) => setColorScheme(isLightScheme ? "dark" : "light")}
       size="md"
-      label="Switch with thumb icon"
+      classNames={{
+        track: classes.track,
+        thumb: classes.thumb,
+      }}
       thumbIcon={
-        checked ? (
-          <IconCheck
+        isLightScheme ? (
+          <IconSunHigh
             style={{ width: rem(12), height: rem(12) }}
-            color={theme.colors.teal[6]}
+            color="#101010"
             stroke={3}
           />
         ) : (
-          <IconX
+          <IconMoon
             style={{ width: rem(12), height: rem(12) }}
-            color={theme.colors.red[6]}
+            color={theme.white}
             stroke={3}
           />
         )
       }
     />
   );
-}
+};

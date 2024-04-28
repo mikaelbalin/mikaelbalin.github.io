@@ -22,3 +22,17 @@
     display: block;
   }
 }
+
+.thumb {
+  @mixin dark {
+    background-color: #101010;
+  }
+}
+
+.track {
+  background-color: #101010;
+
+  @mixin dark {
+    background-color: var(--mantine-color-white);
+  }
+}
