@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import classes from "./HeroBackground.module.css";
 
 const SQUARE_SIZE = 60;
 const ANIMATION_DURATION = 2000;
@@ -209,5 +210,11 @@ export const HeroBackground = () => {
     mousePos.current = { x: nativeEvent.offsetX, y: nativeEvent.offsetY };
   };
 
-  return <canvas ref={canvasRef} onMouseMove={handleMouseMove} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      onMouseMove={handleMouseMove}
+      className={classes.canvas}
+    />
+  );
 };
