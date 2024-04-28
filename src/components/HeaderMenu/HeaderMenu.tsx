@@ -4,6 +4,8 @@ import { Menu, Group, Center, Burger, Container } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
 import classes from "./HeaderMenu.module.css";
+import Link from "next/link";
+import { ColorSchemeToggle } from "../ColorSchemeToggle";
 
 const links = [
   { link: "/about", label: "Features" },
@@ -78,7 +80,10 @@ export function HeaderMenu() {
   return (
     <Container size="md">
       <div className={classes.inner}>
-        Mikhail Balin
+        <Link href="/" className={classes.linkMain}>
+          Mikhail Balin
+        </Link>
+        <ColorSchemeToggle />
         <Group gap={5} visibleFrom="sm">
           {items}
         </Group>

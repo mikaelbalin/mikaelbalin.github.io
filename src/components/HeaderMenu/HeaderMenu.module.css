@@ -34,3 +34,10 @@
 .linkLabel {
   margin-right: rem(5px);
 }
+
+.linkMain {
+  font-size: 20px;
+  line-height: 28px;
+  color: #101010;
+  text-decoration: none;
+}
