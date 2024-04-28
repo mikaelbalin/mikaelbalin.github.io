@@ -1,4 +1,4 @@
-.header {
+/* .header {
   height: rem(56px);
   margin-bottom: rem(120px);
   background-color: var(--mantine-color-body);
@@ -33,11 +33,60 @@
 
 .linkLabel {
   margin-right: rem(5px);
+} */
+
+.header {
+  height: rem(60px);
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
-.linkMain {
-  font-size: 20px;
-  line-height: 28px;
-  color: #101010;
+.link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
   text-decoration: none;
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  font-weight: 500;
+  font-size: var(--mantine-font-size-sm);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: rem(42px);
+    width: 100%;
+  }
+
+  /* @mixin hover {
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-6)
+    );
+  } */
+}
+
+.languageButton {
+  width: 100%;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-lg);
+  border-radius: var(--mantine-radius-md);
+
+  /* @mixin hover {
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-7)
+    );
+  } */
+}
+
+.hoverCardDropdown {
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-dark-7)
+  );
+  border-radius: 0;
+  padding: rem(16px);
+  padding-right: rem(24px);
+  border: rem(1px) solid light-dark(#cbc1ae, var(--mantine-color-dark-5));
 }
