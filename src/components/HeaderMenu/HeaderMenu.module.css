@@ -39,14 +39,13 @@
   height: rem(60px);
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
-  border-bottom: rem(1px) solid
-    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
 
 .link {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: rem(42px);
+  width: 100%;
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
   text-decoration: none;
@@ -54,9 +53,9 @@
   font-weight: 500;
   font-size: var(--mantine-font-size-sm);
 
-  @media (max-width: $mantine-breakpoint-sm) {
-    height: rem(42px);
-    width: 100%;
+  @mixin larger-than $mantine-breakpoint-sm {
+    height: 100%;
+    width: auto;
   }
 
   /* @mixin hover {

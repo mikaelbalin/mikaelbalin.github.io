@@ -1,8 +1,10 @@
-import { MantineProvider } from "@mantine/core";
 import type { Preview } from "@storybook/react";
 import React from "react";
-import { theme } from "../src/theme";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "../src/theme";
 import "@mantine/core/styles.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const preview: Preview = {
   parameters: {
@@ -15,10 +17,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <MantineProvider theme={theme}>
-        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-        <Story />
-      </MantineProvider>
+      <div className={inter.className}>
+        <ThemeProvider>
+          {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+          <Story />
+        </ThemeProvider>
+      </div>
     ),
   ],
 };

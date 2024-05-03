@@ -20,7 +20,7 @@ import {
   Menu,
   Container,
 } from "@mantine/core";
-
+import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCode, IconCoin, IconChevronDown } from "@tabler/icons-react";
 import classes from "./HeaderMenu.module.css";
@@ -99,7 +99,7 @@ export function HeaderMenu() {
 
           <Group gap="xl">
             <Group h="100%" gap={0} visibleFrom="sm">
-              <Anchor href="#" className={classes.link}>
+              <Anchor href="#" component={Link} c="primary">
                 Blog
               </Anchor>
               <Anchor href="#" className={classes.link}>
