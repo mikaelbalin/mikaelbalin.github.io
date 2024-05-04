@@ -1,0 +1,41 @@
+.root {
+  --gap: 3rem;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+.content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  animation: scroll 10s linear infinite;
+}
+
+.item {
+  font-size: rem(104);
+  line-height: 118%;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+/* Pause animation when reduced-motion is set */
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    animation-play-state: paused;
+  }
+}

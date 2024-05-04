@@ -1,0 +1,9 @@
+.root {
+  position: relative;
+  min-height: 100vh;
+}
+
+.location {
+  position: relative;
+  text-align: end;
+}

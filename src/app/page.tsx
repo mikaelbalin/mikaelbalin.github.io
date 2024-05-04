@@ -1,10 +1,16 @@
 import React from "react";
-import { HeroBackground } from "../components/HeroBackground";
+import { Hero } from "../components/Hero";
+import { About } from "../components/About";
+import { BlogPosts } from "../components/BlogPosts";
+import { Subscription } from "../components/Subscription";
 
 export default function Page() {
   return (
-    <div>
-      <HeroBackground />
-    </div>
+    <>
+      <Hero />
+      <About />
+      <BlogPosts />
+      <Subscription />
+    </>
   );
 }

@@ -1,9 +1,14 @@
 "use client";
 
-import { Anchor, DEFAULT_THEME, createTheme } from "@mantine/core";
+import {
+  Anchor,
+  DEFAULT_THEME,
+  createTheme,
+  mergeMantineTheme,
+} from "@mantine/core";
 import { Button } from "./components";
 
-export const theme = createTheme({
+const themeOverride = createTheme({
   fontFamily: `Inter, ${DEFAULT_THEME.fontFamily}`,
   white: "#FDFCF9",
   black: "#101010",
@@ -36,3 +41,5 @@ export const theme = createTheme({
     transitionColor: "background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms",
   },
 });
+
+export const theme = mergeMantineTheme(DEFAULT_THEME, themeOverride);

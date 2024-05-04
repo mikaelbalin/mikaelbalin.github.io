@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import classes from "./HeroBackground.module.css";
+import { MantineThemeOther, alpha, useMantineTheme } from "@mantine/core";
+import { useColorScheme } from "@mantine/hooks";
 
 const SQUARE_SIZE = 60;
 const ANIMATION_DURATION = 2000;
@@ -20,7 +22,7 @@ const lerp = (start: number, end: number, t: number) =>
 class Square {
   readonly xPos: number;
   readonly yPos: number;
-  opacity: string = "1";
+  opacity: number = 1;
   x: number = 0;
   y: number = 0;
 
@@ -31,23 +33,31 @@ class Square {
     this.y = y;
   }
 
-  draw(ctx: CanvasRenderingContext2D, rgb: string = "240, 237, 231") {
-    ctx.fillStyle = `rgba(${rgb}, ${this.opacity})`;
+  draw(ctx: CanvasRenderingContext2D, color: string) {
+    ctx.fillStyle = alpha(color, this.opacity);
     ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+
+    // add text
+    // ctx.fillStyle = "black";
+    // ctx.font = "bold 12px Arial";
+    // ctx.textAlign = "center";
+    // ctx.fillText(
+    //   `${this.opacity}`,
+    //   this.xPos + SQUARE_SIZE / 2,
+    //   this.yPos + SQUARE_SIZE / 2
+    // );
   }
 
-  animate(ctx: CanvasRenderingContext2D, elapsed: number) {
-    if (this.opacity !== "0.00") return;
+  animate(ctx: CanvasRenderingContext2D, elapsed: number, color: string) {
+    if (this.opacity !== 0) return;
 
     ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
 
-    this.opacity = lerp(
-      0,
-      1,
-      Math.min(1, elapsed / ANIMATION_DURATION)
-    ).toFixed(2);
+    this.opacity = Number(
+      lerp(0, 1, Math.min(1, elapsed / ANIMATION_DURATION)).toFixed(2)
+    );
 
-    this.draw(ctx);
+    this.draw(ctx, color);
   }
 }
 
@@ -74,7 +84,8 @@ const getRandomSquares = (squares: Square[]) => {
  */
 const drawSquares = (
   ctx: CanvasRenderingContext2D,
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement,
+  color: string
 ) => {
   const numX = Math.ceil(canvas.width / SQUARE_SIZE);
   const numY = Math.ceil(canvas.height / SQUARE_SIZE);
@@ -85,7 +96,7 @@ const drawSquares = (
     const xPos = x * SQUARE_SIZE;
     const yPos = y * SQUARE_SIZE;
     const square = new Square(xPos, yPos, x, y);
-    square.draw(ctx);
+    square.draw(ctx, color);
     return square;
   });
 };
@@ -99,12 +110,13 @@ const drawSquares = (
  */
 const resizeCanvas = (
   canvas: HTMLCanvasElement,
-  ctx: CanvasRenderingContext2D
+  ctx: CanvasRenderingContext2D,
+  color: string
 ) => {
   canvas.width = document.documentElement.clientWidth;
   canvas.height = document.documentElement.clientHeight;
 
-  return drawSquares(ctx, canvas);
+  return drawSquares(ctx, canvas, color);
 };
 
 /**
@@ -119,9 +131,10 @@ const drawHover = (
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   mousePos: React.MutableRefObject<{ x: number; y: number }>,
-  squares: React.MutableRefObject<Square[]>
+  squares: React.MutableRefObject<Square[]>,
+  colors: MantineThemeOther
 ) => {
-  ctx.fillStyle = `rgba(240, 237, 231, 1)`;
+  ctx.fillStyle = colors.appLightColorBeige;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const { x, y } = mousePos.current;
@@ -137,18 +150,19 @@ const drawHover = (
     // Calculate the opacity based on the distance
     const opacity = Math.max(0, 1 - distance / 100).toFixed(2);
 
-    square.opacity = opacity;
-    square.draw(ctx, "203, 193, 174");
+    square.opacity = Number(opacity);
+    square.draw(ctx, colors.appLightColorBeigeDark);
   });
 };
 
 const animateRandomSquares = (
   randomSquares: Square[],
   ctx: CanvasRenderingContext2D,
-  elapsed: number
+  elapsed: number,
+  color: string
 ) => {
   randomSquares.forEach((square) => {
-    square.animate(ctx, elapsed);
+    square.animate(ctx, elapsed, color);
   });
 };
 
@@ -158,6 +172,9 @@ const animateRandomSquares = (
  * @returns The HeroBackground component.
  */
 export const HeroBackground = () => {
+  const colorScheme = useColorScheme();
+  const theme = useMantineTheme();
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const squares = useRef<Square[]>([]);
   const animationFrameId = useRef<number | null>(null);
@@ -169,9 +186,14 @@ export const HeroBackground = () => {
 
     if (!canvas || !ctx) return;
 
-    squares.current = resizeCanvas(canvas, ctx);
+    const color =
+      colorScheme === "light"
+        ? theme.other.appLightColorBeige
+        : theme.other.appDarkColorCoalBlackLight;
+
+    squares.current = resizeCanvas(canvas, ctx, color);
     const handleResize = () => {
-      squares.current = resizeCanvas(canvas, ctx);
+      squares.current = resizeCanvas(canvas, ctx, color);
     };
 
     let start: DOMHighResTimeStamp | null = null;
@@ -184,8 +206,13 @@ export const HeroBackground = () => {
 
       const elapsed = time - start;
 
-      drawHover(ctx, canvas, mousePos, squares);
-      animateRandomSquares(randomSquares, ctx, elapsed);
+      drawHover(ctx, canvas, mousePos, squares, theme.other);
+      animateRandomSquares(
+        randomSquares,
+        ctx,
+        elapsed,
+        theme.other.appLightColorBeige
+      );
 
       if (elapsed < ANIMATION_DURATION) {
         animationFrameId.current = requestAnimationFrame(redraw);
@@ -203,7 +230,7 @@ export const HeroBackground = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, []);
+  }, [colorScheme, theme.other]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
     const { nativeEvent } = event;

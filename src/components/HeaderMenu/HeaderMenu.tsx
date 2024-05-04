@@ -92,8 +92,8 @@ export function HeaderMenu() {
   );
 
   return (
-    <Box>
-      <header className={classes.header}>
+    <>
+      <Container className={classes.root}>
         <Group justify="space-between" h="100%">
           <Logo />
 
@@ -133,7 +133,7 @@ export function HeaderMenu() {
             />
           </Group>
         </Group>
-      </header>
+      </Container>
 
       <Drawer.Root
         opened={drawerOpened}
@@ -169,7 +169,7 @@ export function HeaderMenu() {
           </Drawer.Body>
         </Drawer.Content>
       </Drawer.Root>
-    </Box>
+    </>
   );
 }
 
