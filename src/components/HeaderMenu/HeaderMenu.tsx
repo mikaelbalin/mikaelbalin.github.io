@@ -99,7 +99,7 @@ export function HeaderMenu() {
 
           <Group gap="xl">
             <Group h="100%" gap={0} visibleFrom="sm">
-              <Anchor href="#" component={Link} c="primary">
+              <Anchor href="/blog" component={Link} c="primary">
                 Blog
               </Anchor>
               <Anchor href="#" className={classes.link}>
