@@ -6,7 +6,7 @@ import {
   createTheme,
   mergeMantineTheme,
 } from "@mantine/core";
-import { Button } from "./components";
+import { Button, Badge, Chip } from "./components";
 
 const themeOverride = createTheme({
   fontFamily: `Inter, ${DEFAULT_THEME.fontFamily}`,
@@ -26,6 +26,8 @@ const themeOverride = createTheme({
       },
     }),
     Button,
+    Badge,
+    Chip,
   },
   // primaryColor: "grape",
   defaultRadius: 0,
