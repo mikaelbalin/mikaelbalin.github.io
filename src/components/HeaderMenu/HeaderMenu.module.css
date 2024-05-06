@@ -29,14 +29,3 @@
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-lg);
   border-radius: var(--mantine-radius-md);
 }
-
-/* .hoverCardDropdown {
-  background-color: light-dark(
-    var(--mantine-color-gray-0),
-    var(--mantine-color-dark-7)
-  );
-  border-radius: 0;
-  padding: rem(16px);
-  padding-right: rem(24px);
-  border: rem(1px) solid light-dark(#cbc1ae, var(--mantine-color-dark-5));
-} */
