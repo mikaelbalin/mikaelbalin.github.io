@@ -19,12 +19,9 @@
     width: auto;
   }
 
-  /* @mixin hover {
-    background-color: light-dark(
-      var(--mantine-color-gray-0),
-      var(--mantine-color-dark-6)
-    );
-  } */
+  @mixin hover {
+    color: light-dark(var(--mantine-color-dark-3), var(--mantine-color-gray-0));
+  }
 }
 
 .languageButton {
@@ -33,7 +30,7 @@
   border-radius: var(--mantine-radius-md);
 }
 
-.hoverCardDropdown {
+/* .hoverCardDropdown {
   background-color: light-dark(
     var(--mantine-color-gray-0),
     var(--mantine-color-dark-7)
@@ -42,4 +39,4 @@
   padding: rem(16px);
   padding-right: rem(24px);
   border: rem(1px) solid light-dark(#cbc1ae, var(--mantine-color-dark-5));
-}
+} */

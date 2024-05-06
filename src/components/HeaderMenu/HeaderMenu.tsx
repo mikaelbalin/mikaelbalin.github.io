@@ -1,13 +1,10 @@
 "use client";
 
-import { ColorSchemeToggle } from "../ColorSchemeToggle";
+import { MouseEventHandler, useState } from "react";
 import {
-  HoverCard,
   Group,
   UnstyledButton,
   Text,
-  SimpleGrid,
-  ThemeIcon,
   Anchor,
   Center,
   Box,
@@ -15,121 +12,162 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
-  rem,
   useMantineTheme,
   Menu,
   Container,
 } from "@mantine/core";
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
-import { IconCode, IconCoin, IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import classes from "./HeaderMenu.module.css";
+import { ColorSchemeToggle } from "../ColorSchemeToggle";
 import { Logo } from "../Logo";
 
-const links = [
-  { link: "/about", label: "Features" },
-  {
-    link: "#1",
-    label: "Learn",
-    links: [
-      { link: "/docs", label: "Documentation" },
-      { link: "/resources", label: "Resources" },
-      { link: "/community", label: "Community" },
-      { link: "/blog", label: "Blog" },
-    ],
-  },
-  { link: "/about", label: "About" },
-  { link: "/pricing", label: "Pricing" },
-  {
-    link: "#2",
-    label: "Support",
-    links: [
-      { link: "/faq", label: "FAQ" },
-      { link: "/demo", label: "Book a demo" },
-      { link: "/forums", label: "Forums" },
-    ],
-  },
+type MenuItem = {
+  link: string;
+  label: string;
+  links?: Omit<MenuItem, "links">[];
+};
+
+const menuItems: MenuItem[] = [
+  { link: "/blog", label: "Blog" },
+  { link: "#about", label: "About" },
+  { link: "/contact", label: "Contact" },
 ];
 
-const languages = [
-  {
-    title: "Portuguese",
-  },
-  {
-    title: "German",
-  },
+const languageMenuItems: MenuItem[] = [
+  { link: "/", label: "English" },
+  { link: "/pt", label: "Portugais" },
+  { link: "/de", label: "Deutsch" },
+  { link: "/fr", label: "Français" },
 ];
 
-export function HeaderMenu() {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks, open, close }] =
-    useDisclosure(false);
+const LangugeToggle = ({
+  label,
+  linksOpened,
+}: {
+  label: string;
+  linksOpened: boolean;
+}) => {
   const theme = useMantineTheme();
 
-  const languageButtons = languages.map((item) => (
-    <UnstyledButton className={classes.languageButton} key={item.title}>
-      <Text size="sm" fw={500}>
-        {item.title}
-      </Text>
-    </UnstyledButton>
-  ));
-
-  const langugeToggle = (
-    <Center inline>
+  return (
+    <>
       <Box component="span" mr={5}>
-        English
+        {label}
       </Box>
       <IconChevronDown
+        size="1rem"
         style={{
-          width: rem(16),
-          height: rem(16),
           transform: `rotate(${linksOpened ? 180 : 0}deg)`,
         }}
         color={theme.black}
       />
-    </Center>
+    </>
   );
+};
+
+export function HeaderMenu() {
+  const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
+    useDisclosure(false);
+  const [
+    linksOpened,
+    { toggle: toggleLinks, close: closeLinks, open: openLinks },
+  ] = useDisclosure(false);
+  const [languageLink, setLanguageLink] = useState<MenuItem>(
+    languageMenuItems[0]
+  );
+
+  const changeLanguage =
+    (item: MenuItem): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      setLanguageLink(item);
+      closeLinks();
+    };
+
+  const languageButtons = languageMenuItems.map((item) => (
+    <UnstyledButton
+      key={item.label}
+      className={classes.languageButton}
+      onClick={changeLanguage(item)}
+    >
+      <Text size="sm" fw={500}>
+        {item.label}
+      </Text>
+    </UnstyledButton>
+  ));
+
+  const menu = [
+    ...menuItems,
+    { ...languageLink, links: languageMenuItems },
+  ].map((link) => {
+    const menuItems = link.links?.map((item) => (
+      <Menu.Item key={item.link} onClick={changeLanguage(item)}>
+        {item.label}
+      </Menu.Item>
+    ));
+
+    if (menuItems) {
+      return (
+        <Menu
+          key={link.label}
+          trigger="click-hover"
+          closeDelay={400}
+          position="bottom-start"
+          withinPortal
+          onChange={(opened) => {
+            if (!opened) {
+              closeLinks();
+            } else {
+              openLinks();
+            }
+          }}
+        >
+          <Menu.Target>
+            <Anchor
+              component={Link}
+              href={link.link}
+              className={classes.link}
+              onClick={(event) => event.preventDefault()}
+            >
+              <Center>
+                <LangugeToggle label={link.label} linksOpened={linksOpened} />
+              </Center>
+            </Anchor>
+          </Menu.Target>
+          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+        </Menu>
+      );
+    }
+
+    return (
+      <Anchor
+        key={link.label}
+        component={Link}
+        href={link.link}
+        className={classes.link}
+        onClick={(event) => event.preventDefault()}
+      >
+        {link.label}
+      </Anchor>
+    );
+  });
 
   return (
     <>
       <Container className={classes.root}>
         <Group justify="space-between" h="100%">
           <Logo />
-
           <Group gap="xl">
-            <Group h="100%" gap={0} visibleFrom="sm">
-              <Anchor href="/blog" component={Link} c="primary">
-                Blog
-              </Anchor>
-              <Anchor href="#" className={classes.link}>
-                Contact
-              </Anchor>
-              <HoverCard
-                width={280}
-                position="bottom"
-                shadow="md"
-                withinPortal
-                onOpen={open}
-                onClose={close}
-              >
-                <HoverCard.Target>
-                  <UnstyledButton className={classes.link}>
-                    {langugeToggle}
-                  </UnstyledButton>
-                </HoverCard.Target>
-                <HoverCard.Dropdown className={classes.hoverCardDropdown}>
-                  {languageButtons}
-                </HoverCard.Dropdown>
-              </HoverCard>
+            <Group gap={5} visibleFrom="sm">
+              {menu}
             </Group>
-
             <ColorSchemeToggle />
-
             <Burger
               opened={drawerOpened}
-              onClick={toggleDrawer}
+              onClick={openDrawer}
               hiddenFrom="sm"
+              aria-label="Open navigation"
             />
           </Group>
         </Group>
@@ -138,7 +176,7 @@ export function HeaderMenu() {
       <Drawer.Root
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="xs"
+        size="md"
         padding="md"
         hiddenFrom="sm"
         position="top"
@@ -149,20 +187,22 @@ export function HeaderMenu() {
             <Logo />
             <Group gap="xl">
               <ColorSchemeToggle />
-              <Drawer.CloseButton />
+              <Burger
+                opened={drawerOpened}
+                onClick={closeDrawer}
+                aria-label="Close navigation"
+              />
             </Group>
           </Drawer.Header>
 
           <Drawer.Body>
             <ScrollArea mx="-md">
-              <Anchor href="#" className={classes.link}>
-                Blog
-              </Anchor>
-              <Anchor href="#" className={classes.link}>
-                Contact
-              </Anchor>
+              {menu.slice(0, -1)}
               <UnstyledButton className={classes.link} onClick={toggleLinks}>
-                {langugeToggle}
+                <LangugeToggle
+                  label={languageLink.label}
+                  linksOpened={linksOpened}
+                />
               </UnstyledButton>
               <Collapse in={linksOpened}>{languageButtons}</Collapse>
             </ScrollArea>
@@ -172,64 +212,3 @@ export function HeaderMenu() {
     </>
   );
 }
-
-// export function HeaderMenu() {
-//   const [opened, { toggle }] = useDisclosure(false);
-
-//   const items = links.map((link) => {
-//     const menuItems = link.links?.map((item) => (
-//       <Menu.Item key={item.link}>{item.label}</Menu.Item>
-//     ));
-
-//     if (menuItems) {
-//       return (
-//         <Menu
-//           key={link.label}
-//           trigger="hover"
-//           transitionProps={{ exitDuration: 0 }}
-//           withinPortal
-//         >
-//           <Menu.Target>
-//             <a
-//               href={link.link}
-//               className={classes.link}
-//               onClick={(event) => event.preventDefault()}
-//             >
-//               <Center>
-//                 <span className={classes.linkLabel}>{link.label}</span>
-//                 <IconChevronDown size="0.9rem" stroke={1.5} />
-//               </Center>
-//             </a>
-//           </Menu.Target>
-//           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
-//         </Menu>
-//       );
-//     }
-
-//     return (
-//       <a
-//         key={link.label}
-//         href={link.link}
-//         className={classes.link}
-//         onClick={(event) => event.preventDefault()}
-//       >
-//         {link.label}
-//       </a>
-//     );
-//   });
-
-//   return (
-//     <Container size="md">
-//       <div className={classes.inner}>
-//         <Link href="/" className={classes.linkMain}>
-//           Mikhail Balin
-//         </Link>
-//         <ColorSchemeToggle />
-//         <Group gap={5} visibleFrom="sm">
-//           {items}
-//         </Group>
-//         <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
-//       </div>
-//     </Container>
-//   );
-// }
