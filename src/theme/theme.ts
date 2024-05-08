@@ -10,6 +10,9 @@ import { Button, Badge, Chip } from "./components";
 
 const themeOverride = createTheme({
   fontFamily: `Inter, ${DEFAULT_THEME.fontFamily}`,
+  headings: {
+    fontFamily: `Inter, ${DEFAULT_THEME.headings.fontFamily}`,
+  },
   white: "#FDFCF9",
   black: "#101010",
   breakpoints: {
