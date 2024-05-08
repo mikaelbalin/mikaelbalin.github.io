@@ -8,11 +8,11 @@ import { useEffect } from "react";
 import { Contact } from "../components/Contact";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  const [springs, set] = useSpring(() => ({ y: -100 }));
+  const [springs, api] = useSpring(() => ({ y: -100 }));
 
   useEffect(() => {
-    set({ y: 0 });
-  }, [set]);
+    api.start({ y: 0 });
+  }, [api]);
 
   return (
     <div className={styles.container}>
