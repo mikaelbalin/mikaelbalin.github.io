@@ -4,15 +4,18 @@ import { Square } from "./Square";
 
 /**
  * Returns a random selection of squares from the given array.
+ *
  * @param squares - An array of squares.
  * @returns A random selection of squares.
  */
 export const getRandomSquares = (squares: Square[]) => {
   let squaresCopy = [...squares];
+
   for (let i = squaresCopy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [squaresCopy[i], squaresCopy[j]] = [squaresCopy[j], squaresCopy[i]];
   }
+
   return squaresCopy.slice(0, Math.floor(Math.random() * 11));
 };
 
@@ -32,11 +35,9 @@ export const drawSquares = (
   const numY = Math.ceil(canvas.height / SQUARE_SIZE);
 
   return Array.from({ length: numX * numY }, (_, i) => {
-    const x = i % numX;
-    const y = Math.floor(i / numX);
-    const xPos = x * SQUARE_SIZE;
-    const yPos = y * SQUARE_SIZE;
-    const square = new Square(xPos, yPos, x, y);
+    const xPos = (i % numX) * SQUARE_SIZE;
+    const yPos = Math.floor(i / numX) * SQUARE_SIZE;
+    const square = new Square(xPos, yPos);
     square.draw(ctx, color);
     return square;
   });

@@ -6,14 +6,10 @@ export class Square {
   readonly xPos: number;
   readonly yPos: number;
   opacity: number = 1;
-  x: number = 0;
-  y: number = 0;
 
-  constructor(xPos: number, yPos: number, x: number, y: number) {
+  constructor(xPos: number, yPos: number) {
     this.xPos = xPos;
     this.yPos = yPos;
-    this.x = x;
-    this.y = y;
   }
 
   draw(ctx: CanvasRenderingContext2D, color: string) {
