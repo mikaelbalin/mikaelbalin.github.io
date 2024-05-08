@@ -1,9 +1,10 @@
 .icon {
-  width: rem(22px);
-  height: rem(22px);
+  width: rem(12);
+  height: rem(12);
 }
 
 .dark {
+  color: var(--mantine-color-black);
   @mixin dark {
     display: none;
   }
@@ -14,6 +15,8 @@
 }
 
 .light {
+  color: var(--mantine-color-white);
+
   @mixin light {
     display: none;
   }
@@ -25,12 +28,12 @@
 
 .thumb {
   @mixin dark {
-    background-color: #101010;
+    background-color: var(--mantine-color-black);
   }
 }
 
 .track {
-  background-color: #101010;
+  background-color: var(--mantine-color-black);
 
   @mixin dark {
     background-color: var(--mantine-color-white);
