@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useMantineTheme } from "@mantine/core";
-import { useColorScheme } from "@mantine/hooks";
+import { useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import classes from "./HeroBackground.module.css";
 import { Square } from "./Square";
 import { ANIMATION_DURATION } from "./HeroBackground.constants";
@@ -14,7 +13,7 @@ import {
 } from "./HeroBackground.utils";
 
 export const HeroBackground = () => {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -28,14 +27,28 @@ export const HeroBackground = () => {
 
     if (!canvas || !ctx) return;
 
-    const color =
+    const squareColor =
       colorScheme === "light"
         ? theme.other.appLightColorBeige
-        : theme.other.appDarkColorCoalBlackLight;
+        : theme.other.appDarkColorCoalBlack;
 
-    squares.current = resizeCanvas(canvas, ctx, color);
+    squares.current = resizeCanvas(canvas, ctx, squareColor);
     const handleResize = () => {
-      squares.current = resizeCanvas(canvas, ctx, color);
+      squares.current = resizeCanvas(canvas, ctx, squareColor);
+    };
+
+    // let addHover = false;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // addHover = !(x < 0 || y < 0 || x > rect.width || y > rect.height);
+
+      // if (addHover) {
+      mousePos.current = { x, y };
+      // }
     };
 
     let start: DOMHighResTimeStamp | null = null;
@@ -48,13 +61,10 @@ export const HeroBackground = () => {
 
       const elapsed = time - start;
 
-      drawHover(ctx, canvas, mousePos, squares, theme.other);
-      animateRandomSquares(
-        randomSquares,
-        ctx,
-        elapsed,
-        theme.other.appLightColorBeige
-      );
+      // if (addHover) {
+      drawHover(ctx, canvas, mousePos, squares, theme.other, colorScheme);
+      // }
+      animateRandomSquares(randomSquares, ctx, elapsed, squareColor);
 
       if (elapsed < ANIMATION_DURATION) {
         animationFrameId.current = requestAnimationFrame(redraw);
@@ -65,25 +75,21 @@ export const HeroBackground = () => {
       }
     })();
 
+    window.addEventListener("mousemove", handleMouseMove, false);
     window.addEventListener("resize", handleResize, false);
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize, false);
+
       if (animationFrameId.current !== null) {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
   }, [colorScheme, theme.other]);
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
-    const { nativeEvent } = event;
-    mousePos.current = { x: nativeEvent.offsetX, y: nativeEvent.offsetY };
-  };
-
   return (
-    <canvas
-      ref={canvasRef}
-      onMouseMove={handleMouseMove}
-      className={classes.canvas}
-    />
+    <div className={classes.root}>
+      <canvas ref={canvasRef} className={classes.canvas} />
+    </div>
   );
 };

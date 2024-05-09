@@ -74,9 +74,19 @@ export const drawHover = (
   canvas: HTMLCanvasElement,
   mousePos: React.MutableRefObject<{ x: number; y: number }>,
   squares: React.MutableRefObject<Square[]>,
-  colors: MantineThemeOther
+  colors: MantineThemeOther,
+  colorScheme: "dark" | "light" | "auto"
 ) => {
-  ctx.fillStyle = colors.appLightColorBeige;
+  const hoverColor =
+    colorScheme === "light"
+      ? colors.appLightColorBeigeDark
+      : colors.appDarkColorCoalBlackLight;
+  const squareColor =
+    colorScheme === "light"
+      ? colors.appLightColorBeige
+      : colors.appDarkColorCoalBlack;
+
+  ctx.fillStyle = squareColor;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const { x, y } = mousePos.current;
@@ -90,10 +100,10 @@ export const drawHover = (
     const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
 
     // Calculate the opacity based on the distance
-    const opacity = Math.max(0, 1 - distance / 100).toFixed(2);
+    const opacity = Number(Math.max(0, 1 - distance / 100).toFixed(2));
 
-    square.opacity = Number(opacity);
-    square.draw(ctx, colors.appLightColorBeigeDark);
+    square.opacity = opacity || 1;
+    square.draw(ctx, opacity ? hoverColor : squareColor, !!opacity);
   });
 };
 

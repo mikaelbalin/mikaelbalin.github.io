@@ -1,4 +1,15 @@
+.root {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: light-dark(
+    var(--mantine-color-white),
+    var(--mantine-color-black)
+  );
+}
+
 .canvas {
   display: block;
-  position: absolute;
 }
