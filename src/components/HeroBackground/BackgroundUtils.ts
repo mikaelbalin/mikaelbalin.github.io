@@ -39,7 +39,7 @@ export class BackgroundUtils {
         : theme.other.appDarkColorCoalBlack;
   }
 
-  tick(
+  public tick(
     timeStamp: DOMHighResTimeStamp = 0,
     onAnimationFrameRequested: (id: number) => void
   ) {
@@ -64,7 +64,23 @@ export class BackgroundUtils {
     }
   }
 
-  public getRandomSquares() {
+  public resizeCanvas() {
+    this.canvas.width = document.documentElement.clientWidth;
+    this.canvas.height = document.documentElement.clientHeight;
+
+    this.drawSquares();
+  }
+
+  public setMousePos(clientX: number, clientY: number): MousePosition {
+    const rect = this.canvas.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+
+    this.mousePos = { x, y };
+    return this.mousePos;
+  }
+
+  private getRandomSquares() {
     let squaresCopy = [...this.squares];
 
     for (let i = squaresCopy.length - 1; i > 0; i--) {
@@ -88,14 +104,7 @@ export class BackgroundUtils {
     });
   }
 
-  public resizeCanvas() {
-    this.canvas.width = document.documentElement.clientWidth;
-    this.canvas.height = document.documentElement.clientHeight;
-
-    this.drawSquares();
-  }
-
-  public drawHover() {
+  private drawHover() {
     const hoverColor =
       this._colorScheme === "light"
         ? theme.other.appLightColorBeigeDark
@@ -122,18 +131,9 @@ export class BackgroundUtils {
     });
   }
 
-  public animateRandomSquares(elapsed: number) {
+  private animateRandomSquares(elapsed: number) {
     this.randomSquares.forEach((square) => {
       square.animate(this.ctx, elapsed, this.squareColor);
     });
-  }
-
-  public setMousePos(clientX: number, clientY: number): MousePosition {
-    const rect = this.canvas.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
-
-    this.mousePos = { x, y };
-    return this.mousePos;
   }
 }

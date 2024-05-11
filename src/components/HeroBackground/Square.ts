@@ -3,23 +3,31 @@ import { ANIMATION_DURATION, SQUARE_SIZE } from "./HeroBackground.constants";
 import { lerp } from "../../utils";
 
 export class Square {
-  readonly xPos: number;
-  readonly yPos: number;
-  opacity: number = 1;
-  hovering: boolean = false;
+  public readonly xPos: number;
+  public readonly yPos: number;
+  public opacity: number = 1;
+  private hovering: boolean = false;
 
   constructor(xPos: number, yPos: number) {
     this.xPos = xPos;
     this.yPos = yPos;
   }
 
-  draw(ctx: CanvasRenderingContext2D, color: string, isHovering = false) {
+  public draw(
+    ctx: CanvasRenderingContext2D,
+    color: string,
+    isHovering = false
+  ) {
     ctx.fillStyle = alpha(color, this.opacity);
     ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
     this.hovering = isHovering;
   }
 
-  animate(ctx: CanvasRenderingContext2D, elapsed: number, color: string) {
+  public animate(
+    ctx: CanvasRenderingContext2D,
+    elapsed: number,
+    color: string
+  ) {
     if (this.hovering) return;
 
     ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
