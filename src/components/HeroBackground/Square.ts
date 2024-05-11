@@ -17,15 +17,6 @@ export class Square {
     ctx.fillStyle = alpha(color, this.opacity);
     ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
     this.hovering = isHovering;
-
-    // add text
-    // ctx.fillStyle = "black";
-    // ctx.font = "bold 12px Arial";
-    // ctx.fillText(
-    //   `${this.opacity}`,
-    //   this.xPos + SQUARE_SIZE / 2,
-    //   this.yPos + SQUARE_SIZE / 2
-    // );
   }
 
   animate(ctx: CanvasRenderingContext2D, elapsed: number, color: string) {

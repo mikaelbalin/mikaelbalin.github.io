@@ -146,7 +146,6 @@ export function HeaderMenu() {
         component={Link}
         href={link.link}
         className={classes.link}
-        onClick={(event) => event.preventDefault()}
       >
         {link.label}
       </Anchor>
