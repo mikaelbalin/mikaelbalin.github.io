@@ -2,40 +2,54 @@ import { alpha } from "@mantine/core";
 import { ANIMATION_DURATION, SQUARE_SIZE } from "./HeroBackground.constants";
 import { lerp } from "../../utils";
 
+const ANIMATION_MID_POINT = ANIMATION_DURATION / 2;
+
 export class Square {
   public readonly xPos: number;
   public readonly yPos: number;
   public opacity: number = 1;
-  private hovering: boolean = false;
+  public start: DOMHighResTimeStamp | null = null;
+  private hasHover: boolean = false;
 
   constructor(xPos: number, yPos: number) {
     this.xPos = xPos;
     this.yPos = yPos;
   }
 
-  public draw(
-    ctx: CanvasRenderingContext2D,
-    color: string,
-    isHovering = false
-  ) {
+  public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
     ctx.fillStyle = alpha(color, this.opacity);
     ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
-    this.hovering = isHovering;
+    this.hasHover = hasHover;
   }
 
   public animate(
     ctx: CanvasRenderingContext2D,
-    elapsed: number,
+    timeStamp: DOMHighResTimeStamp,
     color: string
   ) {
-    if (this.hovering) return;
+    if (this.hasHover) return;
+    const elapsed = this.start ? timeStamp - this.start : 0;
 
-    ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+    if (elapsed < ANIMATION_DURATION) {
+      ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
 
-    this.opacity = Number(
-      lerp(0, 1, Math.min(1, elapsed / ANIMATION_DURATION)).toFixed(2)
-    );
+      if (elapsed <= ANIMATION_MID_POINT) {
+        this.opacity = Number(
+          lerp(1, 0, Math.min(1, elapsed / ANIMATION_MID_POINT)).toFixed(2)
+        );
+      } else {
+        this.opacity = Number(
+          lerp(
+            0,
+            1,
+            Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1)
+          ).toFixed(2)
+        );
+      }
 
-    this.draw(ctx, color);
+      this.draw(ctx, color);
+    } else {
+      this.start = null;
+    }
   }
 }

@@ -1,28 +1,14 @@
+import { Box, Button, Container, SimpleGrid, Text, rem } from "@mantine/core";
 import { HeroBackground } from "../HeroBackground";
-import classes from "./Hero.module.css";
 import { Marquee } from "../Marquee";
-import {
-  Box,
-  Button,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  rem,
-} from "@mantine/core";
 import { LiveTime } from "../LiveTime";
+import classes from "./Hero.module.css";
 
 export const Hero = () => {
   const greetings = ["Hello", "Olá", "Hallå", "Bonjour"];
 
   return (
-    <Stack
-      component="section"
-      justify="center"
-      gap={0}
-      className={classes.root}
-    >
-      <HeroBackground />
+    <HeroBackground>
       <Box mt="auto" mb="auto">
         <Marquee texts={greetings} />
         <Container mt={25}>
@@ -41,6 +27,6 @@ export const Hero = () => {
           <LiveTime />
         </Container>
       </Box>
-    </Stack>
+    </HeroBackground>
   );
 };

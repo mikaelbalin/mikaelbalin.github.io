@@ -12,11 +12,10 @@ export class BackgroundUtils {
   private readonly canvas: HTMLCanvasElement;
   private readonly ctx: CanvasRenderingContext2D;
   private squares: Square[] = [];
-  private mousePos: MousePosition = { x: 0, y: 0 };
-  private randomSquares: Square[] = [];
+  private mousePos?: MousePosition;
   private _colorScheme!: MantineColorScheme;
   private squareColor!: string;
-  private start: DOMHighResTimeStamp | null = null;
+  private activeSquares: Square[] = [];
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -26,9 +25,29 @@ export class BackgroundUtils {
     this.canvas = canvas;
     this.ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
     this.colorScheme = colorScheme;
+    this.mousePos = mousePos;
     this.resizeCanvas();
-    this.getRandomSquares();
-    this.mousePos = mousePos || this.mousePos;
+    this.addActiveSquare();
+  }
+
+  private get randomSquares() {
+    let squaresCopy = [...this.squares];
+    for (let i = squaresCopy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [squaresCopy[i], squaresCopy[j]] = [squaresCopy[j], squaresCopy[i]];
+    }
+    return squaresCopy.slice(0, Math.floor(Math.random() * 5));
+  }
+
+  private addActiveSquare() {
+    const intervalID = setInterval(() => {
+      const randomNumber = Math.floor(Math.random() * this.squares.length);
+      const randomSquare = this.squares[randomNumber];
+
+      if (this.activeSquares.length < 10) {
+        this.activeSquares.push(randomSquare);
+      }
+    }, 1000);
   }
 
   public set colorScheme(colorScheme: MantineColorScheme) {
@@ -43,25 +62,14 @@ export class BackgroundUtils {
     timeStamp: DOMHighResTimeStamp = 0,
     onAnimationFrameRequested: (id: number) => void
   ) {
-    if (!this.start) {
-      this.start = timeStamp;
-    }
-
-    const elapsed = timeStamp - this.start;
-
     this.drawHover();
-    this.animateRandomSquares(elapsed);
+    this.animateSquares(timeStamp);
 
-    if (elapsed < ANIMATION_DURATION) {
-      const id = requestAnimationFrame((time) =>
+    onAnimationFrameRequested(
+      requestAnimationFrame((time) =>
         this.tick(time, onAnimationFrameRequested)
-      );
-      onAnimationFrameRequested(id);
-    } else {
-      this.start = null;
-      this.getRandomSquares();
-      this.tick(timeStamp, onAnimationFrameRequested);
-    }
+      )
+    );
   }
 
   public resizeCanvas() {
@@ -71,24 +79,22 @@ export class BackgroundUtils {
     this.drawSquares();
   }
 
-  public setMousePos(clientX: number, clientY: number): MousePosition {
-    const rect = this.canvas.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
+  public setMousePos(mousePosition?: {
+    clientX: number;
+    clientY: number;
+  }): MousePosition | undefined {
+    if (mousePosition) {
+      const { clientX, clientY } = mousePosition;
+      const rect = this.canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-    this.mousePos = { x, y };
-    return this.mousePos;
-  }
-
-  private getRandomSquares() {
-    let squaresCopy = [...this.squares];
-
-    for (let i = squaresCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [squaresCopy[i], squaresCopy[j]] = [squaresCopy[j], squaresCopy[i]];
+      this.mousePos = { x, y };
+      return this.mousePos;
     }
 
-    this.randomSquares = squaresCopy.slice(0, Math.floor(Math.random() * 11));
+    this.mousePos = undefined;
+    return undefined;
   }
 
   private drawSquares() {
@@ -113,6 +119,7 @@ export class BackgroundUtils {
     this.ctx.fillStyle = this.squareColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+    if (!this.mousePos) return;
     const { x, y } = this.mousePos;
 
     this.squares.forEach((square) => {
@@ -131,9 +138,13 @@ export class BackgroundUtils {
     });
   }
 
-  private animateRandomSquares(elapsed: number) {
-    this.randomSquares.forEach((square) => {
-      square.animate(this.ctx, elapsed, this.squareColor);
+  private animateSquares(timeStamp: DOMHighResTimeStamp) {
+    this.activeSquares.forEach((square) => {
+      if (!square.start) {
+        square.start = timeStamp;
+      }
+
+      square.animate(this.ctx, timeStamp, this.squareColor);
     });
   }
 }

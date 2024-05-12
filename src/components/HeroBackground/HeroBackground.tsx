@@ -1,33 +1,41 @@
 "use client";
 
-import { useMantineColorScheme } from "@mantine/core";
-import { useEffect, useRef } from "react";
+import { Stack, useMantineColorScheme } from "@mantine/core";
+import { useEffect, useRef, PropsWithChildren } from "react";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
 
-export const HeroBackground = () => {
+export const HeroBackground = ({ children }: PropsWithChildren) => {
   const { colorScheme } = useMantineColorScheme();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
-  const mousePos = useRef<MousePosition>({ x: 0, y: 0 });
+  const mousePos = useRef<MousePosition | undefined>(undefined);
+  const utilsRef = useRef<BackgroundUtils | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const utils = new BackgroundUtils(canvas, colorScheme, mousePos.current);
-    utils.colorScheme = colorScheme;
+    utilsRef.current = new BackgroundUtils(
+      canvas,
+      colorScheme,
+      mousePos.current
+    );
+    utilsRef.current.colorScheme = colorScheme;
 
     const handleResize = () => {
-      utils.resizeCanvas();
+      utilsRef.current?.resizeCanvas();
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      mousePos.current = utils.setMousePos(event.clientX, event.clientY);
+      mousePos.current = utilsRef.current?.setMousePos({
+        clientX: event.clientX,
+        clientY: event.clientY,
+      });
     };
 
-    utils.tick(0, (id) => {
+    utilsRef.current.tick(0, (id) => {
       animationFrameIdRef.current = id;
     });
 
@@ -44,8 +52,18 @@ export const HeroBackground = () => {
   }, [colorScheme]);
 
   return (
-    <div className={classes.root}>
-      <canvas ref={canvasRef} className={classes.canvas} />
-    </div>
+    <Stack
+      component="section"
+      justify="center"
+      gap={0}
+      className={classes.root}
+      onMouseEnter={() => console.log("Mouse entered")}
+      onMouseLeave={() => console.log("Mouse left")}
+    >
+      <div className={classes.canvasWrapper}>
+        <canvas ref={canvasRef} className={classes.canvas} />
+      </div>
+      {children}
+    </Stack>
   );
 };
