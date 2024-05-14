@@ -1,7 +1,7 @@
 "use client";
 
 import { Stack, useMantineColorScheme } from "@mantine/core";
-import { useEffect, useRef, PropsWithChildren } from "react";
+import { useEffect, useRef, PropsWithChildren, MouseEventHandler } from "react";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
 
@@ -12,6 +12,13 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
   const animationFrameIdRef = useRef<number | null>(null);
   const mousePos = useRef<MousePosition | undefined>(undefined);
   const utilsRef = useRef<BackgroundUtils | null>(null);
+
+  const handleMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+    mousePos.current = utilsRef.current?.setMousePos({
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -28,21 +35,12 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       utilsRef.current?.resizeCanvas();
     };
 
-    const handleMouseMove = (event: MouseEvent) => {
-      mousePos.current = utilsRef.current?.setMousePos({
-        clientX: event.clientX,
-        clientY: event.clientY,
-      });
-    };
-
     utilsRef.current.tick(0, (id) => {
       animationFrameIdRef.current = id;
     });
 
-    window.addEventListener("mousemove", handleMouseMove, false);
     window.addEventListener("resize", handleResize, false);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove, false);
       window.removeEventListener("resize", handleResize, false);
 
       if (animationFrameIdRef.current !== null) {
@@ -59,6 +57,7 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       className={classes.root}
       onMouseEnter={() => console.log("Mouse entered")}
       onMouseLeave={() => console.log("Mouse left")}
+      onMouseMove={handleMouseMove}
     >
       <div className={classes.canvasWrapper}>
         <canvas ref={canvasRef} className={classes.canvas} />
