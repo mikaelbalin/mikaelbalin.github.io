@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Anchor,
-  DEFAULT_THEME,
-  createTheme,
-  mergeMantineTheme,
-} from "@mantine/core";
-import { Button, Badge, Chip } from "./components";
+import { DEFAULT_THEME, createTheme, mergeMantineTheme } from "@mantine/core";
+import { components } from "./components";
 
 const themeOverride = createTheme({
   fontFamily: `Inter, ${DEFAULT_THEME.fontFamily}`,
@@ -22,16 +17,7 @@ const themeOverride = createTheme({
     lg: "75em", // 1200px
     xl: "88em", // 1408px
   },
-  components: {
-    Anchor: Anchor.extend({
-      defaultProps: {
-        underline: "never",
-      },
-    }),
-    Button,
-    Badge,
-    Chip,
-  },
+  components,
   // primaryColor: "grape",
   defaultRadius: 0,
   colors: {},
