@@ -5,15 +5,19 @@ import { lerp } from "../../utils";
 const ANIMATION_MID_POINT = ANIMATION_DURATION / 2;
 
 export class Square {
+  public x: number;
+  public y: number;
   public readonly xPos: number;
   public readonly yPos: number;
   public opacity: number = 1;
-  public start: DOMHighResTimeStamp | null = null;
+  private start: DOMHighResTimeStamp | null = null;
   private hasHover: boolean = false;
 
-  constructor(xPos: number, yPos: number) {
+  constructor(xPos: number, yPos: number, x: number, y: number) {
     this.xPos = xPos;
     this.yPos = yPos;
+    this.x = x;
+    this.y = y;
   }
 
   public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
@@ -25,9 +29,15 @@ export class Square {
   public animate(
     ctx: CanvasRenderingContext2D,
     timeStamp: DOMHighResTimeStamp,
-    color: string
+    color: string,
+    onAnimationEnd: () => void
   ) {
     if (this.hasHover) return;
+
+    if (!this.start) {
+      this.start = timeStamp;
+    }
+
     const elapsed = this.start ? timeStamp - this.start : 0;
 
     if (elapsed < ANIMATION_DURATION) {
@@ -50,6 +60,7 @@ export class Square {
       this.draw(ctx, color);
     } else {
       this.start = null;
+      onAnimationEnd();
     }
   }
 }

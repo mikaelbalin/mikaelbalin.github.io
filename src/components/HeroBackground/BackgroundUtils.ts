@@ -30,13 +30,39 @@ export class BackgroundUtils {
     this.addActiveSquare();
   }
 
-  private get randomSquares() {
-    let squaresCopy = [...this.squares];
-    for (let i = squaresCopy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [squaresCopy[i], squaresCopy[j]] = [squaresCopy[j], squaresCopy[i]];
-    }
-    return squaresCopy.slice(0, Math.floor(Math.random() * 5));
+  private get randomSquaresGroup() {
+    const randomNumber = Math.floor(Math.random() * this.squares.length);
+    const randomSquare = this.squares[randomNumber];
+    const x = randomSquare.x;
+    const y = randomSquare.y;
+
+    const filterSquares = (condition: (square: any) => boolean) =>
+      this.squares.filter(condition);
+
+    const groupSquare = filterSquares(
+      (square) =>
+        (square.x === x && square.y === y) ||
+        (square.x === x + 1 && square.y === y) ||
+        (square.x === x && square.y === y + 1) ||
+        (square.x === x + 1 && square.y === y + 1)
+    );
+
+    const groupX = filterSquares(
+      (square) =>
+        (square.x === x && square.y === y) ||
+        (square.x === x + 1 && square.y === y)
+    );
+
+    const groupY = filterSquares(
+      (square) =>
+        (square.x === x && square.y === y) ||
+        (square.x === x && square.y === y + 1)
+    );
+
+    const groups = [groupSquare, groupX, groupY];
+    const randomGroup = groups[Math.floor(Math.random() * groups.length)];
+
+    return randomGroup;
   }
 
   private addActiveSquare() {
@@ -45,12 +71,16 @@ export class BackgroundUtils {
       const randomSquare = this.squares[randomNumber];
 
       if (this.activeSquares.length < 10) {
-        this.activeSquares.push(randomSquare);
+        if (Math.random() < 0.2) {
+          this.activeSquares.push(...this.randomSquaresGroup);
+        } else {
+          this.activeSquares.push(randomSquare);
+        }
       }
-    }, 1000);
+    }, 500);
   }
 
-  public set colorScheme(colorScheme: MantineColorScheme) {
+  private set colorScheme(colorScheme: MantineColorScheme) {
     this._colorScheme = colorScheme;
     this.squareColor =
       colorScheme === "light"
@@ -102,9 +132,14 @@ export class BackgroundUtils {
     const numY = Math.ceil(this.canvas.height / SQUARE_SIZE);
 
     this.squares = Array.from({ length: numX * numY }, (_, i) => {
-      const xPos = (i % numX) * SQUARE_SIZE;
-      const yPos = Math.floor(i / numX) * SQUARE_SIZE;
-      const square = new Square(xPos, yPos);
+      const x = i % numX;
+      const y = Math.floor(i / numX);
+      const xPos = x * SQUARE_SIZE;
+      const yPos = y * SQUARE_SIZE;
+      const animatingSquare = this.activeSquares.find(
+        (square) => square.x === x && square.y === y
+      );
+      const square = animatingSquare || new Square(xPos, yPos, x, y);
       square.draw(this.ctx, this.squareColor);
       return square;
     });
@@ -139,12 +174,12 @@ export class BackgroundUtils {
   }
 
   private animateSquares(timeStamp: DOMHighResTimeStamp) {
-    this.activeSquares.forEach((square) => {
-      if (!square.start) {
-        square.start = timeStamp;
-      }
-
-      square.animate(this.ctx, timeStamp, this.squareColor);
+    [...this.activeSquares].forEach((square) => {
+      square.animate(this.ctx, timeStamp, this.squareColor, () => {
+        this.activeSquares = this.activeSquares.filter(
+          (activeSquare) => activeSquare !== square
+        );
+      });
     });
   }
 }

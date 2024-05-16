@@ -1,12 +1,15 @@
 "use client";
 
-import { Stack, useMantineColorScheme } from "@mantine/core";
+import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { useEffect, useRef, PropsWithChildren, MouseEventHandler } from "react";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
 
 export const HeroBackground = ({ children }: PropsWithChildren) => {
   const { colorScheme } = useMantineColorScheme();
+  const { breakpoints } = useMantineTheme();
+  const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
@@ -29,7 +32,6 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       colorScheme,
       mousePos.current
     );
-    utilsRef.current.colorScheme = colorScheme;
 
     const handleResize = () => {
       utilsRef.current?.resizeCanvas();
