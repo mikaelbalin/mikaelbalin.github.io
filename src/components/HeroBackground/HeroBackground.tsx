@@ -5,6 +5,11 @@ import { useMediaQuery } from "@mantine/hooks";
 import { useEffect, useRef, PropsWithChildren, MouseEventHandler } from "react";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
+import { Shared } from "./Square";
+import {
+  SQUARE_SIZE_LARGE,
+  SQUARE_SIZE_SMALL,
+} from "./HeroBackground.constants";
 
 export const HeroBackground = ({ children }: PropsWithChildren) => {
   const { colorScheme } = useMantineColorScheme();
@@ -26,6 +31,8 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    Shared.setSquareSize(matches ? SQUARE_SIZE_LARGE : SQUARE_SIZE_SMALL);
 
     utilsRef.current = new BackgroundUtils(
       canvas,
@@ -49,7 +56,7 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
         cancelAnimationFrame(animationFrameIdRef.current);
       }
     };
-  }, [colorScheme]);
+  }, [colorScheme, matches]);
 
   return (
     <Stack

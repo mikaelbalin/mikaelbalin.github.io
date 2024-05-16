@@ -1,7 +1,7 @@
 import { MantineColorScheme } from "@mantine/core";
 import { theme } from "../../theme";
-import { ANIMATION_DURATION, SQUARE_SIZE } from "./HeroBackground.constants";
-import { Square } from "./Square";
+import { Shared, Square } from "./Square";
+import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 
 export interface MousePosition {
   x: number;
@@ -128,14 +128,14 @@ export class BackgroundUtils {
   }
 
   private drawSquares() {
-    const numX = Math.ceil(this.canvas.width / SQUARE_SIZE);
-    const numY = Math.ceil(this.canvas.height / SQUARE_SIZE);
+    const numX = Math.ceil(this.canvas.width / Shared.squareSize);
+    const numY = Math.ceil(this.canvas.height / Shared.squareSize);
 
     this.squares = Array.from({ length: numX * numY }, (_, i) => {
       const x = i % numX;
       const y = Math.floor(i / numX);
-      const xPos = x * SQUARE_SIZE;
-      const yPos = y * SQUARE_SIZE;
+      const xPos = x * Shared.squareSize;
+      const yPos = y * Shared.squareSize;
       const animatingSquare = this.activeSquares.find(
         (square) => square.x === x && square.y === y
       );
@@ -159,8 +159,9 @@ export class BackgroundUtils {
 
     this.squares.forEach((square) => {
       // Calculate the distance between the mouse and the center of the square.
-      const dx = (x - square.xPos - SQUARE_SIZE / 2) / 1.5;
-      const dy = (y - square.yPos - SQUARE_SIZE / 2) / 1.5;
+      const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
+      const dx = (x - square.xPos - Shared.squareSize / 2) / sizeRatio;
+      const dy = (y - square.yPos - Shared.squareSize / 2) / sizeRatio;
 
       // Calculate the distance between two points using the Pythagorean theorem.
       const distance = Math.round(Math.sqrt(dx * dx + dy * dy));

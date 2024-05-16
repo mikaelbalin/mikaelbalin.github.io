@@ -1,6 +1,14 @@
 import { alpha } from "@mantine/core";
-import { ANIMATION_DURATION, SQUARE_SIZE } from "./HeroBackground.constants";
+import { ANIMATION_DURATION } from "./HeroBackground.constants";
 import { lerp } from "../../utils";
+
+export class Shared {
+  static squareSize: number;
+
+  static setSquareSize(size: number) {
+    this.squareSize = size;
+  }
+}
 
 const ANIMATION_MID_POINT = ANIMATION_DURATION / 2;
 
@@ -22,7 +30,7 @@ export class Square {
 
   public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
     ctx.fillStyle = alpha(color, this.opacity);
-    ctx.fillRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+    ctx.fillRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
     this.hasHover = hasHover;
   }
 
@@ -41,7 +49,7 @@ export class Square {
     const elapsed = this.start ? timeStamp - this.start : 0;
 
     if (elapsed < ANIMATION_DURATION) {
-      ctx.clearRect(this.xPos, this.yPos, SQUARE_SIZE, SQUARE_SIZE);
+      ctx.clearRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
 
       if (elapsed <= ANIMATION_MID_POINT) {
         this.opacity = Number(
