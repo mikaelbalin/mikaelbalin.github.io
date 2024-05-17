@@ -20,13 +20,7 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
   const animationFrameIdRef = useRef<number | null>(null);
   const mousePos = useRef<MousePosition | undefined>(undefined);
   const utilsRef = useRef<BackgroundUtils | null>(null);
-
-  const handleMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
-    mousePos.current = utilsRef.current?.setMousePos({
-      clientX: event.clientX,
-      clientY: event.clientY,
-    });
-  };
+  const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -48,6 +42,8 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       animationFrameIdRef.current = id;
     });
 
+    intervalIDRef.current = utilsRef.current.addActiveSquares();
+
     window.addEventListener("resize", handleResize, false);
     return () => {
       window.removeEventListener("resize", handleResize, false);
@@ -55,8 +51,17 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       if (animationFrameIdRef.current !== null) {
         cancelAnimationFrame(animationFrameIdRef.current);
       }
+
+      clearInterval(intervalIDRef.current);
     };
   }, [colorScheme, matches]);
+
+  const handleMouseMove: MouseEventHandler<HTMLDivElement> = (event) => {
+    mousePos.current = utilsRef.current?.setMousePos({
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+  };
 
   return (
     <Stack

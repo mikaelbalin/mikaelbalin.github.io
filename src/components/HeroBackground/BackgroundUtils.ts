@@ -27,7 +27,6 @@ export class BackgroundUtils {
     this.colorScheme = colorScheme;
     this.mousePos = mousePos;
     this.resizeCanvas();
-    this.addActiveSquare();
   }
 
   private get randomSquaresGroup() {
@@ -65,8 +64,8 @@ export class BackgroundUtils {
     return randomGroup;
   }
 
-  private addActiveSquare() {
-    const intervalID = setInterval(() => {
+  public addActiveSquares() {
+    return setInterval(() => {
       const randomNumber = Math.floor(Math.random() * this.squares.length);
       const randomSquare = this.squares[randomNumber];
 
@@ -90,15 +89,13 @@ export class BackgroundUtils {
 
   public tick(
     timeStamp: DOMHighResTimeStamp = 0,
-    onAnimationFrameRequested: (id: number) => void
+    onAnimationFrameRequest: (id: number) => void
   ) {
     this.drawHover();
     this.animateSquares(timeStamp);
 
-    onAnimationFrameRequested(
-      requestAnimationFrame((time) =>
-        this.tick(time, onAnimationFrameRequested)
-      )
+    onAnimationFrameRequest(
+      requestAnimationFrame((time) => this.tick(time, onAnimationFrameRequest))
     );
   }
 
