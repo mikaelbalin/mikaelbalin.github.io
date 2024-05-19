@@ -143,16 +143,15 @@ export class BackgroundUtils {
   }
 
   private drawHover() {
-    const hoverColor =
-      this._colorScheme === "light"
-        ? theme.other.appLightColorBeigeDark
-        : theme.other.appDarkColorCoalBlackLight;
-
     this.ctx.fillStyle = this.squareColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     if (!this.mousePos) return;
     const { x, y } = this.mousePos;
+    const hoverColor =
+      this._colorScheme === "light"
+        ? theme.other.appLightColorBeigeDark
+        : theme.other.appDarkColorCoalBlackLight;
 
     this.squares.forEach((square) => {
       // Calculate the distance between the mouse and the center of the square.
