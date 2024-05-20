@@ -97,12 +97,12 @@ export const HeroBackground = (
       component="section"
       justify="center"
       gap={0}
-      className={cx(classes.root, { [classes.fullHeight]: fullHeight })}
+      className={cx("relative", { "min-h-lvh": fullHeight })}
     >
       <div className={classes.canvasWrapper}>
         <canvas
           ref={canvasRef}
-          className={classes.canvas}
+          className="block"
           width={width}
           height={height}
         />
