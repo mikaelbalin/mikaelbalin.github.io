@@ -26,7 +26,6 @@ export class BackgroundUtils {
     this.ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
     this.colorScheme = colorScheme;
     this.mousePos = mousePos;
-    this.resizeCanvas();
   }
 
   private get randomSquaresGroup() {
@@ -99,13 +98,6 @@ export class BackgroundUtils {
     );
   }
 
-  public resizeCanvas() {
-    this.canvas.width = document.documentElement.clientWidth;
-    this.canvas.height = document.documentElement.clientHeight;
-
-    this.drawSquares();
-  }
-
   public setMousePos(mousePosition?: {
     clientX: number;
     clientY: number;
@@ -124,7 +116,7 @@ export class BackgroundUtils {
     return undefined;
   }
 
-  private drawSquares() {
+  public drawSquares() {
     const numX = Math.ceil(this.canvas.width / Shared.squareSize);
     const numY = Math.ceil(this.canvas.height / Shared.squareSize);
 

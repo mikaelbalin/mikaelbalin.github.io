@@ -1,8 +1,8 @@
 "use client";
 
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
-import { useEffect, useRef, PropsWithChildren, useContext } from "react";
+import { useElementSize, useMediaQuery } from "@mantine/hooks";
+import { useEffect, useRef, PropsWithChildren, useContext, use } from "react";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
 import { Shared } from "./Square";
@@ -17,12 +17,17 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
   const rootRef = useContext(RootRefContext);
+  const { ref, width, height } = useElementSize();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const mousePos = useRef<MousePosition | undefined>(undefined);
   const utilsRef = useRef<BackgroundUtils | null>(null);
   const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  useEffect(() => {
+    utilsRef.current?.drawSquares();
+  }, [width, height]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,10 +41,6 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       colorScheme,
       mousePos.current
     );
-
-    const handleResize = () => {
-      utilsRef.current?.resizeCanvas();
-    };
 
     const handleMouseMove = (event: MouseEvent) => {
       if (!mousePos.current) return;
@@ -66,12 +67,10 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
 
     intervalIDRef.current = utilsRef.current.addActiveSquares();
 
-    window.addEventListener("resize", handleResize);
     root.addEventListener("mousemove", handleMouseMove);
     root.addEventListener("mouseover", handleMouseOver);
     root.addEventListener("mouseleave", handleMouseLeave);
     return () => {
-      window.removeEventListener("resize", handleResize);
       root.removeEventListener("mousemove", handleMouseMove);
       root.removeEventListener("mouseover", handleMouseOver);
       root.removeEventListener("mouseleave", handleMouseLeave);
@@ -86,13 +85,19 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
 
   return (
     <Stack
+      ref={ref}
       component="section"
       justify="center"
       gap={0}
       className={classes.root}
     >
       <div className={classes.canvasWrapper}>
-        <canvas ref={canvasRef} className={classes.canvas} />
+        <canvas
+          ref={canvasRef}
+          className={classes.canvas}
+          width={width}
+          height={height}
+        />
       </div>
       {children}
     </Stack>
