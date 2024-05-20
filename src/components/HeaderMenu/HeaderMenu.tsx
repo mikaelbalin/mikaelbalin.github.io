@@ -154,8 +154,8 @@ export function HeaderMenu() {
 
   return (
     <>
-      <Container className={classes.root}>
-        <Group justify="space-between" h="100%">
+      <Container className="h-15">
+        <Group justify="space-between" className="h-full">
           <Logo />
           <Group gap="xl">
             <Group gap={5} visibleFrom="sm">

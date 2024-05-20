@@ -5,7 +5,7 @@ import classes from "./HeroBlog.module.css";
 export const HeroBlog = () => {
   return (
     <HeroBackground>
-      <Box pos="relative" pt={60}>
+      <Box className="relative pt-15">
         <Container>
           <Title className={classes.title}>Blog</Title>
         </Container>

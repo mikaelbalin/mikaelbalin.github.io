@@ -1,15 +1,14 @@
-import { Box, Button, Container, SimpleGrid, Text, rem } from "@mantine/core";
+import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 import { HeroBackground } from "../HeroBackground";
 import { Marquee } from "../Marquee";
 import { LiveTime } from "../LiveTime";
-import classes from "./Hero.module.css";
 
 export const Hero = () => {
   const greetings = ["Hello", "Olá", "Hallå", "Bonjour"];
 
   return (
     <HeroBackground fullHeight>
-      <Box mt="auto" mb="auto" pt={60}>
+      <Box className="my-auto pt-15">
         <Marquee texts={greetings} />
         <Container mt={25}>
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
@@ -18,11 +17,11 @@ export const Hero = () => {
               sharing insights with others.
             </Text>
           </SimpleGrid>
-          <Button mt={rem(28)}>Let’s get in touch</Button>
+          <Button className="mt-7">Let’s get in touch</Button>
         </Container>
       </Box>
-      <Box mb={56}>
-        <Container className={classes.location}>
+      <Box className="mb-14">
+        <Container className="relative text-right">
           <Text>Based in Portugal</Text>
           <LiveTime />
         </Container>
