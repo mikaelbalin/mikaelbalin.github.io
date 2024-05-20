@@ -9,7 +9,7 @@ export const Hero = () => {
 
   return (
     <HeroBackground fullHeight>
-      <Box mt="auto" mb="auto">
+      <Box mt="auto" mb="auto" pt={60}>
         <Marquee texts={greetings} />
         <Container mt={25}>
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
