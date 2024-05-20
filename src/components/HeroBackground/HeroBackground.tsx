@@ -26,13 +26,9 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
   const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
-    utilsRef.current?.drawSquares();
-  }, [width, height]);
-
-  useEffect(() => {
     const canvas = canvasRef.current;
     const root = rootRef?.current;
-    if (!canvas || !root) return;
+    if (!canvas || !root || matches === undefined) return;
 
     Shared.setSquareSize(matches ? SQUARE_SIZE_LARGE : SQUARE_SIZE_SMALL);
 
@@ -65,7 +61,7 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       animationFrameIdRef.current = id;
     });
 
-    intervalIDRef.current = utilsRef.current.addActiveSquares();
+    intervalIDRef.current = utilsRef.current.setActiveSquares();
 
     root.addEventListener("mousemove", handleMouseMove);
     root.addEventListener("mouseover", handleMouseOver);
@@ -82,6 +78,10 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       clearInterval(intervalIDRef.current);
     };
   }, [colorScheme, matches, rootRef]);
+
+  useEffect(() => {
+    utilsRef.current?.drawSquares();
+  }, [width, height, colorScheme]);
 
   return (
     <Stack

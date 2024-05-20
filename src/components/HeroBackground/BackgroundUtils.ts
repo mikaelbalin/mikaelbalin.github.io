@@ -63,8 +63,9 @@ export class BackgroundUtils {
     return randomGroup;
   }
 
-  public addActiveSquares() {
+  public setActiveSquares() {
     return setInterval(() => {
+      if (!this.squares.length) return;
       const randomNumber = Math.floor(Math.random() * this.squares.length);
       const randomSquare = this.squares[randomNumber];
 
