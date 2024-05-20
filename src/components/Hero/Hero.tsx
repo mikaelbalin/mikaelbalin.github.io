@@ -8,7 +8,7 @@ export const Hero = () => {
   const greetings = ["Hello", "Olá", "Hallå", "Bonjour"];
 
   return (
-    <HeroBackground>
+    <HeroBackground fullHeight>
       <Box mt="auto" mb="auto">
         <Marquee texts={greetings} />
         <Container mt={25}>

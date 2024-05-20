@@ -2,7 +2,8 @@
 
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
-import { useEffect, useRef, PropsWithChildren, useContext, use } from "react";
+import { useEffect, useRef, PropsWithChildren, useContext } from "react";
+import cx from "clsx";
 import classes from "./HeroBackground.module.css";
 import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
 import { Shared } from "./Square";
@@ -12,7 +13,14 @@ import {
 } from "./HeroBackground.constants";
 import { RootRefContext } from "../../context";
 
-export const HeroBackground = ({ children }: PropsWithChildren) => {
+interface HeroBackgroundProps {
+  fullHeight?: boolean;
+}
+
+export const HeroBackground = (
+  props: PropsWithChildren<HeroBackgroundProps>
+) => {
+  const { children, fullHeight = false } = props;
   const { colorScheme } = useMantineColorScheme();
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
@@ -89,7 +97,7 @@ export const HeroBackground = ({ children }: PropsWithChildren) => {
       component="section"
       justify="center"
       gap={0}
-      className={classes.root}
+      className={cx(classes.root, { [classes.fullHeight]: fullHeight })}
     >
       <div className={classes.canvasWrapper}>
         <canvas
