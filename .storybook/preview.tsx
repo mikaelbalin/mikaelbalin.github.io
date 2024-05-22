@@ -1,9 +1,10 @@
-import type { Preview } from "@storybook/react";
-import React from "react";
-import { Inter } from "next/font/google";
-import { ThemeProvider } from "../src/theme";
 import "@mantine/core/styles.css";
+import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import type { Preview } from "@storybook/react";
+import { Inter } from "next/font/google";
+import React from "react";
 import "../src/app/global.css";
+import { ThemeProvider } from "../src/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,14 @@ const preview: Preview = {
     },
   },
   decorators: [
+    withThemeByDataAttribute({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+      attributeName: "data-mantine-color-scheme",
+    }),
     (Story) => (
       <div className={inter.className}>
         <ThemeProvider>
