@@ -2,20 +2,18 @@
 
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
-import { useEffect, useRef, PropsWithChildren, useContext } from "react";
 import cx from "clsx";
-import classes from "./HeroBackground.module.css";
-import {
-  BackgroundUtils,
-  BackgroundVariant,
-  type MousePosition,
-} from "./BackgroundUtils";
-import { Shared } from "./Square";
+import { PropsWithChildren, useContext, useEffect, useRef } from "react";
+import { RootRefContext } from "../../context";
+import { BlogCanvas } from "./BlogCanvas";
+import { BackgroundVariant, MousePosition } from "./Canvas";
 import {
   SQUARE_SIZE_LARGE,
   SQUARE_SIZE_SMALL,
 } from "./HeroBackground.constants";
-import { RootRefContext } from "../../context";
+import classes from "./HeroBackground.module.css";
+import { MainCanvas } from "./MainCanvas";
+import { Shared } from "./Square";
 
 interface HeroBackgroundProps {
   variant?: BackgroundVariant;
@@ -34,7 +32,7 @@ export const HeroBackground = (
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const mousePos = useRef<MousePosition | undefined>(undefined);
-  const utilsRef = useRef<BackgroundUtils | null>(null);
+  const utilsRef = useRef<MainCanvas | BlogCanvas | null>(null);
   const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
@@ -44,11 +42,10 @@ export const HeroBackground = (
 
     Shared.setSquareSize(matches ? SQUARE_SIZE_LARGE : SQUARE_SIZE_SMALL);
 
-    utilsRef.current = new BackgroundUtils(
-      canvas,
-      colorScheme,
-      mousePos.current
-    );
+    utilsRef.current =
+      variant === "blog"
+        ? new BlogCanvas(canvas, colorScheme, mousePos.current)
+        : new MainCanvas(canvas, colorScheme, mousePos.current);
 
     const handleMouseMove = (event: MouseEvent) => {
       if (!mousePos.current) return;
@@ -69,11 +66,13 @@ export const HeroBackground = (
       mousePos.current = utilsRef.current?.setMousePos(undefined);
     };
 
-    utilsRef.current.tick(0, (id) => {
+    utilsRef.current.run(0, (id) => {
       animationFrameIdRef.current = id;
     });
 
-    intervalIDRef.current = utilsRef.current.setActiveSquares();
+    if (utilsRef.current instanceof MainCanvas) {
+      intervalIDRef.current = utilsRef.current.setActiveSquares();
+    }
 
     root.addEventListener("mousemove", handleMouseMove);
     root.addEventListener("mouseover", handleMouseOver);
@@ -91,11 +90,15 @@ export const HeroBackground = (
         clearInterval(intervalIDRef.current);
       }
     };
-  }, [colorScheme, matches, rootRef]);
+  }, [colorScheme, matches, rootRef, variant]);
 
   useEffect(() => {
     utilsRef.current?.drawSquares();
-  }, [width, height, colorScheme]);
+
+    if (utilsRef.current instanceof BlogCanvas) {
+      utilsRef.current?.drawReferenceShape();
+    }
+  }, [width, height, colorScheme, variant]);
 
   return (
     <Stack

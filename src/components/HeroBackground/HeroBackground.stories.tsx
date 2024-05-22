@@ -1,6 +1,6 @@
-import type { Meta, ReactRenderer, StoryFn, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { HeroBackground } from "./HeroBackground";
-import { PropsWithChildren, ReactNode, useRef } from "react";
+import { PropsWithChildren, useRef } from "react";
 import { RootRefContext } from "../../context";
 
 const Wrapper = ({ children }: PropsWithChildren) => {
@@ -33,5 +33,21 @@ export default meta;
 type Story = StoryObj<typeof HeroBackground>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    variant: "default",
+  },
+};
+
+export const Blog: Story = {
+  args: {
+    variant: "blog",
+    children: <div className="h-60" />,
+  },
+  argTypes: {
+    variant: {
+      options: ["default", "blog"],
+      control: { type: "radio" },
+    },
+    children: { table: { disable: true } },
+  },
 };
