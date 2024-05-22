@@ -7,7 +7,7 @@ export const Hero = () => {
   const greetings = ["Hello", "Olá", "Hallå", "Bonjour"];
 
   return (
-    <HeroBackground fullHeight>
+    <HeroBackground>
       <Box className="my-auto pt-15">
         <Marquee texts={greetings} />
         <Container mt={25}>

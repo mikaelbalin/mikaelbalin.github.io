@@ -14,13 +14,13 @@ import {
 import { RootRefContext } from "../../context";
 
 interface HeroBackgroundProps {
-  fullHeight?: boolean;
+  variant?: "default" | "secondary";
 }
 
 export const HeroBackground = (
   props: PropsWithChildren<HeroBackgroundProps>
 ) => {
-  const { children, fullHeight = false } = props;
+  const { children, variant = "default" } = props;
   const { colorScheme } = useMantineColorScheme();
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
@@ -97,7 +97,7 @@ export const HeroBackground = (
       component="section"
       justify="center"
       gap={0}
-      className={cx("relative", { "min-h-lvh": fullHeight })}
+      className={cx("relative", { "min-h-lvh": variant === "default" })}
     >
       <div className={classes.canvasWrapper}>
         <canvas
