@@ -5,7 +5,11 @@ import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import { useEffect, useRef, PropsWithChildren, useContext } from "react";
 import cx from "clsx";
 import classes from "./HeroBackground.module.css";
-import { BackgroundUtils, type MousePosition } from "./BackgroundUtils";
+import {
+  BackgroundUtils,
+  BackgroundVariant,
+  type MousePosition,
+} from "./BackgroundUtils";
 import { Shared } from "./Square";
 import {
   SQUARE_SIZE_LARGE,
@@ -14,7 +18,7 @@ import {
 import { RootRefContext } from "../../context";
 
 interface HeroBackgroundProps {
-  variant?: "default" | "secondary";
+  variant?: BackgroundVariant;
 }
 
 export const HeroBackground = (
@@ -83,7 +87,9 @@ export const HeroBackground = (
         cancelAnimationFrame(animationFrameIdRef.current);
       }
 
-      clearInterval(intervalIDRef.current);
+      if (intervalIDRef.current) {
+        clearInterval(intervalIDRef.current);
+      }
     };
   }, [colorScheme, matches, rootRef]);
 

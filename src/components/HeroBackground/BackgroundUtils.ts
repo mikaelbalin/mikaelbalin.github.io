@@ -3,6 +3,8 @@ import { theme } from "../../theme";
 import { Shared, Square } from "./Square";
 import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 
+export type BackgroundVariant = "default" | "blog";
+
 export interface MousePosition {
   x: number;
   y: number;
@@ -88,7 +90,7 @@ export class BackgroundUtils {
   }
 
   public tick(
-    timeStamp: DOMHighResTimeStamp = 0,
+    timeStamp: DOMHighResTimeStamp,
     onAnimationFrameRequest: (id: number) => void
   ) {
     this.drawHover();
