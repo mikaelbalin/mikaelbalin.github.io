@@ -9,15 +9,24 @@ export interface MousePosition {
   y: number;
 }
 
+/**
+ * Represents an abstract base class for a canvas element.
+ */
 export abstract class Canvas {
   protected readonly canvas: HTMLCanvasElement;
   protected readonly ctx: CanvasRenderingContext2D;
   protected squares: Square[] = [];
   protected mousePos?: MousePosition;
-  protected _colorScheme!: MantineColorScheme;
+  private _colorScheme!: MantineColorScheme;
   protected squareColor!: string;
   protected activeSquares: Square[] = [];
 
+  /**
+   * Creates a new instance of the Canvas class.
+   * @param canvas - The HTMLCanvasElement to be used as the canvas.
+   * @param colorScheme - The MantineColorScheme to be used for the canvas.
+   * @param mousePos - The initial mouse position on the canvas.
+   */
   constructor(
     canvas: HTMLCanvasElement,
     colorScheme: MantineColorScheme,
@@ -37,17 +46,35 @@ export abstract class Canvas {
         : theme.other.appDarkColorCoalBlack;
   }
 
+  protected get colorScheme() {
+    return this._colorScheme;
+  }
+
+  /**
+   * Runs the animation loop for the canvas.
+   * @param timeStamp - The current timestamp.
+   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
+   */
   protected abstract run(
     timeStamp: DOMHighResTimeStamp,
     onAnimationFrameRequest: (id: number) => void
   ): void;
 
+  /**
+   * Starts the animation loop for the canvas.
+   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
+   */
   protected tick(onAnimationFrameRequest: (id: number) => void) {
     onAnimationFrameRequest(
       requestAnimationFrame((time) => this.run(time, onAnimationFrameRequest))
     );
   }
 
+  /**
+   * Sets the mouse position on the canvas.
+   * @param mousePosition - The clientX and clientY coordinates of the mouse position.
+   * @returns The updated MousePosition object or undefined if mousePosition is not provided.
+   */
   public setMousePos(mousePosition?: {
     clientX: number;
     clientY: number;
@@ -66,6 +93,9 @@ export abstract class Canvas {
     return undefined;
   }
 
+  /**
+   * Draws the squares on the canvas.
+   */
   public drawSquares() {
     const numX = Math.ceil(this.canvas.width / Shared.squareSize);
     const numY = Math.ceil(this.canvas.height / Shared.squareSize);

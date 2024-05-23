@@ -96,7 +96,8 @@ export const HeroBackground = (
     utilsRef.current?.drawSquares();
 
     if (utilsRef.current instanceof BlogCanvas) {
-      utilsRef.current?.drawReferenceShape();
+      // utilsRef.current?.drawReferenceShape();
+      // utilsRef.current?.draw();
     }
   }, [width, height, colorScheme, variant]);
 

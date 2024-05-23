@@ -1,6 +1,6 @@
 import { MantineColorScheme } from "@mantine/core";
 import { theme } from "../../theme";
-import { Shared } from "./Square";
+import { Shared, Square } from "./Square";
 import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 import { Canvas, MousePosition } from "./Canvas";
 
@@ -13,7 +13,11 @@ export class MainCanvas extends Canvas {
     super(canvas, colorScheme, mousePos);
   }
 
-  private get randomSquaresGroup() {
+  /**
+   * Returns a random group of squares based on certain conditions.
+   * @returns {Square[]} The random group of squares.
+   */
+  private get randomSquaresGroup(): Square[] {
     const randomNumber = Math.floor(Math.random() * this.squares.length);
     const randomSquare = this.squares[randomNumber];
     const x = randomSquare.x;
@@ -48,7 +52,11 @@ export class MainCanvas extends Canvas {
     return randomGroup;
   }
 
-  public setActiveSquares() {
+  /**
+   * Sets active squares at regular intervals.
+   * @returns {number} The ID of the interval timer.
+   */
+  public setActiveSquares(): NodeJS.Timeout {
     return setInterval(() => {
       if (!this.squares.length) return;
       const randomNumber = Math.floor(Math.random() * this.squares.length);
@@ -64,6 +72,11 @@ export class MainCanvas extends Canvas {
     }, 500);
   }
 
+  /**
+   * Runs the animation loop for the MainCanvas.
+   * @param timeStamp - The current timestamp.
+   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
+   */
   public override run(
     timeStamp: DOMHighResTimeStamp,
     onAnimationFrameRequest: (id: number) => void
@@ -73,6 +86,9 @@ export class MainCanvas extends Canvas {
     super.tick(onAnimationFrameRequest);
   }
 
+  /**
+   * Draws the hover effect on the canvas.
+   */
   private drawHover() {
     this.ctx.fillStyle = this.squareColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -80,7 +96,7 @@ export class MainCanvas extends Canvas {
     if (!this.mousePos) return;
     const { x, y } = this.mousePos;
     const hoverColor =
-      this._colorScheme === "light"
+      this.colorScheme === "light"
         ? theme.other.appLightColorBeigeDark
         : theme.other.appDarkColorCoalBlackLight;
 
@@ -101,6 +117,10 @@ export class MainCanvas extends Canvas {
     });
   }
 
+  /**
+   * Animates the active squares on the canvas.
+   * @param timeStamp - The current timestamp.
+   */
   private animateSquares(timeStamp: DOMHighResTimeStamp) {
     [...this.activeSquares].forEach((square) => {
       square.animate(this.ctx, timeStamp, this.squareColor, () => {
