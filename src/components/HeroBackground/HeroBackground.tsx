@@ -94,7 +94,7 @@ export const HeroBackground = (
 
   useEffect(() => {
     if (utilsRef.current instanceof BlogCanvas) {
-      utilsRef.current?.getFilteredSquares();
+      utilsRef.current?.setSquares();
     } else {
       utilsRef.current?.drawSquares();
     }

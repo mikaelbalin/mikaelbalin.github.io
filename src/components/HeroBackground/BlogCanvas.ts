@@ -131,9 +131,9 @@ export class BlogCanvas extends Canvas {
   }
 
   /**
-   * Retrieves the filtered squares based on the reference shape and calculates their distance percentage.
+   * Retrieves squares based on the reference shape and calculates their distance percentage.
    */
-  public getFilteredSquares() {
+  public setSquares() {
     this.drawReferenceShape();
     const rows = this.canvas.height / Shared.squareSize;
     const cols = this.canvas.width / Shared.squareSize;
