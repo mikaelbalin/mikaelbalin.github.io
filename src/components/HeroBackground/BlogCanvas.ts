@@ -3,8 +3,6 @@ import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
 
 export class BlogCanvas extends Canvas {
-  private filteredSquares: Square[] = [];
-
   constructor(
     canvas: HTMLCanvasElement,
     colorScheme: MantineColorScheme,
@@ -142,7 +140,7 @@ export class BlogCanvas extends Canvas {
 
     let minDistance = Infinity;
     let maxDistance = -Infinity;
-    const filteredSquares: Square[] = [];
+    const squares: Square[] = [];
 
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
@@ -158,7 +156,7 @@ export class BlogCanvas extends Canvas {
           if (distance < minDistance) minDistance = distance;
           if (distance > maxDistance) maxDistance = distance;
 
-          filteredSquares.push(
+          squares.push(
             new Square({
               xPos,
               yPos,
@@ -173,14 +171,14 @@ export class BlogCanvas extends Canvas {
       }
     }
 
-    filteredSquares.forEach((square) => {
+    squares.forEach((square) => {
       if (typeof square.distance !== "number") return;
       square.distancePercentage = Math.round(
         ((square.distance - minDistance) / (maxDistance - minDistance)) * 100
       );
     });
 
-    this.filteredSquares = filteredSquares;
+    this.squares = squares;
   }
 
   /**
@@ -190,7 +188,7 @@ export class BlogCanvas extends Canvas {
   public animateSquares(timestamp: DOMHighResTimeStamp) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.filteredSquares.forEach((square) => {
+    this.squares.forEach((square) => {
       if (typeof square.distancePercentage !== "number") return;
       const animationFrequency = (1 - square.distancePercentage / 100) * 0.01;
 
