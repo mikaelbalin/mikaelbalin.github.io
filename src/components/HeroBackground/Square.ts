@@ -12,20 +12,55 @@ export class Shared {
 
 const ANIMATION_MID_POINT = ANIMATION_DURATION / 2;
 
+type SquareProperties = {
+  xPos: number;
+  yPos: number;
+  x?: number;
+  y?: number;
+  distance?: number;
+  opacity?: number;
+  animating?: boolean;
+  animationStart?: DOMHighResTimeStamp;
+  firstAnimation?: boolean;
+};
+
 export class Square {
-  public x: number;
-  public y: number;
+  public x?: number;
+  public y?: number;
   public readonly xPos: number;
   public readonly yPos: number;
   public opacity: number = 1;
-  private start: DOMHighResTimeStamp | null = null;
+  public animationStart: DOMHighResTimeStamp | null = null;
   private hasHover: boolean = false;
+  public distance?: number;
+  public animating?: boolean;
+  public distancePercentage?: number;
+  public firstAnimation?: boolean;
 
-  constructor(xPos: number, yPos: number, x: number, y: number) {
+  constructor({
+    xPos,
+    yPos,
+    x,
+    y,
+    distance,
+    opacity,
+    animating,
+    animationStart,
+    firstAnimation,
+  }: SquareProperties) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.x = x;
     this.y = y;
+    this.distance = distance;
+    this.animating = animating;
+    this.firstAnimation = firstAnimation;
+    if (typeof opacity === "number") {
+      this.opacity = opacity;
+    }
+    if (typeof animationStart === "number") {
+      this.animationStart = animationStart;
+    }
   }
 
   public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
@@ -42,11 +77,11 @@ export class Square {
   ) {
     if (this.hasHover) return;
 
-    if (!this.start) {
-      this.start = timeStamp;
+    if (!this.animationStart) {
+      this.animationStart = timeStamp;
     }
 
-    const elapsed = this.start ? timeStamp - this.start : 0;
+    const elapsed = this.animationStart ? timeStamp - this.animationStart : 0;
 
     if (elapsed < ANIMATION_DURATION) {
       ctx.clearRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
@@ -67,7 +102,7 @@ export class Square {
 
       this.draw(ctx, color);
     } else {
-      this.start = null;
+      this.animationStart = null;
       onAnimationEnd();
     }
   }

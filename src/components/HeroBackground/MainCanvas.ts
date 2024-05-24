@@ -37,6 +37,11 @@ export class MainCanvas extends Canvas {
     const x = randomSquare.x;
     const y = randomSquare.y;
 
+    if (!x || !y) {
+      console.warn("Invalid square coordinates.");
+      return [];
+    }
+
     const filterSquares = (condition: (square: any) => boolean) =>
       this.squares.filter(condition);
 
@@ -128,6 +133,27 @@ export class MainCanvas extends Canvas {
           (activeSquare) => activeSquare !== square
         );
       });
+    });
+  }
+
+  /**
+   * Draws the squares on the canvas.
+   */
+  public drawSquares() {
+    const numX = Math.ceil(this.canvas.width / Shared.squareSize);
+    const numY = Math.ceil(this.canvas.height / Shared.squareSize);
+
+    this.squares = Array.from({ length: numX * numY }, (_, i) => {
+      const x = i % numX;
+      const y = Math.floor(i / numX);
+      const xPos = x * Shared.squareSize;
+      const yPos = y * Shared.squareSize;
+      const animatingSquare = this.activeSquares.find(
+        (square) => square.x === x && square.y === y
+      );
+      const square = animatingSquare || new Square({ xPos, yPos, x, y });
+      square.draw(this.ctx, this.squareColor);
+      return square;
     });
   }
 }

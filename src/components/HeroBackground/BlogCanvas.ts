@@ -1,16 +1,9 @@
 import { MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
-import { Shared } from "./Square";
+import { Shared, Square } from "./Square";
 
 export class BlogCanvas extends Canvas {
-  private filteredSquares: {
-    xPos: number;
-    yPos: number;
-    distance: number;
-    opacity: number;
-    animating: boolean;
-    animationStart: number;
-  }[] = [];
+  private filteredSquares: Square[] = [];
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -25,7 +18,6 @@ export class BlogCanvas extends Canvas {
     onAnimationFrameRequest: (id: number) => void
   ) {
     this.animateSquares(timeStamp);
-    // this.draw();
     super.tick(onAnimationFrameRequest);
   }
 
@@ -51,7 +43,10 @@ export class BlogCanvas extends Canvas {
 
   // Function to check if a square is within the shape
   private isSquareInShape(xPos: number, yPos: number) {
-    const pointsToCheck = [{ x: xPos, y: yPos }];
+    const pointsToCheck = [
+      // { x: xPos, y: yPos },
+      { x: xPos, y: yPos + Shared.squareSize / 2 },
+    ];
 
     for (let point of pointsToCheck) {
       if (this.ctx.isPointInPath(point.x, point.y)) {
@@ -72,10 +67,6 @@ export class BlogCanvas extends Canvas {
     );
     this.ctx.lineTo(this.canvas.width, 0);
     this.ctx.closePath();
-
-    this.ctx.strokeStyle = "red";
-
-    this.ctx.stroke();
   }
 
   // Function to calculate distance to the quadratic curve (approximation)
@@ -120,7 +111,10 @@ export class BlogCanvas extends Canvas {
     const rows = this.canvas.height / Shared.squareSize;
     const cols = this.canvas.width / Shared.squareSize;
 
-    const filteredSquares = [];
+    let minDistance = Infinity;
+    let maxDistance = -Infinity;
+    const filteredSquares: Square[] = [];
+
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const xPos = col * Shared.squareSize;
@@ -131,54 +125,74 @@ export class BlogCanvas extends Canvas {
             xPos + Shared.squareSize / 2,
             yPos + Shared.squareSize / 2
           );
-          filteredSquares.push({
-            xPos,
-            yPos,
-            distance,
-            opacity: 1,
-            animating: false,
-            animationStart: 0,
-          });
+
+          if (distance < minDistance) minDistance = distance;
+          if (distance > maxDistance) maxDistance = distance;
+
+          filteredSquares.push(
+            new Square({
+              xPos,
+              yPos,
+              distance,
+              opacity: 0,
+              animating: false,
+              animationStart: 0,
+              firstAnimation: true,
+            })
+          );
         }
       }
     }
+
+    filteredSquares.forEach((square) => {
+      if (typeof square.distance !== "number") return;
+      square.distancePercentage = Math.round(
+        ((square.distance - minDistance) / (maxDistance - minDistance)) * 100
+      );
+    });
 
     this.filteredSquares = filteredSquares;
   }
 
   public animateSquares(timestamp: DOMHighResTimeStamp) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawReferenceShape(); // Redraw the shape to clear the canvas
 
     this.filteredSquares.forEach((square) => {
-      const normalizedDistance = Math.min(
-        square.distance / (this.canvas.width / 2),
-        1
-      );
-      const maxOpacity = 1 - normalizedDistance;
+      if (typeof square.distancePercentage !== "number") return;
+      const animationFrequency = (1 - square.distancePercentage / 100) * 0.01;
 
-      // Randomly start animation
-      if (!square.animating && Math.random() < 0.01) {
+      if (
+        !square.animating &&
+        ((square.distancePercentage! >= 75 && square.firstAnimation) ||
+          (square.distancePercentage! < 75 &&
+            Math.random() < animationFrequency))
+      ) {
         square.animating = true;
         square.animationStart = timestamp;
       }
 
-      // Handle animation
-      if (square.animating) {
-        const elapsedTime = (timestamp - square.animationStart) / 1000; // time in seconds
-        const animationPhase = elapsedTime % 4; // 4-second cycle
+      if (square.animating && square.animationStart !== null) {
+        const elapsedTime = (timestamp - square.animationStart) / 1000;
+        const animationPhase = elapsedTime % 4;
 
-        if (animationPhase < 2) {
-          // Decrease opacity
-          square.opacity = maxOpacity * (1 - animationPhase / 2);
+        if (square.firstAnimation) {
+          square.opacity = animationPhase / 2; // Only increase opacity to 1 and then stop
+
+          if (animationPhase >= 2) {
+            square.animating = false;
+            square.firstAnimation = false; // Set to false after first animation
+          }
         } else {
-          // Increase opacity
-          square.opacity = maxOpacity * ((animationPhase - 2) / 2);
-        }
-
-        if (elapsedTime >= 4) {
-          // End animation cycle
-          square.animating = false;
+          if (animationPhase < 2) {
+            // Decrease opacity
+            square.opacity = 1 - animationPhase / 2;
+          } else {
+            // Increase opacity
+            square.opacity = (animationPhase - 2) / 2;
+          }
+          if (elapsedTime >= 4) {
+            square.animating = false;
+          }
         }
       }
 
@@ -189,56 +203,6 @@ export class BlogCanvas extends Canvas {
         Shared.squareSize,
         Shared.squareSize
       );
-
-      this.ctx.fillStyle = "black";
-      this.ctx.fillText(
-        square.distance.toFixed(2),
-        square.xPos + 5,
-        square.yPos + 15
-      );
-    });
-  }
-
-  public draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawReferenceShape();
-
-    const rows = this.canvas.height / Shared.squareSize;
-    const cols = this.canvas.width / Shared.squareSize;
-
-    const filteredSquares = [];
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const xPos = col * Shared.squareSize;
-        const yPos = row * Shared.squareSize;
-        if (this.isSquareInShape(xPos, yPos)) {
-          filteredSquares.push({ xPos, yPos });
-        }
-      }
-    }
-
-    filteredSquares.forEach((square) => {
-      const distance = this.getDistanceToCurve(square.xPos, square.yPos);
-
-      let color;
-      if (distance < 100) {
-        color = "rgba(255, 0, 0, 0.5)"; // Close to the curve: red
-      } else if (distance < 200) {
-        color = "rgba(0, 255, 0, 0.5)"; // Intermediate distance: green
-      } else {
-        color = "rgba(0, 0, 255, 0.5)"; // Far from the curve: blue
-      }
-
-      this.ctx.fillStyle = color;
-      this.ctx.fillRect(
-        square.xPos,
-        square.yPos,
-        Shared.squareSize,
-        Shared.squareSize
-      );
-
-      this.ctx.fillStyle = "black";
-      this.ctx.fillText(distance.toFixed(2), square.xPos + 5, square.yPos + 15);
     });
   }
 }
