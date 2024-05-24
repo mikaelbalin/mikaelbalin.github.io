@@ -41,7 +41,7 @@ export const Default: Story = {
 export const Blog: Story = {
   args: {
     variant: "blog",
-    children: <div className="h-60" />,
+    children: <div className="h-96" />,
   },
   argTypes: {
     variant: {

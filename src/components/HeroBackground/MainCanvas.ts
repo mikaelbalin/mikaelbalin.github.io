@@ -14,6 +14,20 @@ export class MainCanvas extends Canvas {
   }
 
   /**
+   * Runs the animation loop for the MainCanvas.
+   * @param timeStamp - The current timestamp.
+   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
+   */
+  public override run(
+    timeStamp: DOMHighResTimeStamp,
+    onAnimationFrameRequest: (id: number) => void
+  ) {
+    this.drawHover();
+    this.animateSquares(timeStamp);
+    super.tick(onAnimationFrameRequest);
+  }
+
+  /**
    * Returns a random group of squares based on certain conditions.
    * @returns {Square[]} The random group of squares.
    */
@@ -70,20 +84,6 @@ export class MainCanvas extends Canvas {
         }
       }
     }, 500);
-  }
-
-  /**
-   * Runs the animation loop for the MainCanvas.
-   * @param timeStamp - The current timestamp.
-   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
-   */
-  public override run(
-    timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void
-  ) {
-    this.drawHover();
-    this.animateSquares(timeStamp);
-    super.tick(onAnimationFrameRequest);
   }
 
   /**

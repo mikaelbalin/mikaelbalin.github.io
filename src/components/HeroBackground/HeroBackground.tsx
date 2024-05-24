@@ -93,11 +93,10 @@ export const HeroBackground = (
   }, [colorScheme, matches, rootRef, variant]);
 
   useEffect(() => {
-    utilsRef.current?.drawSquares();
-
     if (utilsRef.current instanceof BlogCanvas) {
-      // utilsRef.current?.drawReferenceShape();
-      // utilsRef.current?.draw();
+      utilsRef.current?.getFilteredSquares();
+    } else {
+      utilsRef.current?.drawSquares();
     }
   }, [width, height, colorScheme, variant]);
 
