@@ -13,6 +13,11 @@ export class BlogCanvas extends Canvas {
     super(canvas, colorScheme, mousePos);
   }
 
+  /**
+   * Runs the animation loop for the BlogCanvas.
+   * @param timeStamp - The current timestamp.
+   * @param onAnimationFrameRequest - A callback function to request the next animation frame.
+   */
   public override run(
     timeStamp: DOMHighResTimeStamp,
     onAnimationFrameRequest: (id: number) => void
@@ -29,7 +34,15 @@ export class BlogCanvas extends Canvas {
     return this.canvas.height * 0.75;
   }
 
-  private calculateStartingX() {
+  /**
+   * Calculates the starting x-coordinate for the canvas.
+   * The x-coordinate is determined based on the canvas width.
+   * If the canvas width is less than or equal to the minimum width, the x-coordinate is 0.
+   * If the canvas width is greater than or equal to the maximum width, the x-coordinate is 1/3 of the canvas width.
+   * For canvas widths between the minimum and maximum, the x-coordinate is interpolated between 0 and 1/3 of the canvas width.
+   * @returns The starting x-coordinate for the canvas.
+   */
+  private calculateStartingX(): number {
     const minWidth = 320; // width at which x should be 0
     const maxWidth = 1440; // width at which x should be 1/3 of canvas width
 
@@ -41,8 +54,13 @@ export class BlogCanvas extends Canvas {
     return ratio * (this.canvas.width / 3);
   }
 
-  // Function to check if a square is within the shape
-  private isSquareInShape(xPos: number, yPos: number) {
+  /**
+   * Checks if a square is within the shape.
+   * @param xPos - The x-coordinate of the square.
+   * @param yPos - The y-coordinate of the square.
+   * @returns A boolean indicating whether the square is within the shape.
+   */
+  private isSquareInShape(xPos: number, yPos: number): boolean {
     const pointsToCheck = [
       // { x: xPos, y: yPos },
       { x: xPos, y: yPos + Shared.squareSize / 2 },
@@ -56,6 +74,9 @@ export class BlogCanvas extends Canvas {
     return false;
   }
 
+  /**
+   * Draws the reference shape on the canvas.
+   */
   private drawReferenceShape() {
     this.ctx.beginPath();
     this.ctx.moveTo(this.calculateStartingX(), 0);
@@ -69,7 +90,12 @@ export class BlogCanvas extends Canvas {
     this.ctx.closePath();
   }
 
-  // Function to calculate distance to the quadratic curve (approximation)
+  /**
+   * Calculates the minimum distance between a given point and a quadratic curve (approximation).
+   * @param xPos The x-coordinate of the point.
+   * @param yPos The y-coordinate of the point.
+   * @returns The minimum distance between the point and the curve.
+   */
   private getDistanceToCurve(xPos: number, yPos: number) {
     const minSamplePoints = 50; // Minimum number of sample points to ensure reasonable accuracy
     const maxSamplePoints = 500; // Maximum number of sample points to limit computation
@@ -106,6 +132,9 @@ export class BlogCanvas extends Canvas {
     return minDistance;
   }
 
+  /**
+   * Retrieves the filtered squares based on the reference shape and calculates their distance percentage.
+   */
   public getFilteredSquares() {
     this.drawReferenceShape();
     const rows = this.canvas.height / Shared.squareSize;
@@ -154,6 +183,10 @@ export class BlogCanvas extends Canvas {
     this.filteredSquares = filteredSquares;
   }
 
+  /**
+   * Animates the squares on the canvas.
+   * @param timestamp - The current timestamp in milliseconds.
+   */
   public animateSquares(timestamp: DOMHighResTimeStamp) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
