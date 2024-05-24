@@ -1,6 +1,6 @@
 import { MantineColorScheme } from "@mantine/core";
 import { theme } from "../../theme";
-import { Shared, Square } from "./Square";
+import { Square } from "./Square";
 
 export type BackgroundVariant = "default" | "blog";
 
