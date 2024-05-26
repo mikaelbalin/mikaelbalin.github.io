@@ -29,7 +29,7 @@ export class Square {
   public y?: number;
   public readonly xPos: number;
   public readonly yPos: number;
-  public opacity: number = 1;
+  private _opacity: number = 1;
   public animationStart: DOMHighResTimeStamp | null = null;
   private hasHover: boolean = false;
   public distance?: number;
@@ -63,8 +63,16 @@ export class Square {
     }
   }
 
+  public set opacity(opacity: number) {
+    this._opacity = Number(opacity.toFixed(2));
+  }
+
+  public get opacity() {
+    return this._opacity;
+  }
+
   public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
-    ctx.fillStyle = alpha(color, this.opacity);
+    ctx.fillStyle = alpha(color, this._opacity);
     ctx.fillRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
     this.hasHover = hasHover;
   }
@@ -87,16 +95,12 @@ export class Square {
       ctx.clearRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
 
       if (elapsed <= ANIMATION_MID_POINT) {
-        this.opacity = Number(
-          lerp(1, 0, Math.min(1, elapsed / ANIMATION_MID_POINT)).toFixed(2)
-        );
+        this.opacity = lerp(1, 0, Math.min(1, elapsed / ANIMATION_MID_POINT));
       } else {
-        this.opacity = Number(
-          lerp(
-            0,
-            1,
-            Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1)
-          ).toFixed(2)
+        this.opacity = lerp(
+          0,
+          1,
+          Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1)
         );
       }
 

@@ -115,7 +115,7 @@ export class MainCanvas extends Canvas {
       const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
 
       // Calculate the opacity based on the distance
-      const opacity = Number(Math.max(0, 1 - distance / 100).toFixed(2));
+      const opacity = Math.max(0, 1 - distance / 100);
 
       square.opacity = opacity || 1;
       square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);

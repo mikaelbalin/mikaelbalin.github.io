@@ -1,6 +1,7 @@
-import { MantineColorScheme } from "@mantine/core";
+import { MantineColorScheme, alpha } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
+import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 
 export class BlogCanvas extends Canvas {
   constructor(
@@ -21,6 +22,7 @@ export class BlogCanvas extends Canvas {
     onAnimationFrameRequest: (id: number) => void
   ) {
     this.animateSquares(timeStamp);
+    this.drawHover();
     super.tick(onAnimationFrameRequest);
   }
 
@@ -207,7 +209,7 @@ export class BlogCanvas extends Canvas {
         const animationPhase = elapsedTime % 4;
 
         if (square.firstAnimation) {
-          square.opacity = animationPhase / 2; // Only increase opacity to 1 and then stop
+          square.opacity = Math.min(animationPhase / 2, 1); // Only increase opacity to 1 and then stop
 
           if (animationPhase >= 2) {
             square.animating = false;
@@ -227,13 +229,46 @@ export class BlogCanvas extends Canvas {
         }
       }
 
-      this.ctx.fillStyle = `rgba(240, 237, 231, ${square.opacity})`;
-      this.ctx.fillRect(
-        square.xPos,
-        square.yPos,
-        Shared.squareSize,
-        Shared.squareSize
+      square.draw(this.ctx, this.squareColor);
+
+      // this.ctx.fillStyle = "black";
+      // this.ctx.fillText(
+      //   String(square.opacity),
+      //   square.xPos + 10,
+      //   square.yPos + 15
+      // );
+    });
+  }
+
+  private drawHover() {
+    if (!this.mousePos) return;
+    const { x, y } = this.mousePos;
+
+    this.squares.forEach((square) => {
+      const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
+
+      const dx = (x - square.xPos - Shared.squareSize / 2) / sizeRatio;
+      const dy = (y - square.yPos - Shared.squareSize / 2) / sizeRatio;
+
+      // Calculate the distance between two points using the Pythagorean theorem.
+      const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
+
+      // Calculate the opacity based on the distance
+      const opacity = Math.min(
+        Number(Math.max(0, distance / 100).toFixed(2)),
+        1
       );
+
+      if (opacity < 1) {
+        square.animating = false;
+        square.opacity = opacity;
+      }
+
+      // square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);
+
+      // this.ctx.fillStyle = "black";
+      // this.ctx.fillText(String(opacity), square.xPos + 10, square.yPos + 15);
+      // }
     });
   }
 }
