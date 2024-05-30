@@ -22,7 +22,6 @@ export class BlogCanvas extends Canvas {
     onAnimationFrameRequest: (id: number) => void
   ) {
     this.animateSquares(timeStamp);
-    this.drawHover();
     super.tick(onAnimationFrameRequest);
   }
 
@@ -230,45 +229,6 @@ export class BlogCanvas extends Canvas {
       }
 
       square.draw(this.ctx, this.squareColor);
-
-      // this.ctx.fillStyle = "black";
-      // this.ctx.fillText(
-      //   String(square.opacity),
-      //   square.xPos + 10,
-      //   square.yPos + 15
-      // );
-    });
-  }
-
-  private drawHover() {
-    if (!this.mousePos) return;
-    const { x, y } = this.mousePos;
-
-    this.squares.forEach((square) => {
-      const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
-
-      const dx = (x - square.xPos - Shared.squareSize / 2) / sizeRatio;
-      const dy = (y - square.yPos - Shared.squareSize / 2) / sizeRatio;
-
-      // Calculate the distance between two points using the Pythagorean theorem.
-      const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
-
-      // Calculate the opacity based on the distance
-      const opacity = Math.min(
-        Number(Math.max(0, distance / 100).toFixed(2)),
-        1
-      );
-
-      if (opacity < 1) {
-        square.animating = false;
-        square.opacity = opacity;
-      }
-
-      // square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);
-
-      // this.ctx.fillStyle = "black";
-      // this.ctx.fillText(String(opacity), square.xPos + 10, square.yPos + 15);
-      // }
     });
   }
 }
