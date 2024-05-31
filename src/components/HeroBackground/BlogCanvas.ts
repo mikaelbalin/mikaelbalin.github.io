@@ -2,6 +2,7 @@ import { MantineColorScheme, alpha } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
 import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
+import { lerp } from "../../utils";
 
 export class BlogCanvas extends Canvas {
   constructor(
@@ -182,6 +183,28 @@ export class BlogCanvas extends Canvas {
     this.squares = squares;
   }
 
+  private isMouseOverSquare(
+    mouseX: number,
+    mouseY: number,
+    square: Square
+  ): boolean {
+    const squareLeft = square.xPos;
+    const squareRight = square.xPos + Shared.squareSize;
+    const squareTop = square.yPos;
+    const squareBottom = square.yPos + Shared.squareSize;
+
+    if (
+      mouseX >= squareLeft &&
+      mouseX <= squareRight &&
+      mouseY >= squareTop &&
+      mouseY <= squareBottom
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * Animates the squares on the canvas.
    * @param timestamp - The current timestamp in milliseconds.
@@ -192,7 +215,44 @@ export class BlogCanvas extends Canvas {
     this.squares.forEach((square) => {
       if (typeof square.distancePercentage !== "number") return;
       const animationFrequency = (1 - square.distancePercentage / 100) * 0.01;
+      const { x, y } = this.mousePos || { x: 0, y: 0 };
 
+      const check = this.isMouseOverSquare(x, y, square);
+
+      // const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
+      // const dx = x - square.xPos - Shared.squareSize / 2;
+      // const dy = y - square.yPos - Shared.squareSize / 2;
+      // const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
+      // const opacity = Math.min(
+      //   Number(Math.max(0, distance / 100).toFixed(2)),
+      //   1
+      // );
+
+      // if (check) {
+      //   if (square.animationStart === null) {
+      //     square.animationStart = timestamp;
+      //     square.hasHover = true;
+      //   }
+
+      //   if (square.animationStart !== null) {
+      //     const elapsedTime = (timestamp - square.animationStart) / 1000;
+      //     square.opacity = Math.max(1 - elapsedTime / 2, 0); // Math.min(elapsedTime / 4, 1);
+
+      //     square.draw(this.ctx, this.squareColor);
+
+      //     this.ctx.fillStyle = "black";
+      //     this.ctx.fillText(
+      //       String(timestamp),
+      //       square.xPos + 10,
+      //       square.yPos + 15
+      //     );
+
+      //     if (elapsedTime >= 2) {
+      //       square.animationStart = null;
+      //       square.hasHover = false;
+      //     }
+      //   }
+      // } else {
       if (
         !square.animating &&
         ((square.distancePercentage! >= 75 && square.firstAnimation) ||
@@ -202,14 +262,11 @@ export class BlogCanvas extends Canvas {
         square.animating = true;
         square.animationStart = timestamp;
       }
-
       if (square.animating && square.animationStart !== null) {
         const elapsedTime = (timestamp - square.animationStart) / 1000;
         const animationPhase = elapsedTime % 4;
-
         if (square.firstAnimation) {
           square.opacity = Math.min(animationPhase / 2, 1); // Only increase opacity to 1 and then stop
-
           if (animationPhase >= 2) {
             square.animating = false;
             square.firstAnimation = false; // Set to false after first animation
@@ -227,8 +284,8 @@ export class BlogCanvas extends Canvas {
           }
         }
       }
-
       square.draw(this.ctx, this.squareColor);
+      // }
     });
   }
 }

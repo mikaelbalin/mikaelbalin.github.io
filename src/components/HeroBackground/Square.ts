@@ -31,7 +31,7 @@ export class Square {
   public readonly yPos: number;
   private _opacity: number = 1;
   public animationStart: DOMHighResTimeStamp | null = null;
-  private hasHover: boolean = false;
+  public hasHover: boolean = false;
   public distance?: number;
   public animating?: boolean;
   public distancePercentage?: number;
