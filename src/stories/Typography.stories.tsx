@@ -2,9 +2,10 @@ import { TypographyStylesProvider } from "@mantine/core";
 import image from "./assets/vaclav-pechar-EHt0DO1wRw8-unsplash.jpg";
 import { Meta } from "@storybook/react";
 
-export default { title: "TypographyStylesProvider" } satisfies Meta<
-  typeof TypographyStylesProvider
->;
+export default {
+  title: "Typography/TypographyStylesProvider",
+  tags: ["autodocs"],
+} satisfies Meta<typeof TypographyStylesProvider>;
 
 const html = `<h1>Heading 1</h1>
 <h2>Heading 2</h2>
