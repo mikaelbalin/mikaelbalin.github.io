@@ -11,6 +11,10 @@ export const resolver: CSSVariablesResolver = (theme) => ({
     "--app-color-coal-black-light": theme.other.appDarkColorCoalBlackLight,
     "--app-transition-color": theme.other.transitionColor,
   },
-  light: {},
-  dark: {},
+  light: {
+    "--mantine-color-body": theme.white,
+  },
+  dark: {
+    "--mantine-color-body": theme.black,
+  },
 });
