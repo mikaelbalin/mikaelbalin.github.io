@@ -5,7 +5,15 @@ const meta = {
   title: "Typography/Text",
   component: Text,
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    truncate: {
+      options: ["end", "start", true, false],
+      control: { type: "select" },
+    },
+    lineClamp: {
+      control: { type: "number" },
+    },
+  },
 } satisfies Meta<typeof Text>;
 
 export default meta;
@@ -14,6 +22,7 @@ type Story = StoryObj<typeof Text>;
 export const ParagraphBig: Story = {
   args: {
     children: "Let’s get in touch",
+    span: false,
   },
 };
 

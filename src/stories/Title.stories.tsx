@@ -1,11 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Title } from "@mantine/core";
+import { Title, TitleProps } from "@mantine/core";
+import { UnionToTuple } from "../types/UnionToTuple";
 
 const meta = {
   title: "Typography/Title",
   component: Title,
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    textWrap: {
+      options: [
+        "wrap",
+        "nowrap",
+        "balance",
+        "pretty",
+        "stable",
+      ] satisfies UnionToTuple<NonNullable<TitleProps["textWrap"]>>,
+      control: { type: "select" },
+    },
+    lineClamp: {
+      control: { type: "number" },
+    },
+  },
 } satisfies Meta<typeof Title>;
 
 export default meta;
