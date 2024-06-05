@@ -1,8 +1,6 @@
-import { MantineColorScheme, alpha } from "@mantine/core";
+import { MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
-import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
-import { lerp } from "../../utils";
 
 export class BlogCanvas extends Canvas {
   constructor(
@@ -51,6 +49,7 @@ export class BlogCanvas extends Canvas {
 
     // Interpolate between 0 and 1/3 of canvas width
     const ratio = (this.canvas.width - minWidth) / (maxWidth - minWidth);
+
     return ratio * (this.canvas.width / 3);
   }
 
@@ -61,16 +60,14 @@ export class BlogCanvas extends Canvas {
    * @returns A boolean indicating whether the square is within the shape.
    */
   private isSquareInShape(xPos: number, yPos: number): boolean {
-    const pointsToCheck = [
-      // { x: xPos, y: yPos },
-      { x: xPos, y: yPos + Shared.squareSize / 2 },
-    ];
+    const pointsToCheck = [{ x: xPos, y: yPos + Shared.squareSize / 2 }];
 
     for (let point of pointsToCheck) {
       if (this.ctx.isPointInPath(point.x, point.y)) {
         return true;
       }
     }
+
     return false;
   }
 
@@ -165,7 +162,6 @@ export class BlogCanvas extends Canvas {
               distance,
               opacity: 0,
               animating: false,
-              animationStart: 0,
               firstAnimation: true,
             })
           );
@@ -215,44 +211,7 @@ export class BlogCanvas extends Canvas {
     this.squares.forEach((square) => {
       if (typeof square.distancePercentage !== "number") return;
       const animationFrequency = (1 - square.distancePercentage / 100) * 0.01;
-      const { x, y } = this.mousePos || { x: 0, y: 0 };
 
-      const check = this.isMouseOverSquare(x, y, square);
-
-      // const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
-      // const dx = x - square.xPos - Shared.squareSize / 2;
-      // const dy = y - square.yPos - Shared.squareSize / 2;
-      // const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
-      // const opacity = Math.min(
-      //   Number(Math.max(0, distance / 100).toFixed(2)),
-      //   1
-      // );
-
-      // if (check) {
-      //   if (square.animationStart === null) {
-      //     square.animationStart = timestamp;
-      //     square.hasHover = true;
-      //   }
-
-      //   if (square.animationStart !== null) {
-      //     const elapsedTime = (timestamp - square.animationStart) / 1000;
-      //     square.opacity = Math.max(1 - elapsedTime / 2, 0); // Math.min(elapsedTime / 4, 1);
-
-      //     square.draw(this.ctx, this.squareColor);
-
-      //     this.ctx.fillStyle = "black";
-      //     this.ctx.fillText(
-      //       String(timestamp),
-      //       square.xPos + 10,
-      //       square.yPos + 15
-      //     );
-
-      //     if (elapsedTime >= 2) {
-      //       square.animationStart = null;
-      //       square.hasHover = false;
-      //     }
-      //   }
-      // } else {
       if (
         !square.animating &&
         ((square.distancePercentage! >= 75 && square.firstAnimation) ||
@@ -262,6 +221,7 @@ export class BlogCanvas extends Canvas {
         square.animating = true;
         square.animationStart = timestamp;
       }
+
       if (square.animating && square.animationStart !== null) {
         const elapsedTime = (timestamp - square.animationStart) / 1000;
         const animationPhase = elapsedTime % 4;
@@ -284,8 +244,8 @@ export class BlogCanvas extends Canvas {
           }
         }
       }
+
       square.draw(this.ctx, this.squareColor);
-      // }
     });
   }
 }
