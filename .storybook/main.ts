@@ -20,7 +20,12 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: "@storybook/nextjs",
-    options: {},
+    options: {
+      strictMode: true,
+    },
+  },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
   },
   docs: {
     autodocs: "tag",
