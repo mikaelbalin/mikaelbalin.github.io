@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  TextInput,
-  Checkbox,
-  Button,
-  Group,
-  Box,
-  Textarea,
-} from "@mantine/core";
+import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 export const ContactForm = () => {

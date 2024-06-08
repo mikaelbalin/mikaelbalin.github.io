@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, TextInput, Box } from "@mantine/core";
+import { Box, Button, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
 
 export const SubscriptionForm = () => {

@@ -1,5 +1,5 @@
 import { Button, Container, Stack, Title } from "@mantine/core";
-import { PostCard } from "../PostCard";
+import { PostCard } from "@/components/PostCard";
 
 const posts = [
   {

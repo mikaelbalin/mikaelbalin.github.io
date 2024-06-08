@@ -1,5 +1,5 @@
+import { theme } from "@/theme";
 import { MantineColorScheme } from "@mantine/core";
-import { theme } from "../../theme";
 import { Square } from "./Square";
 
 export type BackgroundVariant = "default" | "blog";

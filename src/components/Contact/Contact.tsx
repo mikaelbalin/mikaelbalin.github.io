@@ -1,4 +1,4 @@
-import { Container, Grid, Title, Text, GridCol } from "@mantine/core";
+import { Container, Grid, Text, GridCol } from "@mantine/core";
 import { ContactForm } from "./ContactForm";
 
 export const Contact = () => {

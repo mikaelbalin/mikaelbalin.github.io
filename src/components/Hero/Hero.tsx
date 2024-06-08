@@ -1,7 +1,7 @@
+import { HeroBackground } from "@/components/HeroBackground";
+import { LiveTime } from "@/components/LiveTime";
+import { Marquee } from "@/components/Marquee";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
-import { HeroBackground } from "../HeroBackground";
-import { Marquee } from "../Marquee";
-import { LiveTime } from "../LiveTime";
 
 export const Hero = () => {
   const greetings = ["Hello", "Olá", "Hallå", "Bonjour"];

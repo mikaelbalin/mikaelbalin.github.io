@@ -1,10 +1,10 @@
 import {
   Switch,
-  useMantineColorScheme,
   useComputedColorScheme,
+  useMantineColorScheme,
 } from "@mantine/core";
+import { IconMoon, IconSunHigh } from "@tabler/icons-react";
 import cx from "clsx";
-import { IconSunHigh, IconMoon } from "@tabler/icons-react";
 import classes from "./ColorSchemeToggle.module.css";
 
 export const ColorSchemeToggle = () => {

@@ -1,8 +1,8 @@
+import { theme } from "@/theme";
 import { MantineColorScheme } from "@mantine/core";
-import { theme } from "../../theme";
-import { Shared, Square } from "./Square";
-import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 import { Canvas, MousePosition } from "./Canvas";
+import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
+import { Shared, Square } from "./Square";
 
 export class MainCanvas extends Canvas {
   constructor(

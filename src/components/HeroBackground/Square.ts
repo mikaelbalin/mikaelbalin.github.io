@@ -1,6 +1,6 @@
+import { lerp } from "@/utils";
 import { alpha } from "@mantine/core";
 import { ANIMATION_DURATION } from "./HeroBackground.constants";
-import { lerp } from "../../utils";
 
 export class Shared {
   static squareSize: number;

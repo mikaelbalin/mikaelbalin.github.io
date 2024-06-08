@@ -1,10 +1,10 @@
 "use client";
 
+import { RootRefContext } from "@/context";
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import cx from "clsx";
 import { PropsWithChildren, useContext, useEffect, useRef } from "react";
-import { RootRefContext } from "../../context";
 import { BlogCanvas } from "./BlogCanvas";
 import { BackgroundVariant, MousePosition } from "./Canvas";
 import {

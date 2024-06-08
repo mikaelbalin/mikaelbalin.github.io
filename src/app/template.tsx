@@ -1,12 +1,12 @@
 "use client";
 
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
+import { HeaderMenu } from "@/components/HeaderMenu";
+import { RootRefContext } from "@/context";
 import { animated, useSpring } from "@react-spring/web";
 import { PropsWithChildren, useEffect, useRef } from "react";
-import { Contact } from "../components/Contact";
-import { Footer } from "../components/Footer";
-import { HeaderMenu } from "../components/HeaderMenu";
 import styles from "./template.module.css";
-import { RootRefContext } from "../context";
 
 export default function Template({ children }: PropsWithChildren) {
   const [springs, api] = useSpring(() => ({ y: -100 }));

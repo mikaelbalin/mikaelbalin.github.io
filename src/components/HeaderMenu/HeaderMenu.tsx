@@ -1,27 +1,27 @@
 "use client";
 
-import { MouseEventHandler, useState } from "react";
+import { ColorSchemeToggle } from "@/components/ColorSchemeToggle";
+import { Logo } from "@/components/Logo";
 import {
-  Group,
-  UnstyledButton,
-  Text,
   Anchor,
-  Center,
   Box,
   Burger,
-  Drawer,
+  Center,
   Collapse,
-  ScrollArea,
-  useMantineTheme,
-  Menu,
   Container,
+  Drawer,
+  Group,
+  Menu,
+  ScrollArea,
+  Text,
+  UnstyledButton,
+  useMantineTheme,
 } from "@mantine/core";
-import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
+import Link from "next/link";
+import { MouseEventHandler, useState } from "react";
 import classes from "./HeaderMenu.module.css";
-import { ColorSchemeToggle } from "../ColorSchemeToggle";
-import { Logo } from "../Logo";
 
 type MenuItem = {
   link: string;

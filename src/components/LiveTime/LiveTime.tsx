@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Text } from "@mantine/core";
+import { useEffect, useState } from "react";
 
 const options: Intl.DateTimeFormatOptions = {
   hour: "2-digit",
