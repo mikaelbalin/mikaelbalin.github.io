@@ -1,9 +1,11 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const withMDX = require("@next/mdx")();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   output: "export",
   devIndicators: {
     buildActivityPosition: "bottom-right",
@@ -13,4 +15,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = withBundleAnalyzer(withMDX(nextConfig));

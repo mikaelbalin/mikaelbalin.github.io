@@ -27,6 +27,12 @@
       "@/utils": ["utils/index.ts"]
     }
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/app/my-mdx-page/page.mdx"
+  ],
   "exclude": ["node_modules"]
 }
