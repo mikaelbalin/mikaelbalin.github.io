@@ -2,6 +2,9 @@ import { MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
 
+/**
+ * Represents a canvas for the blog background.
+ */
 export class BlogCanvas extends Canvas {
   constructor(
     canvas: HTMLCanvasElement,
