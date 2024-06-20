@@ -24,7 +24,7 @@
     "@storybook/nextjs": "^8.1.10",
     "@storybook/react": "^8.1.10",
     "@storybook/test": "^8.1.10",
-    "@types/eslint": "^8",
+    "@types/eslint": "^8.56.10",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20.14.6",
     "@types/react": "^18.3.3",

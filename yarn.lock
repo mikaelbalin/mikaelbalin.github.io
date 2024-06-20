@@ -4209,7 +4209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8":
+"@types/eslint@npm:^8.56.10":
   version: 8.56.10
   resolution: "@types/eslint@npm:8.56.10"
   dependencies:
@@ -10703,7 +10703,7 @@ __metadata:
     "@storybook/react": "npm:^8.1.10"
     "@storybook/test": "npm:^8.1.10"
     "@tabler/icons-react": "npm:^3.6.0"
-    "@types/eslint": "npm:^8"
+    "@types/eslint": "npm:^8.56.10"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:^20.14.6"
     "@types/react": "npm:^18.3.3"
