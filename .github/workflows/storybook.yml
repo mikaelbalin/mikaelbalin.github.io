@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build and Static HTML export with Next.js
+      - name: Build Storybook
         run: yarn build-storybook
 
       - name: Upload artifact
