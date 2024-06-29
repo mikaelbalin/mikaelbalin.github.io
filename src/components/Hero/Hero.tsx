@@ -17,7 +17,9 @@ export const Hero = ({ title = [], description }: HeroProps) => {
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text pos="relative">{description}</Text>
           </SimpleGrid>
-          <Button className="mt-7">Let’s get in touch</Button>
+          <Button component="a" className="mt-7" href="#contacts">
+            Let’s get in touch
+          </Button>
         </Container>
       </Box>
       <Box className="mb-14">

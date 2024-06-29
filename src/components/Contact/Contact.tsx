@@ -3,7 +3,7 @@ import { ContactForm } from "./ContactForm";
 
 export const Contact = () => {
   return (
-    <Container mt={64} mb={56}>
+    <Container mt={64} mb={56} id="contacts">
       <Grid>
         <GridCol span={{ base: 12, sm: 3 }}>
           <Text>Contact</Text>
