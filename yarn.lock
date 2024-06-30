@@ -12865,7 +12865,6 @@ __metadata:
     "@graphql-codegen/typescript": "npm:^4.0.8"
     "@graphql-codegen/typescript-graphql-request": "npm:^6.2.0"
     "@graphql-codegen/typescript-operations": "npm:^4.2.2"
-    "@graphql-typed-document-node/core": "npm:^3.2.0"
     "@mantine/code-highlight": "npm:^7.11.0"
     "@mantine/core": "npm:^7.11.0"
     "@mantine/form": "npm:^7.11.0"
