@@ -2943,6 +2943,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/typescript-operations@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "@graphql-codegen/typescript-operations@npm:4.2.3"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^5.0.4"
+    "@graphql-codegen/typescript": "npm:^4.0.9"
+    "@graphql-codegen/visitor-plugin-common": "npm:5.3.1"
+    auto-bind: "npm:~4.0.0"
+    tslib: "npm:~2.6.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10c0/eae0d20d7a6087a47b3ad44d322c5a9bd61e2cb35e44f20652740876a2024593ac02964885ebab155cc958992c8d963561fe3d91f748e067f525f9804937f3c3
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/typescript@npm:^4.0.8":
   version: 4.0.8
   resolution: "@graphql-codegen/typescript@npm:4.0.8"
@@ -2955,6 +2970,21 @@ __metadata:
   peerDependencies:
     graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 10c0/3080485ba8ab32652a99272ed25cc2de9d4f8ed1cdaa8f7ff52c9a9546c0147afbeaed0e3891502e60213b020f082c7ed13d7e7cc720ef1721e624f726f251d0
+  languageName: node
+  linkType: hard
+
+"@graphql-codegen/typescript@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "@graphql-codegen/typescript@npm:4.0.9"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^5.0.4"
+    "@graphql-codegen/schema-ast": "npm:^4.0.2"
+    "@graphql-codegen/visitor-plugin-common": "npm:5.3.1"
+    auto-bind: "npm:~4.0.0"
+    tslib: "npm:~2.6.0"
+  peerDependencies:
+    graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10c0/37a209ac6f1e84551805028dddb7be42e9b5ec5d7d411678b845f2c5b6b4bc242330666f993962f4d59dc207b9d1585c568f7c908364c0410531fd6860e4dfbd
   languageName: node
   linkType: hard
 
@@ -2995,6 +3025,26 @@ __metadata:
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
   checksum: 10c0/71e54cb227a1fcd4de0e08eed4a84eeb8470b9680507b20c142f25ad53b40a48ca25c1bce5ca86be6c513945cdc2f0f8a36070619be8dd92f5071b5182676239
+  languageName: node
+  linkType: hard
+
+"@graphql-codegen/visitor-plugin-common@npm:5.3.1":
+  version: 5.3.1
+  resolution: "@graphql-codegen/visitor-plugin-common@npm:5.3.1"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": "npm:^5.0.4"
+    "@graphql-tools/optimize": "npm:^2.0.0"
+    "@graphql-tools/relay-operation-optimizer": "npm:^7.0.0"
+    "@graphql-tools/utils": "npm:^10.0.0"
+    auto-bind: "npm:~4.0.0"
+    change-case-all: "npm:1.0.15"
+    dependency-graph: "npm:^0.11.0"
+    graphql-tag: "npm:^2.11.0"
+    parse-filepath: "npm:^1.0.2"
+    tslib: "npm:~2.6.0"
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+  checksum: 10c0/c6d642445149ef9adb473e0a47019a2008e4e1b69a700d7ff6b2e4d2ba3f3118a4296f6d370fd1c45c84f91dd3580cea63db896a47bd102a0dd7b28bb409a0e6
   languageName: node
   linkType: hard
 
@@ -3704,24 +3754,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/code-highlight@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@mantine/code-highlight@npm:7.11.0"
+"@mantine/code-highlight@npm:^7.11.1":
+  version: 7.11.1
+  resolution: "@mantine/code-highlight@npm:7.11.1"
   dependencies:
     clsx: "npm:^2.1.1"
     highlight.js: "npm:^11.9.0"
   peerDependencies:
-    "@mantine/core": 7.11.0
-    "@mantine/hooks": 7.11.0
+    "@mantine/core": 7.11.1
+    "@mantine/hooks": 7.11.1
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 10c0/10f39458db2f8c28ca3cfc12cbe2c773f6cae2757fca7c87821d96b88a92104386fe2e600690f097bb6fb124cafe615a6b67437533226b0c7f5081257cb1d264
+  checksum: 10c0/feaa951842d0a0692c4a85f98ff027c65bbfd8db5be6a158f6da763cf2cebd95bce2107ff7b328e8ad2de28b51bfdc3e2ee450cc36b6a892da6f32f7eb3ae5ef
   languageName: node
   linkType: hard
 
-"@mantine/core@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@mantine/core@npm:7.11.0"
+"@mantine/core@npm:^7.11.1":
+  version: 7.11.1
+  resolution: "@mantine/core@npm:7.11.1"
   dependencies:
     "@floating-ui/react": "npm:^0.26.9"
     clsx: "npm:^2.1.1"
@@ -3730,31 +3780,31 @@ __metadata:
     react-textarea-autosize: "npm:8.5.3"
     type-fest: "npm:^4.12.0"
   peerDependencies:
-    "@mantine/hooks": 7.11.0
+    "@mantine/hooks": 7.11.1
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 10c0/41fb80ed5e9cfe67bca3dd9a764c00e66f8c78b92f2f71f4f4fd73b1621d682053b07532590a609bce7e876d8d4f67d69fcacc37168a294595b8af7c2ffce616
+  checksum: 10c0/f501aa262441a6344e813d85d3c5dfb0946a29cb8a1d57312e26c0899af523f7dd4edfc019df26824c7f93b605de4bc77734e558ef404cbe25849d46171e4d42
   languageName: node
   linkType: hard
 
-"@mantine/form@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@mantine/form@npm:7.11.0"
+"@mantine/form@npm:^7.11.1":
+  version: 7.11.1
+  resolution: "@mantine/form@npm:7.11.1"
   dependencies:
     fast-deep-equal: "npm:^3.1.3"
     klona: "npm:^2.0.6"
   peerDependencies:
     react: ^18.2.0
-  checksum: 10c0/21d84b7becc88d397e15d6053ccfac7eda333c0824d601857ca5637eb27face6ea284efb2970a670658846789ec7a5e0761dc328d58f18d0335e61511a19c5ba
+  checksum: 10c0/4c470f36f9078490f7d8145721fc969821dea3e4ba697f3cee41d04774e6ac5d5b84442616fb3021dee04e9b03f4a88145b06378ba04a2388156be7016de6020
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:^7.11.0":
-  version: 7.11.0
-  resolution: "@mantine/hooks@npm:7.11.0"
+"@mantine/hooks@npm:^7.11.1":
+  version: 7.11.1
+  resolution: "@mantine/hooks@npm:7.11.1"
   peerDependencies:
     react: ^18.2.0
-  checksum: 10c0/5fb96b46145f0f1fbbe2a4934ce26e374e59dfc4b0d7b1f0b96e4d9a93997315bb57e5d2747331648e33280669404555a52b0e9857bb8b81b1121fe02eede5ac
+  checksum: 10c0/e21ed0b67f160d2500819b515bd61f741220019d780afefe59bdab69de0cf6db839920b5673f4dfe17fbd2598d8ed14b5deea11ce97af9bf06b42ce433b43226
   languageName: node
   linkType: hard
 
@@ -12862,13 +12912,13 @@ __metadata:
   resolution: "mikhailbalin.github.io@workspace:."
   dependencies:
     "@graphql-codegen/cli": "npm:5.0.2"
-    "@graphql-codegen/typescript": "npm:^4.0.8"
+    "@graphql-codegen/typescript": "npm:^4.0.9"
     "@graphql-codegen/typescript-graphql-request": "npm:^6.2.0"
-    "@graphql-codegen/typescript-operations": "npm:^4.2.2"
-    "@mantine/code-highlight": "npm:^7.11.0"
-    "@mantine/core": "npm:^7.11.0"
-    "@mantine/form": "npm:^7.11.0"
-    "@mantine/hooks": "npm:^7.11.0"
+    "@graphql-codegen/typescript-operations": "npm:^4.2.3"
+    "@mantine/code-highlight": "npm:^7.11.1"
+    "@mantine/core": "npm:^7.11.1"
+    "@mantine/form": "npm:^7.11.1"
+    "@mantine/hooks": "npm:^7.11.1"
     "@mdx-js/loader": "npm:^3.0.1"
     "@mdx-js/react": "npm:^3.0.1"
     "@next/bundle-analyzer": "npm:^14.2.4"
