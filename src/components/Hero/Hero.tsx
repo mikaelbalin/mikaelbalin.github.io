@@ -14,11 +14,12 @@ interface HeroProps {
     heading: string[];
     description: string;
     link: Link;
+    location: string;
   };
 }
 
 export const Hero = ({ data }: Readonly<HeroProps>) => {
-  const { heading, description, link } = data;
+  const { heading, description, link, location } = data;
 
   return (
     <HeroBackground>
@@ -35,7 +36,7 @@ export const Hero = ({ data }: Readonly<HeroProps>) => {
       </Box>
       <Box className="mb-14">
         <Container className="relative text-right">
-          <Text>Based in Portugal</Text>
+          <Text>{location}</Text>
           <LiveTime />
         </Container>
       </Box>
