@@ -3,7 +3,7 @@ import { Container, Title, Text } from "@mantine/core";
 export const About = () => {
   return (
     <Container component="section" pt={104} pb={64}>
-      <Title>
+      <Title order={2}>
         Striving for excellence in every line of code, down to the last pixel.
       </Title>
       <Text mt={32}>
