@@ -13,6 +13,20 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.githubusercontent.com",
+        port: "1337",
+        pathname: "/uploads/**/*",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+      },
+    ],
+  },
 };
 
 module.exports = withBundleAnalyzer(withMDX(nextConfig));

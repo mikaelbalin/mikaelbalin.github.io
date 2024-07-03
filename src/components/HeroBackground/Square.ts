@@ -1,4 +1,4 @@
-import { lerp } from "@/lib";
+import { lerp } from "@/lib/lerp";
 import { alpha } from "@mantine/core";
 import { ANIMATION_DURATION } from "./HeroBackground.constants";
 
