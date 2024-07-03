@@ -1,8 +1,9 @@
 import classes from "./Marquee.module.css";
+import cn from "clsx";
 
 function renderListItems(items: string[]) {
   return items.map((item) => (
-    <li key={item} className={classes.item}>
+    <li key={item} className={cn(classes.item, "uppercase")}>
       {item}
     </li>
   ));

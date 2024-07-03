@@ -3,22 +3,33 @@ import { LiveTime } from "@/components/LiveTime";
 import { Marquee } from "@/components/Marquee";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 
-interface HeroProps {
-  title: string[];
-  description: string;
+interface Link {
+  url: string;
+  text: string;
+  isExternal: boolean;
 }
 
-export const Hero = ({ title = [], description }: HeroProps) => {
+interface HeroProps {
+  data: {
+    heading: string[];
+    description: string;
+    link: Link;
+  };
+}
+
+export const Hero = ({ data }: Readonly<HeroProps>) => {
+  const { heading, description, link } = data;
+
   return (
     <HeroBackground>
       <Box className="my-auto pt-15">
-        <Marquee texts={title} />
+        <Marquee texts={heading} />
         <Container mt={25}>
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text pos="relative">{description}</Text>
           </SimpleGrid>
-          <Button component="a" className="mt-7" href="#contacts">
-            Let’s get in touch
+          <Button component="a" className="mt-7" href={link.url}>
+            {link.text}
           </Button>
         </Container>
       </Box>

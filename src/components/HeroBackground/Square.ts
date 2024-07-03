@@ -1,4 +1,4 @@
-import { lerp } from "@/utils";
+import { lerp } from "@/lib";
 import { alpha } from "@mantine/core";
 import { ANIMATION_DURATION } from "./HeroBackground.constants";
 
@@ -81,7 +81,7 @@ export class Square {
     ctx: CanvasRenderingContext2D,
     timeStamp: DOMHighResTimeStamp,
     color: string,
-    onAnimationEnd: () => void
+    onAnimationEnd: () => void,
   ) {
     if (this.hasHover) return;
 
@@ -100,7 +100,7 @@ export class Square {
         this.opacity = lerp(
           0,
           1,
-          Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1)
+          Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1),
         );
       }
 

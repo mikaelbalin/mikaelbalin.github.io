@@ -24,7 +24,7 @@
       "@/components/*": ["components/*"],
       "@/theme": ["theme/index.ts"],
       "@/context": ["context/index.ts"],
-      "@/utils": ["utils/index.ts"]
+      "@/lib": ["lib/index.ts"]
     }
   },
   "include": [
