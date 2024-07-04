@@ -1,6 +1,6 @@
 "use client";
 
-import { Text } from "@mantine/core";
+// import { Text } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 const options: Intl.DateTimeFormatOptions = {
@@ -17,12 +17,12 @@ export const LiveTime = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(
-        new Date().toLocaleTimeString(window.navigator.language, options)
+        new Date().toLocaleTimeString(window.navigator.language, options),
       );
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return <Text component="time">{currentTime}</Text>;
+  return <>{/* <Text component="time">{currentTime}</Text> */}</>;
 };

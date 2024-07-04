@@ -1,5 +1,5 @@
 import { theme } from "@/theme";
-import { MantineColorScheme } from "@mantine/core";
+// import { MantineColorScheme } from "@mantine/core";
 import { Square } from "./Square";
 
 export type BackgroundVariant = "default" | "blog";
@@ -17,7 +17,7 @@ export abstract class Canvas {
   protected readonly ctx: CanvasRenderingContext2D;
   protected squares: Square[] = [];
   protected mousePos?: MousePosition;
-  private _colorScheme!: MantineColorScheme;
+  // private _colorScheme!: MantineColorScheme;
   protected squareColor!: string;
   protected activeSquares: Square[] = [];
 
@@ -29,26 +29,26 @@ export abstract class Canvas {
    */
   constructor(
     canvas: HTMLCanvasElement,
-    colorScheme: MantineColorScheme,
-    mousePos?: MousePosition
+    // colorScheme: MantineColorScheme,
+    mousePos?: MousePosition,
   ) {
     this.canvas = canvas;
     this.ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-    this.colorScheme = colorScheme;
+    // this.colorScheme = colorScheme;
     this.mousePos = mousePos;
   }
 
-  private set colorScheme(colorScheme: MantineColorScheme) {
-    this._colorScheme = colorScheme;
-    this.squareColor =
-      colorScheme === "light"
-        ? theme.other.appLightColorBeige
-        : theme.other.appDarkColorCoalBlack;
-  }
+  // private set colorScheme(colorScheme: MantineColorScheme) {
+  //   this._colorScheme = colorScheme;
+  //   this.squareColor =
+  //     colorScheme === "light"
+  //       ? theme.other.appLightColorBeige
+  //       : theme.other.appDarkColorCoalBlack;
+  // }
 
-  protected get colorScheme() {
-    return this._colorScheme;
-  }
+  // protected get colorScheme() {
+  //   return this._colorScheme;
+  // }
 
   /**
    * Runs the animation loop for the canvas.
@@ -57,7 +57,7 @@ export abstract class Canvas {
    */
   protected abstract run(
     timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void
+    onAnimationFrameRequest: (id: number) => void,
   ): void;
 
   /**
@@ -66,7 +66,7 @@ export abstract class Canvas {
    */
   protected tick(onAnimationFrameRequest: (id: number) => void) {
     onAnimationFrameRequest(
-      requestAnimationFrame((time) => this.run(time, onAnimationFrameRequest))
+      requestAnimationFrame((time) => this.run(time, onAnimationFrameRequest)),
     );
   }
 

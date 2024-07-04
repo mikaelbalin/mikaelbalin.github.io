@@ -1,4 +1,4 @@
-import { Badge, Group, Title, Text } from "@mantine/core";
+// import { Badge, Group, Title, Text } from "@mantine/core";
 import classes from "./PostCard.module.css";
 
 interface PostCardProps {
@@ -10,21 +10,23 @@ interface PostCardProps {
 
 export const PostCard = ({ title, date, timeToRead, tags }: PostCardProps) => {
   return (
-    <Group className={classes.root}>
-      <Title component="div" size="h2">
-        {title}
-      </Title>
-      <Group>
-        {tags.map((tag) => (
-          <Badge key={tag} color="blue">
-            tag
-          </Badge>
-        ))}
-      </Group>
-      <Group>
-        <Text>{date}</Text>
-        <Text>{timeToRead} min read</Text>
-      </Group>
-    </Group>
+    <>
+      {/* <Group className={classes.root}>
+        <Title component="div" size="h2">
+          {title}
+        </Title>
+        <Group>
+          {tags.map((tag) => (
+            <Badge key={tag} color="blue">
+              tag
+            </Badge>
+          ))}
+        </Group>
+        <Group>
+          <Text>{date}</Text>
+          <Text>{timeToRead} min read</Text>
+        </Group>
+      </Group> */}
+    </>
   );
 };

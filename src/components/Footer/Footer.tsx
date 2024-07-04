@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Group, Anchor } from "@mantine/core";
+// import { Container, Group, Anchor } from "@mantine/core";
 import classes from "./Footer.module.css";
 
 const links = [
@@ -11,22 +11,24 @@ const links = [
 ];
 
 export function Footer() {
-  const items = links.map((link) => (
-    <Anchor<"a">
-      c="dimmed"
-      key={link.label}
-      href={link.link}
-      onClick={(event) => event.preventDefault()}
-      size="sm"
-    >
-      {link.label}
-    </Anchor>
-  ));
+  // const items = links.map((link) => (
+  //   <Anchor<"a">
+  //     c="dimmed"
+  //     key={link.label}
+  //     href={link.link}
+  //     onClick={(event) => event.preventDefault()}
+  //     size="sm"
+  //   >
+  //     {link.label}
+  //   </Anchor>
+  // ));
 
   return (
-    <Container className={classes.inner}>
-      Mikhail Balin
-      <Group className={classes.links}>{items}</Group>
-    </Container>
+    <>
+      {/* <Container className={classes.inner}>
+        Mikhail Balin
+        <Group className={classes.links}>{items}</Group>
+      </Container> */}
+    </>
   );
 }

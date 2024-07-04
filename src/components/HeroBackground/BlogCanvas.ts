@@ -1,4 +1,4 @@
-import { MantineColorScheme } from "@mantine/core";
+// import { MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { Shared, Square } from "./Square";
 
@@ -6,13 +6,13 @@ import { Shared, Square } from "./Square";
  * Represents a canvas for the blog background.
  */
 export class BlogCanvas extends Canvas {
-  constructor(
-    canvas: HTMLCanvasElement,
-    colorScheme: MantineColorScheme,
-    mousePos?: MousePosition
-  ) {
-    super(canvas, colorScheme, mousePos);
-  }
+  // constructor(
+  //   canvas: HTMLCanvasElement,
+  //   colorScheme: MantineColorScheme,
+  //   mousePos?: MousePosition
+  // ) {
+  //   super(canvas, colorScheme, mousePos);
+  // }
 
   /**
    * Runs the animation loop for the BlogCanvas.
@@ -21,7 +21,7 @@ export class BlogCanvas extends Canvas {
    */
   public override run(
     timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void
+    onAnimationFrameRequest: (id: number) => void,
   ) {
     this.animateSquares(timeStamp);
     super.tick(onAnimationFrameRequest);
@@ -84,7 +84,7 @@ export class BlogCanvas extends Canvas {
       this.cpx,
       this.cpy,
       this.canvas.width,
-      this.canvas.height
+      this.canvas.height,
     );
     this.ctx.lineTo(this.canvas.width, 0);
     this.ctx.closePath();
@@ -103,8 +103,8 @@ export class BlogCanvas extends Canvas {
       maxSamplePoints,
       Math.max(
         minSamplePoints,
-        Math.max(this.canvas.width, this.canvas.height) / 10
-      )
+        Math.max(this.canvas.width, this.canvas.height) / 10,
+      ),
     );
     let minDistance = Infinity;
 
@@ -121,7 +121,7 @@ export class BlogCanvas extends Canvas {
         Math.pow(parameter, 2) * this.canvas.height;
 
       const distance = Math.sqrt(
-        (xPos - curveX) * (xPos - curveX) + (yPos - curveY) * (yPos - curveY)
+        (xPos - curveX) * (xPos - curveX) + (yPos - curveY) * (yPos - curveY),
       );
 
       if (distance < minDistance) {
@@ -152,7 +152,7 @@ export class BlogCanvas extends Canvas {
         if (this.isSquareInShape(xPos, yPos)) {
           const distance = this.getDistanceToCurve(
             xPos + Shared.squareSize / 2,
-            yPos + Shared.squareSize / 2
+            yPos + Shared.squareSize / 2,
           );
 
           if (distance < minDistance) minDistance = distance;
@@ -166,7 +166,7 @@ export class BlogCanvas extends Canvas {
               opacity: 0,
               animating: false,
               firstAnimation: true,
-            })
+            }),
           );
         }
       }
@@ -175,7 +175,7 @@ export class BlogCanvas extends Canvas {
     squares.forEach((square) => {
       if (typeof square.distance !== "number") return;
       square.distancePercentage = Math.round(
-        ((square.distance - minDistance) / (maxDistance - minDistance)) * 100
+        ((square.distance - minDistance) / (maxDistance - minDistance)) * 100,
       );
     });
 
@@ -185,7 +185,7 @@ export class BlogCanvas extends Canvas {
   private isMouseOverSquare(
     mouseX: number,
     mouseY: number,
-    square: Square
+    square: Square,
   ): boolean {
     const squareLeft = square.xPos;
     const squareRight = square.xPos + Shared.squareSize;
