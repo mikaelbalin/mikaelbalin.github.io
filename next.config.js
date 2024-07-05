@@ -10,9 +10,9 @@ const nextConfig = {
   devIndicators: {
     buildActivityPosition: "bottom-right",
   },
-  // experimental: {
-  //   optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-  // },
+  experimental: {
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+  },
   images: {
     remotePatterns: [
       {

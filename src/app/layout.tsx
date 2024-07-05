@@ -1,5 +1,6 @@
-// import { ThemeProvider } from "@/theme";
-// import "@mantine/core/styles.css";
+import { ThemeProvider } from "@/theme";
+import { ColorSchemeScript } from "@mantine/core";
+import "@mantine/core/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./global.css";
@@ -18,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <ColorSchemeScript defaultColorScheme="auto" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

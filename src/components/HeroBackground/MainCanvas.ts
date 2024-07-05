@@ -1,17 +1,17 @@
 import { theme } from "@/theme";
-// import { MantineColorScheme } from "@mantine/core";
+import { MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
 import { Shared, Square } from "./Square";
 
 export class MainCanvas extends Canvas {
-  // constructor(
-  //   canvas: HTMLCanvasElement,
-  //   colorScheme: MantineColorScheme,
-  //   mousePos?: MousePosition
-  // ) {
-  //   super(canvas, colorScheme, mousePos);
-  // }
+  constructor(
+    canvas: HTMLCanvasElement,
+    colorScheme: MantineColorScheme,
+    mousePos?: MousePosition
+  ) {
+    super(canvas, colorScheme, mousePos);
+  }
 
   /**
    * Runs the animation loop for the MainCanvas.
@@ -20,7 +20,7 @@ export class MainCanvas extends Canvas {
    */
   public override run(
     timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void,
+    onAnimationFrameRequest: (id: number) => void
   ) {
     this.drawHover();
     this.animateSquares(timeStamp);
@@ -50,19 +50,19 @@ export class MainCanvas extends Canvas {
         (square.x === x && square.y === y) ||
         (square.x === x + 1 && square.y === y) ||
         (square.x === x && square.y === y + 1) ||
-        (square.x === x + 1 && square.y === y + 1),
+        (square.x === x + 1 && square.y === y + 1)
     );
 
     const groupX = filterSquares(
       (square) =>
         (square.x === x && square.y === y) ||
-        (square.x === x + 1 && square.y === y),
+        (square.x === x + 1 && square.y === y)
     );
 
     const groupY = filterSquares(
       (square) =>
         (square.x === x && square.y === y) ||
-        (square.x === x && square.y === y + 1),
+        (square.x === x && square.y === y + 1)
     );
 
     const groups = [groupSquare, groupX, groupY];
@@ -95,26 +95,31 @@ export class MainCanvas extends Canvas {
    * Draws the hover effect on the canvas.
    */
   private drawHover() {
-    // this.ctx.fillStyle = this.squareColor;
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    // if (!this.mousePos) return;
-    // const { x, y } = this.mousePos;
-    // const hoverColor =
-    //   this.colorScheme === "light"
-    //     ? theme.other.appLightColorBeigeDark
-    //     : theme.other.appDarkColorCoalBlackLight;
-    // this.squares.forEach((square) => {
-    //   // Calculate the distance between the mouse and the center of the square.
-    //   const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
-    //   const dx = (x - square.xPos - Shared.squareSize / 2) / sizeRatio;
-    //   const dy = (y - square.yPos - Shared.squareSize / 2) / sizeRatio;
-    //   // Calculate the distance between two points using the Pythagorean theorem.
-    //   const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
-    //   // Calculate the opacity based on the distance
-    //   const opacity = Math.max(0, 1 - distance / 100);
-    //   square.opacity = opacity || 1;
-    //   square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);
-    // });
+    this.ctx.fillStyle = this.squareColor;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    if (!this.mousePos) return;
+    const { x, y } = this.mousePos;
+    const hoverColor =
+      this.colorScheme === "light"
+        ? theme.other.appLightColorBeigeDark
+        : theme.other.appDarkColorCoalBlackLight;
+
+    this.squares.forEach((square) => {
+      // Calculate the distance between the mouse and the center of the square.
+      const sizeRatio = Shared.squareSize / SQUARE_SIZE_SMALL;
+      const dx = (x - square.xPos - Shared.squareSize / 2) / sizeRatio;
+      const dy = (y - square.yPos - Shared.squareSize / 2) / sizeRatio;
+
+      // Calculate the distance between two points using the Pythagorean theorem.
+      const distance = Math.round(Math.sqrt(dx * dx + dy * dy));
+
+      // Calculate the opacity based on the distance
+      const opacity = Math.max(0, 1 - distance / 100);
+
+      square.opacity = opacity || 1;
+      square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);
+    });
   }
 
   /**
@@ -125,7 +130,7 @@ export class MainCanvas extends Canvas {
     [...this.activeSquares].forEach((square) => {
       square.animate(this.ctx, timeStamp, this.squareColor, () => {
         this.activeSquares = this.activeSquares.filter(
-          (activeSquare) => activeSquare !== square,
+          (activeSquare) => activeSquare !== square
         );
       });
     });
@@ -144,7 +149,7 @@ export class MainCanvas extends Canvas {
       const xPos = x * Shared.squareSize;
       const yPos = y * Shared.squareSize;
       const animatingSquare = this.activeSquares.find(
-        (square) => square.x === x && square.y === y,
+        (square) => square.x === x && square.y === y
       );
       const square = animatingSquare || new Square({ xPos, yPos, x, y });
       square.draw(this.ctx, this.squareColor);

@@ -1,5 +1,5 @@
 import { lerp } from "@/lib/lerp";
-// import { alpha } from "@mantine/core";
+import { alpha } from "@mantine/core";
 import { ANIMATION_DURATION } from "./HeroBackground.constants";
 
 export class Shared {
@@ -72,7 +72,7 @@ export class Square {
   }
 
   public draw(ctx: CanvasRenderingContext2D, color: string, hasHover = false) {
-    // ctx.fillStyle = alpha(color, this._opacity);
+    ctx.fillStyle = alpha(color, this._opacity);
     ctx.fillRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
     this.hasHover = hasHover;
   }

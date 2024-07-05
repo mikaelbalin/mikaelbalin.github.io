@@ -1,7 +1,7 @@
 "use client";
 
-// import { MantineProvider } from "@mantine/core";
-// import { theme } from "./theme";
+import { MantineProvider } from "@mantine/core";
+import { theme } from "./theme";
 import { resolver } from "./resolver";
 
 export const ThemeProvider = ({
@@ -9,9 +9,7 @@ export const ThemeProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <>
-    {/* <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-      {children}
-    </MantineProvider> */}
-  </>
+  <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+    {children}
+  </MantineProvider>
 );

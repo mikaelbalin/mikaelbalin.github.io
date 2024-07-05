@@ -1,7 +1,7 @@
 import { HeroBackground } from "@/components/HeroBackground";
 import { LiveTime } from "@/components/LiveTime";
 import { Marquee } from "@/components/Marquee";
-// import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
+import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 
 interface Link {
   url: string;
@@ -19,11 +19,11 @@ interface HeroProps {
 }
 
 export const Hero = ({ data }: Readonly<HeroProps>) => {
-  // const { heading, description, link, location } = data;
+  const { heading, description, link, location } = data;
 
   return (
     <HeroBackground>
-      {/* <Box className="my-auto pt-15">
+      <Box className="my-auto pt-15">
         <Marquee texts={heading} />
         <Container mt={25}>
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
@@ -39,7 +39,7 @@ export const Hero = ({ data }: Readonly<HeroProps>) => {
           <Text>{location}</Text>
           <LiveTime />
         </Container>
-      </Box> */}
+      </Box>
     </HeroBackground>
   );
 };
