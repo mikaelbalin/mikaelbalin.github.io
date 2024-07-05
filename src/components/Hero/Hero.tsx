@@ -29,8 +29,8 @@ export const Hero = ({ data }: Readonly<HeroProps>) => {
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text pos="relative">{description}</Text>
           </SimpleGrid>
-          <Button component="a" className="mt-7" href={link.url}>
-            {link.text}
+          <Button component="a" className="mt-7" href={link?.url}>
+            {link?.text}
           </Button>
         </Container>
       </Box>

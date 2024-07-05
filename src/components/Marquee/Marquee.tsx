@@ -13,7 +13,7 @@ interface MarqueeProps {
   texts: string[];
 }
 
-export const Marquee = ({ texts }: MarqueeProps) => {
+export const Marquee = ({ texts = [] }: MarqueeProps) => {
   return (
     <div className={classes.root}>
       <ul className={classes.content}>{renderListItems(texts)}</ul>

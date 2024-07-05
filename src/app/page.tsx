@@ -21,7 +21,7 @@ export default async function Page() {
 
   return (
     <div>
-      <Hero data={strapiData.data.attributes.blocks[0]} />
+      <Hero data={strapiData?.data.attributes.blocks[0] || {}} />
       <About />
       <BlogPosts />
       <Subscription />
