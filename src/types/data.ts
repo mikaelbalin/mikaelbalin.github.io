@@ -21,15 +21,40 @@ export interface AboutProps {
   __component: "layout.about-section";
 }
 
+interface DateMetadata {
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
 export interface HomePageData {
   data: {
     id: number;
-    attributes: {
-      createdAt: string;
-      updatedAt: string;
-      publishedAt: string;
+    attributes: DateMetadata & {
       blocks: [HeroProps, AboutProps];
     };
   };
   meta: {};
+}
+
+export interface GlobalPageData {
+  data: {
+    id: 1;
+    attributes: DateMetadata & {
+      header: {
+        id: number;
+        logoText: Link;
+      };
+      footer: {
+        id: number;
+        scrollTexts: [string[], string[]];
+        contactsTitle: string;
+        email: string;
+        phone: string;
+        socialTitle: string;
+        formTitle: string;
+        socialLink: Link[];
+      };
+    };
+  };
 }

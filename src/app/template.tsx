@@ -6,25 +6,25 @@ import { HeaderMenu } from "@/components/HeaderMenu";
 import { RootRefContext } from "@/context";
 import { animated, useSpring } from "@react-spring/web";
 import { PropsWithChildren, useEffect, useRef } from "react";
-import styles from "./template.module.css";
 
 export default function Template({ children }: PropsWithChildren) {
   const [springs, api] = useSpring(() => ({ y: -100 }));
   const rootRef = useRef<HTMLDivElement | null>(null);
+  // const globalData = await getGlobalPageData();
 
   useEffect(() => {
     api.start({ y: 0 });
   }, [api]);
 
   return (
-    <div ref={rootRef} className={styles.root}>
-      <animated.header style={springs} className={styles.header}>
+    <div ref={rootRef} className="relative flex flex-col min-h-screen">
+      <animated.header style={springs} className="absolute w-full z-10">
         <HeaderMenu />
       </animated.header>
       <RootRefContext.Provider value={rootRef}>
-        <main className={styles.main}>{children}</main>
+        <main className="flex-1">{children}</main>
       </RootRefContext.Provider>
-      <footer className={styles.footer}>
+      <footer className="border border-r-neutral-500">
         <Contact />
         <Footer />
       </footer>
