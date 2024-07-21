@@ -4,22 +4,23 @@ import { Marquee } from "@/components/Marquee";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 
 interface Link {
+  id: number;
   url: string;
   text: string;
   isExternal: boolean;
 }
 
-interface HeroProps {
-  data: {
-    heading: string[];
-    description: string;
-    link: Link;
-    location: string;
-  };
+export interface HeroProps {
+  id: number;
+  heading: string[];
+  description: string;
+  location: string;
+  link: Link;
+  __component: "layout.hero-section";
 }
 
-export const Hero = ({ data }: Readonly<HeroProps>) => {
-  const { heading, description, link, location } = data;
+export const Hero = (props: Readonly<HeroProps>) => {
+  const { heading, description, link, location } = props;
 
   return (
     <HeroBackground>

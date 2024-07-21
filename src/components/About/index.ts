@@ -1,1 +1,1 @@
-export { About } from "./About";
+export { About, type AboutProps } from "./About";
