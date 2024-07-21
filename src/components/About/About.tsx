@@ -1,11 +1,5 @@
 import { Container, Title, Text } from "@mantine/core";
-
-export interface AboutProps {
-  id: number;
-  heading: string;
-  text: string;
-  __component: "layout.about-section";
-}
+import { AboutProps } from "../../types/data";
 
 export const About = (props: AboutProps) => {
   const { heading, text } = props;

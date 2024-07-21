@@ -24,8 +24,10 @@
       "@/components/*": ["components/*"],
       "@/theme": ["theme/index.ts"],
       "@/context": ["context/index.ts"],
+      "@/data": ["data/index.ts"],
       "@/lib/*": ["lib/*"]
-    }
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",

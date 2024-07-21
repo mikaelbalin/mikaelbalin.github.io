@@ -1,5 +1,5 @@
-import { LastOf } from "./LastOf";
-import { Push } from "./Push";
+import { LastOf } from "./last-of";
+import { Push } from "./push";
 
 /**
  * Converts a union type to a tuple type.

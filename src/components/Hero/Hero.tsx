@@ -1,23 +1,8 @@
 import { HeroBackground } from "@/components/HeroBackground";
 import { LiveTime } from "@/components/LiveTime";
 import { Marquee } from "@/components/Marquee";
+import { HeroProps } from "../../types/data";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
-
-interface Link {
-  id: number;
-  url: string;
-  text: string;
-  isExternal: boolean;
-}
-
-export interface HeroProps {
-  id: number;
-  heading: string[];
-  description: string;
-  location: string;
-  link: Link;
-  __component: "layout.hero-section";
-}
 
 export const Hero = (props: Readonly<HeroProps>) => {
   const { heading, description, link, location } = props;
