@@ -22,7 +22,7 @@ import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
-import classes from "./HeaderMenu.module.css";
+import classes from "./Header.module.css";
 
 type MenuItem = {
   link: string;
@@ -68,7 +68,7 @@ const LangugeToggle = ({
   );
 };
 
-export function HeaderMenu() {
+export function Header() {
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [
