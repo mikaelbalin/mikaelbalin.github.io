@@ -1,7 +1,4 @@
-"use client";
-
 import { Container, Group, Anchor } from "@mantine/core";
-import classes from "./Footer.module.css";
 import { Contact } from "@/components/Contact";
 
 const links = [
@@ -27,9 +24,9 @@ export function Footer() {
   return (
     <footer className="border border-r-neutral-500">
       <Contact />
-      <Container className={classes.inner}>
+      <Container className="flex items-center justify-between flex-col xs:flex-row py-8">
         Mikhail Balin
-        <Group className={classes.links}>{items}</Group>
+        <Group className="mt-4 xs:mt-0">{items}</Group>
       </Container>
     </footer>
   );
