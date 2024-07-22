@@ -1,6 +1,5 @@
 "use client";
 
-import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RootRefContext } from "@/context";
@@ -17,10 +16,7 @@ export default function Template({ children }: PropsWithChildren) {
       <RootRefContext.Provider value={rootRef}>
         <main className="flex-1">{children}</main>
       </RootRefContext.Provider>
-      <footer className="border border-r-neutral-500">
-        <Contact />
-        <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }

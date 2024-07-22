@@ -2,6 +2,7 @@
 
 import { Container, Group, Anchor } from "@mantine/core";
 import classes from "./Footer.module.css";
+import { Contact } from "@/components/Contact";
 
 const links = [
   { link: "#", label: "Contact" },
@@ -24,9 +25,12 @@ export function Footer() {
   ));
 
   return (
-    <Container className={classes.inner}>
-      Mikhail Balin
-      <Group className={classes.links}>{items}</Group>
-    </Container>
+    <footer className="border border-r-neutral-500">
+      <Contact />
+      <Container className={classes.inner}>
+        Mikhail Balin
+        <Group className={classes.links}>{items}</Group>
+      </Container>
+    </footer>
   );
 }
