@@ -8,7 +8,6 @@ import { PropsWithChildren, useRef } from "react";
 
 export default function Template({ children }: PropsWithChildren) {
   const rootRef = useRef<HTMLDivElement | null>(null);
-  // const globalData = await getGlobalPageData();
 
   return (
     <div ref={rootRef} className="relative flex flex-col min-h-screen">
