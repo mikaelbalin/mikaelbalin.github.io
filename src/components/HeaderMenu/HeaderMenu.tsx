@@ -18,9 +18,10 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import classes from "./HeaderMenu.module.css";
 
 type MenuItem = {
@@ -75,8 +76,13 @@ export function HeaderMenu() {
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
   const [languageLink, setLanguageLink] = useState<MenuItem>(
-    languageMenuItems[0]
+    languageMenuItems[0],
   );
+  const [springs, api] = useSpring(() => ({ y: -100 }));
+
+  useEffect(() => {
+    api.start({ y: 0 });
+  }, [api]);
 
   const changeLanguage =
     (item: MenuItem): MouseEventHandler<HTMLButtonElement> =>
@@ -153,7 +159,7 @@ export function HeaderMenu() {
   });
 
   return (
-    <>
+    <animated.header style={springs} className="absolute w-full z-10">
       <Container className="h-15">
         <Group justify="space-between" className="h-full">
           <Logo />
@@ -208,6 +214,6 @@ export function HeaderMenu() {
           </Drawer.Body>
         </Drawer.Content>
       </Drawer.Root>
-    </>
+    </animated.header>
   );
 }
