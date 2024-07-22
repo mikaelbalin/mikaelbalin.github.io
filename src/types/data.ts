@@ -39,7 +39,7 @@ export interface HomePageData {
 
 export interface GlobalPageData {
   data: {
-    id: 1;
+    id: number;
     attributes: DateMetadata & {
       header: {
         id: number;
