@@ -20,7 +20,7 @@ interface HeroBackgroundProps {
 }
 
 export const HeroBackground = (
-  props: PropsWithChildren<HeroBackgroundProps>
+  props: PropsWithChildren<HeroBackgroundProps>,
 ) => {
   const { children, variant = "default" } = props;
   const { colorScheme } = useMantineColorScheme();
@@ -38,7 +38,7 @@ export const HeroBackground = (
   useEffect(() => {
     const canvas = canvasRef.current;
     const root = rootRef?.current;
-    if (!canvas || !root || matches === undefined) return;
+    if (!canvas || matches === undefined) return;
 
     Shared.setSquareSize(matches ? SQUARE_SIZE_LARGE : SQUARE_SIZE_SMALL);
 
@@ -74,13 +74,18 @@ export const HeroBackground = (
       intervalIDRef.current = utilsRef.current.setActiveSquares();
     }
 
-    root.addEventListener("mousemove", handleMouseMove);
-    root.addEventListener("mouseover", handleMouseOver);
-    root.addEventListener("mouseleave", handleMouseLeave);
+    if (root) {
+      root.addEventListener("mousemove", handleMouseMove);
+      root.addEventListener("mouseover", handleMouseOver);
+      root.addEventListener("mouseleave", handleMouseLeave);
+    }
+
     return () => {
-      root.removeEventListener("mousemove", handleMouseMove);
-      root.removeEventListener("mouseover", handleMouseOver);
-      root.removeEventListener("mouseleave", handleMouseLeave);
+      if (root) {
+        root.removeEventListener("mousemove", handleMouseMove);
+        root.removeEventListener("mouseover", handleMouseOver);
+        root.removeEventListener("mouseleave", handleMouseLeave);
+      }
 
       if (animationFrameIdRef.current !== null) {
         cancelAnimationFrame(animationFrameIdRef.current);
