@@ -21,10 +21,10 @@ export default async function Page() {
   if (!blocks) return <p>No sections found</p>;
 
   return (
-    <div>
+    <>
       {blocks.map(blockRenderer)}
       <BlogPosts />
       <Subscription />
-    </div>
+    </>
   );
 }
