@@ -1,10 +1,9 @@
 "use client";
 
-import { RootRefContext } from "@/context";
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import cx from "clsx";
-import { PropsWithChildren, useContext, useEffect, useRef } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import { BlogCanvas } from "./BlogCanvas";
 import { BackgroundVariant, MousePosition } from "./Canvas";
 import {
@@ -26,18 +25,22 @@ export const HeroBackground = (
   const { colorScheme } = useMantineColorScheme();
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
-  const rootRef = useContext(RootRefContext);
-  const { ref, width, height } = useElementSize();
+  const { ref, width, height } = useElementSize<HTMLDivElement>();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
   const mousePos = useRef<MousePosition | undefined>(undefined);
   const utilsRef = useRef<MainCanvas | BlogCanvas | null>(null);
   const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const bodyRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    bodyRef.current = document.body;
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const root = rootRef?.current;
+    const body = bodyRef.current;
     if (!canvas || matches === undefined) return;
 
     Shared.setSquareSize(matches ? SQUARE_SIZE_LARGE : SQUARE_SIZE_SMALL);
@@ -74,17 +77,17 @@ export const HeroBackground = (
       intervalIDRef.current = utilsRef.current.setActiveSquares();
     }
 
-    if (root) {
-      root.addEventListener("mousemove", handleMouseMove);
-      root.addEventListener("mouseover", handleMouseOver);
-      root.addEventListener("mouseleave", handleMouseLeave);
+    if (body) {
+      body.addEventListener("mousemove", handleMouseMove);
+      body.addEventListener("mouseover", handleMouseOver);
+      body.addEventListener("mouseleave", handleMouseLeave);
     }
 
     return () => {
-      if (root) {
-        root.removeEventListener("mousemove", handleMouseMove);
-        root.removeEventListener("mouseover", handleMouseOver);
-        root.removeEventListener("mouseleave", handleMouseLeave);
+      if (body) {
+        body.removeEventListener("mousemove", handleMouseMove);
+        body.removeEventListener("mouseover", handleMouseOver);
+        body.removeEventListener("mouseleave", handleMouseLeave);
       }
 
       if (animationFrameIdRef.current !== null) {
@@ -95,7 +98,7 @@ export const HeroBackground = (
         clearInterval(intervalIDRef.current);
       }
     };
-  }, [colorScheme, matches, rootRef, variant]);
+  }, [colorScheme, matches, variant]);
 
   useEffect(() => {
     if (utilsRef.current instanceof BlogCanvas) {

@@ -1,20 +1,13 @@
-"use client";
-
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { RootRefContext } from "@/context";
-
-import { PropsWithChildren, useRef } from "react";
+import { getGlobalPageData } from "@/data";
+import { PropsWithChildren } from "react";
 
 export default function Template({ children }: PropsWithChildren) {
-  const rootRef = useRef<HTMLDivElement | null>(null);
-
   return (
-    <div ref={rootRef} className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
       <Header />
-      <RootRefContext.Provider value={rootRef}>
-        <main className="flex-1">{children}</main>
-      </RootRefContext.Provider>
+      <main className="flex-1">{children}</main>
       <Footer />
     </div>
   );
