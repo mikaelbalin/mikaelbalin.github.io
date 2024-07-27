@@ -3522,16 +3522,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8.56.11":
-  version: 8.56.11
-  resolution: "@types/eslint@npm:8.56.11"
-  dependencies:
-    "@types/estree": "npm:*"
-    "@types/json-schema": "npm:*"
-  checksum: 10c0/e47d2b8e0ce1aa7e1f2564555576fa55343e942ae8cba5940b4e2566f842810c007beff80a01d74d48c60a45ecf28150cbc5cbd53324b1e55cf672b24ccf4667
-  languageName: node
-  linkType: hard
-
 "@types/estree-jsx@npm:^1.0.0":
   version: 1.0.5
   resolution: "@types/estree-jsx@npm:1.0.5"
@@ -9576,7 +9566,6 @@ __metadata:
     "@storybook/react": "npm:^8.2.6"
     "@storybook/test": "npm:^8.2.6"
     "@tabler/icons-react": "npm:^3.11.0"
-    "@types/eslint": "npm:^8.56.11"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:^20.14.12"
     "@types/react": "npm:^18.3.3"
