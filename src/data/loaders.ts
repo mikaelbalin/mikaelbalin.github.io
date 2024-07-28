@@ -1,4 +1,4 @@
-import { GlobalPageData, HomePageData } from "../types/data";
+import { GlobalPageData, HomePageData, StrapiMetadata } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
 const baseUrl = getStrapiURL();
@@ -24,6 +24,13 @@ async function fetchData<T>(url: string) {
     console.error("Error fetching data:", error);
     throw error; // or return null;
   }
+}
+
+export async function getHomePageMetaData() {
+  const url = new URL("/api/home-page", baseUrl);
+  url.searchParams.set("populate[seo]", "true");
+  const data = await fetchData<StrapiMetadata>(url.href);
+  return data;
 }
 
 export async function getHomePageData() {

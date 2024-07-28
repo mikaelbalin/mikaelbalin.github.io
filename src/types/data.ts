@@ -65,3 +65,23 @@ export interface GlobalPageData {
     };
   };
 }
+
+interface Seo {
+  id: number;
+  metaTitle: string;
+  metaDescription: string;
+  keywords: null;
+  metaRobots: null;
+  structuredData: null;
+  metaViewport: null;
+  canonicalURL: null;
+}
+
+export interface StrapiMetadata {
+  data: {
+    id: number;
+    attributes: DateMetadata & {
+      seo: Seo;
+    };
+  };
+}
