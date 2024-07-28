@@ -1,4 +1,4 @@
-interface Link {
+export interface DataLink {
   id: number;
   url: string;
   text: string;
@@ -10,7 +10,7 @@ export interface HeroProps {
   heading: string[];
   description: string;
   location: string;
-  link: Link;
+  link: DataLink;
   __component: "layout.hero-section";
 }
 
@@ -37,24 +37,31 @@ export interface HomePageData {
   meta: {};
 }
 
+export interface HeaderProps {
+  id: number;
+  logoText: DataLink;
+}
+
+export interface ContactProps {
+  contactsTitle: string;
+  email: string;
+  phone: string;
+  socialTitle: string;
+  socialLink: DataLink[];
+  formTitle: string;
+}
+
+export interface FooterProps extends ContactProps {
+  id: number;
+  scrollTexts: [string[], string[]];
+}
+
 export interface GlobalPageData {
   data: {
     id: number;
     attributes: DateMetadata & {
-      header: {
-        id: number;
-        logoText: Link;
-      };
-      footer: {
-        id: number;
-        scrollTexts: [string[], string[]];
-        contactsTitle: string;
-        email: string;
-        phone: string;
-        socialTitle: string;
-        formTitle: string;
-        socialLink: Link[];
-      };
+      header: HeaderProps;
+      footer: FooterProps;
     };
   };
 }

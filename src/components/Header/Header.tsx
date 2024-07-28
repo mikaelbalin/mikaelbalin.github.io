@@ -21,8 +21,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
+
 import { MouseEventHandler, useEffect, useState } from "react";
 import classes from "./Header.module.css";
+import { HeaderProps } from "../../types/data";
 
 type MenuItem = {
   link: string;
@@ -68,7 +70,9 @@ const LangugeToggle = ({
   );
 };
 
-export function Header() {
+export function Header(props: HeaderProps) {
+  const { logoText } = props;
+
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [
@@ -162,7 +166,7 @@ export function Header() {
     <animated.header style={springs} className="absolute w-full z-10">
       <Container className="h-15">
         <Group justify="space-between" className="h-full">
-          <Logo />
+          <Logo text={logoText.text} />
           <Group gap="xl">
             <Group gap={5} visibleFrom="sm">
               {menu}
@@ -189,7 +193,7 @@ export function Header() {
         <Drawer.Overlay backgroundOpacity={0.5} blur={4} />
         <Drawer.Content>
           <Drawer.Header>
-            <Logo />
+            <Logo text={logoText.text} />
             <Group gap="xl">
               <ColorSchemeToggle />
               <Burger
