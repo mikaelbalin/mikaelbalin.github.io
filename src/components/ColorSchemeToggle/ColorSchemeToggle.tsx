@@ -4,7 +4,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
-import cx from "clsx";
+import { cn } from "@/lib/utils";
 import classes from "./ColorSchemeToggle.module.css";
 
 export const ColorSchemeToggle = () => {
@@ -26,8 +26,8 @@ export const ColorSchemeToggle = () => {
       }}
       thumbIcon={
         <>
-          <IconSunHigh className={cx(classes.icon, classes.dark)} stroke={3} />
-          <IconMoon className={cx(classes.icon, classes.light)} stroke={3} />
+          <IconSunHigh className={cn(classes.icon, classes.dark)} stroke={3} />
+          <IconMoon className={cn(classes.icon, classes.light)} stroke={3} />
         </>
       }
     />

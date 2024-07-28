@@ -2,7 +2,7 @@
 
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
-import cx from "clsx";
+import { cn } from "@/lib/utils";
 import { PropsWithChildren, useEffect, useRef } from "react";
 import { BlogCanvas } from "./BlogCanvas";
 import { BackgroundVariant, MousePosition } from "./Canvas";
@@ -114,7 +114,7 @@ export const HeroBackground = (
       component="section"
       justify="center"
       gap={0}
-      className={cx("relative", { "min-h-lvh": variant === "default" })}
+      className={cn("relative", { "min-h-lvh": variant === "default" })}
     >
       <div className={classes.canvasWrapper}>
         <canvas

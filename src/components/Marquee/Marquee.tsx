@@ -1,5 +1,5 @@
 import classes from "./Marquee.module.css";
-import cn from "clsx";
+import { cn } from "@/lib/utils";
 
 function renderListItems(items: string[]) {
   return items.map((item) => (
