@@ -26,7 +26,7 @@ export function Footer(props: FooterProps) {
   ));
 
   return (
-    <footer className="border border-r-neutral-500">
+    <footer>
       <Contact
         contactsTitle={contactsTitle}
         email={email}

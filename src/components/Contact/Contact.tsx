@@ -1,5 +1,5 @@
 import { Container, Grid, Text, GridCol } from "@mantine/core";
-import { ContactForm } from "./ContactForm";
+import { ContactForm } from "../forms/ContactForm";
 import { ContactProps } from "../../types/data";
 import Link from "next/link";
 
