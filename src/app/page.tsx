@@ -2,7 +2,7 @@ import { Hero, type HeroProps } from "@/components/Hero";
 import { About, type AboutProps } from "@/components/About";
 import { BlogPosts } from "@/components/BlogPosts";
 import { Subscription } from "@/components/Subscription";
-import { getHomePageData, getHomePageMetaData } from "@/data";
+import { getHomePageData, getHomePageMetaData } from "@/data/loaders";
 import { Metadata } from "next";
 
 function blockRenderer(block: HeroProps | AboutProps) {

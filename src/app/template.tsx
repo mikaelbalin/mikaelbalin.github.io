@@ -1,6 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { getGlobalPageData } from "@/data";
+import { getGlobalPageData } from "@/data/loaders";
 import { PropsWithChildren } from "react";
 
 export default async function Template({ children }: PropsWithChildren) {
