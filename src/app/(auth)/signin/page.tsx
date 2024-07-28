@@ -7,10 +7,12 @@ export default function SignInRoute() {
     <Container size={420} my={40}>
       <Title ta="center">Welcome back!</Title>
       <Text c="dimmed" size="sm" ta="center" mt={5}>
+        Enter your details to sign in to your account
+      </Text>
+      <SigninForm />
+      <Text ta="center" mt="md">
         Do not have an account yet? <Link href="/signup">Create account</Link>
       </Text>
-
-      <SigninForm />
     </Container>
   );
 }

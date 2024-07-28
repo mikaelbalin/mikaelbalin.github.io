@@ -1,5 +1,6 @@
 import { SignupForm } from "@/components/forms/SignupForm";
 import { Text, Container, Title } from "@mantine/core";
+import Link from "next/link";
 
 export default function SingUpRoute() {
   return (
@@ -9,6 +10,9 @@ export default function SingUpRoute() {
         Enter your details to creacte a new account
       </Text>
       <SignupForm />
+      <Text ta="center" mt="md">
+        Have an account? <Link href="/signin">Sign in</Link>
+      </Text>
     </Container>
   );
 }
