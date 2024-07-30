@@ -8968,6 +8968,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mantine-form-zod-resolver@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "mantine-form-zod-resolver@npm:1.1.0"
+  peerDependencies:
+    "@mantine/form": ">=7.0.0"
+    zod: ">=3.0.0"
+  checksum: 10c0/3ff086f2a5d7b9d3d56b09f16fdc27919000c2007279c2e5e6fe85c60c56ee75a13cfebaa1dd341c4ddafd73aba9a3c59a98ea41c59ea8d01c67483dc07ea1ad
+  languageName: node
+  linkType: hard
+
 "map-or-similar@npm:^1.5.0":
   version: 1.5.0
   resolution: "map-or-similar@npm:1.5.0"
@@ -9575,6 +9585,7 @@ __metadata:
     eslint: "npm:8.57.0"
     eslint-config-next: "npm:^14.2.5"
     eslint-plugin-storybook: "npm:^0.8.0"
+    mantine-form-zod-resolver: "npm:^1.1.0"
     next: "npm:^14.2.5"
     postcss: "npm:^8.4.40"
     postcss-preset-mantine: "npm:^1.17.0"
@@ -9586,6 +9597,7 @@ __metadata:
     tailwindcss: "npm:^3.4.7"
     typescript: "npm:5.5.4"
     webpack: "npm:^5.93.0"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -13769,6 +13781,13 @@ __metadata:
   version: 1.0.0
   resolution: "yocto-queue@npm:1.0.0"
   checksum: 10c0/856117aa15cf5103d2a2fb173f0ab4acb12b4b4d0ed3ab249fdbbf612e55d1cadfd27a6110940e24746fb0a78cf640b522cc8bca76f30a3b00b66e90cf82abe0
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.23.8":
+  version: 3.23.8
+  resolution: "zod@npm:3.23.8"
+  checksum: 10c0/8f14c87d6b1b53c944c25ce7a28616896319d95bc46a9660fe441adc0ed0a81253b02b5abdaeffedbeb23bdd25a0bf1c29d2c12dd919aef6447652dd295e3e69
   languageName: node
   linkType: hard
 
