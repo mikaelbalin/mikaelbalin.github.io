@@ -1,5 +1,6 @@
 "use client";
 
+import { signinSchema, SigninSchema } from "@/lib/schemas";
 import {
   Anchor,
   Button,
@@ -9,27 +10,29 @@ import {
   PasswordInput,
   TextInput,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import Link from "next/link";
+import { useForm, zodResolver } from "@mantine/form";
 import React from "react";
 
 export function SigninForm() {
-  const form = useForm({
+  const form = useForm<SigninSchema>({
     mode: "uncontrolled",
     initialValues: {
       email: "",
       password: "",
     },
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      password: (value) =>
-        value?.trim().length > 0 ? null : "Password is required",
-    },
+    validate: zodResolver(signinSchema),
   });
+
+  const handleError = (errors: typeof form.errors) => {
+    const firstErrorPath = Object.keys(errors)[0];
+    form.getInputNode(firstErrorPath)?.focus();
+  };
 
   return (
     <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form
+        onSubmit={form.onSubmit((values) => console.log(values), handleError)}
+      >
         <TextInput
           withAsterisk
           label="Email"

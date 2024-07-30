@@ -1,1 +1,1 @@
-export { SignupForm, type SignupFormValues } from "./SignupForm";
+export { SignupForm, type SignupFormSchema } from "./SignupForm";

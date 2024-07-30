@@ -1,42 +1,43 @@
 "use client";
 
 import { registerUserAction } from "@/data/actions/auth-actions";
+import { signupSchema, SignupSchema } from "@/lib/schemas";
 import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
-
-export interface SignupFormValues {
-  username: string;
-  email: string;
-  password: string;
-}
+import { useForm, zodResolver } from "@mantine/form";
 
 export function SignupForm() {
-  const form = useForm<SignupFormValues>({
+  const form = useForm<SignupSchema>({
     mode: "uncontrolled",
     initialValues: {
       username: "",
       email: "",
       password: "",
     },
-    validate: {
-      username: (value) =>
-        value?.trim().length > 0 ? null : "Name is required",
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      password: (value) =>
-        value?.trim().length > 0 ? null : "Password is required",
-    },
+    validate: zodResolver(signupSchema),
   });
+
+  const handleError = (errors: typeof form.errors) => {
+    const firstErrorPath = Object.keys(errors)[0];
+    form.getInputNode(firstErrorPath)?.focus();
+  };
+
+  const handleSubmit = async (values: SignupSchema) => {
+    const result = await registerUserAction(values);
+
+    if (result.errors) {
+      form.setErrors(result.zodErrors);
+    }
+  };
 
   return (
     <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-      <form onSubmit={form.onSubmit(registerUserAction)}>
+      <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <TextInput
           withAsterisk
           label="User name"
           placeholder="username"
           key={form.key("username")}
           {...form.getInputProps("username")}
-          required
         />
         <TextInput
           withAsterisk
@@ -44,7 +45,6 @@ export function SignupForm() {
           placeholder="you@email.com"
           key={form.key("email")}
           {...form.getInputProps("email")}
-          required
           mt="md"
         />
         <PasswordInput
@@ -53,7 +53,6 @@ export function SignupForm() {
           placeholder="Your password"
           key={form.key("password")}
           {...form.getInputProps("password")}
-          required
           mt="md"
         />
         <Button fullWidth mt="xl" type="submit">
