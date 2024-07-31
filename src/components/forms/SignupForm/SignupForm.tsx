@@ -25,7 +25,7 @@ export function SignupForm() {
     const result = await registerUserAction(values);
 
     if (result.errors) {
-      form.setErrors(result.zodErrors);
+      form.setErrors(result.errors);
     }
   };
 

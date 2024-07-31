@@ -1,9 +1,10 @@
-import { Hero, type HeroProps } from "@/components/Hero";
-import { About, type AboutProps } from "@/components/About";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
 import { BlogPosts } from "@/components/BlogPosts";
 import { Subscription } from "@/components/Subscription";
 import { getHomePageData, getHomePageMetaData } from "@/data/loaders";
 import { Metadata } from "next";
+import { AboutProps, HeroProps } from "types/data";
 
 function blockRenderer(block: HeroProps | AboutProps) {
   switch (block.__component) {

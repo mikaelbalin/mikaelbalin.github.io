@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "check-types": "tsc --noEmit --watch",
     "analyze": "ANALYZE=true yarn build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

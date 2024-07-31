@@ -1,9 +1,17 @@
 "use server";
 
-import { type SignupFormSchema } from "@/components/forms/SignupForm";
-import { signupSchema } from "@/lib/schemas";
+import { SignupSchema, signupSchema } from "@/lib/schemas";
 
-export async function registerUserAction(data: SignupFormSchema) {
+export async function registerUserAction(data: SignupSchema): Promise<
+  SignupSchema & {
+    errors?: {
+      username?: string[];
+      email?: string[];
+      password?: string[];
+    };
+    message: string;
+  }
+> {
   const validatedFields = signupSchema.safeParse(data);
 
   if (!validatedFields.success) {
