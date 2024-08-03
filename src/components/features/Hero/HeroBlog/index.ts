@@ -1,0 +1,1 @@
+export { HeroBlog } from "./HeroBlog";

@@ -1,4 +1,4 @@
-import { Hero } from "@/components/features/Hero/Main";
+import { HeroMain } from "@/components/features/Hero/HeroMain";
 import { About } from "@/components/features/About";
 import { PostList } from "@/components/features/Post/PostList";
 import { Subscription } from "@/components/features/Subscription";
@@ -9,7 +9,7 @@ import { AboutProps, HeroProps } from "types/data";
 function blockRenderer(block: HeroProps | AboutProps) {
   switch (block.__component) {
     case "layout.hero-section":
-      return <Hero key={block.__component} {...block} />;
+      return <HeroMain key={block.__component} {...block} />;
     case "layout.about-section":
       return <About key={block.__component} {...block} />;
     default:
