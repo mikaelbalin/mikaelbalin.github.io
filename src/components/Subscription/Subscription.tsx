@@ -1,6 +1,6 @@
 import { Container, Title, Text, Box } from "@mantine/core";
 import classes from "./Subscription.module.css";
-import { SubscriptionForm } from "./SubscriptionForm";
+import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
 
 export const Subscription = () => {
   return (
