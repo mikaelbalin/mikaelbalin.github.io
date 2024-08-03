@@ -1,7 +1,7 @@
-import { HeroBackground } from "@/components/HeroBackground";
-import { LiveTime } from "@/components/LiveTime";
-import { Marquee } from "@/components/Marquee";
-import { HeroProps } from "../../types/data";
+import { HeroBackground } from "@/components/features/Hero/Background";
+import { LiveTime } from "@/components/ui/LiveTime";
+import { Marquee } from "@/components/ui/Marquee";
+import { HeroProps } from "@/types/data";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 
 export const Hero = (props: Readonly<HeroProps>) => {

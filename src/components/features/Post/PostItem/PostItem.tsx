@@ -1,5 +1,5 @@
 import { Badge, Group, Title, Text } from "@mantine/core";
-import classes from "./PostCard.module.css";
+import classes from "./PostItem.module.css";
 
 interface PostCardProps {
   title: string;
@@ -8,7 +8,7 @@ interface PostCardProps {
   tags: string[];
 }
 
-export const PostCard = ({ title, date, timeToRead, tags }: PostCardProps) => {
+export const PostItem = ({ title, date, timeToRead, tags }: PostCardProps) => {
   return (
     <Group className={classes.root}>
       <Title component="div" size="h2">

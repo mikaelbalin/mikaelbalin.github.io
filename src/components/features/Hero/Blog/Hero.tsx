@@ -1,8 +1,8 @@
-import { HeroBackground } from "@/components/HeroBackground";
+import { HeroBackground } from "@/components/features/Hero/Background";
 import { Box, Container, Title } from "@mantine/core";
 import classes from "./HeroBlog.module.css";
 
-export const HeroBlog = () => {
+export const Hero = () => {
   return (
     <HeroBackground variant="blog">
       <Box className="relative mt-15 pt-6 pb-16">

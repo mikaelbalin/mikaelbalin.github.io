@@ -1,13 +1,13 @@
 import React from "react";
-import { Subscription } from "../../components/Subscription";
-import { BlogPosts } from "../../components/BlogPosts";
-import { HeroBlog } from "../../components/HeroBlog";
+import { Subscription } from "@/components/features/Subscription";
+import { PostList } from "@/components/features/Post/PostList";
+import { Hero } from "@/components/features/Hero/Blog";
 
 export default function Page() {
   return (
     <>
-      <HeroBlog />
-      <BlogPosts />
+      <Hero />
+      <PostList />
       <Subscription />
     </>
   );

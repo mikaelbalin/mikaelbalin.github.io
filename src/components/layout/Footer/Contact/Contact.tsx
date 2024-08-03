@@ -1,6 +1,6 @@
 import { Container, Grid, Text, GridCol } from "@mantine/core";
-import { ContactForm } from "../forms/ContactForm";
-import { ContactProps } from "../../types/data";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactProps } from "@/types/data";
 import Link from "next/link";
 
 export const Contact = (props: ContactProps) => {

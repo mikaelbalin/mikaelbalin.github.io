@@ -1,7 +1,7 @@
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { BlogPosts } from "@/components/BlogPosts";
-import { Subscription } from "@/components/Subscription";
+import { Hero } from "@/components/features/Hero/Main";
+import { About } from "@/components/features/About";
+import { PostList } from "@/components/features/Post/PostList";
+import { Subscription } from "@/components/features/Subscription";
 import { getHomePageData, getHomePageMetaData } from "@/data/loaders";
 import { Metadata } from "next";
 import { AboutProps, HeroProps } from "types/data";
@@ -34,7 +34,7 @@ export default async function Page() {
   return (
     <>
       {blocks.map(blockRenderer)}
-      <BlogPosts />
+      <PostList />
       <Subscription />
     </>
   );

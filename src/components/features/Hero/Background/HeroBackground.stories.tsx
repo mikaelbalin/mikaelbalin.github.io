@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { HeroBackground } from "./HeroBackground";
 import { PropsWithChildren, useRef } from "react";
-import { RootRefContext } from "../../context";
+import { RootRefContext } from "../../../../context";
 
 const Wrapper = ({ children }: PropsWithChildren) => {
   const rootRef = useRef<HTMLDivElement | null>(null);

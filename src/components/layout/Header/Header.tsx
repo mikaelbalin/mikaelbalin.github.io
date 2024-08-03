@@ -1,7 +1,7 @@
 "use client";
 
-import { ColorSchemeToggle } from "@/components/ColorSchemeToggle";
-import { Logo } from "@/components/Logo";
+import { ColorSchemeToggle } from "@/components/ui/ColorSchemeToggle";
+import { Logo } from "@/components/ui/Logo";
 import {
   Anchor,
   Box,
@@ -21,10 +21,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
-
 import { MouseEventHandler, useEffect, useState } from "react";
 import classes from "./Header.module.css";
-import { HeaderProps } from "../../types/data";
+import { HeaderProps } from "@/types/data";
 
 type MenuItem = {
   link: string;

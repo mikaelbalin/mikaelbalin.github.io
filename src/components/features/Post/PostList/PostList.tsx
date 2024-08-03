@@ -1,5 +1,5 @@
 import { Button, Container, Stack, Title } from "@mantine/core";
-import { PostCard } from "@/components/PostCard";
+import { PostItem } from "@/components/features/Post/PostItem";
 
 const posts = [
   {
@@ -34,7 +34,7 @@ const posts = [
   },
 ];
 
-export const BlogPosts = () => {
+export const PostList = () => {
   return (
     <Container component="section">
       <Stack mb={56}>
@@ -43,7 +43,7 @@ export const BlogPosts = () => {
       </Stack>
       <Stack gap={0}>
         {posts.map((item) => (
-          <PostCard key={item.title} {...item} />
+          <PostItem key={item.title} {...item} />
         ))}
       </Stack>
     </Container>

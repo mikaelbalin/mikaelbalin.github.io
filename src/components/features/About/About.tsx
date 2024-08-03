@@ -1,5 +1,5 @@
 import { Container, Title, Text } from "@mantine/core";
-import { AboutProps } from "../../types/data";
+import { AboutProps } from "../../../types/data";
 
 export const About = (props: AboutProps) => {
   const { heading, text } = props;

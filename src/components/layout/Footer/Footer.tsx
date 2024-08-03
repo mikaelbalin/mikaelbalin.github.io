@@ -1,6 +1,6 @@
 import { Container, Group, Anchor } from "@mantine/core";
-import { Contact } from "@/components/Contact";
-import { FooterProps } from "../../types/data";
+import { Contact } from "@/components/layout/Footer/Contact";
+import { FooterProps } from "@/types/data";
 
 const links = [
   { link: "#", label: "Contact" },

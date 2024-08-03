@@ -25,7 +25,8 @@
       "@/theme": ["theme/index.ts"],
       "@/context": ["context/index.ts"],
       "@/data/*": ["data/*"],
-      "@/lib/*": ["lib/*"]
+      "@/lib/*": ["lib/*"],
+      "@/types/*": ["types/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
