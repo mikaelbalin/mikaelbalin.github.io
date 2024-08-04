@@ -1,11 +1,16 @@
 "use client";
 
+import { StrapiErrors, StrapiErrorsProps } from "@/components/ui/StrapiErrors";
 import { registerUserAction } from "@/data/actions/auth-actions";
 import { signupSchema, SignupSchema } from "@/lib/schemas";
 import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { useState } from "react";
 
 export function SignupForm() {
+  const [strapiError, setStarpiError] = useState<StrapiErrorsProps | null>(
+    null,
+  );
   const form = useForm<SignupSchema>({
     mode: "uncontrolled",
     initialValues: {
@@ -26,6 +31,10 @@ export function SignupForm() {
 
     if (result.errors) {
       form.setErrors(result.errors);
+    }
+
+    if (result.strapiError) {
+      setStarpiError(result.strapiError);
     }
   };
 
@@ -59,6 +68,8 @@ export function SignupForm() {
           Sign up
         </Button>
       </form>
+
+      {strapiError && <StrapiErrors error={strapiError} />}
     </Paper>
   );
 }

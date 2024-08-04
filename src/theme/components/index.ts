@@ -20,6 +20,10 @@ export const components: MantineThemeComponents = {
   Title: Title.extend({
     classNames: (theme, { order }, ctx) => {
       switch (order) {
+        case 1:
+          return {
+            root: "title-lg",
+          };
         case 2:
           return {
             root: "title-lg",
