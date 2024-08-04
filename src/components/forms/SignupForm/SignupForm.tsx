@@ -5,12 +5,10 @@ import { registerUserAction } from "@/data/actions/auth-actions";
 import { signupSchema, SignupSchema } from "@/lib/schemas";
 import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 
 export function SignupForm() {
-  const [strapiError, setStarpiError] = useState<StrapiErrorsProps | null>(
-    null,
-  );
   const form = useForm<SignupSchema>({
     mode: "uncontrolled",
     initialValues: {
@@ -34,7 +32,10 @@ export function SignupForm() {
     }
 
     if (result?.strapiError) {
-      setStarpiError(result.strapiError);
+      notifications.show({
+        title: result.strapiError.name,
+        message: result.strapiError.message,
+      });
     }
   };
 
@@ -68,8 +69,6 @@ export function SignupForm() {
           Sign up
         </Button>
       </form>
-
-      {strapiError && <StrapiErrors error={strapiError} />}
     </Paper>
   );
 }
