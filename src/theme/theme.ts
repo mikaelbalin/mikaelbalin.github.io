@@ -18,7 +18,6 @@ const themeOverride = createTheme({
     xl: "88em", // 1408px
   },
   components,
-  // primaryColor: "grape",
   defaultRadius: 0,
   colors: {},
   other: {

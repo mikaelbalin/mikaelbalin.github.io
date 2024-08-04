@@ -29,11 +29,11 @@ export function SignupForm() {
   const handleSubmit = async (values: SignupSchema) => {
     const result = await registerUserAction(values);
 
-    if (result.errors) {
+    if (result?.errors) {
       form.setErrors(result.errors);
     }
 
-    if (result.strapiError) {
+    if (result?.strapiError) {
       setStarpiError(result.strapiError);
     }
   };

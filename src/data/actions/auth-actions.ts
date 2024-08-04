@@ -7,15 +7,16 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function registerUserAction(data: SignupSchema): Promise<
-  SignupSchema & {
-    errors?: {
-      username?: string[];
-      email?: string[];
-      password?: string[];
-    };
-    message: string;
-    strapiError?: StrapiErrorsProps;
-  }
+  | (SignupSchema & {
+      errors?: {
+        username?: string[];
+        email?: string[];
+        password?: string[];
+      };
+      message: string;
+      strapiError?: StrapiErrorsProps;
+    })
+  | undefined
 > {
   const validatedFields = signupSchema.safeParse(data);
 

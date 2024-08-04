@@ -1,19 +1,17 @@
 "use client";
 
+import { IconLogin } from "@tabler/icons-react";
 import { ColorSchemeToggle } from "@/components/ui/ColorSchemeToggle";
 import { Logo } from "@/components/ui/Logo";
 import {
   Anchor,
-  Box,
   Burger,
-  Center,
   Collapse,
   Container,
   Drawer,
   Group,
   Menu,
   ScrollArea,
-  Text,
   UnstyledButton,
   useMantineTheme,
 } from "@mantine/core";
@@ -22,8 +20,8 @@ import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import { MouseEventHandler, useEffect, useState } from "react";
-import classes from "./Header.module.css";
 import { HeaderProps } from "@/types/data";
+import { cn } from "@/lib/utils";
 
 type MenuItem = {
   link: string;
@@ -50,24 +48,18 @@ const LangugeToggle = ({
 }: {
   label: string;
   linksOpened: boolean;
-}) => {
-  const theme = useMantineTheme();
-
-  return (
-    <>
-      <Box component="span" mr={5}>
-        {label}
-      </Box>
-      <IconChevronDown
-        size="1rem"
-        style={{
-          transform: `rotate(${linksOpened ? 180 : 0}deg)`,
-        }}
-        color={theme.black}
-      />
-    </>
-  );
-};
+}) => (
+  <>
+    <span className="mr-1">{label}</span>
+    <IconChevronDown
+      size="1rem"
+      style={{
+        transform: `rotate(${linksOpened ? 180 : 0}deg)`,
+      }}
+      className="text-black"
+    />
+  </>
+);
 
 export function Header(props: HeaderProps) {
   const { logoText } = props;
@@ -97,12 +89,10 @@ export function Header(props: HeaderProps) {
   const languageButtons = languageMenuItems.map((item) => (
     <UnstyledButton
       key={item.label}
-      className={classes.languageButton}
+      className="w-full h-11 px-6"
       onClick={changeLanguage(item)}
     >
-      <Text size="sm" fw={500}>
-        {item.label}
-      </Text>
+      {item.label}
     </UnstyledButton>
   ));
 
@@ -136,12 +126,10 @@ export function Header(props: HeaderProps) {
             <Anchor
               component={Link}
               href={link.link}
-              className={classes.link}
               onClick={(event) => event.preventDefault()}
+              className="flex items-center text-black"
             >
-              <Center>
-                <LangugeToggle label={link.label} linksOpened={linksOpened} />
-              </Center>
+              <LangugeToggle label={link.label} linksOpened={linksOpened} />
             </Anchor>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
@@ -154,7 +142,11 @@ export function Header(props: HeaderProps) {
         key={link.label}
         component={Link}
         href={link.link}
-        className={classes.link}
+        className={cn(
+          "flex items-center w-full h-11 px-4",
+          "text-sm text-black font-medium",
+          "sm:w-auto sm:h-full sm:px-0",
+        )}
       >
         {link.label}
       </Anchor>
@@ -167,9 +159,7 @@ export function Header(props: HeaderProps) {
         <Group justify="space-between" className="h-full">
           <Logo text={logoText.text} />
           <Group gap="xl">
-            <Group gap={5} visibleFrom="sm">
-              {menu}
-            </Group>
+            <Group className="hidden sm:flex gap-8">{menu}</Group>
             <ColorSchemeToggle />
             <Burger
               opened={drawerOpened}
@@ -177,6 +167,9 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
+            <Link href="/signin">
+              <IconLogin stroke={2} />
+            </Link>
           </Group>
         </Group>
       </Container>
@@ -206,13 +199,22 @@ export function Header(props: HeaderProps) {
           <Drawer.Body>
             <ScrollArea mx="-md">
               {menu.slice(0, -1)}
-              <UnstyledButton className={classes.link} onClick={toggleLinks}>
+              <UnstyledButton
+                onClick={toggleLinks}
+                className={cn("flex items-center w-full h-11 px-4")}
+              >
                 <LangugeToggle
                   label={languageLink.label}
                   linksOpened={linksOpened}
                 />
               </UnstyledButton>
               <Collapse in={linksOpened}>{languageButtons}</Collapse>
+              <Link
+                href="/signin"
+                className="flex items-center w-full h-11 px-4"
+              >
+                <IconLogin stroke={2} />
+              </Link>
             </ScrollArea>
           </Drawer.Body>
         </Drawer.Content>
