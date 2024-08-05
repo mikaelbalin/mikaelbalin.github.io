@@ -3,6 +3,7 @@ import {
   MantineThemeComponents,
   Title,
   TypographyStylesProvider,
+  Text,
 } from "@mantine/core";
 import { Button } from "./button";
 import { Badge } from "./badge";
@@ -18,29 +19,36 @@ export const components: MantineThemeComponents = {
   Badge,
   Chip,
   Title: Title.extend({
-    classNames: (theme, { order }, ctx) => {
+    classNames: (theme, { order, className }, ctx) => {
       switch (order) {
         case 1:
           return {
-            root: "title-lg",
+            root: "text-9xl md:text-10xl",
           };
         case 2:
           return {
-            root: "title-lg",
+            root: "text-lg md:text-8xl",
           };
         case 3:
           return {
-            root: "title-md",
+            root: "text-3xl md:text-6xl",
           };
         case 4:
           return {
-            root: "title-sm",
+            root: "text-xl md:text-4xl",
           };
         default:
           return {
-            root: "title-sm",
+            root: className,
           };
       }
+    },
+  }),
+  Text: Text.extend({
+    classNames(theme, props, ctx) {
+      return {
+        // root:
+      };
     },
   }),
   TypographyStylesProvider: TypographyStylesProvider.extend({

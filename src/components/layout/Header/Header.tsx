@@ -13,7 +13,6 @@ import {
   Menu,
   ScrollArea,
   UnstyledButton,
-  useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { animated, useSpring } from "@react-spring/web";
@@ -167,7 +166,7 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
-            <Link href="/signin">
+            <Link href="/signin" className="hidden sm:block">
               <IconLogin stroke={2} />
             </Link>
           </Group>
