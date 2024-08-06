@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Title, TitleProps } from "@mantine/core";
-import { UnionToTuple } from "../types/union-to-tuple";
+import { UnionToTuple } from "@/types/union-to-tuple";
 
 const meta = {
   title: "Typography/Title",

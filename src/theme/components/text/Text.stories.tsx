@@ -19,33 +19,37 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Text>;
 
-export const ParagraphBig: Story = {
+export const Paragraph: Story = {
   args: {
     children: "Let’s get in touch",
     span: false,
   },
 };
 
-export const Paragraph: Story = {
+export const ParagraphBig: Story = {
   args: {
-    ...ParagraphBig.args,
+    ...Paragraph.args,
+    size: "lg",
   },
 };
 
 export const Tiny: Story = {
   args: {
-    ...ParagraphBig.args,
+    ...Paragraph.args,
+    size: "sm",
   },
 };
 
 export const ParagraphBold: Story = {
   args: {
-    ...ParagraphBig.args,
+    ...Paragraph.args,
+    fw: 700,
   },
 };
 
 export const ParagraphLink: Story = {
   args: {
-    ...ParagraphBig.args,
+    ...Paragraph.args,
+    size: "xl",
   },
 };
