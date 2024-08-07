@@ -55,10 +55,8 @@ type Story = StoryObj<ButtonProps>;
 export const Default: Story = {
   args: {
     children: "Let’s get in touch",
-    size: "md",
     disabled: false,
     fullWidth: false,
-    variant: "default",
   },
 };
 

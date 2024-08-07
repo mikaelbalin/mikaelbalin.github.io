@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: ["selector", '[data-mantine-color-scheme="dark"]'],
   theme: {
+    colors: {
+      black: "var(--mantine-color-black)",
+      white: "var(--mantine-color-white)",
+      appLightColorGreyDark: "var(--app-color-grey-dark)",
+    },
     screens: {
       xs: "36em",
       sm: "48em",
@@ -29,6 +34,8 @@ module.exports = {
       spacing: {
         13: "3.25rem",
         15: "3.75rem",
+        16: "3.875rem",
+        17: "4rem",
         33: "8.25rem",
       },
       lineHeight: {

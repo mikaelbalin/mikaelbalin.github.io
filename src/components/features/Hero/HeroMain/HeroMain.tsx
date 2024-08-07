@@ -13,7 +13,9 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
         <Marquee texts={heading} />
         <Container mt={25}>
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
-            <Text pos="relative">{description}</Text>
+            <Text className="relative" size="lg">
+              {description}
+            </Text>
           </SimpleGrid>
           <Button component="a" className="mt-7" href={link?.url}>
             {link?.text}

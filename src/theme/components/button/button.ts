@@ -1,19 +1,15 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@mantine/core";
-import classes from "./button.module.css";
 
 export default Button.extend({
-  defaultProps: {
-    // radius: 0,
-    color: "cyan",
-    // variant: "primary",
+  defaultProps: {},
+  classNames(theme, props) {
+    // console.log({ props });
+    return {
+      root: cn(
+        "bg-black h-15 px-8 text-xl sm:h-16 sm:text-2xl hover:bg-appLightColorGreyDark transition-colors",
+        "dark:bg-white dark:text-black",
+      ),
+    };
   },
-  classNames: classes,
-  // vars: (theme, props) => {
-  //   return {
-  //     root: {
-  //       "--button-bg": theme.black,
-  //       "--button-hover": theme.other.appLightColorGreyDark,
-  //     },
-  //   };
-  // },
 });
