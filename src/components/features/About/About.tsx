@@ -5,9 +5,9 @@ export const About = (props: AboutProps) => {
   const { heading, text } = props;
 
   return (
-    <Container component="section" pt={104} pb={64}>
+    <Container component="section" className="pt-25 pb-16">
       <Title order={2}>{heading}</Title>
-      <Text mt={32}>{text}</Text>
+      <Text className="mt-8">{text}</Text>
     </Container>
   );
 };
