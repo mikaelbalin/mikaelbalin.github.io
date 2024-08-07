@@ -11,20 +11,20 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
     <HeroBackground>
       <Box className="my-auto pt-15">
         <Marquee texts={heading} />
-        <Container mt={25}>
+        <Container className="mt-6.5 sm:mt-8">
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text className="relative" size="lg">
               {description}
             </Text>
           </SimpleGrid>
-          <Button component="a" className="mt-7" href={link?.url}>
+          <Button component="a" className="mt-7 sm:mt-8" href={link?.url}>
             {link?.text}
           </Button>
         </Container>
       </Box>
       <Box className="mb-14">
         <Container className="relative text-right">
-          <Text>{location}</Text>
+          <Text size="lg">{location}</Text>
           <LiveTime />
         </Container>
       </Box>

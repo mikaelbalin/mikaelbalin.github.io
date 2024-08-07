@@ -6,9 +6,9 @@ export default Text.extend({
     return {
       root: cn(
         props.size === "sm" && "text-sm",
-        props.size === "md" && "text-base md:text-lg md:leading-13",
-        props.size === "lg" && "text-lg leading-13 md:text-3xl md:leading-18",
-        props.size === "xl" && "text-xl leading-7 md:text-2xl",
+        props.size === "md" && "text-base sm:text-lg sm:leading-13",
+        props.size === "lg" && "text-lg leading-13 sm:text-3xl sm:leading-18",
+        props.size === "xl" && "text-xl leading-7 sm:text-2xl",
       ),
     };
   },

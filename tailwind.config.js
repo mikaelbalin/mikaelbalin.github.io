@@ -7,6 +7,7 @@ module.exports = {
       black: "var(--mantine-color-black)",
       white: "var(--mantine-color-white)",
       appLightColorGreyDark: "var(--app-color-grey-dark)",
+      appDarkColorGreyLight: "var(--app-color-grey-light)",
     },
     screens: {
       xs: "36em",
@@ -32,6 +33,7 @@ module.exports = {
     },
     extend: {
       spacing: {
+        6.5: "1.5625rem",
         13: "3.25rem",
         15: "3.75rem",
         16: "3.875rem",

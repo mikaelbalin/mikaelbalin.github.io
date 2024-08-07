@@ -17,12 +17,16 @@ export const LiveTime = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(
-        new Date().toLocaleTimeString(window.navigator.language, options)
+        new Date().toLocaleTimeString(window.navigator.language, options),
       );
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return <Text component="time">{currentTime}</Text>;
+  return (
+    <Text component="time" size="lg">
+      {currentTime}
+    </Text>
+  );
 };
