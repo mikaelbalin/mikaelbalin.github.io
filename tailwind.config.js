@@ -8,6 +8,8 @@ module.exports = {
       white: "var(--mantine-color-white)",
       appLightColorGreyDark: "var(--app-color-grey-dark)",
       appDarkColorGreyLight: "var(--app-color-grey-light)",
+      appLightColorBeige: "var(--app-color-beige)",
+      appLightColorGrey: "var(--app-color-grey)",
     },
     screens: {
       xs: "36em",
@@ -23,6 +25,7 @@ module.exports = {
       xl: "1.25rem",
       "2xl": ["1.5rem", "1.875rem"],
       "3xl": "1.75rem",
+      "3.5xl": "1.875rem",
       "4xl": ["2rem", "2.48rem"],
       "5xl": ["2.125rem", "2.5075rem"],
       "6xl": ["3rem", "3.54rem"],
@@ -42,6 +45,7 @@ module.exports = {
         33: "8.25rem",
       },
       lineHeight: {
+        normal: "normal",
         11: "1.085rem",
         12: "1.24rem",
         13: "1.395rem",

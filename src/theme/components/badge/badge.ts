@@ -2,14 +2,12 @@ import { Badge } from "@mantine/core";
 
 export default Badge.extend({
   defaultProps: {
-    // radius: 0,
-    // variant: "primary",
+    radius: 0,
   },
-  vars: (theme, props) => {
+  classNames: (theme, props) => {
     return {
-      root: {
-        "--badge-radius": "0",
-      },
+      root: "bg-white border border-appLightColorGrey",
+      label: "text-sm text-appLightColorGrey normal-case",
     };
   },
 });

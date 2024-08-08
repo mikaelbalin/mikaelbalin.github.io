@@ -1,5 +1,5 @@
-import { Badge, Group, Title, Text } from "@mantine/core";
-import classes from "./PostItem.module.css";
+import { cn } from "@/lib/utils";
+import { Badge, Group, Text, Stack } from "@mantine/core";
 
 interface PostCardProps {
   title: string;
@@ -9,22 +9,22 @@ interface PostCardProps {
 }
 
 export const PostItem = ({ title, date, timeToRead, tags }: PostCardProps) => {
+  const classes = cn(
+    "flex items-center gap-x-2",
+    "before:content-[''] before:w-2 before:h-2 before:bg-black",
+  );
   return (
-    <Group className={classes.root}>
-      <Title component="div" size="h2">
-        {title}
-      </Title>
+    <Stack className="border-t py-8 gap-6">
+      <div className="text-xl leading-15">{title}</div>
       <Group>
         {tags.map((tag) => (
-          <Badge key={tag} color="blue">
-            tag
-          </Badge>
+          <Badge key={tag}>{tag}</Badge>
         ))}
       </Group>
       <Group>
-        <Text>{date}</Text>
-        <Text>{timeToRead} min read</Text>
+        <Text className={classes}>{date}</Text>
+        <Text className={classes}>{timeToRead} min read</Text>
       </Group>
-    </Group>
+    </Stack>
   );
 };

@@ -1,9 +1,0 @@
-.root {
-  padding-top: rem(32);
-  padding-bottom: rem(32);
-  border-top: 1px solid var(--mantine-color-black);
-}
-
-.root:last-of-type {
-  border-bottom: 1px solid var(--mantine-color-black);
-}

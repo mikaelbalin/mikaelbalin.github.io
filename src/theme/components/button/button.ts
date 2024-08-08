@@ -6,12 +6,32 @@ export default Button.extend({
     variant: "default",
   },
   classNames(theme, props) {
-    console.log({ props });
+    let root =
+      "h-15 sm:h-16 text-xl sm:text-2xl transition-colors duration-300";
+
+    switch (props.variant) {
+      case "default":
+        root = cn(
+          root,
+          "bg-black px-8 text-white hover:bg-appLightColorGreyDark hover:text-white",
+          "dark:bg-white dark:text-black dark:hover:bg-appDarkColorGreyLight dark:hover:text-black",
+        );
+        break;
+
+      case "outline":
+        root = cn(
+          root,
+          "border-black text-black",
+          "hover:bg-appLightColorBeige hover:text-black",
+        );
+        break;
+
+      default:
+        break;
+    }
+
     return {
-      root: cn(
-        "bg-black h-15 px-8 text-xl text-white sm:h-16 sm:text-2xl hover:bg-appLightColorGreyDark hover:text-white transition-colors duration-300",
-        "dark:bg-white dark:text-black dark:hover:bg-appDarkColorGreyLight dark:hover:text-black",
-      ),
+      root,
     };
   },
 });
