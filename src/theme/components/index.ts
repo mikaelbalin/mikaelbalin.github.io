@@ -1,13 +1,14 @@
 import {
   Anchor,
   MantineThemeComponents,
-  TypographyStylesProvider,
+  // TypographyStylesProvider,
 } from "@mantine/core";
 import { Button } from "./button";
 import { Badge } from "./badge";
 import { Chip } from "./chip";
 import { Text } from "./text";
 import { Title } from "./title";
+import { TextInput } from "./text-input";
 
 export const components: MantineThemeComponents = {
   Anchor: Anchor.extend({
@@ -20,9 +21,10 @@ export const components: MantineThemeComponents = {
   Chip,
   Title,
   Text,
-  TypographyStylesProvider: TypographyStylesProvider.extend({
-    classNames: () => ({
-      root: "",
-    }),
-  }),
+  // TypographyStylesProvider: TypographyStylesProvider.extend({
+  //   classNames: () => ({
+  //     root: "",
+  //   }),
+  // }),
+  TextInput,
 };

@@ -6,8 +6,13 @@ export default Button.extend({
     variant: "default",
   },
   classNames(theme, props) {
-    let root =
-      "h-15 sm:h-16 text-xl sm:text-2xl transition-colors duration-300";
+    let root = "transition-colors duration-300";
+
+    if ((props.size = "xs")) {
+      root = cn(root, "h-13 sm:h-13.5 font-normal text-base leading-[1.24]");
+    } else {
+      root = cn(root, "h-15 sm:h-16 text-xl sm:text-2xl ");
+    }
 
     switch (props.variant) {
       case "default":

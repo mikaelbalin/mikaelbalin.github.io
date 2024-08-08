@@ -13,7 +13,7 @@ export default Title.extend({
         };
       case 3:
         return {
-          root: "text-3xl sm:text-6xl",
+          root: "text-3xl leading-17 sm:text-6xl sm:leading-21",
         };
       case 4:
         return {
