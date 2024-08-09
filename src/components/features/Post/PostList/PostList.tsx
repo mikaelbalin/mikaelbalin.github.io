@@ -37,10 +37,16 @@ const posts = [
 export const PostList = () => {
   return (
     <Container component="section" className="pt-17">
-      <Title order={2} className="!text-3.5xl !leading-normal mb-8">
-        Lates blog posts
-      </Title>
-      <Button variant="outline">View all blog posts</Button>
+      <Stack className="gap-0 items-start sm:flex-row sm:items-center sm:justify-between">
+        <Title
+          order={2}
+          className="!text-3.5xl !leading-normal mb-8 md:!text-8xl sm:mb-0"
+        >
+          Lates blog posts
+        </Title>
+        <Button variant="outline">View all blog posts</Button>
+      </Stack>
+
       <Stack gap={0} className="pt-14 mb-14 border-b">
         {posts.map((item) => (
           <PostItem key={item.title} {...item} />

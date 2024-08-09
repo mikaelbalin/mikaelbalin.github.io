@@ -44,6 +44,7 @@ module.exports = {
         17: "4rem",
         25: "6.5rem",
         33: "8.25rem",
+        53: "13.25rem",
       },
       lineHeight: {
         normal: "normal",
@@ -61,6 +62,15 @@ module.exports = {
         22: "5.9rem",
         23: "6.49rem",
         24: "7.67rem",
+      },
+      keyframes: {
+        scroll: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+      },
+      animation: {
+        scroll: "scroll 10s linear infinite",
       },
     },
   },

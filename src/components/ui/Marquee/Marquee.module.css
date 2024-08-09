@@ -1,40 +1,12 @@
 .root {
-  --gap: rem(80);
+  --gap: theme("spacing.20");
   gap: var(--gap);
 
   @mixin larger-than $mantine-breakpoint-sm {
-    --gap: rem(212);
+    --gap: theme("spacing.53");
   }
 }
 
 .content {
   gap: var(--gap);
-  animation: scroll 10s linear infinite;
-}
-
-.item {
-  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-}
-
-.item::before {
-  background-color: light-dark(
-    var(--mantine-color-black),
-    var(--mantine-color-white)
-  );
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-}
-
-/* Pause animation when reduced-motion is set */
-@media (prefers-reduced-motion: reduce) {
-  .content {
-    animation-play-state: paused;
-  }
 }
