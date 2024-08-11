@@ -1,6 +1,7 @@
 import { Container, Group, Anchor } from "@mantine/core";
 import { Contact } from "@/components/layout/Footer/Contact";
 import { FooterProps } from "@/types/data";
+import { Marquee } from "@/components/ui/Marquee";
 
 const links = [
   { link: "#", label: "Contact" },
@@ -27,6 +28,9 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer>
+      {scrollTexts.map((texts, index) => (
+        <Marquee key={index} texts={texts} index={index} />
+      ))}
       <Contact
         contactsTitle={contactsTitle}
         email={email}

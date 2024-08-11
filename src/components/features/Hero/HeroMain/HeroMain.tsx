@@ -10,7 +10,7 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
   return (
     <HeroBackground>
       <Box className="my-auto pt-15">
-        <Marquee texts={heading} />
+        <Marquee texts={heading} hasAnimation />
         <Container className="mt-6.5 sm:mt-8">
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text className="relative" size="lg">

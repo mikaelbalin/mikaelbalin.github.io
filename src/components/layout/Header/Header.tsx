@@ -65,13 +65,16 @@ export function Header(props: HeaderProps) {
 
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
+
   const [
     linksOpened,
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
+
   const [languageLink, setLanguageLink] = useState<MenuItem>(
     languageMenuItems[0],
   );
+
   const [springs, api] = useSpring(() => ({ y: -100 }));
 
   useEffect(() => {

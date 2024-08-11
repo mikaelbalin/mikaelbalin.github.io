@@ -1,5 +1,9 @@
+"use client";
+
+import { animated, useScroll, useSpring, useSprings } from "@react-spring/web";
 import classes from "./Marquee.module.css";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 function renderListItems(items: string[]) {
   return items.map((item) => (
@@ -19,26 +23,46 @@ function renderListItems(items: string[]) {
 
 interface MarqueeProps {
   texts: string[];
+  hasAnimation?: boolean;
+  index?: number;
 }
 
-export const Marquee = ({ texts = [] }: MarqueeProps) => {
+export const Marquee = ({ texts = [], hasAnimation, index }: MarqueeProps) => {
+  const { scrollYProgress } = useScroll();
+
+  const [springs, api] = useSprings(texts.length, (index) => ({
+    transform: "translateX(0px)",
+  }));
+
+  useEffect(() => {
+    api.start((index) => ({
+      transform: scrollYProgress.to(
+        [0, 1],
+        index % 2 === 0
+          ? ["translateX(0px)", "translateX(-2000px)"]
+          : ["translateX(-2000px)", "translateX(0px)"],
+      ),
+    }));
+  }, [scrollYProgress, api]);
+
   return (
     <div
       className={cn(classes.root, "relative flex overflow-hidden select-none")}
     >
-      {Array.from({ length: 2 }).map((_, index) => (
-        <div
-          key={index}
+      {Array.from({ length: 2 }).map((_, idx) => (
+        <animated.div
+          key={idx}
           className={cn(
             classes.content,
-            "motion-safe:animate-scroll",
+            hasAnimation && "motion-safe:animate-scroll",
             "flex shrink-0 justify-around min-w-full p-0 m-0",
             "list-none",
           )}
-          aria-hidden={index === 1}
+          style={typeof index === "number" ? springs[index] : undefined}
+          aria-hidden={idx === 1}
         >
           {renderListItems(texts)}
-        </div>
+        </animated.div>
       ))}
     </div>
   );
