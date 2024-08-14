@@ -5,22 +5,6 @@ import classes from "./Marquee.module.css";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
-function renderListItems(items: string[]) {
-  return items.map((item) => (
-    <li
-      key={item}
-      className={cn(
-        "relative",
-        "uppercase text-9xl sm:text-10xl text-black dark:text-white",
-        "before:absolute before:top-1/2 before:-left-12 before:w-4 before:h-4 before:-translate-y-1/2 before:bg-black dark:before:bg-white",
-        "sm:before:w-13 sm:before:h-13 sm:before:-left-33",
-      )}
-    >
-      {item}
-    </li>
-  ));
-}
-
 interface MarqueeProps {
   texts: string[];
   hasAnimation?: boolean;
@@ -50,7 +34,7 @@ export const Marquee = ({ texts = [], hasAnimation, index }: MarqueeProps) => {
       className={cn(classes.root, "relative flex overflow-hidden select-none")}
     >
       {Array.from({ length: 2 }).map((_, idx) => (
-        <animated.div
+        <animated.ul
           key={idx}
           className={cn(
             classes.content,
@@ -61,8 +45,20 @@ export const Marquee = ({ texts = [], hasAnimation, index }: MarqueeProps) => {
           style={typeof index === "number" ? springs[index] : undefined}
           aria-hidden={idx === 1}
         >
-          {renderListItems(texts)}
-        </animated.div>
+          {texts.map((item) => (
+            <li
+              key={item}
+              className={cn(
+                "relative",
+                "uppercase text-9xl sm:text-10xl text-black dark:text-white",
+                "before:absolute before:top-1/2 before:-left-12 before:w-4 before:h-4 before:-translate-y-1/2 before:bg-black dark:before:bg-white",
+                "sm:before:w-13 sm:before:h-13 sm:before:-left-33",
+              )}
+            >
+              {item}
+            </li>
+          ))}
+        </animated.ul>
       ))}
     </div>
   );
