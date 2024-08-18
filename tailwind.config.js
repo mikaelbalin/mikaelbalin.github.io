@@ -27,6 +27,7 @@ module.exports = {
       "3xl": "1.75rem",
       "3.5xl": "1.875rem",
       "4xl": ["2rem", "2.48rem"],
+      "4.5xl": "2.5rem",
       "5xl": ["2.125rem", "2.5075rem"],
       "6xl": ["3rem", "3.54rem"],
       "7xl": ["5rem", "5.9rem"],
@@ -44,7 +45,6 @@ module.exports = {
         17: "4rem",
         25: "6.5rem",
         33: "8.25rem",
-        53: "13.25rem",
       },
       lineHeight: {
         normal: "normal",

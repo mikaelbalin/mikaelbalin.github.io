@@ -28,9 +28,7 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer>
-      {scrollTexts.map((texts, index) => (
-        <Marquee key={index} texts={texts} index={index} />
-      ))}
+      <Marquee texts={scrollTexts} />
       <Contact
         contactsTitle={contactsTitle}
         email={email}

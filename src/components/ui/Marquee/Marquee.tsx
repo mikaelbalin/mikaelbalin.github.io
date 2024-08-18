@@ -1,17 +1,59 @@
 "use client";
 
 import { animated, useScroll, useSpring, useSprings } from "@react-spring/web";
-import classes from "./Marquee.module.css";
 import { cn } from "@/lib/utils";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useIntersection } from "@mantine/hooks";
 
-interface MarqueeProps {
-  texts: string[];
-  hasAnimation?: boolean;
-  index?: number;
+function isArrayOfStrings(
+  texts: string[] | [string[], string[]],
+): texts is string[] {
+  return (
+    Array.isArray(texts) && texts.every((item) => typeof item === "string")
+  );
 }
 
-export const Marquee = ({ texts = [], hasAnimation, index }: MarqueeProps) => {
+const Line = ({
+  texts,
+  className,
+  showFirstSeparator,
+}: {
+  texts: string[];
+  className: string;
+  showFirstSeparator?: boolean;
+}) => {
+  return texts.map((item, index) => (
+    <>
+      {(index !== 0 || (index === 0 && showFirstSeparator)) && (
+        <li
+          aria-hidden
+          className="w-4 h-4 bg-black dark:bg-white sm:w-13 sm:h-13"
+        />
+      )}
+      <li
+        key={item}
+        className={cn(
+          "relative",
+          "uppercase text-black dark:text-white",
+          className,
+        )}
+      >
+        {item}
+      </li>
+    </>
+  ));
+};
+
+interface MarqueeProps {
+  texts: string[] | [string[], string[]];
+}
+
+export const Marquee = ({ texts = [] }: MarqueeProps) => {
+  const { ref, entry } = useIntersection({
+    threshold: 0,
+  });
+  const isIntersecting = entry?.isIntersecting;
+
   const { scrollYProgress } = useScroll();
 
   const [springs, api] = useSprings(texts.length, (index) => ({
@@ -19,47 +61,74 @@ export const Marquee = ({ texts = [], hasAnimation, index }: MarqueeProps) => {
   }));
 
   useEffect(() => {
-    api.start((index) => ({
-      transform: scrollYProgress.to(
-        [0, 1],
-        index % 2 === 0
-          ? ["translateX(0px)", "translateX(-2000px)"]
-          : ["translateX(-2000px)", "translateX(0px)"],
-      ),
-    }));
-  }, [scrollYProgress, api]);
+    if (isIntersecting) {
+      api.start((index) => ({
+        transform: scrollYProgress.to(
+          [0, 1],
+          index % 2 === 0
+            ? ["translateX(13%)", "translateX(-13%)"]
+            : ["translateX(-13%)", "translateX(13%)"],
+        ),
+      }));
+    } else {
+      api.stop();
+    }
+  }, [scrollYProgress, api, isIntersecting]);
 
-  return (
-    <div
-      className={cn(classes.root, "relative flex overflow-hidden select-none")}
-    >
-      {Array.from({ length: 2 }).map((_, idx) => (
-        <animated.ul
-          key={idx}
-          className={cn(
-            classes.content,
-            hasAnimation && "motion-safe:animate-scroll",
-            "flex shrink-0 justify-around min-w-full p-0 m-0",
-            "list-none",
-          )}
-          style={typeof index === "number" ? springs[index] : undefined}
-          aria-hidden={idx === 1}
-        >
-          {texts.map((item) => (
-            <li
-              key={item}
+  if (isArrayOfStrings(texts)) {
+    return (
+      <div
+        className={cn(
+          "[--gap:theme(spacing.8)] sm:[--gap:theme(spacing.20)]",
+          "gap-[--gap]",
+          "overflow-hidden",
+          "relative flex select-none",
+        )}
+      >
+        {Array.from({ length: 2 }).map((_, index) => (
+          <ul
+            key={index}
+            className={cn(
+              "motion-safe:animate-scroll",
+              "gap-[--gap]",
+              "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
+              "list-none",
+            )}
+            aria-hidden={index === 1}
+          >
+            <Line
+              texts={texts}
+              className="text-9xl sm:text-10xl"
+              showFirstSeparator
+            />
+          </ul>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+      <div className={cn(entry?.isIntersecting ? "bg-[green]" : "")} ref={ref}>
+        {texts.map((text, index) => (
+          <div
+            key={index}
+            className={cn(
+              "gap-8 sm:gap-20",
+              "flex justify-center overflow-hidden select-none",
+            )}
+          >
+            <animated.ul
               className={cn(
-                "relative",
-                "uppercase text-9xl sm:text-10xl text-black dark:text-white",
-                "before:absolute before:top-1/2 before:-left-12 before:w-4 before:h-4 before:-translate-y-1/2 before:bg-black dark:before:bg-white",
-                "sm:before:w-13 sm:before:h-13 sm:before:-left-33",
+                "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
+                "gap-8 sm:gap-20",
+                "list-none",
               )}
+              style={springs[index]}
             >
-              {item}
-            </li>
-          ))}
-        </animated.ul>
-      ))}
-    </div>
-  );
+              <Line texts={text} className="text-4.5xl sm:text-9xl" />
+            </animated.ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
 };
