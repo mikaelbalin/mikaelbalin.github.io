@@ -1,9 +1,15 @@
 "use client";
 
-import { animated, useScroll, useSpring, useSprings } from "@react-spring/web";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  type SpringOptions,
+  useMotionTemplate,
+} from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef } from "react";
-import { useIntersection } from "@mantine/hooks";
+import { useRef } from "react";
 
 function isArrayOfStrings(
   texts: string[] | [string[], string[]],
@@ -32,11 +38,7 @@ const Line = ({
       )}
       <li
         key={item}
-        className={cn(
-          "relative",
-          "uppercase text-black dark:text-white",
-          className,
-        )}
+        className={cn("relative", "text-black dark:text-white", className)}
       >
         {item}
       </li>
@@ -44,36 +46,29 @@ const Line = ({
   ));
 };
 
+const BASE: number = 10;
+const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
+
 interface MarqueeProps {
   texts: string[] | [string[], string[]];
 }
 
 export const Marquee = ({ texts = [] }: MarqueeProps) => {
-  const { ref, entry } = useIntersection({
-    threshold: 0,
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["end start", "start end"],
   });
-  const isIntersecting = entry?.isIntersecting;
 
-  const { scrollYProgress } = useScroll();
+  const transformEven = useTransform(scrollYProgress, [0, 1], [-BASE, BASE]);
+  const transformOdd = useTransform(scrollYProgress, [0, 1], [BASE, -BASE]);
 
-  const [springs, api] = useSprings(texts.length, (index) => ({
-    transform: "translateX(0px)",
-  }));
+  const transformEvenSpring = useSpring(transformEven, springConfig);
+  const transformOddSpring = useSpring(transformOdd, springConfig);
 
-  useEffect(() => {
-    if (isIntersecting) {
-      api.start((index) => ({
-        transform: scrollYProgress.to(
-          [0, 1],
-          index % 2 === 0
-            ? ["translateX(13%)", "translateX(-13%)"]
-            : ["translateX(-13%)", "translateX(13%)"],
-        ),
-      }));
-    } else {
-      api.stop();
-    }
-  }, [scrollYProgress, api, isIntersecting]);
+  const even = useMotionTemplate`${transformEvenSpring}%`;
+  const odd = useMotionTemplate`${transformOddSpring}%`;
 
   if (isArrayOfStrings(texts)) {
     return (
@@ -107,7 +102,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
     );
   } else {
     return (
-      <div className={cn(entry?.isIntersecting ? "bg-[green]" : "")} ref={ref}>
+      <div ref={ref}>
         {texts.map((text, index) => (
           <div
             key={index}
@@ -116,16 +111,18 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
               "flex justify-center overflow-hidden select-none",
             )}
           >
-            <animated.ul
+            <motion.ul
               className={cn(
                 "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
                 "gap-8 sm:gap-20",
                 "list-none",
               )}
-              style={springs[index]}
+              style={{
+                translateX: index % 2 === 0 ? even : odd,
+              }}
             >
               <Line texts={text} className="text-4.5xl sm:text-9xl" />
-            </animated.ul>
+            </motion.ul>
           </div>
         ))}
       </div>
