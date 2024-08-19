@@ -9,7 +9,7 @@ import {
   useMotionTemplate,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 
 function isArrayOfStrings(
   texts: string[] | [string[], string[]],
@@ -29,20 +29,17 @@ const Line = ({
   showFirstSeparator?: boolean;
 }) => {
   return texts.map((item, index) => (
-    <>
+    <Fragment key={index}>
       {(index !== 0 || (index === 0 && showFirstSeparator)) && (
         <li
           aria-hidden
           className="w-4 h-4 bg-black dark:bg-white sm:w-13 sm:h-13"
         />
       )}
-      <li
-        key={item}
-        className={cn("relative", "text-black dark:text-white", className)}
-      >
+      <li className={cn("relative", "text-black dark:text-white", className)}>
         {item}
       </li>
-    </>
+    </Fragment>
   ));
 };
 
@@ -102,7 +99,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
     );
   } else {
     return (
-      <div ref={ref}>
+      <div ref={ref} className="pt-16 pb-14 sm:pt-24 sm:pb-18">
         {texts.map((text, index) => (
           <div
             key={index}

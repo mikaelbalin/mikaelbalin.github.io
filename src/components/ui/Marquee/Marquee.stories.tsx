@@ -15,3 +15,19 @@ export const Default: Story = {
     texts: ["Hello", "Olá", "Hallå", "Bonjour"],
   },
 };
+
+export const Multiline: Story = {
+  args: {
+    texts: [
+      ["Hello", "Olá", "Hallå", "Bonjour"],
+      ["Hello", "Olá", "Hallå", "Bonjour"],
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div className="flex items-center h-[200vh] overflow-hidden">
+        <Story />
+      </div>
+    ),
+  ],
+};
