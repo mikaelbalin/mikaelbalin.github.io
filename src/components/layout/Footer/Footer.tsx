@@ -27,7 +27,7 @@ export function Footer(props: FooterProps) {
   ));
 
   return (
-    <footer>
+    <footer className="mt-14">
       <Marquee texts={scrollTexts} />
       <Contact
         contactsTitle={contactsTitle}
