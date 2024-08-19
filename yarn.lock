@@ -2655,72 +2655,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spring/animated@npm:~9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/animated@npm:9.7.4"
-  dependencies:
-    "@react-spring/shared": "npm:~9.7.4"
-    "@react-spring/types": "npm:~9.7.4"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/7620fe7f058ca81d321710dd391062eda8bd298d2abdf63c5e230348aecd1b80730e5b96bdf052807838a20c8961efe1f9e2840e6cce3cacae5b74a28622eff8
-  languageName: node
-  linkType: hard
-
-"@react-spring/core@npm:~9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/core@npm:9.7.4"
-  dependencies:
-    "@react-spring/animated": "npm:~9.7.4"
-    "@react-spring/shared": "npm:~9.7.4"
-    "@react-spring/types": "npm:~9.7.4"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/cdbc5e222edc5f25746cad36086acf20563157543557a3436b55bf0527460f68e5eb98e2927e186937eba37abe3067c227b685c07b9dc393f987a8ff7abe2455
-  languageName: node
-  linkType: hard
-
-"@react-spring/rafz@npm:~9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/rafz@npm:9.7.4"
-  checksum: 10c0/975e27d6c19ed055dea91e97e473831a862aad2dc882f5402e98ac1f3f636f4ec05ee5cff623e5f6ece25388bb50a024bbc6dcdb6b750e43d53f0321140c5e52
-  languageName: node
-  linkType: hard
-
-"@react-spring/shared@npm:~9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/shared@npm:9.7.4"
-  dependencies:
-    "@react-spring/rafz": "npm:~9.7.4"
-    "@react-spring/types": "npm:~9.7.4"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/ae5cbb41f4876ebf365e0b2293466678d421eb68e736bfb4a0836a550518eb916fee763274f81c5af8a6a25f776df1480031e39f2981639aa79ac6cb6d290a15
-  languageName: node
-  linkType: hard
-
-"@react-spring/types@npm:~9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/types@npm:9.7.4"
-  checksum: 10c0/2ad43c0463dadb8caa58a7eeafc9ba447fa66cd7d9b9ea2241d58c619353155ea94d7e6a89fc6da0f071d500216c654b35a64a12a3a586d85e304ed6c93546fd
-  languageName: node
-  linkType: hard
-
-"@react-spring/web@npm:^9.7.4":
-  version: 9.7.4
-  resolution: "@react-spring/web@npm:9.7.4"
-  dependencies:
-    "@react-spring/animated": "npm:~9.7.4"
-    "@react-spring/core": "npm:~9.7.4"
-    "@react-spring/shared": "npm:~9.7.4"
-    "@react-spring/types": "npm:~9.7.4"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/6312b612e53ae7a7cd0ab5fe16aaccbc6fba5d71248e30373a1f46e6aec997723095eff3c1a47f59aa8d5788b7092a898dee2120f841814f1d1295e5a4fcf5fb
-  languageName: node
-  linkType: hard
-
 "@rushstack/eslint-patch@npm:^1.3.3":
   version: 1.8.0
   resolution: "@rushstack/eslint-patch@npm:1.8.0"
@@ -7290,6 +7224,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^11.3.28":
+  version: 11.3.28
+  resolution: "framer-motion@npm:11.3.28"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@emotion/is-prop-valid": "*"
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  peerDependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10c0/f5aaf914f764ca4a05f7b77e50469b0dbd3311f7be98be871385075513370840de2f154422c7cdc00664147a3cc04f31053997c5eb3131edb25a1abfec570f93
+  languageName: node
+  linkType: hard
+
 "fresh@npm:0.5.2":
   version: 0.5.2
   resolution: "fresh@npm:0.5.2"
@@ -9620,7 +9574,6 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.1"
     "@next/bundle-analyzer": "npm:^14.2.5"
     "@next/mdx": "npm:^14.2.5"
-    "@react-spring/web": "npm:^9.7.4"
     "@storybook/addon-essentials": "npm:^8.2.9"
     "@storybook/addon-interactions": "npm:^8.2.9"
     "@storybook/addon-links": "npm:^8.2.9"
@@ -9640,6 +9593,7 @@ __metadata:
     eslint: "npm:8.57.0"
     eslint-config-next: "npm:^14.2.5"
     eslint-plugin-storybook: "npm:^0.8.0"
+    framer-motion: "npm:^11.3.28"
     next: "npm:^14.2.5"
     postcss: "npm:^8.4.41"
     postcss-preset-mantine: "npm:^1.17.0"
