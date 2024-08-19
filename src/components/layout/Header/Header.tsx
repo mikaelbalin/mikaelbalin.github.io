@@ -15,10 +15,9 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { animated, useSpring } from "@react-spring/web";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { HeaderProps } from "@/types/data";
 import { cn } from "@/lib/utils";
 
@@ -74,12 +73,6 @@ export function Header(props: HeaderProps) {
   const [languageLink, setLanguageLink] = useState<MenuItem>(
     languageMenuItems[0],
   );
-
-  const [springs, api] = useSpring(() => ({ y: -100 }));
-
-  useEffect(() => {
-    api.start({ y: 0 });
-  }, [api]);
 
   const changeLanguage =
     (item: MenuItem): MouseEventHandler<HTMLButtonElement> =>
@@ -156,7 +149,7 @@ export function Header(props: HeaderProps) {
   });
 
   return (
-    <animated.header style={springs} className="absolute w-full z-10">
+    <header className="absolute w-full z-10 motion-safe:animate-slide">
       <Container className="h-15">
         <Group justify="space-between" className="h-full">
           <Logo text={logoText.text} />
@@ -221,6 +214,6 @@ export function Header(props: HeaderProps) {
           </Drawer.Body>
         </Drawer.Content>
       </Drawer.Root>
-    </animated.header>
+    </header>
   );
 }

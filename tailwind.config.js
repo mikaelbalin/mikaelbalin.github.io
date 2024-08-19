@@ -68,9 +68,14 @@ module.exports = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(calc(-100% - var(--gap)))" },
         },
+        slide: {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
+        },
       },
       animation: {
         scroll: "scroll 10s linear infinite",
+        slide: "slide 1s ease-out",
       },
     },
   },
