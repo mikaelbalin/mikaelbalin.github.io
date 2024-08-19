@@ -1,10 +1,6 @@
 import { Container, Grid, Text, GridCol } from "@mantine/core";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactProps } from "@/types/data";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-
-const textClasses = "text-xl leading-7";
 
 export const Contact = (props: ContactProps) => {
   const { contactsTitle, email, phone, socialTitle, socialLink, formTitle } =

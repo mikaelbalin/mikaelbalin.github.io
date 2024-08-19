@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
-import { TextInput } from "@mantine/core";
+import { Textarea } from "@mantine/core";
 
-export default TextInput.extend({
+export default Textarea.extend({
   defaultProps: {},
   classNames: (theme, props) => {
     const { variant } = props;
@@ -12,8 +12,7 @@ export default TextInput.extend({
       input:
         variant === "filled"
           ? cn(
-              "h-13 px-4 border-0 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
-              "sm:h-13.5",
+              "px-4 border-0 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
             )
           : cn(""),
       description: "",

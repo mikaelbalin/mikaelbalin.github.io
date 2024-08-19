@@ -18,7 +18,9 @@ export const SubscriptionForm = () => {
           label="Email"
           placeholder="email@example.com"
           className="sm:w-full"
+          variant="filled"
         />
+
         <Button onClick={field.validate} className="shrink-0">
           Submit
         </Button>
