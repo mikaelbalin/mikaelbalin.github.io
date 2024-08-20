@@ -12,7 +12,7 @@ export const Contact = (props: ContactProps) => {
         <GridCol span={{ base: 12, sm: 6 }} className="mb-14">
           <Grid>
             <GridCol
-              span={{ base: 12, md: 6 }}
+              span={{ base: 12, lg: 6 }}
               className="flex flex-col gap-6 mb-10"
             >
               <Text>{contactsTitle}</Text>
@@ -24,7 +24,7 @@ export const Contact = (props: ContactProps) => {
               </Text>
             </GridCol>
 
-            <GridCol span={{ base: 12, md: 6 }} className="flex flex-col gap-6">
+            <GridCol span={{ base: 12, lg: 6 }} className="flex flex-col gap-6">
               <Text>{socialTitle}</Text>
               {socialLink.map((link) => (
                 <Text
