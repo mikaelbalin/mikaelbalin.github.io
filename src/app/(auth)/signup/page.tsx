@@ -5,7 +5,9 @@ import Link from "next/link";
 export default function SingUpRoute() {
   return (
     <Container size={420} my={40}>
-      <Title ta="center">Sign up</Title>
+      <Title size="h3" ta="center">
+        Sign up
+      </Title>
       <Text c="dimmed" size="sm" ta="center" mt={5}>
         Enter your details to creacte a new account
       </Text>

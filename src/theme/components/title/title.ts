@@ -1,21 +1,23 @@
 import { Title } from "@mantine/core";
 
 export default Title.extend({
-  classNames: (theme, { order, className }, ctx) => {
-    switch (order) {
-      case 1:
+  classNames: (theme, { order, className, size }, ctx) => {
+    const titleSize = size !== undefined ? size : `h${order}`;
+
+    switch (titleSize) {
+      case "h1":
         return {
           root: "text-9xl sm:text-10xl",
         };
-      case 2:
+      case "h2":
         return {
           root: "text-5xl sm:text-8xl",
         };
-      case 3:
+      case "h3":
         return {
           root: "text-3xl leading-17 sm:text-6xl sm:leading-21",
         };
-      case 4:
+      case "h4":
         return {
           root: "text-xl sm:text-4xl",
         };

@@ -5,7 +5,9 @@ import Link from "next/link";
 export default function SignInRoute() {
   return (
     <Container size={420} my={40}>
-      <Title ta="center">Welcome back!</Title>
+      <Title size="h3" ta="center">
+        Welcome back!
+      </Title>
       <Text c="dimmed" size="sm" ta="center" mt={5}>
         Enter your details to sign in to your account
       </Text>
