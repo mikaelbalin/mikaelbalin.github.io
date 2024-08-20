@@ -6,8 +6,15 @@ const meta = {
   component: Container,
   parameters: {},
   tags: ["autodocs"],
-  argTypes: {},
-  // args: { onClick: fn() },
+  argTypes: {
+    size: {
+      options: ["sm", "md"],
+      control: "select",
+    },
+    bg: {
+      control: "color",
+    },
+  },
 } satisfies Meta<typeof Container>;
 
 export default meta;
@@ -18,6 +25,5 @@ export const Default: Story = {
   args: {
     bg: "var(--mantine-color-blue-light)",
     h: 50,
-    mt: "md",
   },
 };
