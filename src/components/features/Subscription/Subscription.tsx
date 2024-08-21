@@ -5,7 +5,7 @@ export const Subscription = () => {
   return (
     <Container component="section">
       <Box className="bg-appLightColorBeige py-14 px-4 sm:py-20 sm:px-12">
-        <Grid className="sm:gap-20">
+        <Grid>
           <GridCol span={{ base: 12, sm: 8, lg: 7 }}>
             <Title order={3}>Sign up now and ensure you catch every post</Title>
           </GridCol>

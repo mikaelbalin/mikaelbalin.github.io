@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, SimpleGrid, TextInput } from "@mantine/core";
+import { Button, Grid, GridCol, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
 
 export const SubscriptionForm = () => {
@@ -11,20 +11,20 @@ export const SubscriptionForm = () => {
   });
 
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2 }} className="mt-8 sm:mt-14">
-      <Box className="flex items-end">
+    <Grid className="mt-8 sm:mt-14">
+      <GridCol span={{ base: 12, sm: 8, lg: 7 }} className="sm:flex items-end">
         <TextInput
           {...field.getInputProps()}
           label="Email"
           placeholder="email@example.com"
-          className="sm:w-full"
+          className="w-full"
           variant="filled"
         />
 
-        <Button onClick={field.validate} className="shrink-0">
+        <Button onClick={field.validate} className="w-full sm:w-auto shrink-0">
           Submit
         </Button>
-      </Box>
-    </SimpleGrid>
+      </GridCol>
+    </Grid>
   );
 };
