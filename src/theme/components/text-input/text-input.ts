@@ -10,7 +10,7 @@ export default TextInput.extend({
       root: "",
       label: cn("block mb-2 text-base font-normal", "sm:text-lg"),
       input: cn(
-        "h-13 px-4 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
+        "h-13 px-4 bg-white text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
         "sm:h-13.5 sm:text-lg",
         "border-black",
         variant === "filled" && "border-0",

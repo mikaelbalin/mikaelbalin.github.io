@@ -10,7 +10,7 @@ export default Textarea.extend({
       root: "",
       label: cn("block mb-2 text-base font-normal", "sm:text-lg"),
       input: cn(
-        "p-4 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
+        "p-4 bg-white text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
         "sm:text-lg",
         "border-black",
         variant === "filled" && "border-0",
