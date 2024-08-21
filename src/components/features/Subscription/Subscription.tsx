@@ -1,21 +1,25 @@
-import { Container, Title, Text, Box, SimpleGrid } from "@mantine/core";
+import { Container, Title, Text, Box, Grid, GridCol } from "@mantine/core";
 import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
 
 export const Subscription = () => {
   return (
     <Container component="section">
-      <Box className="bg-appLightColorBeige py-14 px-4">
-        <SimpleGrid cols={{ base: 1, sm: 2 }} className="sm:gap-20">
-          <div>
+      <Box className="bg-appLightColorBeige py-14 px-4 sm:py-20 sm:px-12">
+        <Grid className="sm:gap-20">
+          <GridCol span={{ base: 12, sm: 8, lg: 7 }}>
             <Title order={3}>Sign up now and ensure you catch every post</Title>
-          </div>
-          <div>
+          </GridCol>
+          <GridCol
+            span={{ base: 12, sm: 4 }}
+            offset={{ base: 0, lg: 1 }}
+            className="flex items-center"
+          >
             <Text>
               Forem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
               vulputate libero et velit interdum, ac aliquet odio mattis.
             </Text>
-          </div>
-        </SimpleGrid>
+          </GridCol>
+        </Grid>
 
         <SubscriptionForm />
       </Box>
