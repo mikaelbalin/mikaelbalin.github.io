@@ -11,7 +11,7 @@ export default Container.extend({
     size: "md",
   },
   classNames: (_, { className }) => ({
-    root: cn("md:px-20", className),
+    root: cn("md:px-20 box-content", className),
   }),
   vars: (_, { size, fluid }) => ({
     root: {

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SingUpRoute() {
   return (
-    <Container size="sm" className="box-content mt-15">
+    <Container size="sm" className="mt-15">
       <Title size="h3" ta="center">
         Sign up
       </Title>
