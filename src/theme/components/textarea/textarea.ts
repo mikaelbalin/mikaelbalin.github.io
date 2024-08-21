@@ -8,13 +8,13 @@ export default Textarea.extend({
 
     return {
       root: "",
-      label: "block text-base mb-2",
-      input:
-        variant === "filled"
-          ? cn(
-              "px-4 border-0 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
-            )
-          : cn(""),
+      label: cn("block mb-2 text-base font-normal", "sm:text-lg"),
+      input: cn(
+        "p-4 text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
+        "sm:text-lg",
+        "border-black",
+        variant === "filled" && "border-0",
+      ),
       description: "",
       error: "",
       required: "",
