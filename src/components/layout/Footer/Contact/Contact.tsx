@@ -7,7 +7,7 @@ export const Contact = (props: ContactProps) => {
     props;
 
   return (
-    <Container id="contacts" className="mb-14">
+    <Container id="contacts" className="pb-14 sm:pb-18">
       <Grid>
         <GridCol span={{ base: 12, sm: 6 }} className="mb-14">
           <Grid>
