@@ -5,20 +5,23 @@ export default Button.extend({
   defaultProps: {
     variant: "default",
   },
-  classNames(theme, props) {
-    let root = "transition-colors duration-300";
+  classNames(_, { size, variant, rightSection }) {
+    let root = "transition-colors duration-300 font-normal leading-7";
 
-    if ((props.size = "xs")) {
-      root = cn(root, "h-13 sm:h-13.5 font-normal text-base leading-[1.24]");
+    if (size === "xs") {
+      root = cn(root, "h-13 sm:h-13.5 text-base sm:text-lg leading-[1.24]");
+    } else if (variant === "transparent") {
+      root = cn(root, "h-auto text-xl px-0 sm:text-2xl");
     } else {
-      root = cn(root, "h-15 sm:h-16 text-xl sm:text-2xl ");
+      root = cn(root, "h-15 sm:h-16 text-xl sm:text-2xl");
     }
 
-    switch (props.variant) {
+    switch (variant) {
       case "default":
         root = cn(
           root,
-          "bg-black px-8 text-white hover:bg-appLightColorGreyDark hover:text-white",
+          "px-8",
+          "bg-black text-white hover:bg-appLightColorGreyDark hover:text-white",
           "dark:bg-white dark:text-black dark:hover:bg-appDarkColorGreyLight dark:hover:text-black",
         );
         break;
@@ -26,9 +29,14 @@ export default Button.extend({
       case "outline":
         root = cn(
           root,
+          "px-8",
           "border-black text-black",
           "hover:bg-appLightColorBeige hover:text-black",
         );
+        break;
+
+      case "transparent":
+        root = cn(root, "text-black hover:text-appLightColorGrey");
         break;
 
       default:
@@ -37,6 +45,7 @@ export default Button.extend({
 
     return {
       root,
+      section: cn(rightSection && "ml-2"),
     };
   },
 });

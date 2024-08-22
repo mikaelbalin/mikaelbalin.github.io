@@ -37,15 +37,15 @@ module.exports = {
     },
     extend: {
       spacing: {
-        6.5: "1.5625rem",
-        13: "3.25rem",
-        13.5: "3.375rem",
-        15: "3.75rem",
-        16: "3.875rem",
-        17: "4rem",
-        18: "4.5rem",
-        25: "6.5rem",
-        33: "8.25rem",
+        6.5: "1.5625rem", // 25px
+        13: "3.25rem", // 52px
+        13.5: "3.375rem", // 54px
+        15: "3.75rem", // 60px
+        16: "3.875rem", // 62px
+        17: "4rem", // 64px
+        18: "4.5rem", // 72px
+        25: "6.5rem", // 104px
+        33: "8.25rem", // 132px
       },
       lineHeight: {
         normal: "normal",
