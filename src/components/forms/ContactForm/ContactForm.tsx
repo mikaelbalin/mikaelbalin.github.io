@@ -53,7 +53,9 @@ export const ContactForm = () => {
       </div>
 
       <Group className="mt-8 justify-end">
-        <Button type="submit">Submit message</Button>
+        <Button type="submit" size="xs">
+          Submit message
+        </Button>
       </Group>
     </form>
   );

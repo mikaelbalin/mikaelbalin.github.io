@@ -21,7 +21,11 @@ export const SubscriptionForm = () => {
           variant="filled"
         />
 
-        <Button onClick={field.validate} className="w-full sm:w-auto shrink-0">
+        <Button
+          onClick={field.validate}
+          size="xs"
+          className="w-full sm:w-auto shrink-0"
+        >
           Submit
         </Button>
       </GridCol>
