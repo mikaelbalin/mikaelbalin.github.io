@@ -1,13 +1,15 @@
 "use client";
 
-import { Button } from "@mantine/core";
+import { Button, ButtonProps } from "@mantine/core";
 import { IconArrowNarrowUp } from "@tabler/icons-react";
 
-export const ScrollTopButton = () => (
+type ScrollTopButtonProps = Pick<ButtonProps, "className">;
+
+export const ScrollTopButton = ({ className }: ScrollTopButtonProps) => (
   <Button
     rightSection={<IconArrowNarrowUp />}
     variant="transparent"
-    className="mt-10"
+    className={className}
     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
   >
     Back to top
