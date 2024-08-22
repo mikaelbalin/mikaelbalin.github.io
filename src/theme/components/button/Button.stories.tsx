@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { Button, ButtonProps } from "@mantine/core";
+import { IconMoodTongue } from "@tabler/icons-react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -67,42 +68,22 @@ export const Outline: Story = {
   },
 };
 
-export const White: Story = {
+// export const White: Story = {
+//   args: {
+//     ...Default.args,
+//     variant: "white",
+//   },
+//   parameters: {
+//     backgrounds: {
+//       default: "dark",
+//     },
+//   },
+// };
+
+export const Transparent: Story = {
   args: {
     ...Default.args,
-    variant: "white",
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-    },
+    variant: "transparent",
+    rightSection: <IconMoodTongue />,
   },
 };
-
-// export const Secondary: Story = {
-//   args: {
-//     label: "Button",
-//   },
-// };
-
-// export const Large: Story = {
-//   args: {
-//     size: "large",
-//     label: "Button",
-//   },
-// };
-
-// export const Small: Story = {
-//   args: {
-//     size: "small",
-//     label: "Button",
-//   },
-// };
-
-// export const Warning: Story = {
-//   args: {
-//     primary: true,
-//     label: "Delete now",
-//     backgroundColor: "red",
-//   },
-// };
