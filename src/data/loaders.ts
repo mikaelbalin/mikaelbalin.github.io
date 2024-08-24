@@ -59,3 +59,33 @@ export async function getGlobalPageData() {
   const { data } = await fetchData<GlobalPageData>(url.href);
   return data;
 }
+
+interface Blog {
+  title: string;
+  body: unknown;
+  date: string;
+  category: string;
+  slug: string;
+}
+
+interface BlogListResponseDataItem {
+  id: string;
+  attributes: Blog;
+}
+
+interface BlogListResponse {
+  data: BlogListResponseDataItem[];
+}
+
+export async function getBlogsData() {
+  const url = new URL("/api/blogs", baseUrl);
+  const { data } = await fetchData<BlogListResponse>(url.href);
+  return data;
+}
+
+export async function getBlog(slug: string) {
+  const url = new URL("/api/blogs", baseUrl);
+  url.searchParams.append("filters[slug][$eq]", slug);
+  const { data } = await fetchData<BlogListResponse>(url.href);
+  return data;
+}
