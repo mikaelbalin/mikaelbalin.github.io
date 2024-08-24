@@ -46,6 +46,9 @@ export const PostList = ({ children }: PostListProps) => {
           <PostItem key={item.title} {...item} />
         ))}
       </Stack>
+      <div className="flex justify-center mb-14">
+        <Button variant="outline">Load more post</Button>
+      </div>
     </Container>
   );
 };
