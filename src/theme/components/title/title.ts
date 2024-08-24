@@ -7,7 +7,7 @@ export default Title.extend({
     switch (titleSize) {
       case "h1":
         return {
-          root: "text-9xl sm:text-10xl",
+          root: "text-9xl sm:text-10xl font-normal",
         };
       case "h2":
         return {

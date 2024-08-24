@@ -7,7 +7,7 @@ export const HeroBlog = () => {
     <HeroBackground variant="blog">
       <Box className="relative mt-15 pt-6 pb-16">
         <Container>
-          <Title className={classes.title}>Blog</Title>
+          <Title>Blog</Title>
         </Container>
       </Box>
     </HeroBackground>

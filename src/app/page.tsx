@@ -5,6 +5,7 @@ import { Subscription } from "@/components/features/Subscription";
 import { getHomePageData, getHomePageMetaData } from "@/data/loaders";
 import { Metadata } from "next";
 import { AboutProps, HeroProps } from "types/data";
+import { PostLatest } from "@/components/features/Post/PostLatest";
 
 function blockRenderer(block: HeroProps | AboutProps) {
   switch (block.__component) {
@@ -34,7 +35,9 @@ export default async function Page() {
   return (
     <>
       {blocks.map(blockRenderer)}
-      <PostList />
+      <PostList>
+        <PostLatest />
+      </PostList>
       <Subscription />
     </>
   );
