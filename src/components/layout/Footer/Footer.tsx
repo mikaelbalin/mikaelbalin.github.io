@@ -37,7 +37,7 @@ export function Footer(props: FooterProps) {
       />
 
       <Container>
-        <Box className="border-t border-black pt-14 pb-17 sm:pb-24">
+        <Box className="border-t border-black pt-14 pb-16 sm:pb-24">
           <Text className="mb-6 sm:mb-8">Content</Text>
 
           <div className="flex flex-col gap-6 items-start sm:flex-row">

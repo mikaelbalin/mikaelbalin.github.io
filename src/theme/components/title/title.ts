@@ -15,7 +15,7 @@ export default Title.extend({
         };
       case "h3":
         return {
-          root: "text-3xl leading-17 sm:text-6xl sm:leading-21",
+          root: "text-3xl leading-16 sm:text-6xl sm:leading-21",
         };
       case "h4":
         return {

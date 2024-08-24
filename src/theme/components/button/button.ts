@@ -13,7 +13,7 @@ export default Button.extend({
     } else if (variant === "transparent") {
       root = cn(root, "h-auto text-xl px-0 sm:text-2xl");
     } else {
-      root = cn(root, "h-15 sm:h-16 text-xl sm:text-2xl");
+      root = cn(root, "h-15 sm:h-15.5 text-xl sm:text-2xl");
     }
 
     switch (variant) {

@@ -5,7 +5,7 @@ export const About = (props: AboutProps) => {
   const { heading, text } = props;
 
   return (
-    <Container component="section" className="pt-25 pb-17">
+    <Container component="section" className="pt-25 pb-16">
       <Title order={2} className="mb-8">
         {heading}
       </Title>
