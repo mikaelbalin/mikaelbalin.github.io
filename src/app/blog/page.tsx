@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <HeroBlog />
-      <PostList>
+      <PostList loadMore>
         <PostSearch />
       </PostList>
       <Subscription />

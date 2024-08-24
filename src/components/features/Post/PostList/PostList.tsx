@@ -35,20 +35,24 @@ const posts = [
   },
 ];
 
-interface PostListProps extends PropsWithChildren {}
+interface PostListProps extends PropsWithChildren {
+  loadMore?: boolean;
+}
 
-export const PostList = ({ children }: PostListProps) => {
+export const PostList = ({ children, loadMore }: PostListProps) => {
   return (
     <Container component="section" className="pt-17">
       {children}
-      <Stack gap={0} className="pt-14 mb-14 border-b">
+      <Stack gap={0} className="pt-14 border-b">
         {posts.map((item) => (
           <PostItem key={item.title} {...item} />
         ))}
       </Stack>
-      <div className="flex justify-center mb-14">
-        <Button variant="outline">Load more post</Button>
-      </div>
+      {loadMore && (
+        <div className="flex justify-center pt-14 sm:pt-20">
+          <Button variant="outline">Load more post</Button>
+        </div>
+      )}
     </Container>
   );
 };
