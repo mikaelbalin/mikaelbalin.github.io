@@ -43,7 +43,7 @@ export const PostList = ({ children, loadMore }: PostListProps) => {
   return (
     <Container component="section" className="pt-17">
       {children}
-      <Stack gap={0} className="pt-14 border-b">
+      <Stack gap={0} className="pt-14 border-b sm:pt-20">
         {posts.map((item) => (
           <PostItem key={item.title} {...item} />
         ))}
