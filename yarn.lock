@@ -2040,6 +2040,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/intl-localematcher@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "@formatjs/intl-localematcher@npm:0.5.4"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10c0/c9ff5d34ca8b6fe59f8f303a3cc31a92d343e095a6987e273e5cc23f0fe99feb557a392a05da95931c7d24106acb6988e588d00ddd05b0934005aafd7fdbafe6
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -3621,6 +3630,13 @@ __metadata:
   version: 0.7.34
   resolution: "@types/ms@npm:0.7.34"
   checksum: 10c0/ac80bd90012116ceb2d188fde62d96830ca847823e8ca71255616bc73991aa7d9f057b8bfab79e8ee44ffefb031ddd1bcce63ea82f9e66f7c31ec02d2d823ccc
+  languageName: node
+  linkType: hard
+
+"@types/negotiator@npm:^0.6.3":
+  version: 0.6.3
+  resolution: "@types/negotiator@npm:0.6.3"
+  checksum: 10c0/d182002d9d7d3248139008e29857dddbc98bd7ada1fddbb33c96fce2f62821698a1ac62e90a92ea004c594abc6865e143f50146e21123a0aeb0641c2bf832aa3
   languageName: node
   linkType: hard
 
@@ -9565,6 +9581,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikhailbalin.github.io@workspace:."
   dependencies:
+    "@formatjs/intl-localematcher": "npm:^0.5.4"
     "@mantine/code-highlight": "npm:^7.12.1"
     "@mantine/core": "npm:^7.12.1"
     "@mantine/form": "npm:^7.12.1"
@@ -9585,6 +9602,7 @@ __metadata:
     "@storybook/test": "npm:^8.2.9"
     "@tabler/icons-react": "npm:^3.14.0"
     "@types/mdx": "npm:^2.0.13"
+    "@types/negotiator": "npm:^0.6.3"
     "@types/node": "npm:^22.5.0"
     "@types/react": "npm:^18.3.4"
     "@types/react-dom": "npm:^18.3.0"
@@ -9594,6 +9612,7 @@ __metadata:
     eslint-config-next: "npm:^14.2.7"
     eslint-plugin-storybook: "npm:^0.8.0"
     framer-motion: "npm:^11.3.30"
+    negotiator: "npm:^0.6.3"
     next: "npm:^14.2.7"
     postcss: "npm:^8.4.41"
     postcss-preset-mantine: "npm:^1.17.0"
