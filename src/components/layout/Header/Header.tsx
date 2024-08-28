@@ -15,14 +15,16 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler } from "react";
 import { HeaderProps } from "@/types/data";
 import { cn } from "@/lib/utils";
+import { i18n, type Locale } from "../../../i18n-config";
+import { usePathname, useParams } from "next/navigation";
+import { LangugeToggle } from "@/components/ui/LangugeToggle";
 
 type MenuItem = {
-  link: string;
+  link: Locale | string;
   label: string;
   links?: Omit<MenuItem, "links">[];
 };
@@ -33,34 +35,21 @@ const menuItems: MenuItem[] = [
   { link: "/contact", label: "Contact" },
 ];
 
-const languageMenuItems: MenuItem[] = [
-  { link: "/", label: "English" },
-  { link: "/pt", label: "Portugais" },
-  { link: "/de", label: "Deutsch" },
-  { link: "/fr", label: "Français" },
-];
+const labels: Record<Locale, string> = {
+  en: "English",
+  pt: "Portugais",
+};
 
-const LangugeToggle = ({
-  label,
-  linksOpened,
-}: {
-  label: string;
-  linksOpened: boolean;
-}) => (
-  <>
-    <span className="mr-1">{label}</span>
-    <IconChevronDown
-      size="1rem"
-      style={{
-        transform: `rotate(${linksOpened ? 180 : 0}deg)`,
-      }}
-      className="text-black"
-    />
-  </>
-);
+const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
+  link: locale,
+  label: labels[locale],
+}));
 
 export function Header(props: HeaderProps) {
   const { logoText } = props;
+
+  const pathName = usePathname();
+  const { lang } = useParams<{ lang: Locale }>();
 
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -70,33 +59,33 @@ export function Header(props: HeaderProps) {
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
 
-  const [languageLink, setLanguageLink] = useState<MenuItem>(
-    languageMenuItems[0],
-  );
-
-  const changeLanguage =
-    (item: MenuItem): MouseEventHandler<HTMLButtonElement> =>
-    (event) => {
-      setLanguageLink(item);
-      closeLinks();
-    };
-
-  const languageButtons = languageMenuItems.map((item) => (
-    <UnstyledButton
-      key={item.label}
-      className="w-full h-11 px-6"
-      onClick={changeLanguage(item)}
+  const languageButtons = languageMenuItems.map((menuItem) => (
+    <Link
+      key={menuItem.label}
+      className="flex items-center w-full h-11 px-6"
+      href={menuItem.link}
     >
-      {item.label}
-    </UnstyledButton>
+      {menuItem.label}
+    </Link>
   ));
+
+  const redirectedPathName = (locale: Locale) => {
+    if (!pathName) return "/";
+    const segments = pathName.split("/");
+    segments[1] = locale;
+    return segments.join("/");
+  };
 
   const menu = [
     ...menuItems,
-    { ...languageLink, links: languageMenuItems },
-  ].map((link) => {
-    const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link} onClick={changeLanguage(item)}>
+    { links: languageMenuItems, link: lang, label: labels[lang] },
+  ].map((menuItem) => {
+    const menuItems = menuItem.links?.map((item) => (
+      <Menu.Item
+        component={Link}
+        key={item.link}
+        href={redirectedPathName(item.link as Locale)}
+      >
         {item.label}
       </Menu.Item>
     ));
@@ -104,7 +93,7 @@ export function Header(props: HeaderProps) {
     if (menuItems) {
       return (
         <Menu
-          key={link.label}
+          key={menuItem.label}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -118,14 +107,14 @@ export function Header(props: HeaderProps) {
           }}
         >
           <Menu.Target>
-            <Anchor
-              component={Link}
-              href={link.link}
-              onClick={(event) => event.preventDefault()}
-              className="flex items-center text-black"
+            <UnstyledButton
+              className={cn(
+                "px-4 flex items-center text-sm text-black font-medium",
+                "sm:text-lg sm:leading-13 sm:px-0",
+              )}
             >
-              <LangugeToggle label={link.label} linksOpened={linksOpened} />
-            </Anchor>
+              <LangugeToggle label={menuItem.label} linksOpened={linksOpened} />
+            </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown>{menuItems}</Menu.Dropdown>
         </Menu>
@@ -134,16 +123,16 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={link.label}
+        key={menuItem.label}
         component={Link}
-        href={link.link}
+        href={menuItem.link}
         className={cn(
           "flex items-center w-full h-11 px-4",
           "text-sm text-black font-medium",
           "sm:w-auto sm:h-full sm:px-0",
         )}
       >
-        {link.label}
+        {menuItem.label}
       </Anchor>
     );
   });
@@ -198,10 +187,7 @@ export function Header(props: HeaderProps) {
                 onClick={toggleLinks}
                 className={cn("flex items-center w-full h-11 px-4")}
               >
-                <LangugeToggle
-                  label={languageLink.label}
-                  linksOpened={linksOpened}
-                />
+                <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
               </UnstyledButton>
               <Collapse in={linksOpened}>{languageButtons}</Collapse>
               <Link

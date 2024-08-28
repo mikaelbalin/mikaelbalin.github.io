@@ -6,6 +6,7 @@ import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "./global.css";
 import { Notifications } from "@mantine/notifications";
+import { Locale } from "../../i18n-config";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params,
+}: Readonly<
+  {
+    children: React.ReactNode;
+  } & {
+    params: { lang: Locale };
+  }
+>) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
