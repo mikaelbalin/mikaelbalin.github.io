@@ -78,12 +78,12 @@ export function Header(props: HeaderProps) {
 
   const menu = [
     ...menuItems,
-    { links: languageMenuItems, link: lang, label: labels[lang] },
+    { link: lang, label: labels[lang], links: languageMenuItems },
   ].map((menuItem) => {
     const menuItems = menuItem.links?.map((item) => (
       <Menu.Item
-        component={Link}
         key={item.link}
+        component={Link}
         href={redirectedPathName(item.link as Locale)}
       >
         {item.label}
@@ -93,7 +93,7 @@ export function Header(props: HeaderProps) {
     if (menuItems) {
       return (
         <Menu
-          key={menuItem.label}
+          key={menuItem.link}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -123,7 +123,7 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={menuItem.label}
+        key={menuItem.link}
         component={Link}
         href={menuItem.link}
         className={cn(
