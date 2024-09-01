@@ -16,7 +16,6 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { MouseEventHandler } from "react";
 import { HeaderProps } from "@/types/data";
 import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
