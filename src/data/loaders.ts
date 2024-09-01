@@ -60,32 +60,50 @@ export async function getGlobalPageData() {
   return data;
 }
 
-interface Blog {
+interface CategoryResponseDataObject {
+  id: number;
+  attributes: {
+    name: string;
+    slug: string;
+  };
+}
+
+interface ComponentsRichTextComponent {
+  id: number;
+  __component: "string";
+  content: unknown;
+}
+
+interface Article {
   title: string;
-  body: unknown;
-  date: string;
-  category: string;
   slug: string;
+  blocks: ComponentsRichTextComponent[];
+  categories: {
+    data: CategoryResponseDataObject[];
+  };
 }
 
-interface BlogListResponseDataItem {
+export interface ArticleListResponseDataItem {
   id: string;
-  attributes: Blog;
+  attributes: Article;
 }
 
-interface BlogListResponse {
-  data: BlogListResponseDataItem[];
+interface ArticleListResponse {
+  data: ArticleListResponseDataItem[];
 }
 
-export async function getBlogsData() {
-  const url = new URL("/api/blogs", baseUrl);
-  const { data } = await fetchData<BlogListResponse>(url.href);
+export async function getArticles(start: number, limit: number) {
+  const url = new URL("/api/articles", baseUrl);
+  url.searchParams.append("sort[createdAt]", "desc");
+  url.searchParams.append("populate[categories][populate]", "*");
+  url.searchParams.append("pagination[start]", start.toString());
+  url.searchParams.append("pagination[limit]", limit.toString());
+  const { data } = await fetchData<ArticleListResponse>(url.href);
   return data;
 }
 
-export async function getBlog(slug: string) {
+export async function getArticle(slug: string) {
   const url = new URL("/api/blogs", baseUrl);
-  url.searchParams.append("filters[slug][$eq]", slug);
-  const { data } = await fetchData<BlogListResponse>(url.href);
+  const { data } = await fetchData<ArticleListResponse>(url.href);
   return data;
 }
