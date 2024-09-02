@@ -60,7 +60,7 @@ export async function getGlobalPageData() {
   return data;
 }
 
-interface CategoryResponseDataObject {
+interface TagResponseDataObject {
   id: number;
   attributes: {
     name: string;
@@ -85,8 +85,8 @@ export interface Meta {
 export interface Article {
   title: string;
   slug: string;
-  categories: {
-    data: CategoryResponseDataObject[];
+  tags: {
+    data: TagResponseDataObject[];
   };
   createdAt: string;
   updatedAt: string;
@@ -107,7 +107,7 @@ interface ArticleListResponse {
 export async function getArticles(start: number, limit: number) {
   const url = new URL("/api/articles", baseUrl);
   url.searchParams.append("sort[createdAt]", "desc");
-  url.searchParams.append("populate[0]", "categories");
+  url.searchParams.append("populate[0]", "tags");
   url.searchParams.append("pagination[start]", start.toString());
   url.searchParams.append("pagination[limit]", limit.toString());
   const response = await fetchData<ArticleListResponse>(url.href);
@@ -115,7 +115,7 @@ export async function getArticles(start: number, limit: number) {
 }
 
 export async function getArticle(slug: string) {
-  const url = new URL("/api/blogs", baseUrl);
+  const url = new URL("/api/articles", baseUrl);
   const { data } = await fetchData<ArticleListResponse>(url.href);
   return data;
 }

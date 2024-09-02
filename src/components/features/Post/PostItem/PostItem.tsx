@@ -8,7 +8,7 @@ type PostCardProps = Article;
 export const PostItem = ({
   title,
   slug,
-  categories,
+  tags: { data: tags },
   publishedAt,
 }: PostCardProps) => {
   const classes = cn(
@@ -16,7 +16,6 @@ export const PostItem = ({
     "before:content-[''] before:w-2 before:h-2 before:bg-black",
   );
 
-  const tags = categories.data;
   const date = new Date(publishedAt);
 
   return (
