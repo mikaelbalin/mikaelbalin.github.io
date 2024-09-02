@@ -5,15 +5,7 @@ import { Subscription } from "@/components/features/Subscription";
 import { PostList } from "@/components/features/Post/PostList";
 import { HeroBlog } from "@/components/features/Hero/HeroBlog";
 import { PostSearch } from "@/components/features/Post/PostSearch";
-import { ArticleListResponseDataItem, getArticles } from "@/data/loaders";
-
-interface Meta {
-  pagination: {
-    start: number;
-    limit: number;
-    total: number;
-  };
-}
+import { ArticleListResponseDataItem, getArticles, Meta } from "@/data/loaders";
 
 export default function Page() {
   const [meta, setMeta] = useState<Meta | undefined>();
@@ -23,15 +15,15 @@ export default function Page() {
   const fetchData = useCallback(async (start: number, limit: number) => {
     setLoading(true);
     try {
-      const responseData = await getArticles(start, limit);
+      const { data, meta } = await getArticles(start, limit);
 
       if (start === 0) {
-        setData(responseData);
+        setData(data);
       } else {
-        setData((prevData) => [...prevData, ...responseData]);
+        setData((prevData) => [...prevData, ...data]);
       }
 
-      // setMeta(responseData.meta);
+      setMeta(meta);
     } catch (error) {
       console.error(error);
     } finally {
@@ -55,7 +47,7 @@ export default function Page() {
   return (
     <>
       <HeroBlog />
-      <PostList loadMore>
+      <PostList loadMore data={data}>
         <PostSearch />
       </PostList>
       <Subscription />

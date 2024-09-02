@@ -68,19 +68,30 @@ interface CategoryResponseDataObject {
   };
 }
 
-interface ComponentsRichTextComponent {
-  id: number;
-  __component: "string";
-  content: unknown;
+export interface Meta {
+  pagination: {
+    start: number;
+    limit: number;
+    total: number;
+  };
 }
 
-interface Article {
+// interface ComponentsRichTextComponent {
+//   id: number;
+//   __component: "string";
+//   content: unknown;
+// }
+
+export interface Article {
   title: string;
   slug: string;
-  blocks: ComponentsRichTextComponent[];
   categories: {
     data: CategoryResponseDataObject[];
   };
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string;
 }
 
 export interface ArticleListResponseDataItem {
@@ -90,16 +101,17 @@ export interface ArticleListResponseDataItem {
 
 interface ArticleListResponse {
   data: ArticleListResponseDataItem[];
+  meta: Meta;
 }
 
 export async function getArticles(start: number, limit: number) {
   const url = new URL("/api/articles", baseUrl);
   url.searchParams.append("sort[createdAt]", "desc");
-  url.searchParams.append("populate[categories][populate]", "*");
+  url.searchParams.append("populate[0]", "categories");
   url.searchParams.append("pagination[start]", start.toString());
   url.searchParams.append("pagination[limit]", limit.toString());
-  const { data } = await fetchData<ArticleListResponse>(url.href);
-  return data;
+  const response = await fetchData<ArticleListResponse>(url.href);
+  return response;
 }
 
 export async function getArticle(slug: string) {
