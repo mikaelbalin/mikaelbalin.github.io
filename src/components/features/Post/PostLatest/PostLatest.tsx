@@ -1,4 +1,5 @@
 import { Button, Stack, Title } from "@mantine/core";
+import Link from "next/link";
 
 export const PostLatest = () => {
   return (
@@ -9,7 +10,9 @@ export const PostLatest = () => {
       >
         Latest blog posts
       </Title>
-      <Button variant="outline">View all blog posts</Button>
+      <Button component={Link} href="/blog" variant="outline">
+        View all blog posts
+      </Button>
     </Stack>
   );
 };

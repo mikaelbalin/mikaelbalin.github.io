@@ -2,7 +2,11 @@ import { HeroMain } from "@/components/features/Hero/HeroMain";
 import { About } from "@/components/features/About";
 import { PostList } from "@/components/features/Post/PostList";
 import { Subscription } from "@/components/features/Subscription";
-import { getHomePageData, getHomePageMetaData } from "@/data/loaders";
+import {
+  getArticles,
+  getHomePageData,
+  getHomePageMetaData,
+} from "@/data/loaders";
 import { Metadata } from "next";
 import { AboutProps, HeroProps } from "types/data";
 import { PostLatest } from "@/components/features/Post/PostLatest";
@@ -30,13 +34,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const strapiData = await getHomePageData();
+  const { data: articlesData } = await getArticles();
   const blocks = strapiData?.attributes?.blocks;
   if (!blocks) return <p>No sections found</p>;
 
   return (
     <>
       {blocks.map(blockRenderer)}
-      <PostList>
+      <PostList data={articlesData}>
         <PostLatest />
       </PostList>
       <Subscription />

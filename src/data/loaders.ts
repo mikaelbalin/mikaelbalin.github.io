@@ -1,4 +1,9 @@
-import { GlobalPageData, HomePageData, StrapiMetadata } from "../types/data";
+import {
+  ArticleListResponse,
+  GlobalPageData,
+  HomePageData,
+  StrapiMetadata,
+} from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
 const baseUrl = getStrapiURL();
@@ -60,51 +65,10 @@ export async function getGlobalPageData() {
   return data;
 }
 
-interface TagResponseDataObject {
-  id: number;
-  attributes: {
-    name: string;
-    slug: string;
-  };
-}
-
-export interface Meta {
-  pagination: {
-    start: number;
-    limit: number;
-    total: number;
-  };
-}
-
-// interface ComponentsRichTextComponent {
-//   id: number;
-//   __component: "string";
-//   content: unknown;
-// }
-
-export interface Article {
-  title: string;
-  slug: string;
-  tags: {
-    data: TagResponseDataObject[];
-  };
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  locale: string;
-}
-
-export interface ArticleListResponseDataItem {
-  id: string;
-  attributes: Article;
-}
-
-interface ArticleListResponse {
-  data: ArticleListResponseDataItem[];
-  meta: Meta;
-}
-
-export async function getArticles(start: number, limit: number) {
+export async function getArticles(
+  start: number = 0,
+  limit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
+) {
   const url = new URL("/api/articles", baseUrl);
   url.searchParams.append("sort[createdAt]", "desc");
   url.searchParams.append("populate[0]", "tags");

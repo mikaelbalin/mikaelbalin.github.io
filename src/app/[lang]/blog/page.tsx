@@ -5,17 +5,19 @@ import { Subscription } from "@/components/features/Subscription";
 import { PostList } from "@/components/features/Post/PostList";
 import { HeroBlog } from "@/components/features/Hero/HeroBlog";
 import { PostSearch } from "@/components/features/Post/PostSearch";
-import { ArticleListResponseDataItem, getArticles, Meta } from "@/data/loaders";
+import { getArticles } from "@/data/loaders";
+import { ArticleListResponseDataItem, Meta } from "@/types/data";
 
 export default function Page() {
   const [meta, setMeta] = useState<Meta | undefined>();
   const [data, setData] = useState<ArticleListResponseDataItem[]>([]);
   const [isLoading, setLoading] = useState(true);
 
-  const fetchData = useCallback(async (start: number, limit: number) => {
+  const fetchData = useCallback(async (start?: number) => {
     setLoading(true);
+
     try {
-      const { data, meta } = await getArticles(start, limit);
+      const { data, meta } = await getArticles(start);
 
       if (start === 0) {
         setData(data);
@@ -33,14 +35,12 @@ export default function Page() {
 
   function loadMorePosts(): void {
     const nextPosts = meta!.pagination.start + meta!.pagination.limit;
-    fetchData(nextPosts, Number(process.env.NEXT_PUBLIC_PAGE_LIMIT));
+    fetchData(nextPosts);
   }
 
   useEffect(() => {
-    fetchData(0, Number(process.env.NEXT_PUBLIC_PAGE_LIMIT));
+    fetchData();
   }, [fetchData]);
-
-  console.log({ data });
 
   // if (isLoading) return <Loader />;
 

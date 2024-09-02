@@ -1,5 +1,5 @@
-import { Article } from "@/data/loaders";
 import { cn } from "@/lib/utils";
+import { Article } from "@/types/data";
 import { Badge, Group, Text } from "@mantine/core";
 import Link from "next/link";
 

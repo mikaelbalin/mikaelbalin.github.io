@@ -1,7 +1,7 @@
 import { Button, Container, Stack, Title } from "@mantine/core";
 import { PostItem } from "@/components/features/Post/PostItem";
 import { PropsWithChildren } from "react";
-import { ArticleListResponseDataItem } from "@/data/loaders";
+import { ArticleListResponseDataItem } from "@/types/data";
 
 interface PostListProps extends PropsWithChildren {
   loadMore?: boolean;
