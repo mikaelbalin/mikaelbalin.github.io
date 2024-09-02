@@ -3,6 +3,7 @@ import {
   GlobalPageData,
   HomePageData,
   StrapiMetadata,
+  TagListResponse,
 } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
@@ -76,6 +77,12 @@ export async function getArticles(
   url.searchParams.append("pagination[limit]", limit.toString());
   const response = await fetchData<ArticleListResponse>(url.href);
   return response;
+}
+
+export async function getTags() {
+  const url = new URL("/api/tags", baseUrl);
+  const { data } = await fetchData<TagListResponse>(url.href);
+  return data;
 }
 
 export async function getArticle(slug: string) {

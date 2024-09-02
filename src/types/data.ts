@@ -123,3 +123,18 @@ export interface ArticleListResponse {
   data: ArticleListResponseDataItem[];
   meta: Meta;
 }
+
+interface Tag {
+  name: string;
+  slug: string;
+}
+
+export interface TagListResponseDataItem {
+  id: number;
+  attributes: Tag;
+}
+
+export interface TagListResponse {
+  data: TagListResponseDataItem[];
+  meta: Meta;
+}

@@ -1,9 +1,14 @@
 "use client";
 
-import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
+import { TagListResponseDataItem } from "@/types/data";
+import { Box, Chip, ChipGroup, Group, Text } from "@mantine/core";
 import { useState } from "react";
 
-export const PostSearch = () => {
+interface PostSearchProps {
+  tags: TagListResponseDataItem[];
+}
+
+export const PostSearch = ({ tags }: PostSearchProps) => {
   // string value when multiple is false (default)
   const [value, setValue] = useState("all");
 
@@ -13,10 +18,11 @@ export const PostSearch = () => {
       <ChipGroup multiple={false} value={value} onChange={setValue}>
         <Group>
           <Chip value="all">All</Chip>
-          <Chip value="react">React</Chip>
-          <Chip value="ng">Angular</Chip>
-          <Chip value="svelte">Svelte</Chip>
-          <Chip value="vue">Vue</Chip>
+          {tags.map(({ id, attributes: { slug, name } }) => (
+            <Chip key={id} value={slug}>
+              {name}
+            </Chip>
+          ))}
         </Group>
       </ChipGroup>
     </Box>
