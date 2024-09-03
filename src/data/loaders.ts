@@ -69,12 +69,16 @@ export async function getGlobalPageData() {
 export async function getArticles(
   start: number = 0,
   limit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
+  filter?: string,
 ) {
   const url = new URL("/api/articles", baseUrl);
+
   url.searchParams.append("sort[createdAt]", "desc");
   url.searchParams.append("populate[0]", "tags");
   url.searchParams.append("pagination[start]", start.toString());
   url.searchParams.append("pagination[limit]", limit.toString());
+  filter && url.searchParams.append("filters[tags][slug]", filter);
+
   const response = await fetchData<ArticleListResponse>(url.href);
   return response;
 }

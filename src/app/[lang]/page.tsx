@@ -41,7 +41,7 @@ export default async function Page() {
   return (
     <>
       {blocks.map(blockRenderer)}
-      <PostList data={articlesData}>
+      <PostList initialData={articlesData}>
         <PostLatest />
       </PostList>
       <Subscription />
