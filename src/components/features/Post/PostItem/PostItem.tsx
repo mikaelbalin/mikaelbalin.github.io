@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Article } from "@/types/data";
 import { Badge, Group, Text } from "@mantine/core";
+import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
 type PostCardProps = Article;
@@ -19,17 +20,32 @@ export const PostItem = ({
   const date = new Date(publishedAt);
 
   return (
-    <Link href={`/blog/${slug}`} className="flex flex-col border-t py-8 gap-6">
-      <div className="text-xl leading-15">{title}</div>
-      <Group>
-        {tags.map((tag) => (
-          <Badge key={tag.id}>{tag.attributes.name}</Badge>
-        ))}
-      </Group>
-      <Group>
-        <Text className={classes}>{date.toLocaleDateString()}</Text>
-        <Text className={classes}>0 min read</Text>
-      </Group>
+    <Link
+      href={`/blog/${slug}`}
+      className="group flex border-t py-8 transition-colors sm:hover:bg-appLightColorBeige"
+    >
+      <div className="flex flex-col gap-6 sm:w-1/2 transition-transform sm:group-hover:translate-x-6">
+        <div className="text-xl leading-15 sm:text-4xl sm:font-medium">
+          {title}
+        </div>
+        <Group>
+          {tags.map((tag) => (
+            <Badge key={tag.id}>{tag.attributes.name}</Badge>
+          ))}
+        </Group>
+        <Group>
+          <Text className={classes}>{date.toLocaleDateString()}</Text>
+          <Text className={classes}>0 min read</Text>
+        </Group>
+      </div>
+      <div className="hidden sm:flex items-center justify-end sm:w-1/2 transition-transform group-hover:-translate-x-6">
+        <Text
+          size="xl"
+          className="opacity-0 transition-opacity group-hover:opacity-100"
+        >
+          Read article <IconArrowNarrowRight className="inline-block" />
+        </Text>
+      </div>
     </Link>
   );
 };

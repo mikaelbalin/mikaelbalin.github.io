@@ -42,3 +42,5 @@ git push
 ```
 
 After that Storybook will be deployed to GitHub pages and app to Vercel.
+
+[Canva](https://www.canva.com/design/DAF-waWoppc/ZR0oa4X3YnQuOHEo-85Hjw/view?utm_content=DAF-waWoppc&utm_campaign=designshare&utm_medium=link&utm_source=ed#7)
