@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   Button,
   Container,
@@ -31,6 +32,7 @@ export const PostList = ({
   initialMeta,
   tags,
 }: PostListProps) => {
+  const router = useRouter();
   const [articles, setArticles] = useState<ArticleListResponseDataItem[]>([]);
   const [meta, setMeta] = useState<Meta | undefined>();
   const [isLoading, setLoading] = useState(false);
@@ -61,8 +63,9 @@ export const PostList = ({
   }
 
   function filterPosts(value: string): void {
-    setTag(value);
-    fetchData(0, value === "all" ? undefined : value);
+    router.push(`/blog/tags/${value}`);
+    // setTag(value);
+    // fetchData(0, value === "all" ? undefined : value);
   }
 
   useEffect(() => {
