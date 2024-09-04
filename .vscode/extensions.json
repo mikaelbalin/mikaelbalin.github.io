@@ -3,7 +3,6 @@
     "arcanis.vscode-zipfs",
     "dbaeumer.vscode-eslint",
     "vunguyentuan.vscode-postcss",
-    // "vunguyentuan.vscode-css-variables",
     "esbenp.prettier-vscode"
   ]
 }
