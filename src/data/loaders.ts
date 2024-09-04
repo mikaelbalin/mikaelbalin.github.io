@@ -94,3 +94,13 @@ export async function getArticle(slug: string) {
   const { data } = await fetchData<ArticleListResponse>(url.href);
   return data;
 }
+
+export const getArticleBySlug = async (slug: string) => {
+  const url = new URL(`/api/articles`, baseUrl);
+
+  url.searchParams.append("filters[slug]", slug);
+  url.searchParams.append("populate", "*");
+
+  const { data } = await fetchData<any>(url.href);
+  return data;
+};
