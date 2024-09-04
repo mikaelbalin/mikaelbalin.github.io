@@ -1,7 +1,9 @@
+import { Container } from "@mantine/core";
+
 interface ArticleContentProps {
   data: any;
 }
 
 export const ArticleContent = ({ data }: ArticleContentProps) => {
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return <Container>{JSON.stringify(data, null, 2)}</Container>;
 };
