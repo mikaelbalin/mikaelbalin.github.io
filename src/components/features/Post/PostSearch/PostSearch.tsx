@@ -14,9 +14,8 @@ export const PostSearch = ({ tags }: PostSearchProps) => {
   const [tag, setTag] = useState("all");
 
   function filterPosts(value: string): void {
-    // router.push(`/blog/tags/${value}`);
+    router.push(`/blog/tags/${value}`);
     setTag(value);
-    // fetchData(0, value === "all" ? undefined : value);
   }
 
   return (
