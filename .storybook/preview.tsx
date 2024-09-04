@@ -3,7 +3,7 @@ import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react";
 import { Inter } from "next/font/google";
 import React from "react";
-import "../src/app/global.css";
+import "../src/app/[lang]/global.css";
 import { ThemeProvider } from "../src/theme";
 
 const inter = Inter({ subsets: ["latin"] });

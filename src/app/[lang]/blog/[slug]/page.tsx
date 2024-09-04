@@ -1,3 +1,11 @@
+import { ArticleContent } from "@/components/features/Article/ArticleContent";
+import { ArticleHeader } from "@/components/features/Article/ArticleHeader";
+
 export default function Page() {
-  return <div>blog page</div>;
+  return (
+    <>
+      <ArticleHeader />
+      <ArticleContent />
+    </>
+  );
 }
