@@ -1,42 +1,24 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import {
-  Button,
-  Container,
-  Stack,
-  Box,
-  Chip,
-  ChipGroup,
-  Group,
-  Text,
-} from "@mantine/core";
+import { Button, Container, Stack } from "@mantine/core";
 import { PostItem } from "@/components/features/Post/PostItem";
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
-import {
-  ArticleListResponseDataItem,
-  Meta,
-  TagListResponseDataItem,
-} from "@/types/data";
+import { ArticleListResponseDataItem, Meta } from "@/types/data";
 import { getArticles } from "@/data/loaders";
 
 interface PostListProps extends PropsWithChildren {
   initialData: ArticleListResponseDataItem[];
   initialMeta?: Meta;
-  tags?: TagListResponseDataItem[];
 }
 
 export const PostList = ({
   children,
   initialData,
   initialMeta,
-  tags,
 }: PostListProps) => {
-  const router = useRouter();
   const [articles, setArticles] = useState<ArticleListResponseDataItem[]>([]);
   const [meta, setMeta] = useState<Meta | undefined>();
   const [isLoading, setLoading] = useState(false);
-  const [tag, setTag] = useState("all");
 
   const fetchData = useCallback(async (start: number = 0, filter?: string) => {
     setLoading(true);
@@ -62,12 +44,6 @@ export const PostList = ({
     fetchData(nextPosts);
   }
 
-  function filterPosts(value: string): void {
-    router.push(`/blog/tags/${value}`);
-    // setTag(value);
-    // fetchData(0, value === "all" ? undefined : value);
-  }
-
   useEffect(() => {
     setArticles(initialData);
     setMeta(initialMeta);
@@ -75,30 +51,13 @@ export const PostList = ({
 
   return (
     <Container component="section" className="pt-17">
-      {tags ? (
-        <Box>
-          <Text className="mb-8">Search by category</Text>
-          <ChipGroup multiple={false} value={tag} onChange={filterPosts}>
-            <Group>
-              <Chip value="all">All</Chip>
-              {tags.map(({ id, attributes: { slug, name } }) => (
-                <Chip key={id} value={slug}>
-                  {name}
-                </Chip>
-              ))}
-            </Group>
-          </ChipGroup>
-        </Box>
-      ) : (
-        children
-      )}
+      {children}
       <Stack gap={0} className="pt-14 border-b sm:pt-20">
         {articles.map((item) => (
           <PostItem key={item.id} {...item.attributes} />
         ))}
       </Stack>
-      {tags &&
-        meta &&
+      {meta &&
         meta.pagination.start + meta.pagination.limit <
           meta.pagination.total && (
           <div className="flex justify-center pt-14 sm:pt-20">

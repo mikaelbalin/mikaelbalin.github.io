@@ -6,8 +6,6 @@ import { getArticles, getTags } from "@/data/loaders";
 
 export default async function Page({ params }: { params: { tag: string } }) {
   const { tag } = params;
-  console.log({ tag });
-  const tags = await getTags();
   const { data: articles, meta } = await getArticles(
     0,
     Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
@@ -17,7 +15,7 @@ export default async function Page({ params }: { params: { tag: string } }) {
   return (
     <>
       <HeroBlog />
-      <PostList tags={tags} initialData={articles} initialMeta={meta} />
+      <PostList initialData={articles} initialMeta={meta} />
       <Subscription />
     </>
   );
