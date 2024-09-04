@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { TextBullet } from "@/components/ui/TextBullet";
 import { Article } from "@/types/data";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
@@ -12,11 +12,6 @@ export const PostItem = ({
   tags: { data: tags },
   publishedAt,
 }: PostCardProps) => {
-  const classes = cn(
-    "flex items-center gap-x-2",
-    "before:content-[''] before:w-2 before:h-2 before:bg-black",
-  );
-
   const date = new Date(publishedAt);
 
   return (
@@ -34,8 +29,8 @@ export const PostItem = ({
           ))}
         </Group>
         <Group>
-          <Text className={classes}>{date.toLocaleDateString()}</Text>
-          <Text className={classes}>0 min read</Text>
+          <TextBullet>{date.toLocaleDateString()}</TextBullet>
+          <TextBullet>0 min read</TextBullet>
         </Group>
       </div>
       <div className="hidden sm:flex items-center justify-end sm:w-1/2 transition-transform group-hover:-translate-x-6">
