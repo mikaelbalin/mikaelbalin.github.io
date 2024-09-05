@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Storybook to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -45,10 +45,10 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Build Storybook
-        run: yarn build-storybook
+        run: pnpm build-storybook
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
