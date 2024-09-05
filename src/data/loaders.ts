@@ -22,7 +22,7 @@ async function fetchData<T>(url: string) {
   try {
     const response = await fetch(
       url,
-      authToken ? headers : { cache: "no-store" }, // opt out of Next.js cache
+      // authToken ? headers : { cache: "no-store" }, // opt out of Next.js cache
     );
     const data: T = await response.json();
     return data;
