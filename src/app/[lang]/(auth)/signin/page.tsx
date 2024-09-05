@@ -1,4 +1,4 @@
-import { Anchor, Title, Text, Container } from "@mantine/core";
+import { Title, Text, Container } from "@mantine/core";
 import { SigninForm } from "@/components/forms/SigninForm";
 import Link from "next/link";
 
