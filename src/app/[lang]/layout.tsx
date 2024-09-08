@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
+import "@mantine/code-highlight/styles.css";
 import "./global.css";
 import { Notifications } from "@mantine/notifications";
 import { Locale } from "../../i18n-config";

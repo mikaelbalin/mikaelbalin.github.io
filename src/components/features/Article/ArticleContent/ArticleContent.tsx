@@ -1,4 +1,5 @@
-import { Code, Container } from "@mantine/core";
+import { Container } from "@mantine/core";
+import componentResolver from "@/lib/component-resolver";
 
 interface ArticleContentProps {
   data: any;
@@ -7,7 +8,9 @@ interface ArticleContentProps {
 export const ArticleContent = ({ data }: ArticleContentProps) => {
   return (
     <Container>
-      <Code block>{JSON.stringify(data, null, 2)}</Code>
+      {data.attributes.blocks.map((block: any, index: number) =>
+        componentResolver(block, index),
+      )}
     </Container>
   );
 };
