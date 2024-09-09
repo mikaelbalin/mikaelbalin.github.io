@@ -10,6 +10,7 @@ module.exports = {
       appDarkColorGreyLight: "var(--app-color-grey-light)",
       appLightColorBeige: "var(--app-color-beige)",
       appLightColorGrey: "var(--app-color-grey)",
+      appLightColorBeigeDark: "var(--app-color-beige-dark)",
     },
     screens: {
       xs: "36em", // 576px
@@ -46,6 +47,7 @@ module.exports = {
         26: "6.5rem", // 104px
         33: "8.25rem", // 132px
         34: "8.5rem", // 136px
+        50: "12.5rem", // 200px
       },
       lineHeight: {
         normal: "normal",
