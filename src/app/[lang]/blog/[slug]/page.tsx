@@ -5,7 +5,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const data = await getArticleBySlug(slug);
 
-  if (data.length === 0) return <h2>no post found</h2>;
+  if (!data?.length) return <h2>no post found</h2>;
 
-  return <ArticleContent data={data[0]} />;
+  const post = data[0];
+
+  return <ArticleContent data={post} />;
 }

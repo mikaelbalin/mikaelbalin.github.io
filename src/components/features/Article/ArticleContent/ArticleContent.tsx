@@ -16,7 +16,7 @@ export const ArticleContent = ({ data }: ArticleContentProps) => {
     <Container>
       <Grid>
         <GridCol span={{ base: 12, sm: 9 }} ref={ref}>
-          {data.attributes.blocks.map((block: any, index: number) => (
+          {data.attributes.sections.map((block: any, index: number) => (
             <div key={block.id} className="mb-8">
               {componentResolver(block, index)}
             </div>
