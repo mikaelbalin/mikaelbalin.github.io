@@ -31,7 +31,7 @@ export interface HomePageData {
   data: {
     id: number;
     attributes: DateMetadata & {
-      blocks: [HeroProps, AboutProps];
+      sections: [HeroProps, AboutProps];
     };
   };
   meta: {};

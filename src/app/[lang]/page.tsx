@@ -35,12 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const strapiData = await getHomePageData();
   const { data: articlesData } = await getArticles();
-  const blocks = strapiData?.attributes?.blocks;
-  if (!blocks) return <p>No sections found</p>;
+  const sections = strapiData?.attributes?.sections;
+  if (!sections) return <p>No sections found</p>;
 
   return (
     <>
-      {blocks.map(blockRenderer)}
+      {sections.map(blockRenderer)}
       <PostList initialData={articlesData}>
         <PostLatest />
       </PostList>

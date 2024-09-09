@@ -22,7 +22,7 @@ async function fetchData<T>(url: string) {
   try {
     const response = await fetch(
       url,
-      // authToken ? headers : { cache: "no-store" }, // opt out of Next.js cache
+      { cache: "no-store" }, // opt out of Next.js cache
     );
     const data: T = await response.json();
     return data;
@@ -41,7 +41,7 @@ export async function getHomePageMetaData() {
 
 export async function getHomePageData() {
   const url = new URL("/api/home-page", baseUrl);
-  url.searchParams.set("populate[blocks][populate][link][populate]", "true");
+  url.searchParams.set("populate", "*");
   const { data } = await fetchData<HomePageData>(url.href);
   return data;
 }
