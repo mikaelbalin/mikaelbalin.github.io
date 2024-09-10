@@ -1,8 +1,20 @@
-import { TypographyStylesProvider } from "@mantine/core";
+import {
+  Title,
+  TitleOrder,
+  TypographyStylesProvider,
+  Text,
+  List,
+  ListItem,
+  Code,
+  Kbd,
+  Mark,
+} from "@mantine/core";
 import Markdown, { ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { createElement, DetailedHTMLProps } from "react";
+import { DetailedHTMLProps } from "react";
+import { IconLink } from "@tabler/icons-react";
+import Link from "next/link";
 
 const HeadingRenderer = (
   props: DetailedHTMLProps<
@@ -11,15 +23,21 @@ const HeadingRenderer = (
   > &
     ExtraProps,
 ) => {
-  console.log({ props });
-  const Tag = props.node?.tagName || "h1";
-  const id = props.children?.toString().replace(/\s+/g, "-").toLowerCase();
-  return createElement(
-    Tag,
-    { id },
-    <a href={`#${id}`} style={{ textDecoration: "none", color: "inherit" }}>
+  const order = parseInt(props.node?.tagName.match(/\d+/)?.[0] || "1", 10);
+  const childrenString = props.children?.toString();
+  const id = childrenString?.replace(/\s+/g, "-").toLowerCase();
+
+  return (
+    <Title order={order as TitleOrder} id={id} className="group">
       {props.children}
-    </a>,
+      <Link
+        href={`#${id}`}
+        aria-label={`Permalink: ${childrenString}`}
+        className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-1 text-black"
+      >
+        <IconLink className="relative top-[0.12em] w-[1em] h-[1em]" />
+      </Link>
+    </Title>
   );
 };
 
@@ -31,7 +49,7 @@ interface MarkdownTextProps {
 
 export default function MarkdownText({ block }: MarkdownTextProps) {
   return (
-    <TypographyStylesProvider component="section" className="">
+    <section>
       <Markdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -42,10 +60,32 @@ export default function MarkdownText({ block }: MarkdownTextProps) {
           h4: HeadingRenderer,
           h5: HeadingRenderer,
           h6: HeadingRenderer,
+          p: (props) => <Text className="mb-4">{props.children}</Text>,
+          ol: (props) => (
+            <List className="mb-4" type="ordered" listStyleType="auto">
+              {props.children}
+            </List>
+          ),
+          ul: (props) => (
+            <List className="mb-4" type="unordered" listStyleType="initial">
+              {props.children}
+            </List>
+          ),
+          li: (props) => <ListItem>{props.children}</ListItem>,
+          code: (props) => {
+            console.log({ props });
+            return <Code>{props.children}</Code>;
+          },
+          pre: (props) => {
+            console.log({ props });
+            return <Code block>{props.children}</Code>;
+          },
+          kbd: (props) => <Kbd>{props.children}</Kbd>,
+          mark: (props) => <Mark>{props.children}</Mark>,
         }}
       >
         {block.content}
       </Markdown>
-    </TypographyStylesProvider>
+    </section>
   );
 }

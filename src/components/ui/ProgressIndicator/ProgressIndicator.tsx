@@ -20,7 +20,7 @@ export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {
   });
 
   return (
-    <div className="sticky top-0 flex flex-col items-center gap-0.5">
+    <div className="sticky top-4 flex flex-col items-center gap-0.5">
       <Text size="sm">0</Text>
       <div className="h-50 w-0.5 bg-appLightColorBeigeDark relative">
         <motion.div
