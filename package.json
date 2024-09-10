@@ -49,7 +49,6 @@
     "@mantine/form": "^7.12.2",
     "@mantine/hooks": "^7.12.2",
     "@mantine/notifications": "^7.12.2",
-    "@strapi/blocks-react-renderer": "^1.0.1",
     "@tabler/icons-react": "^3.14.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.4",
