@@ -1,8 +1,9 @@
-import "@mantine/core/styles.css";
+import React from "react";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react";
 import { Inter } from "next/font/google";
-import React from "react";
+import "@mantine/core/styles.css";
+import "@mantine/code-highlight/styles.css";
 import "../src/app/[lang]/global.css";
 import { ThemeProvider } from "../src/theme";
 

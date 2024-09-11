@@ -16,13 +16,16 @@ import {
   TableTh,
   TableTd,
   TableScrollContainer,
+  Blockquote,
 } from "@mantine/core";
+import { CodeHighlight } from "@mantine/code-highlight";
 import Markdown, { Components, ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { DetailedHTMLProps } from "react";
 import { IconLink } from "@tabler/icons-react";
 import Link from "next/link";
+import "@mantine/code-highlight/styles.css";
 
 const HeadingRenderer = (
   props: DetailedHTMLProps<
@@ -69,18 +72,28 @@ const components: Partial<Components> = {
   ),
   li: (props) => <ListItem>{props.children}</ListItem>,
   code: (props) => <Code>{props.children}</Code>,
-  pre: (props) => (
-    <Code block className="mb-6">
-      {props.children}
-    </Code>
-  ),
+  pre: (props) => {
+    const element = props.node?.children.find(
+      (node) => node.type === "element",
+    );
+    if (!element) {
+      return null;
+    }
+
+    const text = element.children.find((node) => node.type === "text");
+    if (!text) {
+      return null;
+    }
+
+    return <CodeHighlight code={text.value} language="tsx" className="mb-6" />;
+  },
   kbd: (props) => <Kbd>{props.children}</Kbd>,
   mark: (props) => <Mark>{props.children}</Mark>,
   hr: (props) => <Divider className="my-6" />,
   a: (props) => <Anchor href={props.href}>{props.children}</Anchor>,
   table: (props) => (
     <TableScrollContainer minWidth={500} type="native" className="mb-6">
-      <Table>{props.children}</Table>
+      <Table highlightOnHover>{props.children}</Table>
     </TableScrollContainer>
   ),
   thead: (props) => <TableThead>{props.children}</TableThead>,
@@ -88,6 +101,11 @@ const components: Partial<Components> = {
   tr: (props) => <TableTr>{props.children}</TableTr>,
   th: (props) => <TableTh>{props.children}</TableTh>,
   td: (props) => <TableTd>{props.children}</TableTd>,
+  blockquote: (props) => (
+    <Blockquote className="my-6" cite="– Forrest Gump">
+      {props.children}
+    </Blockquote>
+  ),
 };
 
 interface MarkdownTextProps {
