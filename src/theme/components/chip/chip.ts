@@ -8,7 +8,7 @@ export default Chip.extend({
   classNames: {
     iconWrapper: "hidden",
     label: cn(
-      "py-2 px-4 text-base !border-black h-auto transition-colors",
+      "py-2 px-4 text-base !border-black h-auto transition-colors sm:text-lg",
       "hover:!bg-appLightColorBeige",
       "data-[checked=true]:bg-black data-[checked=true]:text-white",
       "hover:data-[checked=true]:!bg-appLightColorGreyDark",

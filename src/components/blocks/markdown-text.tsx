@@ -73,11 +73,9 @@ export default function MarkdownText({ block }: MarkdownTextProps) {
           ),
           li: (props) => <ListItem>{props.children}</ListItem>,
           code: (props) => {
-            console.log({ props });
             return <Code>{props.children}</Code>;
           },
           pre: (props) => {
-            console.log({ props });
             return <Code block>{props.children}</Code>;
           },
           kbd: (props) => <Kbd>{props.children}</Kbd>,

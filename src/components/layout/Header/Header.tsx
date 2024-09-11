@@ -138,7 +138,7 @@ export function Header(props: HeaderProps) {
 
   return (
     <header className="absolute w-full z-10 motion-safe:animate-slide">
-      <Container className="h-16">
+      <Container className="h-16 sm:h-19.5">
         <Group justify="space-between" className="h-full">
           <Logo text={logoText.text} />
           <Group gap="xl">

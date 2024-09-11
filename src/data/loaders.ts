@@ -41,7 +41,7 @@ export async function getHomePageMetaData() {
 
 export async function getHomePageData() {
   const url = new URL("/api/home-page", baseUrl);
-  url.searchParams.set("populate", "*");
+  url.searchParams.set("populate[sections][populate][link][populate]", "true");
   const { data } = await fetchData<HomePageData>(url.href);
   return data;
 }

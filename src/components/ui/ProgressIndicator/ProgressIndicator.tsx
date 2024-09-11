@@ -11,8 +11,9 @@ interface ProgressIndicatorProps {
 export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {
   const { scrollYProgress } = useScroll({
     target,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
+
   const scaleY = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
