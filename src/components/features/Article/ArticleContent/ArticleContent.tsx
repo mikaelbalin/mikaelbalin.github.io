@@ -1,9 +1,9 @@
 "use client";
 
+import { Fragment, useRef } from "react";
 import { Container, Grid, GridCol } from "@mantine/core";
 import componentResolver from "@/lib/component-resolver";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
-import { useRef } from "react";
 
 interface ArticleContentProps {
   data: any;
@@ -17,9 +17,9 @@ export const ArticleContent = ({ data }: ArticleContentProps) => {
       <Grid>
         <GridCol span={{ base: 12, sm: 9 }} ref={ref}>
           {data.attributes.sections.map((block: any, index: number) => (
-            <div key={block.id} className="mb-8">
+            <Fragment key={`${block.__component}-${block.id}`}>
               {componentResolver(block, index)}
-            </div>
+            </Fragment>
           ))}
         </GridCol>
         <GridCol
