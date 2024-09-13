@@ -1,6 +1,7 @@
 import React from "react";
 import { ArticleHeader } from "@/components/features/Article/ArticleHeader";
 import { getArticleBySlug } from "@/data/loaders";
+import { ArticleFooter } from "@/components/features/Article/ArticleFooter";
 
 export default async function Page({
   children,
@@ -23,6 +24,7 @@ export default async function Page({
     <article>
       <ArticleHeader tags={tags} title={title} />
       {children}
+      <ArticleFooter />
     </article>
   );
 }
