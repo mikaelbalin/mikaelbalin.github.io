@@ -22,14 +22,13 @@ import { CodeHighlight } from "@mantine/code-highlight";
 import Markdown, { Components, ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { DetailedHTMLProps } from "react";
-import { IconLink } from "@tabler/icons-react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 import Link from "next/link";
 import "@mantine/code-highlight/styles.css";
 
 const HeadingRenderer = (
   props: DetailedHTMLProps<
-    React.HTMLAttributes<HTMLHeadingElement>,
+    HTMLAttributes<HTMLHeadingElement>,
     HTMLHeadingElement
   > &
     ExtraProps,
@@ -39,14 +38,19 @@ const HeadingRenderer = (
   const id = childrenString?.replace(/\s+/g, "-").toLowerCase();
 
   return (
-    <Title order={order as TitleOrder} id={id} className="group mb-4">
-      {props.children}
+    <Title
+      order={order as TitleOrder}
+      size={`h${order + 1}`}
+      id={id}
+      className="group mb-4"
+    >
+      {props.children}&nbsp;
       <Link
         href={`#${id}`}
         aria-label={`Permalink: ${childrenString}`}
-        className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-1 text-black"
+        className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-[var(--mantine-color-blue-6)]"
       >
-        <IconLink className="relative top-[0.12em] w-[1em] h-[1em]" />
+        #
       </Link>
     </Title>
   );
@@ -57,16 +61,14 @@ const components: Partial<Components> = {
   h2: HeadingRenderer,
   h3: HeadingRenderer,
   h4: HeadingRenderer,
-  h5: HeadingRenderer,
-  h6: HeadingRenderer,
-  p: (props) => <Text className="mb-6">{props.children}</Text>,
+  p: (props) => <Text className="mb-8">{props.children}</Text>,
   ol: (props) => (
-    <List className="mb-6" type="ordered" listStyleType="auto">
+    <List className="mb-8" type="ordered" listStyleType="auto">
       {props.children}
     </List>
   ),
   ul: (props) => (
-    <List className="mb-6" type="unordered" listStyleType="initial">
+    <List className="mb-8" type="unordered" listStyleType="initial">
       {props.children}
     </List>
   ),
@@ -85,14 +87,18 @@ const components: Partial<Components> = {
       return null;
     }
 
-    return <CodeHighlight code={text.value} language="tsx" className="mb-6" />;
+    return <CodeHighlight code={text.value} language="tsx" className="mb-8" />;
   },
   kbd: (props) => <Kbd>{props.children}</Kbd>,
   mark: (props) => <Mark>{props.children}</Mark>,
-  hr: (props) => <Divider className="my-6" />,
-  a: (props) => <Anchor href={props.href}>{props.children}</Anchor>,
+  hr: (props) => <Divider className="my-8" />,
+  a: (props) => (
+    <Anchor component={Link} href={props.href || "/"}>
+      {props.children}
+    </Anchor>
+  ),
   table: (props) => (
-    <TableScrollContainer minWidth={500} type="native" className="mb-6">
+    <TableScrollContainer minWidth={undefined} type="native" className="mb-8">
       <Table highlightOnHover>{props.children}</Table>
     </TableScrollContainer>
   ),
@@ -102,7 +108,7 @@ const components: Partial<Components> = {
   th: (props) => <TableTh>{props.children}</TableTh>,
   td: (props) => <TableTd>{props.children}</TableTd>,
   blockquote: (props) => (
-    <Blockquote className="my-6" cite="– Forrest Gump">
+    <Blockquote className="my-8" cite="– Forrest Gump">
       {props.children}
     </Blockquote>
   ),
