@@ -8,6 +8,7 @@ import { TextInput } from "./text-input";
 import { Container } from "./container";
 import { Textarea } from "./textarea";
 import { TypographyStylesProvider } from "./typography-styles-provider";
+import { CodeHighlight } from "./code-highlight";
 
 export const components: MantineThemeComponents = {
   Anchor: Anchor.extend({
@@ -24,4 +25,5 @@ export const components: MantineThemeComponents = {
   TextInput,
   Container,
   Textarea,
+  CodeHighlight,
 };
