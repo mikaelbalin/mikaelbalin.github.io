@@ -14,7 +14,6 @@ export const LangugeToggle = ({
       style={{
         transform: `rotate(${linksOpened ? 180 : 0}deg)`,
       }}
-      className="text-black"
     />
   </>
 );

@@ -61,7 +61,7 @@ export function Header(props: HeaderProps) {
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
       key={menuItem.label}
-      className="flex items-center w-full h-11 px-6"
+      className="flex items-center w-full h-11 px-6 dark:text-white"
       href={menuItem.link}
     >
       {menuItem.label}
@@ -84,6 +84,7 @@ export function Header(props: HeaderProps) {
         key={item.link}
         component={Link}
         href={redirectedPathName(item.link as Locale)}
+        className="dark:text-white"
       >
         {item.label}
       </Menu.Item>
@@ -108,7 +109,7 @@ export function Header(props: HeaderProps) {
           <Menu.Target>
             <UnstyledButton
               className={cn(
-                "px-4 flex items-center text-sm text-black font-medium",
+                "px-4 flex items-center text-sm text-black dark:text-white font-medium",
                 "sm:text-lg sm:leading-13 sm:px-0",
               )}
             >
@@ -127,7 +128,7 @@ export function Header(props: HeaderProps) {
         href={menuItem.link}
         className={cn(
           "flex items-center w-full h-11 px-4",
-          "text-sm text-black font-medium",
+          "text-sm text-black dark:text-white font-medium",
           "sm:w-auto sm:h-full sm:px-0",
         )}
       >
@@ -184,7 +185,9 @@ export function Header(props: HeaderProps) {
               {menu.slice(0, -1)}
               <UnstyledButton
                 onClick={toggleLinks}
-                className={cn("flex items-center w-full h-11 px-4")}
+                className={
+                  "flex items-center w-full h-11 px-4 text-black dark:text-white"
+                }
               >
                 <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
               </UnstyledButton>
