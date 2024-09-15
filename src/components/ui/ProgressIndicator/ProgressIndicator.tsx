@@ -23,9 +23,9 @@ export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {
   return (
     <div className="sticky top-4 flex flex-col items-center gap-0.5">
       <Text size="sm">0</Text>
-      <div className="h-50 w-0.5 bg-appLightColorBeigeDark relative">
+      <div className="h-50 w-0.5 bg-appLightColorBeigeDark dark:bg-appDarkColorCoalBlackLight relative">
         <motion.div
-          className="bg-black absolute top-0 left-0 right-0 bottom-0 origin-top"
+          className="bg-appLightColorGreyDark dark:bg-white absolute top-0 left-0 right-0 bottom-0 origin-top"
           style={{ scaleY }}
         />
       </div>

@@ -17,7 +17,7 @@ export const PostItem = ({
   return (
     <Link
       href={`/blog/${slug}`}
-      className="group flex border-t py-8 transition-colors sm:hover:bg-appLightColorBeige"
+      className="group flex border-t py-8 transition-colors sm:hover:bg-appLightColorBeige dark:sm:hover:bg-appDarkColorCoalBlack"
     >
       <div className="flex flex-col gap-6 sm:w-1/2 transition-transform sm:group-hover:translate-x-6">
         <div className="text-xl leading-15 sm:text-4xl sm:font-medium">

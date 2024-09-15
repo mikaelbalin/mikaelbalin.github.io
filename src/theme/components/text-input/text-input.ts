@@ -7,18 +7,17 @@ export default TextInput.extend({
     const { variant } = props;
 
     return {
-      root: "",
-      label: cn("block mb-2 text-base font-normal", "sm:text-lg"),
+      label: cn(
+        "block mb-2 text-base font-normal",
+        "sm:text-lg dark:text-white",
+      ),
       input: cn(
-        "h-13 px-4 bg-white text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
+        "h-13 px-4 bg-white dark:bg-black text-base text-appLightColorGrey dark:text-appDarkColorGreyLight",
+        "placeholder:text-appLightColorGrey dark:placeholder:text-appDarkColorGreyLight",
         "sm:h-13.5 sm:text-lg",
-        "border-black",
+        "border-black dark:border-white",
         variant === "filled" && "border-0",
       ),
-      description: "",
-      error: "",
-      required: "",
-      wrapper: "",
     };
   },
 });

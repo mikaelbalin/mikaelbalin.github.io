@@ -11,7 +11,7 @@ export const TextBullet = ({ children, size, className }: TextBulletProps) => {
     <Text
       className={cn(
         "flex items-center gap-x-2",
-        "before:content-[''] before:w-2 before:h-2 before:bg-black",
+        "before:content-[''] before:w-2 before:h-2 before:bg-black dark:before:bg-white",
         className,
       )}
       size={size}

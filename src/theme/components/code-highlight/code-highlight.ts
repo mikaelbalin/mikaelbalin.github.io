@@ -5,7 +5,7 @@ export default CodeHighlight.extend({
   classNames: {},
   vars: (theme, props) => ({
     root: {
-      "--code-background": theme.other.appLightColorBeige,
+      // "--code-background": theme.other.appLightColorBeige,
     },
   }),
 });

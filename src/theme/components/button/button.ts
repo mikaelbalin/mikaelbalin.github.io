@@ -30,13 +30,16 @@ export default Button.extend({
         root = cn(
           root,
           "px-8",
-          "border-black text-black",
-          "hover:bg-appLightColorBeige hover:text-black",
+          "border-black dark:border-white text-black dark:text-white",
+          "hover:bg-appLightColorBeige dark:hover:bg-appDarkColorCoalBlack hover:text-black dark:hover:text-white",
         );
         break;
 
       case "transparent":
-        root = cn(root, "text-black hover:text-appLightColorGrey");
+        root = cn(
+          root,
+          "text-black dark:text-white hover:text-appLightColorGrey dark:hover:text-appDarkColorGreyLight",
+        );
         break;
 
       default:

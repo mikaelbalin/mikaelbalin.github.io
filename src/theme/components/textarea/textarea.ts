@@ -7,18 +7,17 @@ export default Textarea.extend({
     const { variant } = props;
 
     return {
-      root: "",
-      label: cn("block mb-2 text-base font-normal", "sm:text-lg"),
+      label: cn(
+        "block mb-2 text-base font-normal",
+        "sm:text-lg dark:text-white",
+      ),
       input: cn(
-        "p-4 bg-white text-base text-appLightColorGrey placeholder:text-appLightColorGrey",
+        "p-4 bg-white dark:bg-black text-base text-appLightColorGrey dark:text-appDarkColorGreyLight",
+        "placeholder:text-appLightColorGrey dark:placeholder:text-appDarkColorGreyLight",
         "sm:text-lg",
-        "border-black",
+        "border-black dark:border-white",
         variant === "filled" && "border-0",
       ),
-      description: "",
-      error: "",
-      required: "",
-      wrapper: "",
     };
   },
 });

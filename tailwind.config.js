@@ -11,6 +11,8 @@ module.exports = {
       appLightColorBeige: "var(--app-color-beige)",
       appLightColorGrey: "var(--app-color-grey)",
       appLightColorBeigeDark: "var(--app-color-beige-dark)",
+      appDarkColorCoalBlack: "var(--app-color-coal-black)",
+      appDarkColorCoalBlackLight: "var(--app-color-coal-black-light)",
     },
     screens: {
       xs: "36em", // 576px

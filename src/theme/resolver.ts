@@ -13,8 +13,10 @@ export const resolver: CSSVariablesResolver = (theme) => ({
   },
   light: {
     "--mantine-color-body": theme.white,
+    "--mantine-color-text": theme.black,
   },
   dark: {
     "--mantine-color-body": theme.black,
+    "--mantine-color-text": theme.white,
   },
 });
