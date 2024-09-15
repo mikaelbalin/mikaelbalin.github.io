@@ -18,7 +18,7 @@ export const Comments = () => {
           ))}
         </div>
       </Drawer>
-      <Button onClick={open} variant="outline" className="mb-10">
+      <Button onClick={open} variant="outline">
         Comments
       </Button>
     </>
