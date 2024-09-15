@@ -1,7 +1,9 @@
 import React from "react";
 import { ArticleHeader } from "@/components/features/Article/ArticleHeader";
-import { getArticleBySlug } from "@/data/loaders";
+import { getArticleBySlug, getArticlesByTag } from "@/data/loaders";
 import { ArticleFooter } from "@/components/features/Article/ArticleFooter";
+import { PostList } from "@/components/features/Post/PostList";
+import { Title } from "@mantine/core";
 
 export default async function Page({
   children,
@@ -20,11 +22,21 @@ export default async function Page({
   const tags = post.attributes.tags.data;
   const title = post.attributes.title;
 
+  const articles = await getArticlesByTag(
+    tags.map((tag: any) => tag.attributes.name),
+  );
+
   return (
-    <article>
-      <ArticleHeader tags={tags} title={title} />
-      {children}
-      <ArticleFooter />
-    </article>
+    <>
+      <article>
+        <ArticleHeader tags={tags} title={title} />
+        {children}
+        <ArticleFooter />
+      </article>
+
+      <PostList initialData={articles} className="hidden sm:block py-24">
+        <Title order={2}>Similar articles</Title>
+      </PostList>
+    </>
   );
 }

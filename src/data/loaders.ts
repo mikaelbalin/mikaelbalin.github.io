@@ -89,9 +89,16 @@ export async function getTags() {
   return data;
 }
 
-export async function getArticle(slug: string) {
+export async function getArticlesByTag(tags: string[]) {
   const url = new URL("/api/articles", baseUrl);
-  const { data } = await fetchData<ArticleListResponse>(url.href);
+
+  tags.forEach((tag) => {
+    url.searchParams.append("filters[tags][name][$in]", tag);
+  });
+  url.searchParams.append("pagination[limit]", "3");
+  url.searchParams.append("populate", "*");
+
+  const { data } = await fetchData<any>(url.href);
   return data;
 }
 

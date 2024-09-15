@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, Container, Stack } from "@mantine/core";
+import { Button, Container, Stack, BoxProps } from "@mantine/core";
 import { PostItem } from "@/components/features/Post/PostItem";
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import { ArticleListResponseDataItem, Meta } from "@/types/data";
 import { getArticles } from "@/data/loaders";
 
-interface PostListProps extends PropsWithChildren {
+interface PostListProps extends PropsWithChildren, Pick<BoxProps, "className"> {
   initialData: ArticleListResponseDataItem[];
   initialMeta?: Meta;
 }
@@ -15,6 +15,7 @@ export const PostList = ({
   children,
   initialData,
   initialMeta,
+  className,
 }: PostListProps) => {
   const [articles, setArticles] = useState<ArticleListResponseDataItem[]>([]);
   const [meta, setMeta] = useState<Meta | undefined>();
@@ -50,7 +51,7 @@ export const PostList = ({
   }, [initialData, initialMeta]);
 
   return (
-    <Container component="section" className="pt-17">
+    <Container component="section" className={className}>
       {children}
       <Stack gap={0} className="pt-14 border-b sm:pt-20">
         {articles.map((item) => (
