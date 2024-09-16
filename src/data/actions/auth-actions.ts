@@ -52,5 +52,6 @@ export async function registerUserAction(data: SignupSchema): Promise<
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   });
+
   redirect("/");
 }
