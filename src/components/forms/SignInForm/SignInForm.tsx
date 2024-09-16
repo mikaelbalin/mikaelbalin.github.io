@@ -5,6 +5,8 @@ import {
   Anchor,
   Button,
   Checkbox,
+  Grid,
+  GridCol,
   Group,
   Paper,
   PasswordInput,
@@ -29,7 +31,7 @@ export function SigninForm() {
   };
 
   return (
-    <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+    <Paper withBorder shadow="md" radius="md" className="p-8 pt-8">
       <form
         onSubmit={form.onSubmit((values) => console.log(values), handleError)}
       >

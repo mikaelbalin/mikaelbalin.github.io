@@ -3,7 +3,14 @@
 import { StrapiErrors, StrapiErrorsProps } from "@/components/ui/StrapiErrors";
 import { registerUserAction } from "@/data/actions/auth-actions";
 import { signupSchema, SignupSchema } from "@/lib/schemas";
-import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";
+import {
+  Button,
+  Grid,
+  GridCol,
+  Paper,
+  PasswordInput,
+  TextInput,
+} from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
@@ -40,7 +47,7 @@ export function SignupForm() {
   };
 
   return (
-    <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+    <Paper withBorder shadow="md" radius="md" className="p-8 pt-8">
       <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <TextInput
           withAsterisk
