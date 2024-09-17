@@ -62,9 +62,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isProtectedRoute && user.ok === false) {
-    return NextResponse.redirect(
-      new URL(`/${pathnameLocale}/signin`, request.url),
-    );
+    return NextResponse.redirect(new URL(`/signin`, request.url));
   }
 
   // Redirect if there is no locale
