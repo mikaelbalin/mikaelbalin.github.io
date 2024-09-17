@@ -47,7 +47,7 @@ export function SignupForm() {
   };
 
   return (
-    <Paper withBorder shadow="md" radius="md" className="p-8 pt-8">
+    <Paper withBorder shadow="md" className="p-8 text-left">
       <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <TextInput
           withAsterisk
