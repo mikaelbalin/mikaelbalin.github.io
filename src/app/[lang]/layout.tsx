@@ -10,6 +10,7 @@ import "./global.css";
 import { Notifications } from "@mantine/notifications";
 import { Locale } from "../../i18n-config";
 import { getGlobalPageData } from "@/data/loaders";
+import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
   }
 >) {
   const globalData = await getGlobalPageData();
+  const user = await getUserMeLoader();
 
   return (
     <html lang={params.lang}>
@@ -38,7 +40,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <div className="relative flex flex-col min-h-screen">
-            <Header {...globalData.attributes.header} />
+            <Header {...globalData.attributes.header} user={user} />
             <main className="flex-1">{children}</main>
             <Footer {...globalData.attributes.footer} />
           </div>

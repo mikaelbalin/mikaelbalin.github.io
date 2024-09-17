@@ -46,7 +46,7 @@ const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
 }));
 
 export function Header(props: HeaderProps) {
-  const { logoText } = props;
+  const { logoText, user } = props;
 
   const pathName = usePathname();
   const { lang } = useParams<{ lang: Locale }>();
@@ -152,10 +152,13 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
-            <Link href="/signin" className="hidden sm:block">
-              <IconLogin stroke={2} />
-            </Link>
-            <LogoutForm />
+            {user.ok ? (
+              <LogoutForm />
+            ) : (
+              <Link href="/signin" className="hidden sm:block">
+                <IconLogin stroke={2} />
+              </Link>
+            )}
           </Group>
         </Group>
       </Container>

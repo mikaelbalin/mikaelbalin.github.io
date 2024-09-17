@@ -40,6 +40,7 @@ export interface HomePageData {
 export interface HeaderProps {
   id: number;
   logoText: DataLink;
+  user: any;
 }
 
 export interface ContactProps {
