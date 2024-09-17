@@ -5,6 +5,7 @@ import { i18n } from "./i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { getUserMeLoader } from "./data/services/get-user-me-loader";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -23,25 +24,48 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+const protectedRoutes = ["/me"];
 
-  // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
-  // // If you have one
-  // if (
-  //   [
-  //     '/manifest.json',
-  //     '/favicon.ico',
-  //     // Your other files in `public`
-  //   ].includes(pathname)
-  // )
-  //   return
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const user = await getUserMeLoader();
+
+  // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
+  if (
+    [
+      "/manifest.json",
+      "/favicon.ico",
+      // Your other files in `public`
+    ].includes(pathname)
+  ) {
+    return;
+  }
 
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
+
+  // Extract locale from pathname if it exists
+  const pathnameLocale = i18n.locales.find((locale) =>
+    pathname.startsWith(`/${locale}`),
+  );
+
+  // Check if the pathname matches any of the protected routes
+  const isProtectedRoute = protectedRoutes.some(
+    (route) =>
+      pathname === route ||
+      pathname.startsWith(route) ||
+      pathname === `/${pathnameLocale}${route}` ||
+      pathname.startsWith(`/${pathnameLocale}${route}`),
+  );
+
+  if (isProtectedRoute && user.ok === false) {
+    return NextResponse.redirect(
+      new URL(`/${pathnameLocale}/signin`, request.url),
+    );
+  }
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
