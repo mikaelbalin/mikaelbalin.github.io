@@ -1,6 +1,11 @@
 "use server";
 
-import { signinSchema, SignupSchema, signupSchema } from "@/lib/schemas";
+import {
+  SigninSchema,
+  signinSchema,
+  SignupSchema,
+  signupSchema,
+} from "@/lib/schemas";
 import {
   loginUserService,
   registerUserService,
@@ -56,27 +61,28 @@ export async function registerUserAction(data: SignupSchema): Promise<
     };
   }
 
-  cookies().set("jwt", responseData.jwt, {
-    maxAge: 60 * 60 * 24 * 7, // 1 week
-    path: "/",
-    domain: process.env.HOST ?? "localhost",
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-  });
+  cookies().set("jwt", responseData.jwt, config);
 
   redirect("/me");
 }
 
-export async function loginUserAction(prevState: any, formData: FormData) {
-  const validatedFields = signinSchema.safeParse({
-    email: formData.get("email"),
-    password: formData.get("password"),
-  });
+export async function loginUserAction(data: SigninSchema): Promise<
+  | (SigninSchema & {
+      errors?: {
+        email?: string[];
+        password?: string[];
+      };
+      message: string;
+      strapiError?: StrapiErrorsProps;
+    })
+  | undefined
+> {
+  const validatedFields = signinSchema.safeParse(data);
 
   if (!validatedFields.success) {
     return {
-      ...prevState,
-      zodErrors: validatedFields.error.flatten().fieldErrors,
+      ...data,
+      errors: validatedFields.error.flatten().fieldErrors,
       message: "Missing Fields. Failed to Login.",
     };
   }
@@ -85,28 +91,27 @@ export async function loginUserAction(prevState: any, formData: FormData) {
 
   if (!responseData) {
     return {
-      ...prevState,
-      strapiErrors: responseData.error,
-      zodErrors: null,
+      ...data,
+      strapiError: responseData.error,
       message: "Ops! Something went wrong. Please try again.",
     };
   }
 
   if (responseData.error) {
     return {
-      ...prevState,
-      strapiErrors: responseData.error,
-      zodErrors: null,
+      ...data,
+      strapiError: responseData.error,
       message: "Failed to Login.",
     };
   }
 
   cookies().set("jwt", responseData.jwt, config);
 
-  redirect("/dashboard");
+  redirect("/me");
 }
 
 export async function logoutAction() {
   cookies().set("jwt", "", { ...config, maxAge: 0 });
+  // cookies().delete("jwt");
   redirect("/");
 }

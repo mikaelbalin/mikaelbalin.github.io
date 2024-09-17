@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
+import { LogoutForm } from "@/components/forms/LogoutForm";
 
 type MenuItem = {
   link: Locale | string;
@@ -154,6 +155,7 @@ export function Header(props: HeaderProps) {
             <Link href="/signin" className="hidden sm:block">
               <IconLogin stroke={2} />
             </Link>
+            <LogoutForm />
           </Group>
         </Group>
       </Container>

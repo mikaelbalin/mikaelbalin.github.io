@@ -1,19 +1,9 @@
+import { SigninSchema, SignupSchema } from "@/lib/schemas";
 import { getStrapiURL } from "@/lib/utils";
-
-interface RegisterUserProps {
-  username: string;
-  password: string;
-  email: string;
-}
-
-interface LoginUserProps {
-  email: string;
-  password: string;
-}
 
 const baseUrl = getStrapiURL();
 
-export async function registerUserService(userData: RegisterUserProps) {
+export async function registerUserService(userData: SignupSchema) {
   const url = new URL("/api/auth/local/register", baseUrl);
 
   try {
@@ -32,7 +22,7 @@ export async function registerUserService(userData: RegisterUserProps) {
   }
 }
 
-export async function loginUserService(userData: LoginUserProps) {
+export async function loginUserService(userData: SigninSchema) {
   const url = new URL("/api/auth/local", baseUrl);
 
   try {

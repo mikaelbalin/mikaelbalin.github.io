@@ -1,25 +1,25 @@
 "use client";
 
+import { loginUserAction } from "@/data/actions/auth-actions";
 import { signinSchema, SigninSchema } from "@/lib/schemas";
 import {
   Anchor,
   Button,
   Checkbox,
-  Grid,
-  GridCol,
   Group,
   Paper,
   PasswordInput,
   TextInput,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import React from "react";
 
 export function SigninForm() {
   const form = useForm<SigninSchema>({
     mode: "uncontrolled",
     initialValues: {
-      email: "",
+      identifier: "",
       password: "",
     },
     validate: zodResolver(signinSchema),
@@ -30,17 +30,30 @@ export function SigninForm() {
     form.getInputNode(firstErrorPath)?.focus();
   };
 
+  const handleSubmit = async (values: SigninSchema) => {
+    const result = await loginUserAction(values);
+
+    if (result?.errors) {
+      form.setErrors(result.errors);
+    }
+
+    if (result?.strapiError) {
+      notifications.show({
+        title: result.strapiError.name,
+        message: result.strapiError.message,
+      });
+    }
+  };
+
   return (
     <Paper withBorder shadow="md" className="p-8 text-left">
-      <form
-        onSubmit={form.onSubmit((values) => console.log(values), handleError)}
-      >
+      <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <TextInput
           withAsterisk
-          label="Email"
+          label="Username or email"
           placeholder="you@email.com"
-          key={form.key("email")}
-          {...form.getInputProps("email")}
+          key={form.key("identifier")}
+          {...form.getInputProps("identifier")}
           required
         />
         <PasswordInput
