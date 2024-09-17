@@ -3,17 +3,9 @@
 import { StrapiErrors, StrapiErrorsProps } from "@/components/ui/StrapiErrors";
 import { registerUserAction } from "@/data/actions/auth-actions";
 import { signupSchema, SignupSchema } from "@/lib/schemas";
-import {
-  Button,
-  Grid,
-  GridCol,
-  Paper,
-  PasswordInput,
-  TextInput,
-} from "@mantine/core";
+import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { useState } from "react";
 
 export function SignupForm() {
   const form = useForm<SignupSchema>({
