@@ -117,7 +117,7 @@ export function Header(props: HeaderProps) {
               <LangugeToggle label={menuItem.label} linksOpened={linksOpened} />
             </UnstyledButton>
           </Menu.Target>
-          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+          <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
         </Menu>
       );
     }

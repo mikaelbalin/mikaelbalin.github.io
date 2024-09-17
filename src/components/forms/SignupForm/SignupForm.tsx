@@ -39,7 +39,7 @@ export function SignupForm() {
   };
 
   return (
-    <Paper withBorder shadow="md" className="p-8 text-left">
+    <Paper withBorder className="p-8 text-left shadow-lg">
       <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <TextInput
           withAsterisk
