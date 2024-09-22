@@ -1,9 +1,12 @@
 "use client";
 
+import { ContactFormProps } from "@/types/data";
 import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export const ContactForm = () => {
+export const ContactForm = (props: ContactFormProps) => {
+  const { name, message, email } = props;
+
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -23,24 +26,24 @@ export const ContactForm = () => {
       <div className="flex flex-col gap-6">
         <TextInput
           withAsterisk
-          label="Name"
-          placeholder="John Doe"
+          label={name.label}
+          placeholder={name.placeholder}
           key={form.key("name")}
           {...form.getInputProps("name")}
         />
 
         <TextInput
           withAsterisk
-          label="Email"
-          placeholder="your@email.com"
+          label={email.label}
+          placeholder={email.placeholder}
           key={form.key("email")}
           {...form.getInputProps("email")}
         />
 
         <Textarea
           withAsterisk
-          label="Message"
-          placeholder="Your message"
+          label={message.label}
+          placeholder={message.placeholder}
           key={form.key("message")}
           {...form.getInputProps("message")}
         />

@@ -152,7 +152,7 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
-            {user.ok ? (
+            {user?.ok ? (
               <LogoutForm />
             ) : (
               <Link href="/signin" className="hidden sm:block">

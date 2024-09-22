@@ -49,20 +49,16 @@ export async function getHomePageData() {
 export async function getGlobalPageData() {
   const url = new URL("/api/global", baseUrl);
 
-  [
-    "header.logoText",
-    "header.scrollTexts",
-    "footer.contactsTitle",
-    "footer.email",
-    "footer.phone",
-    "footer.socialTitle",
-    "footer.socialLink",
-    "footer.formTitle",
-  ].forEach((param, index) => {
-    url.searchParams.append(`populate[${index}]`, param);
-  });
+  url.searchParams.append(`populate[header][populate]`, "logoText");
+  url.searchParams.append(`populate[header][populate]`, "navLinks");
+  url.searchParams.append(`populate[footer][populate][0]`, "contacts");
+  url.searchParams.append(`populate[footer][populate][1]`, "social.socialLink");
+  url.searchParams.append(`populate[footer][populate][2]`, "form.name");
+  url.searchParams.append(`populate[footer][populate][3]`, "form.email");
+  url.searchParams.append(`populate[footer][populate][4]`, "form.message");
+  url.searchParams.append(`populate[subscription][populate]`, "email");
 
-  const { data } = await fetchData<GlobalPageData>(url.href);
+  const { data } = await fetchData<{ data: GlobalPageData }>(url.href);
   return data;
 }
 

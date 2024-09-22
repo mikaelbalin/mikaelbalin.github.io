@@ -5,6 +5,13 @@ export interface DataLink {
   isExternal: boolean;
 }
 
+interface FormControl {
+  id: number;
+  label: string;
+  description: null | string;
+  placeholder: string;
+}
+
 export interface HeroProps {
   id: number;
   heading: string[];
@@ -37,34 +44,73 @@ export interface HomePageData {
   meta: {};
 }
 
+export interface UsersPermissionsUser extends DateMetadata {
+  id: number;
+  documentId: string;
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  locale: null | string;
+}
+
+export interface GetUserMeLoaderResult {
+  ok: boolean;
+  data: UsersPermissionsUser | null;
+  error: any | null;
+}
+
 export interface HeaderProps {
   id: number;
   logoText: DataLink;
-  user: any;
+  navLinks: DataLink[];
+  user?: GetUserMeLoaderResult;
+}
+
+export interface ContactFormProps {
+  id: number;
+  title: string;
+  message: FormControl;
+  email: FormControl;
+  name: FormControl;
 }
 
 export interface ContactProps {
-  contactsTitle: string;
-  email: string;
-  phone: string;
-  socialTitle: string;
-  socialLink: DataLink[];
-  formTitle: string;
+  contacts: {
+    id: number;
+    title: string;
+    email: string;
+    phone: string;
+  };
+  social: {
+    id: number;
+    title: string;
+    socialLink: DataLink[];
+  };
+  form: ContactFormProps;
 }
 
 export interface FooterProps extends ContactProps {
   id: number;
-  scrollTexts: [string[], string[]];
+  titles: [string[], string[]];
 }
 
-export interface GlobalPageData {
-  data: {
-    id: number;
-    attributes: DateMetadata & {
-      header: HeaderProps;
-      footer: FooterProps;
-    };
-  };
+interface SubscriptionProps {
+  id: number;
+  title: string;
+  text: string;
+  button: string;
+  email: FormControl;
+}
+
+export interface GlobalPageData extends DateMetadata {
+  id: number;
+  documentId: string;
+  locale: string;
+  header: HeaderProps;
+  footer: FooterProps;
+  subscription: SubscriptionProps;
 }
 
 interface Seo {

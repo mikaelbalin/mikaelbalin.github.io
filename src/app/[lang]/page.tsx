@@ -23,28 +23,28 @@ function blockRenderer(block: HeroProps | AboutProps) {
   }
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await getHomePageMetaData();
-  const { metaTitle, metaDescription } = data.attributes.seo;
-  return {
-    title: metaTitle,
-    description: metaDescription,
-  };
-}
+// export async function generateMetadata(): Promise<Metadata> {
+//   const { data } = await getHomePageMetaData();
+//   const { metaTitle, metaDescription } = data.attributes.seo;
+//   return {
+//     title: metaTitle,
+//     description: metaDescription,
+//   };
+// }
 
 export default async function Page() {
-  const strapiData = await getHomePageData();
-  const { data: articlesData } = await getArticles();
-  const sections = strapiData?.attributes?.sections;
-  if (!sections) return <p>No sections found</p>;
+  // const strapiData = await getHomePageData();
+  // const { data: articlesData } = await getArticles();
+  // const sections = strapiData?.attributes?.sections;
+  // if (!sections) return <p>No sections found</p>;
 
   return (
     <>
-      {sections.map(blockRenderer)}
-      <PostList initialData={articlesData}>
+      {/* {sections.map(blockRenderer)} */}
+      {/* <PostList initialData={articlesData}>
         <PostLatest />
-      </PostList>
-      <Subscription />
+      </PostList> */}
+      {/* <Subscription /> */}
     </>
   );
 }

@@ -13,28 +13,13 @@ const links = [
 ];
 
 export function Footer(props: FooterProps) {
-  const {
-    contactsTitle,
-    email,
-    phone,
-    socialTitle,
-    socialLink,
-    formTitle,
-    scrollTexts,
-  } = props;
+  const { titles, contacts, social, form } = props;
 
   return (
     <footer>
-      <Marquee texts={scrollTexts} />
+      <Marquee texts={titles} />
 
-      <Contact
-        contactsTitle={contactsTitle}
-        email={email}
-        phone={phone}
-        socialTitle={socialTitle}
-        socialLink={socialLink}
-        formTitle={formTitle}
-      />
+      <Contact contacts={contacts} social={social} form={form} />
 
       <Container>
         <Box className="border-t border-black dark:border-white pt-14 pb-16 sm:pb-24">

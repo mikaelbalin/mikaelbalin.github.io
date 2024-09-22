@@ -3,8 +3,7 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactProps } from "@/types/data";
 
 export const Contact = (props: ContactProps) => {
-  const { contactsTitle, email, phone, socialTitle, socialLink, formTitle } =
-    props;
+  const { contacts, social, form } = props;
 
   return (
     <Container id="contacts" className="pb-14 sm:pb-18">
@@ -15,18 +14,18 @@ export const Contact = (props: ContactProps) => {
               span={{ base: 12, lg: 6 }}
               className="flex flex-col gap-6 mb-10"
             >
-              <Text>{contactsTitle}</Text>
-              <Text component="a" size="xl" href={`mailto:${email}`}>
-                {email}
+              <Text>{contacts.title}</Text>
+              <Text component="a" size="xl" href={`mailto:${contacts.email}`}>
+                {contacts.email}
               </Text>
-              <Text component="a" size="xl" href={`tel:${phone}`}>
-                {phone}
+              <Text component="a" size="xl" href={`tel:${contacts.phone}`}>
+                {contacts.phone}
               </Text>
             </GridCol>
 
             <GridCol span={{ base: 12, lg: 6 }} className="flex flex-col gap-6">
-              <Text>{socialTitle}</Text>
-              {socialLink.map((link) => (
+              <Text>{social.title}</Text>
+              {social.socialLink.map((link) => (
                 <Text
                   component="a"
                   key={link.id}
@@ -43,8 +42,8 @@ export const Contact = (props: ContactProps) => {
         </GridCol>
 
         <GridCol span={{ base: 12, sm: 6 }}>
-          <Text className="mb-8">{formTitle}</Text>
-          <ContactForm />
+          <Text className="mb-8">{form.title}</Text>
+          <ContactForm {...form} />
         </GridCol>
       </Grid>
     </Container>
