@@ -5,6 +5,8 @@ import {
   StrapiMetadata,
   TagListResponse,
   SubscriptionResponse,
+  ArticleResponseDataObject,
+  Post,
 } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
@@ -110,18 +112,20 @@ export async function getArticlesByTag(tags: string[]) {
     url.searchParams.append("filters[tags][name][$in]", tag);
   });
   url.searchParams.append("pagination[limit]", "3");
-  url.searchParams.append("populate", "*");
+  url.searchParams.append("populate[0]", "tags");
 
-  const { data } = await fetchData<any>(url.href);
+  const { data } = await fetchData<{
+    data: Post[];
+  }>(url.href);
   return data;
 }
 
 export const getArticleBySlug = async (slug: string) => {
-  const url = new URL(`/api/articles`, baseUrl);
+  const url = new URL("/api/articles", baseUrl);
 
   url.searchParams.append("filters[slug]", slug);
   url.searchParams.append("populate", "*");
 
-  const { data } = await fetchData<any>(url.href);
+  const { data } = await fetchData<ArticleResponseDataObject>(url.href);
   return data;
 };

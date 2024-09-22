@@ -12,17 +12,6 @@ import { Metadata } from "next";
 import { PostLatest } from "@/components/features/Post/PostLatest";
 import { i18n } from "../../i18n-config";
 
-// function blockRenderer(block: HeroProps | AboutProps) {
-//   switch (block.__component) {
-//     case "layout.hero-section":
-//       return <HeroMain key={block.__component} {...block} />;
-//     case "layout.about-section":
-//       return <About key={block.__component} {...block} />;
-//     default:
-//       return null;
-//   }
-// }
-
 // export async function generateMetadata(): Promise<Metadata> {
 //   const { data } = await getHomePageMetaData();
 //   const { metaTitle, metaDescription } = data.attributes.seo;

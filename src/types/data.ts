@@ -186,3 +186,34 @@ export interface TagListResponse {
   data: Tag[];
   meta: Meta;
 }
+
+export interface RichTextBlock {
+  __component: "shared.rich-text";
+  id: number;
+  body: string;
+}
+
+export interface CalloutBlock {
+  __component: "shared.callout";
+  id: number;
+  type: "note" | "tip" | "important";
+  body: string;
+  title: string;
+}
+
+export interface Article {
+  id: number;
+  documentId: string;
+  title: string;
+  locale: string;
+  timeToRead: number;
+  slug: string;
+  tags: Tag[];
+  blocks: (RichTextBlock | CalloutBlock)[];
+  localizations: [];
+}
+
+export interface ArticleResponseDataObject extends DateMetadata {
+  data: Article[];
+  meta: Meta;
+}

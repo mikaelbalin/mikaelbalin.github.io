@@ -19,17 +19,12 @@ export default async function Page({
 
   const post = data[0];
 
-  const tags = post.attributes.tags.data;
-  const title = post.attributes.title;
-
-  const articles = await getArticlesByTag(
-    tags.map((tag: any) => tag.attributes.name),
-  );
+  const articles = await getArticlesByTag(post.tags.map((tag) => tag.name));
 
   return (
     <>
       <article>
-        <ArticleHeader tags={tags} title={title} />
+        <ArticleHeader tags={post.tags} title={post.title} />
         {children}
         <ArticleFooter />
       </article>

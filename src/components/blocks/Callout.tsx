@@ -1,3 +1,4 @@
+import { CalloutBlock } from "@/types/data";
 import { Text } from "@mantine/core";
 import {
   IconInfoCircle,
@@ -18,17 +19,10 @@ function getIcon(type: "note" | "tip" | "important") {
   }
 }
 
-interface AdmonitionProps {
-  block: {
-    id: number;
-    type: "note" | "tip" | "important";
-    title?: string;
-    body?: string;
-  };
-}
+type CalloutProps = CalloutBlock;
 
-export default function Admonition({ block }: AdmonitionProps) {
-  const { type, title, body } = block;
+export default function Callout(props: CalloutProps) {
+  const { type, title, body } = props;
   const Icon = getIcon(type);
   return (
     <div className="mb-6 bg-appLightColorBeige dark:bg-appDarkColorCoalBlack">

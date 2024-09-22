@@ -1,9 +1,9 @@
 import { TextBullet } from "@/components/ui/TextBullet";
-import { TagListResponseDataItem } from "@/types/data";
+import { Tag } from "@/types/data";
 import { Badge, Container, Group, SimpleGrid, Title } from "@mantine/core";
 
 interface ArticleHeaderProps {
-  tags: TagListResponseDataItem[];
+  tags: Tag[];
   title: string;
 }
 
@@ -24,7 +24,7 @@ export const ArticleHeader = ({ tags, title }: ArticleHeaderProps) => {
         <Group className="sm:justify-end">
           {tags.map((tag) => (
             <Badge key={tag.id} size="lg">
-              {tag.attributes.name}
+              {tag.name}
             </Badge>
           ))}
         </Group>

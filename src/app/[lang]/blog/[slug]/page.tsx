@@ -9,5 +9,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const post = data[0];
 
-  return <ArticleContent data={post} />;
+  return <ArticleContent {...post} />;
 }

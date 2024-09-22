@@ -25,6 +25,7 @@ import rehypeRaw from "rehype-raw";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import Link from "next/link";
 import "@mantine/code-highlight/styles.css";
+import { RichTextBlock } from "@/types/data";
 
 const HeadingRenderer = (
   props: DetailedHTMLProps<
@@ -114,14 +115,11 @@ const components: Partial<Components> = {
   ),
 };
 
-interface MarkdownTextProps {
-  block: {
-    id: number;
-    content: string;
-  };
-}
+type MarkdownTextProps = RichTextBlock;
 
-export default function MarkdownText({ block }: MarkdownTextProps) {
+export default function RichText(props: MarkdownTextProps) {
+  const { body } = props;
+
   return (
     <section>
       <Markdown
@@ -129,7 +127,7 @@ export default function MarkdownText({ block }: MarkdownTextProps) {
         rehypePlugins={[rehypeRaw]}
         components={components}
       >
-        {block.content}
+        {body}
       </Markdown>
     </section>
   );

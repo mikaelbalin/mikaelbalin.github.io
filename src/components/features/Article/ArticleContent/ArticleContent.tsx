@@ -4,21 +4,34 @@ import { Fragment, useRef } from "react";
 import { Container, Grid, GridCol } from "@mantine/core";
 import componentResolver from "@/lib/component-resolver";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
+import { Article, CalloutBlock, RichTextBlock } from "@/types/data";
+import RichText from "@/components/blocks/RichText";
+import Callout from "@/components/blocks/Callout";
 
-interface ArticleContentProps {
-  data: any;
+function blockRenderer(block: RichTextBlock | CalloutBlock) {
+  switch (block.__component) {
+    case "shared.rich-text":
+      return <RichText {...block} />;
+    case "shared.callout":
+      return <Callout {...block} />;
+    default:
+      return null;
+  }
 }
 
-export const ArticleContent = ({ data }: ArticleContentProps) => {
+type ArticleContentProps = Article;
+
+export const ArticleContent = (props: ArticleContentProps) => {
+  const { blocks } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   return (
     <Container>
       <Grid>
         <GridCol span={{ base: 12, sm: 9 }} ref={ref}>
-          {data.attributes.sections.map((block: any, index: number) => (
+          {blocks.map((block) => (
             <Fragment key={`${block.__component}-${block.id}`}>
-              {componentResolver(block, index)}
+              {blockRenderer(block)}
             </Fragment>
           ))}
         </GridCol>
