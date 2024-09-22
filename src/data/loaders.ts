@@ -1,9 +1,10 @@
 import {
-  ArticleListResponse,
+  PostListResponse,
   GlobalPageData,
   HomePageData,
   StrapiMetadata,
   TagListResponse,
+  SubscriptionResponse,
 } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
@@ -33,16 +34,25 @@ async function fetchData<T>(url: string) {
 }
 
 export async function getHomePageMetaData() {
-  const url = new URL("/api/home-page", baseUrl);
+  const url = new URL("/api/home", baseUrl);
+
   url.searchParams.set("populate[seo]", "true");
+
   const data = await fetchData<StrapiMetadata>(url.href);
   return data;
 }
 
 export async function getHomePageData() {
-  const url = new URL("/api/home-page", baseUrl);
-  url.searchParams.set("populate[sections][populate][link][populate]", "true");
-  const { data } = await fetchData<HomePageData>(url.href);
+  const url = new URL("/api/home", baseUrl);
+
+  url.searchParams.set(
+    "populate[hero][populate][contactLink][populate]",
+    "true",
+  );
+  url.searchParams.set("populate[about][populate]", "true");
+  url.searchParams.set("populate", "latestPostsLink");
+
+  const { data } = await fetchData<{ data: HomePageData }>(url.href);
   return data;
 }
 
@@ -56,9 +66,17 @@ export async function getGlobalPageData() {
   url.searchParams.append(`populate[footer][populate][2]`, "form.name");
   url.searchParams.append(`populate[footer][populate][3]`, "form.email");
   url.searchParams.append(`populate[footer][populate][4]`, "form.message");
-  url.searchParams.append(`populate[subscription][populate]`, "email");
 
   const { data } = await fetchData<{ data: GlobalPageData }>(url.href);
+  return data;
+}
+
+export async function getSubscriptionData() {
+  const url = new URL("/api/global", baseUrl);
+
+  url.searchParams.append(`populate[subscription][populate]`, "email");
+
+  const { data } = await fetchData<{ data: SubscriptionResponse }>(url.href);
   return data;
 }
 
@@ -75,7 +93,7 @@ export async function getArticles(
   url.searchParams.append("pagination[limit]", limit.toString());
   filter && url.searchParams.append("filters[tags][slug]", filter);
 
-  const response = await fetchData<ArticleListResponse>(url.href);
+  const response = await fetchData<PostListResponse>(url.href);
   return response;
 }
 

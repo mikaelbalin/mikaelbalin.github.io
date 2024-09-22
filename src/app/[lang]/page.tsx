@@ -6,22 +6,22 @@ import {
   getArticles,
   getHomePageData,
   getHomePageMetaData,
+  getSubscriptionData,
 } from "@/data/loaders";
 import { Metadata } from "next";
-import { AboutProps, HeroProps } from "types/data";
 import { PostLatest } from "@/components/features/Post/PostLatest";
 import { i18n } from "../../i18n-config";
 
-function blockRenderer(block: HeroProps | AboutProps) {
-  switch (block.__component) {
-    case "layout.hero-section":
-      return <HeroMain key={block.__component} {...block} />;
-    case "layout.about-section":
-      return <About key={block.__component} {...block} />;
-    default:
-      return null;
-  }
-}
+// function blockRenderer(block: HeroProps | AboutProps) {
+//   switch (block.__component) {
+//     case "layout.hero-section":
+//       return <HeroMain key={block.__component} {...block} />;
+//     case "layout.about-section":
+//       return <About key={block.__component} {...block} />;
+//     default:
+//       return null;
+//   }
+// }
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   const { data } = await getHomePageMetaData();
@@ -33,18 +33,21 @@ function blockRenderer(block: HeroProps | AboutProps) {
 // }
 
 export default async function Page() {
-  // const strapiData = await getHomePageData();
-  // const { data: articlesData } = await getArticles();
-  // const sections = strapiData?.attributes?.sections;
-  // if (!sections) return <p>No sections found</p>;
+  const strapiData = await getHomePageData();
+  const subscriptionData = await getSubscriptionData();
+  const { data: articlesData } = await getArticles();
 
   return (
     <>
-      {/* {sections.map(blockRenderer)} */}
-      {/* <PostList initialData={articlesData}>
-        <PostLatest />
-      </PostList> */}
-      {/* <Subscription /> */}
+      <HeroMain {...strapiData.hero} />
+      <About {...strapiData.about} />
+      <PostList initialData={articlesData}>
+        <PostLatest
+          latestPostsLink={strapiData.latestPostsLink}
+          latestPostsTitle={strapiData.latestPostsTitle}
+        />
+      </PostList>
+      <Subscription {...subscriptionData.subscription} />
     </>
   );
 }

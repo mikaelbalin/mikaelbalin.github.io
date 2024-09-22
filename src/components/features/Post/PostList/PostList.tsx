@@ -3,11 +3,11 @@
 import { Button, Container, Stack, BoxProps } from "@mantine/core";
 import { PostItem } from "@/components/features/Post/PostItem";
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
-import { ArticleListResponseDataItem, Meta } from "@/types/data";
+import { Post, Meta } from "@/types/data";
 import { getArticles } from "@/data/loaders";
 
 interface PostListProps extends PropsWithChildren, Pick<BoxProps, "className"> {
-  initialData: ArticleListResponseDataItem[];
+  initialData: Post[];
   initialMeta?: Meta;
 }
 
@@ -17,7 +17,7 @@ export const PostList = ({
   initialMeta,
   className,
 }: PostListProps) => {
-  const [articles, setArticles] = useState<ArticleListResponseDataItem[]>([]);
+  const [articles, setArticles] = useState<Post[]>([]);
   const [meta, setMeta] = useState<Meta | undefined>();
   const [isLoading, setLoading] = useState(false);
 
@@ -55,7 +55,7 @@ export const PostList = ({
       {children}
       <Stack gap={0} className="pt-14 border-b sm:pt-20">
         {articles.map((item) => (
-          <PostItem key={item.id} {...item.attributes} />
+          <PostItem key={item.id} {...item} />
         ))}
       </Stack>
       {meta &&

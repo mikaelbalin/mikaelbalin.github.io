@@ -12,36 +12,37 @@ interface FormControl {
   placeholder: string;
 }
 
-export interface HeroProps {
-  id: number;
-  heading: string[];
-  description: string;
-  location: string;
-  link: DataLink;
-  __component: "layout.hero-section";
-}
-
-export interface AboutProps {
-  id: number;
-  heading: string;
-  text: string;
-  __component: "layout.about-section";
-}
-
 interface DateMetadata {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
 }
 
-export interface HomePageData {
-  data: {
-    id: number;
-    attributes: DateMetadata & {
-      sections: [HeroProps, AboutProps];
-    };
-  };
-  meta: {};
+export interface HeroProps {
+  id: number;
+  title: string[];
+  description: string;
+  location: string;
+  contactLink: DataLink;
+}
+
+export interface AboutProps {
+  id: number;
+  title: string;
+  description: string;
+}
+
+export interface PostLatestProps {
+  latestPostsTitle: string;
+  latestPostsLink: DataLink;
+}
+
+export interface HomePageData extends DateMetadata, PostLatestProps {
+  id: number;
+  documentId: string;
+  locale: string;
+  hero: HeroProps;
+  about: AboutProps;
 }
 
 export interface UsersPermissionsUser extends DateMetadata {
@@ -96,12 +97,15 @@ export interface FooterProps extends ContactProps {
   titles: [string[], string[]];
 }
 
-interface SubscriptionProps {
+export interface SubscriptionFormProps {
+  button: string;
+  email: FormControl;
+}
+
+export interface SubscriptionProps extends SubscriptionFormProps {
   id: number;
   title: string;
   text: string;
-  button: string;
-  email: FormControl;
 }
 
 export interface GlobalPageData extends DateMetadata {
@@ -110,6 +114,12 @@ export interface GlobalPageData extends DateMetadata {
   locale: string;
   header: HeaderProps;
   footer: FooterProps;
+}
+
+export interface SubscriptionResponse extends DateMetadata {
+  id: number;
+  documentId: string;
+  locale: string;
   subscription: SubscriptionProps;
 }
 
@@ -133,12 +143,12 @@ export interface StrapiMetadata {
   };
 }
 
-interface TagResponseDataObject {
+interface TagResponseDataObject extends DateMetadata {
   id: number;
-  attributes: {
-    name: string;
-    slug: string;
-  };
+  documentId: string;
+  locale: null;
+  name: string;
+  slug: string;
 }
 
 export interface Meta {
@@ -149,25 +159,18 @@ export interface Meta {
   };
 }
 
-export interface Article {
+export interface Post extends DateMetadata {
+  id: number;
+  documentId: string;
   title: string;
-  slug: string;
-  tags: {
-    data: TagResponseDataObject[];
-  };
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
   locale: string;
+  timeToRead: number;
+  slug: string;
+  tags: TagResponseDataObject[];
 }
 
-export interface ArticleListResponseDataItem {
-  id: string;
-  attributes: Article;
-}
-
-export interface ArticleListResponse {
-  data: ArticleListResponseDataItem[];
+export interface PostListResponse {
+  data: Post[];
   meta: Meta;
 }
 

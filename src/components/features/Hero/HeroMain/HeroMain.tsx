@@ -5,20 +5,20 @@ import { HeroProps } from "@/types/data";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 
 export const HeroMain = (props: Readonly<HeroProps>) => {
-  const { heading, description, link, location } = props;
+  const { title, description, location, contactLink } = props;
 
   return (
     <HeroBackground>
       <Box className="my-auto pt-15">
-        <Marquee texts={heading} />
+        <Marquee texts={title} />
         <Container className="mt-6.5 sm:mt-8">
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text className="relative" size="lg">
               {description}
             </Text>
           </SimpleGrid>
-          <Button component="a" className="mt-7 sm:mt-8" href={link?.url}>
-            {link?.text}
+          <Button component="a" className="mt-7 sm:mt-8" href={contactLink.url}>
+            {contactLink.text}
           </Button>
         </Container>
       </Box>

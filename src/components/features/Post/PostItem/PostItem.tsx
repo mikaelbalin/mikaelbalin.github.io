@@ -1,17 +1,12 @@
 import { TextBullet } from "@/components/ui/TextBullet";
-import { Article } from "@/types/data";
+import { Post } from "@/types/data";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import Link from "next/link";
 
-type PostCardProps = Article;
+type PostCardProps = Post;
 
-export const PostItem = ({
-  title,
-  slug,
-  tags: { data: tags },
-  publishedAt,
-}: PostCardProps) => {
+export const PostItem = ({ title, slug, tags, publishedAt }: PostCardProps) => {
   const date = new Date(publishedAt);
 
   return (
@@ -25,7 +20,7 @@ export const PostItem = ({
         </div>
         <Group>
           {tags.map((tag) => (
-            <Badge key={tag.id}>{tag.attributes.name}</Badge>
+            <Badge key={tag.id}>{tag.name}</Badge>
           ))}
         </Group>
         <Group>

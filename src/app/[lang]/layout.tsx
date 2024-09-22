@@ -40,7 +40,6 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ThemeProvider>
           <div className="relative flex flex-col min-h-screen">
-            <pre>{JSON.stringify(user, null, 2)}</pre>
             <Header {...globalData.header} user={user} />
             <main className="flex-1">{children}</main>
             <Footer {...globalData.footer} />

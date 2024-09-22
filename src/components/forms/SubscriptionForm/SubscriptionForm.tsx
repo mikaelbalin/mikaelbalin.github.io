@@ -1,9 +1,11 @@
 "use client";
 
+import { SubscriptionFormProps } from "@/types/data";
 import { Button, Grid, GridCol, TextInput } from "@mantine/core";
 import { useField } from "@mantine/form";
 
-export const SubscriptionForm = () => {
+export const SubscriptionForm = (props: SubscriptionFormProps) => {
+  const { email, button } = props;
   const field = useField({
     initialValue: "",
     validate: (value) =>
@@ -15,8 +17,8 @@ export const SubscriptionForm = () => {
       <GridCol span={{ base: 12, sm: 8, lg: 7 }} className="sm:flex items-end">
         <TextInput
           {...field.getInputProps()}
-          label="Email"
-          placeholder="email@example.com"
+          label={email.label}
+          placeholder={email.placeholder}
           className="w-full"
           variant="filled"
         />
@@ -26,7 +28,7 @@ export const SubscriptionForm = () => {
           size="xs"
           className="w-full sm:w-auto shrink-0"
         >
-          Submit
+          {button}
         </Button>
       </GridCol>
     </Grid>
