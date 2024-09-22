@@ -174,17 +174,15 @@ export interface PostListResponse {
   meta: Meta;
 }
 
-interface Tag {
+export interface Tag extends DateMetadata {
+  id: number;
+  documentId: string;
+  locale: null;
   name: string;
   slug: string;
 }
 
-export interface TagListResponseDataItem {
-  id: number;
-  attributes: Tag;
-}
-
 export interface TagListResponse {
-  data: TagListResponseDataItem[];
+  data: Tag[];
   meta: Meta;
 }

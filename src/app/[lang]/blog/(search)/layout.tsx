@@ -1,7 +1,7 @@
 import React from "react";
 import { Subscription } from "@/components/features/Subscription";
 import { HeroBlog } from "@/components/features/Hero/HeroBlog";
-import { getTags } from "@/data/loaders";
+import { getSubscriptionData, getTags } from "@/data/loaders";
 import { PostSearch } from "@/components/features/Post/PostSearch";
 
 export default async function Page({
@@ -10,13 +10,14 @@ export default async function Page({
   children: React.ReactNode;
 }>) {
   const tags = await getTags();
+  const subscriptionData = await getSubscriptionData();
 
   return (
     <>
       <HeroBlog />
       <PostSearch tags={tags} />
       {children}
-      <Subscription />
+      <Subscription {...subscriptionData.subscription} />
     </>
   );
 }

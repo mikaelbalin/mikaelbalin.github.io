@@ -1,11 +1,11 @@
 "use client";
 
-import { TagListResponseDataItem } from "@/types/data";
+import { Tag } from "@/types/data";
 import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
 import { useParams, useRouter } from "next/navigation";
 
 interface PostSearchProps {
-  tags: TagListResponseDataItem[];
+  tags: Tag[];
 }
 
 export const PostSearch = ({ tags }: PostSearchProps) => {
@@ -27,7 +27,7 @@ export const PostSearch = ({ tags }: PostSearchProps) => {
         >
           <Group>
             <Chip value="all">All</Chip>
-            {tags.map(({ id, attributes: { slug, name } }) => (
+            {tags.map(({ id, slug, name }) => (
               <Chip key={id} value={slug}>
                 {name}
               </Chip>
