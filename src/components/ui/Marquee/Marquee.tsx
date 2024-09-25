@@ -70,6 +70,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
   if (isArrayOfStrings(texts)) {
     return (
       <div
+        ref={ref}
         className={cn(
           "[--gap:theme(spacing.8)] sm:[--gap:theme(spacing.20)]",
           "gap-[--gap]",

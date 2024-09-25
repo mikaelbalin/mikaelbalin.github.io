@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Marquee } from "./Marquee";
+import "./story.css";
 
 const meta = {
   title: "Marquee",

@@ -33,7 +33,7 @@ export default async function RootLayout({
   const user = await getUserMeLoader();
 
   return (
-    <html lang={params.lang}>
+    <html lang={params.lang} className="relative">
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
