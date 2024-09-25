@@ -8,7 +8,7 @@ export class MainCanvas extends Canvas {
   constructor(
     canvas: HTMLCanvasElement,
     colorScheme: MantineColorScheme,
-    mousePos?: MousePosition
+    mousePos?: MousePosition,
   ) {
     super(canvas, colorScheme, mousePos);
   }
@@ -20,7 +20,7 @@ export class MainCanvas extends Canvas {
    */
   public override run(
     timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void
+    onAnimationFrameRequest: (id: number) => void,
   ) {
     this.drawHover();
     this.animateSquares(timeStamp);
@@ -38,7 +38,6 @@ export class MainCanvas extends Canvas {
     const y = randomSquare.y;
 
     if (!x || !y) {
-      console.warn("Invalid square coordinates.");
       return [];
     }
 
@@ -50,19 +49,19 @@ export class MainCanvas extends Canvas {
         (square.x === x && square.y === y) ||
         (square.x === x + 1 && square.y === y) ||
         (square.x === x && square.y === y + 1) ||
-        (square.x === x + 1 && square.y === y + 1)
+        (square.x === x + 1 && square.y === y + 1),
     );
 
     const groupX = filterSquares(
       (square) =>
         (square.x === x && square.y === y) ||
-        (square.x === x + 1 && square.y === y)
+        (square.x === x + 1 && square.y === y),
     );
 
     const groupY = filterSquares(
       (square) =>
         (square.x === x && square.y === y) ||
-        (square.x === x && square.y === y + 1)
+        (square.x === x && square.y === y + 1),
     );
 
     const groups = [groupSquare, groupX, groupY];
@@ -130,7 +129,7 @@ export class MainCanvas extends Canvas {
     [...this.activeSquares].forEach((square) => {
       square.animate(this.ctx, timeStamp, this.squareColor, () => {
         this.activeSquares = this.activeSquares.filter(
-          (activeSquare) => activeSquare !== square
+          (activeSquare) => activeSquare !== square,
         );
       });
     });
@@ -149,7 +148,7 @@ export class MainCanvas extends Canvas {
       const xPos = x * Shared.squareSize;
       const yPos = y * Shared.squareSize;
       const animatingSquare = this.activeSquares.find(
-        (square) => square.x === x && square.y === y
+        (square) => square.x === x && square.y === y,
       );
       const square = animatingSquare || new Square({ xPos, yPos, x, y });
       square.draw(this.ctx, this.squareColor);
