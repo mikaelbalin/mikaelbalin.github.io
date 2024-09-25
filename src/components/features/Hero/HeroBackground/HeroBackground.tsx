@@ -112,11 +112,16 @@ export const HeroBackground = (
     <Stack
       ref={ref}
       component="section"
-      justify="center"
-      gap={0}
-      className={cn("relative", { "min-h-lvh": variant === "default" })}
+      className={cn("relative gap-0 justify-center", {
+        "min-h-lvh": variant === "default",
+      })}
     >
-      <div className={classes.canvasWrapper}>
+      <div
+        className={cn(
+          "absolute top-0 right-0 bottom-0 left-0",
+          "bg-white dark:bg-black",
+        )}
+      >
         <canvas
           ref={canvasRef}
           className="block"

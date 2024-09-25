@@ -10,7 +10,7 @@ export class Shared {
   }
 }
 
-const ANIMATION_MID_POINT = ANIMATION_DURATION / 2;
+const ANIMATION_MIDDLE_POINT = ANIMATION_DURATION / 2;
 
 type SquareProperties = {
   xPos: number;
@@ -94,13 +94,17 @@ export class Square {
     if (elapsed < ANIMATION_DURATION) {
       ctx.clearRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
 
-      if (elapsed <= ANIMATION_MID_POINT) {
-        this.opacity = lerp(1, 0, Math.min(1, elapsed / ANIMATION_MID_POINT));
+      if (elapsed <= ANIMATION_MIDDLE_POINT) {
+        this.opacity = lerp(
+          1,
+          0,
+          Math.min(1, elapsed / ANIMATION_MIDDLE_POINT),
+        );
       } else {
         this.opacity = lerp(
           0,
           1,
-          Math.max(0, (1 - elapsed / ANIMATION_MID_POINT) * -1),
+          Math.max(0, (1 - elapsed / ANIMATION_MIDDLE_POINT) * -1),
         );
       }
 
