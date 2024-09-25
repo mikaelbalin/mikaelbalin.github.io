@@ -19,6 +19,13 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
+  argTypes: {
+    variant: {
+      options: ["default", "blog"],
+      control: { type: "radio" },
+    },
+    children: { table: { disable: true } },
+  },
   decorators: (Story) => {
     return (
       <Wrapper>
@@ -35,6 +42,7 @@ type Story = StoryObj<typeof HeroBackground>;
 export const Default: Story = {
   args: {
     variant: "default",
+    children: <div className="h-96" />,
   },
 };
 
@@ -42,12 +50,5 @@ export const Blog: Story = {
   args: {
     variant: "blog",
     children: <div className="h-96" />,
-  },
-  argTypes: {
-    variant: {
-      options: ["default", "blog"],
-      control: { type: "radio" },
-    },
-    children: { table: { disable: true } },
   },
 };
