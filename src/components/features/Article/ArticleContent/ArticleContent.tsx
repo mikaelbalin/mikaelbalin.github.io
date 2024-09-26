@@ -4,8 +4,8 @@ import { Fragment, useRef } from "react";
 import { Container, Grid, GridCol } from "@mantine/core";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
 import { Article, CalloutBlock, RichTextBlock } from "@/types/data";
-import RichText from "@/components/blocks/RichText";
-import { Callout } from "@/components/ui/Callout/Callout";
+import { RichText } from "@/components/ui/RichText";
+import { Callout } from "@/components/ui/Callout";
 
 function blockRenderer(block: RichTextBlock | CalloutBlock) {
   switch (block.__component) {

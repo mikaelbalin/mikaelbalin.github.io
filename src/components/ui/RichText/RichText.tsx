@@ -117,7 +117,7 @@ const components: Partial<Components> = {
 
 type MarkdownTextProps = RichTextBlock;
 
-export default function RichText(props: MarkdownTextProps) {
+export const RichText = (props: MarkdownTextProps) => {
   const { body } = props;
 
   return (
@@ -131,4 +131,4 @@ export default function RichText(props: MarkdownTextProps) {
       </Markdown>
     </section>
   );
-}
+};
