@@ -21,7 +21,7 @@ function getIcon(type: "note" | "tip" | "important") {
 
 type CalloutProps = CalloutBlock;
 
-export default function Callout(props: CalloutProps) {
+export const Callout = (props: CalloutProps) => {
   const { type, title, body } = props;
   const Icon = getIcon(type);
   return (
@@ -36,4 +36,4 @@ export default function Callout(props: CalloutProps) {
       </div>
     </div>
   );
-}
+};
