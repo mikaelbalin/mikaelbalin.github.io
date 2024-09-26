@@ -21,7 +21,7 @@ interface VideoEmbedProps {
   };
 }
 
-export default function VideoEmbed({ block }: VideoEmbedProps) {
+export const VideoEmbed = ({ block }: VideoEmbedProps) => {
   const embedUrl = getEmbedUrl(block.url);
 
   if (!embedUrl) return <div>Invalid video URL</div>;
@@ -39,4 +39,4 @@ export default function VideoEmbed({ block }: VideoEmbedProps) {
       />
     </div>
   );
-}
+};
