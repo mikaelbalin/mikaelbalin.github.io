@@ -78,10 +78,16 @@ module.exports = {
           from: { transform: "translateY(-100%)" },
           to: { transform: "translateY(0)" },
         },
+        show: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
       },
       animation: {
         scroll: "scroll 30s linear infinite",
         slide: "slide 1s ease-out",
+        show: "show 1s ease-out both",
+        showWithDelay: "show 1s ease-out 1s both",
       },
     },
   },

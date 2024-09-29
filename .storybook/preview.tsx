@@ -17,6 +17,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    backgrounds: {
+      values: [
+        // 👇 Default values
+        { name: "Dark", value: "var(--mantine-color-black)" },
+        { name: "Light", value: "var(--mantine-color-white)" },
+        // 👇 Add your own
+        { name: "White", value: "white" },
+      ],
+      // 👇 Specify which background is shown by default
+      default: "Light",
+    },
   },
   decorators: [
     withThemeByDataAttribute({

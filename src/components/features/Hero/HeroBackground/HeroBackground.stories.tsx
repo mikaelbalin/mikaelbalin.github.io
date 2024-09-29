@@ -3,6 +3,10 @@ import { HeroBackground } from "./HeroBackground";
 import { PropsWithChildren, useRef } from "react";
 import { RootRefContext } from "../../../../context";
 
+/**
+ * Wrapper component that provides a context with a reference to its root div element.
+ * Currently unused in the component itself.
+ */
 const Wrapper = ({ children }: PropsWithChildren) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
   return (

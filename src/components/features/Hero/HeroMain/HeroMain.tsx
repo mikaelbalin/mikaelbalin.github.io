@@ -11,7 +11,7 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
     <HeroBackground>
       <Box className="my-auto pt-15">
         <Marquee texts={title} />
-        <Container className="mt-6.5 sm:mt-8">
+        <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
           <SimpleGrid cols={{ base: 1, sm: 2 }}>
             <Text className="relative" size="lg">
               {description}
@@ -22,7 +22,7 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
           </Button>
         </Container>
       </Box>
-      <Box className="mb-14">
+      <Box className="mb-14 motion-safe:animate-showWithDelay">
         <Container className="relative text-right">
           <Text size="lg">{location}</Text>
           <LiveTime />
