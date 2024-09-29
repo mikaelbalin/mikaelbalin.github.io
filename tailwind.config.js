@@ -36,7 +36,7 @@ module.exports = {
       "7xl": ["5rem", "5.9rem"],
       "8xl": ["5.5rem", "6.49rem"],
       "9xl": ["6.5rem", "7.67rem"],
-      "10xl": ["13.5rem", "1"],
+      "10xl": ["13.5rem", "normal"],
     },
     extend: {
       spacing: {
@@ -80,7 +80,7 @@ module.exports = {
         },
       },
       animation: {
-        scroll: "scroll 10s linear infinite",
+        scroll: "scroll 30s linear infinite",
         slide: "slide 1s ease-out",
       },
     },

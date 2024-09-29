@@ -10,7 +10,6 @@ import {
   SQUARE_SIZE_LARGE,
   SQUARE_SIZE_SMALL,
 } from "./HeroBackground.constants";
-import classes from "./HeroBackground.module.css";
 import { MainCanvas } from "./MainCanvas";
 import { Shared } from "./Square";
 
