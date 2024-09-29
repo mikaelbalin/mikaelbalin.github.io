@@ -9,12 +9,15 @@ const options: Intl.DateTimeFormatOptions = {
   second: undefined,
   timeZoneName: "short",
 };
-``;
 
 export const LiveTime = () => {
   const [currentTime, setCurrentTime] = useState<string | null>(null);
 
   useEffect(() => {
+    setCurrentTime(
+      new Date().toLocaleTimeString(window.navigator.language, options),
+    );
+
     const interval = setInterval(() => {
       setCurrentTime(
         new Date().toLocaleTimeString(window.navigator.language, options),
