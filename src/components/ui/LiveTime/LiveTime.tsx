@@ -11,13 +11,11 @@ const options: Intl.DateTimeFormatOptions = {
 };
 
 export const LiveTime = () => {
-  const [currentTime, setCurrentTime] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState<string>(
+    new Date().toLocaleTimeString(window.navigator.language, options),
+  );
 
   useEffect(() => {
-    setCurrentTime(
-      new Date().toLocaleTimeString(window.navigator.language, options),
-    );
-
     const interval = setInterval(() => {
       setCurrentTime(
         new Date().toLocaleTimeString(window.navigator.language, options),
