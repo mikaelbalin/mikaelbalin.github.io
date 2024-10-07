@@ -1,10 +1,20 @@
 import { theme } from "@/theme";
-import { MantineColorScheme } from "@mantine/core";
+import { alpha, MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
-import { SQUARE_SIZE_SMALL } from "./HeroBackground.constants";
+import {
+  LINE_ANIMATION_DURATION,
+  SQUARE_SIZE_SMALL,
+} from "./HeroBackground.constants";
 import { Shared, Square } from "./Square";
 
 export class MainCanvas extends Canvas {
+  private startTime: DOMHighResTimeStamp = 0;
+  /**
+   * A factor used to adjust the duration of animations or transitions.
+   * This value is used to scale the base duration to achieve the desired timing effect.
+   */
+  private readonly durationFactor = 3;
+
   constructor(
     canvas: HTMLCanvasElement,
     colorScheme: MantineColorScheme,
@@ -22,8 +32,19 @@ export class MainCanvas extends Canvas {
     timeStamp: DOMHighResTimeStamp,
     onAnimationFrameRequest: (id: number) => void,
   ) {
-    this.drawHover();
-    this.animateSquares(timeStamp);
+    if (!this.startTime) {
+      this.startTime = timeStamp;
+    }
+
+    const elapsedTime = timeStamp - this.startTime;
+
+    if (elapsedTime <= LINE_ANIMATION_DURATION / this.durationFactor) {
+      this.animateLines(elapsedTime);
+    } else {
+      this.drawHover();
+      this.animateSquares(timeStamp);
+    }
+
     super.tick(onAnimationFrameRequest);
   }
 
@@ -154,5 +175,45 @@ export class MainCanvas extends Canvas {
       square.draw(this.ctx, this.squareColor);
       return square;
     });
+  }
+
+  /**
+   * Draws a horizontal line on the canvas with the specified opacity.
+   */
+  private drawLine(i: number, opacity: number) {
+    const { width } = this.canvas;
+    const lineHeight = Shared.squareSize;
+    const color =
+      this.colorScheme === "light"
+        ? theme.other.appLightColorBeige
+        : theme.other.appDarkColorCoalBlack;
+
+    this.ctx.fillStyle = alpha(color, opacity);
+    this.ctx.fillRect(0, i * Shared.squareSize, width, lineHeight);
+  }
+
+  /**
+   * Animates lines on the canvas based on the elapsed time.
+   *
+   * This method clears the canvas and then draws lines with varying opacity
+   * depending on their progress through the animation duration.
+   */
+  private animateLines(elapsedTime: DOMHighResTimeStamp) {
+    const { width, height } = this.canvas;
+    const lineHeight = Shared.squareSize;
+    const lineCount = Math.ceil(height / lineHeight);
+    const lineDuration = LINE_ANIMATION_DURATION / lineCount;
+
+    this.ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < lineCount; i++) {
+      const lineStartTime = (i * lineDuration) / this.durationFactor;
+      const timeSinceStart = elapsedTime - lineStartTime;
+      const lineProgress = timeSinceStart / lineDuration;
+
+      const opacity = Math.min(1, Math.max(0, lineProgress));
+
+      this.drawLine(i, opacity);
+    }
   }
 }

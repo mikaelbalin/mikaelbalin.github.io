@@ -118,7 +118,7 @@ export const HeroBackground = (
       <div
         className={cn(
           "absolute top-0 right-0 bottom-0 left-0",
-          "bg-white dark:bg-black",
+          "overflow-hidden",
         )}
       >
         <canvas
