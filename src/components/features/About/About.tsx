@@ -3,9 +3,37 @@
 import { Container, Title, Text, Grid, GridCol } from "@mantine/core";
 import { AboutProps } from "@/types/data";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const splitText = (text: string) => {
+  return text.split("").map((char, index) => {
+    const shouldAnimate = Math.random() > 0.8;
+
+    if (shouldAnimate) {
+      return (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 2, delay: index * 0.005 }}
+          viewport={{ once: true }}
+        >
+          {char}
+        </motion.span>
+      );
+    } else {
+      return <span key={index}>{char}</span>;
+    }
+  });
+};
 
 export const About = (props: AboutProps) => {
   const { title, description } = props;
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <Container
@@ -29,11 +57,13 @@ export const About = (props: AboutProps) => {
       )}
     >
       <Title order={2} className="mb-8">
-        {title}
+        {isClient ? splitText(title) : title}
       </Title>
       <Grid>
         <GridCol span={{ base: 12, sm: 6 }} offset={{ sm: 6 }}>
-          <Text size="lg">{description}</Text>
+          <Text size="lg">
+            {isClient ? splitText(description) : description}
+          </Text>
         </GridCol>
       </Grid>
     </Container>
