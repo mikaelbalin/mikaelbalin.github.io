@@ -3,7 +3,13 @@
 import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
-import { PropsWithChildren, useEffect, useRef } from "react";
+import {
+  forwardRef,
+  PropsWithChildren,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
 import { BlogCanvas } from "./BlogCanvas";
 import { BackgroundVariant, MousePosition } from "./Canvas";
 import {
@@ -17,14 +23,15 @@ interface HeroBackgroundProps {
   variant?: BackgroundVariant;
 }
 
-export const HeroBackground = (
-  props: PropsWithChildren<HeroBackgroundProps>,
-) => {
+export const HeroBackground = forwardRef<
+  HTMLDivElement,
+  PropsWithChildren<HeroBackgroundProps>
+>((props, ref) => {
   const { children, variant = "default" } = props;
   const { colorScheme } = useMantineColorScheme();
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
-  const { ref, width, height } = useElementSize<HTMLDivElement>();
+  const { ref: elementRef, width, height } = useElementSize<HTMLDivElement>();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
@@ -32,6 +39,10 @@ export const HeroBackground = (
   const utilsRef = useRef<MainCanvas | BlogCanvas | null>(null);
   const intervalIDRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const bodyRef = useRef<HTMLElement | null>(null);
+
+  useImperativeHandle(ref, () => {
+    return elementRef.current!;
+  }, [elementRef]);
 
   useEffect(() => {
     bodyRef.current = document.body;
@@ -109,7 +120,7 @@ export const HeroBackground = (
 
   return (
     <Stack
-      ref={ref}
+      ref={elementRef}
       component="section"
       className={cn("relative gap-0 justify-center", {
         "min-h-lvh": variant === "default",
@@ -131,4 +142,6 @@ export const HeroBackground = (
       {children}
     </Stack>
   );
-};
+});
+
+HeroBackground.displayName = "HeroBackground";
