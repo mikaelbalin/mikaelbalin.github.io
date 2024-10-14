@@ -1,20 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { HeroBackground } from "./HeroBackground";
-import { PropsWithChildren, useRef } from "react";
-import { RootRefContext } from "../../../../context";
-
-/**
- * Wrapper component that provides a context with a reference to its root div element.
- * Currently unused in the component itself.
- */
-const Wrapper = ({ children }: PropsWithChildren) => {
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  return (
-    <RootRefContext.Provider value={rootRef}>
-      <div ref={rootRef}>{children}</div>
-    </RootRefContext.Provider>
-  );
-};
+import { MotionProvider } from "@/context/motion-context";
 
 const meta = {
   title: "HeroBackground",
@@ -30,14 +16,12 @@ const meta = {
     },
     children: { table: { disable: true } },
   },
-  decorators: (Story) => {
-    return (
-      <Wrapper>
-        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-        <Story />
-      </Wrapper>
-    );
-  },
+  decorators: (Story) => (
+    <MotionProvider>
+      {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+      <Story />
+    </MotionProvider>
+  ),
 } satisfies Meta<typeof HeroBackground>;
 
 export default meta;
