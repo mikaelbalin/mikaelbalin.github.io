@@ -18,18 +18,8 @@ import {
 } from "./HeroBackground.constants";
 import { MainCanvas } from "./MainCanvas";
 import { Shared } from "./Square";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  MotionValue,
-  useMotionValueEvent,
-} from "framer-motion";
-
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
+import { useMotionContext } from "context/motion-context";
+import { motion } from "framer-motion";
 
 interface HeroBackgroundProps {
   variant?: BackgroundVariant;
@@ -44,6 +34,8 @@ export const HeroBackground = forwardRef<
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
   const { ref: elementRef, width, height } = useElementSize<HTMLDivElement>();
+
+  const { y } = useMotionContext();
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
@@ -137,9 +129,10 @@ export const HeroBackground = forwardRef<
         "min-h-lvh": variant === "default",
       })}
     >
-      <div
+      <motion.div
         ref={elementRef}
-        className={cn("absolute top-0 right-0 bottom-0 left-0")}
+        className={cn("absolute -top-80 right-0 bottom-0 left-0")}
+        style={{ y: y.current }}
       >
         <canvas
           ref={canvasRef}
@@ -147,7 +140,7 @@ export const HeroBackground = forwardRef<
           width={width}
           height={height}
         />
-      </div>
+      </motion.div>
 
       {children}
     </Stack>
