@@ -18,6 +18,18 @@ import {
 } from "./HeroBackground.constants";
 import { MainCanvas } from "./MainCanvas";
 import { Shared } from "./Square";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  MotionValue,
+  useMotionValueEvent,
+} from "framer-motion";
+
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance]);
+}
 
 interface HeroBackgroundProps {
   variant?: BackgroundVariant;
@@ -120,17 +132,14 @@ export const HeroBackground = forwardRef<
 
   return (
     <Stack
-      ref={elementRef}
       component="section"
-      className={cn("relative gap-0 justify-center", {
+      className={cn("relative overflow-hidden pt-16 sm:pt-19.5", {
         "min-h-lvh": variant === "default",
       })}
     >
       <div
-        className={cn(
-          "absolute top-0 right-0 bottom-0 left-0",
-          "overflow-hidden",
-        )}
+        ref={elementRef}
+        className={cn("absolute top-0 right-0 bottom-0 left-0")}
       >
         <canvas
           ref={canvasRef}
@@ -139,6 +148,7 @@ export const HeroBackground = forwardRef<
           height={height}
         />
       </div>
+
       {children}
     </Stack>
   );

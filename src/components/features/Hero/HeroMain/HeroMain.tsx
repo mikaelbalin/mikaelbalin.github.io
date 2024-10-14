@@ -21,7 +21,7 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
     <HeroBackground>
       {isClient && (
         <>
-          <Box className="my-auto pt-15">
+          <Box className="my-auto">
             <Marquee texts={title} />
             <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
               <SimpleGrid cols={{ base: 1, sm: 2 }}>
