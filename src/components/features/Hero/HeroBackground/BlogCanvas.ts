@@ -43,7 +43,7 @@ export class BlogCanvas extends Canvas {
    * For canvas widths between the minimum and maximum, the x-coordinate is interpolated between 0 and 1/3 of the canvas width.
    * @returns The starting x-coordinate for the canvas.
    */
-  private calculateStartingX(): number {
+  private get startingX(): number {
     const minWidth = 320; // width at which x should be 0
     const maxWidth = 1440; // width at which x should be 1/3 of canvas width
 
@@ -79,7 +79,7 @@ export class BlogCanvas extends Canvas {
    */
   private drawReferenceShape() {
     this.ctx.beginPath();
-    this.ctx.moveTo(this.calculateStartingX(), 0);
+    this.ctx.moveTo(this.startingX, 0);
     this.ctx.quadraticCurveTo(
       this.cpx,
       this.cpy,
@@ -112,7 +112,7 @@ export class BlogCanvas extends Canvas {
       const parameter = i / samplePoints;
 
       const curveX =
-        Math.pow(1 - parameter, 2) * this.calculateStartingX() +
+        Math.pow(1 - parameter, 2) * this.startingX +
         2 * (1 - parameter) * parameter * this.cpx +
         Math.pow(parameter, 2) * this.canvas.width;
       const curveY =

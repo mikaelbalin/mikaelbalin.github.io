@@ -131,7 +131,10 @@ export const HeroBackground = forwardRef<
     >
       <motion.div
         ref={elementRef}
-        className={cn("absolute -top-80 right-0 bottom-0 left-0")}
+        className={cn(
+          "absolute right-0 bottom-0 left-0",
+          variant === "default" ? "-top-80" : "top-0",
+        )}
         style={{ y: y.current }}
       >
         <canvas
