@@ -26,7 +26,8 @@
       "@/context": ["context/index.ts"],
       "@/data/*": ["data/*"],
       "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/context/*": ["context/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
