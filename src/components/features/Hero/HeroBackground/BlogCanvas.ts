@@ -45,7 +45,7 @@ export class BlogCanvas extends Canvas {
    */
   private get startingX(): number {
     const minWidth = 320; // width at which x should be 0
-    const maxWidth = 1440; // width at which x should be 1/3 of canvas width
+    const maxWidth = 1400; // width at which x should be 1/3 of canvas width
 
     if (this.canvas.width <= minWidth) return 0;
     if (this.canvas.width >= maxWidth) return this.canvas.width / 3;
