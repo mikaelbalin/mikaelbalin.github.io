@@ -18,7 +18,7 @@ import {
 } from "./HeroBackground.constants";
 import { MainCanvas } from "./MainCanvas";
 import { Shared } from "./Square";
-import { useMotionContext } from "context/motion-context";
+import { useMotionContext } from "@/context/motion-context";
 import { motion } from "framer-motion";
 
 interface HeroBackgroundProps {

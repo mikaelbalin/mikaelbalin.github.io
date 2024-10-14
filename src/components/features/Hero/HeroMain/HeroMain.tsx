@@ -13,7 +13,7 @@ import {
   MotionValue,
   SpringOptions,
 } from "framer-motion";
-import { MotionProvider, useMotionContext } from "context/motion-context";
+import { MotionProvider, useMotionContext } from "@/context/motion-context";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
