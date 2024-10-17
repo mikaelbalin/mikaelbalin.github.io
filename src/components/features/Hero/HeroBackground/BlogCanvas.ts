@@ -178,28 +178,6 @@ export class BlogCanvas extends Canvas {
     this.squares = squares;
   }
 
-  private isMouseOverSquare(
-    mouseX: number,
-    mouseY: number,
-    square: Square,
-  ): boolean {
-    const squareLeft = square.xPos;
-    const squareRight = square.xPos + Shared.squareSize;
-    const squareTop = square.yPos;
-    const squareBottom = square.yPos + Shared.squareSize;
-
-    if (
-      mouseX >= squareLeft &&
-      mouseX <= squareRight &&
-      mouseY >= squareTop &&
-      mouseY <= squareBottom
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   /**
    * Animates the squares on the canvas.
    * @param timestamp - The current timestamp in milliseconds.
