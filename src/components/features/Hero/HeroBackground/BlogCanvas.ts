@@ -6,12 +6,8 @@ import { Shared, Square } from "./Square";
  * Represents a canvas for the blog background.
  */
 export class BlogCanvas extends Canvas {
-  constructor(
-    canvas: HTMLCanvasElement,
-    colorScheme: MantineColorScheme,
-    mousePos?: MousePosition,
-  ) {
-    super(canvas, colorScheme, mousePos);
+  constructor(canvas: HTMLCanvasElement, colorScheme: MantineColorScheme) {
+    super(canvas, colorScheme);
   }
 
   /**

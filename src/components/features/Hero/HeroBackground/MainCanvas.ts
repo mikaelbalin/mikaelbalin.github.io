@@ -91,6 +91,12 @@ export class MainCanvas extends Canvas {
     return randomGroup;
   }
 
+  private get hoverColor(): string {
+    return this.colorScheme === "light"
+      ? theme.other.appLightColorBeigeDark
+      : theme.other.appDarkColorCoalBlackLight;
+  }
+
   /**
    * Sets active squares at regular intervals.
    * @returns {number} The ID of the interval timer.
@@ -120,10 +126,6 @@ export class MainCanvas extends Canvas {
 
     if (!this.mousePos) return;
     const { x, y } = this.mousePos;
-    const hoverColor =
-      this.colorScheme === "light"
-        ? theme.other.appLightColorBeigeDark
-        : theme.other.appDarkColorCoalBlackLight;
 
     this.squares.forEach((square) => {
       // Calculate the distance between the mouse and the center of the square.
@@ -138,7 +140,11 @@ export class MainCanvas extends Canvas {
       const opacity = Math.max(0, 1 - distance / 100);
 
       square.opacity = opacity || 1;
-      square.draw(this.ctx, opacity ? hoverColor : this.squareColor, !!opacity);
+      square.draw(
+        this.ctx,
+        opacity ? this.hoverColor : this.squareColor,
+        !!opacity,
+      );
     });
   }
 

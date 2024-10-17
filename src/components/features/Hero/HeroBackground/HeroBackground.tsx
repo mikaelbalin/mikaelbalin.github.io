@@ -61,7 +61,7 @@ export const HeroBackground = forwardRef<
 
     utilsRef.current =
       variant === "blog"
-        ? new BlogCanvas(canvas, colorScheme, mousePos.current)
+        ? new BlogCanvas(canvas, colorScheme)
         : new MainCanvas(canvas, colorScheme, mousePos.current);
 
     const handleMouseMove = (event: MouseEvent) => {
