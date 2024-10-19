@@ -77,7 +77,7 @@ export class Square {
     this.hasHover = hasHover;
 
     // Set text properties
-    ctx.font = "16px Arial"; // Adjust the font size and family as needed
+    ctx.font = "14px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "black"; // Set the text color
@@ -88,6 +88,8 @@ export class Square {
 
     // Draw the text
     ctx.fillText(`${this._opacity}`, textX, textY);
+    ctx.font = "10px Arial";
+    ctx.fillText(`${text?.toFixed(2)}`, textX, textY + 20);
   }
 
   public animate(
