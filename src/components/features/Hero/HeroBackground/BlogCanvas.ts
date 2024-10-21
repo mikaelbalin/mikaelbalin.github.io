@@ -133,11 +133,13 @@ export class BlogCanvas extends Canvas {
    */
   public setSquares() {
     this.drawReferenceShape();
+
     const rows = this.canvas.height / Shared.squareSize;
     const cols = this.canvas.width / Shared.squareSize;
 
     let minDistance = Infinity;
     let maxDistance = -Infinity;
+
     const squares: Square[] = [];
 
     for (let row = 0; row < rows; row++) {

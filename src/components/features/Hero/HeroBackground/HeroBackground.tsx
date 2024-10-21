@@ -73,6 +73,13 @@ export const HeroBackground = forwardRef<
     };
 
     const handleMouseOver = (event: MouseEvent) => {
+      if (!(utilsRef.current instanceof MainCanvas)) return;
+
+      if (!utilsRef.current.fadeInStartTime) {
+        utilsRef.current.fadeInStartTime = event.timeStamp;
+        utilsRef.current.fadeOutStartTime = null;
+      }
+
       mousePos.current = {
         x: event.clientX,
         y: event.clientY,
@@ -80,7 +87,12 @@ export const HeroBackground = forwardRef<
     };
 
     const handleMouseLeave = (event: MouseEvent) => {
-      mousePos.current = utilsRef.current?.setMousePos(undefined);
+      if (!(utilsRef.current instanceof MainCanvas)) return;
+
+      if (!utilsRef.current.fadeOutStartTime) {
+        utilsRef.current.fadeOutStartTime = event.timeStamp;
+        utilsRef.current.fadeInStartTime = null;
+      }
     };
 
     utilsRef.current.run(0, (id) => {
@@ -115,11 +127,7 @@ export const HeroBackground = forwardRef<
   }, [colorScheme, matches, variant]);
 
   useEffect(() => {
-    if (utilsRef.current instanceof BlogCanvas) {
-      utilsRef.current?.setSquares();
-    } else {
-      utilsRef.current?.drawSquares();
-    }
+    utilsRef.current?.setSquares();
   }, [width, height, colorScheme, variant]);
 
   return (

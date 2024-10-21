@@ -75,21 +75,6 @@ export class Square {
     ctx.fillStyle = alpha(color, this._opacity);
     ctx.fillRect(this.xPos, this.yPos, Shared.squareSize, Shared.squareSize);
     this.hasHover = hasHover;
-
-    // Set text properties
-    ctx.font = "14px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "black"; // Set the text color
-
-    // Calculate the text position
-    const textX = this.xPos + Shared.squareSize / 2;
-    const textY = this.yPos + Shared.squareSize / 2;
-
-    // Draw the text
-    ctx.fillText(`${this._opacity}`, textX, textY);
-    ctx.font = "10px Arial";
-    ctx.fillText(`${text?.toFixed(2)}`, textX, textY + 20);
   }
 
   public animate(

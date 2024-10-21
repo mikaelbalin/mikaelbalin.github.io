@@ -2,6 +2,7 @@ import { theme } from "@/theme";
 import { alpha, MantineColorScheme } from "@mantine/core";
 import { Canvas, MousePosition } from "./Canvas";
 import {
+  HOVER_ANIMATION_DURATION,
   LINE_ANIMATION_DURATION,
   SQUARE_SIZE_SMALL,
 } from "./HeroBackground.constants";
@@ -14,6 +15,8 @@ export class MainCanvas extends Canvas {
    * This value is used to scale the base duration to achieve the desired timing effect.
    */
   private readonly durationFactor = 3;
+  fadeInStartTime: number | null = null;
+  fadeOutStartTime: number | null = null;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -41,7 +44,7 @@ export class MainCanvas extends Canvas {
     if (elapsedTime <= LINE_ANIMATION_DURATION / this.durationFactor) {
       this.animateLines(elapsedTime);
     } else {
-      this.drawHover();
+      this.drawHover(timeStamp);
       this.animateSquares(timeStamp);
     }
 
@@ -120,12 +123,19 @@ export class MainCanvas extends Canvas {
   /**
    * Draws the hover effect on the canvas.
    */
-  private drawHover() {
+  private drawHover(timeStamp: DOMHighResTimeStamp) {
     this.ctx.fillStyle = this.squareColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     if (!this.mousePos) return;
     const { x, y } = this.mousePos;
+
+    const elapsedSinceFadeInStart = this.fadeInStartTime
+      ? timeStamp - this.fadeInStartTime
+      : HOVER_ANIMATION_DURATION;
+    const elapsedSinceFadeOutStart = this.fadeOutStartTime
+      ? timeStamp - this.fadeOutStartTime
+      : HOVER_ANIMATION_DURATION;
 
     this.squares.forEach((square) => {
       // Calculate the distance between the mouse and the center of the square.
@@ -139,7 +149,22 @@ export class MainCanvas extends Canvas {
       // Calculate the opacity based on the distance
       const opacity = Math.max(0, 1 - distance / 100);
 
-      square.opacity = opacity || 1;
+      if (elapsedSinceFadeInStart < HOVER_ANIMATION_DURATION) {
+        // Draw the hover effect on the canvas if the mouse is over the canvas. The effect fades in from 0 to `square.opacity`.
+        square.opacity = Math.min(
+          opacity,
+          elapsedSinceFadeInStart / HOVER_ANIMATION_DURATION,
+        );
+      } else if (elapsedSinceFadeOutStart < HOVER_ANIMATION_DURATION) {
+        // Draw the hover effect on the canvas if the mouse is out of the canvas. The effect fades out from `square.opacity` to 0.
+        square.opacity = Math.max(
+          0,
+          opacity - elapsedSinceFadeOutStart / HOVER_ANIMATION_DURATION,
+        );
+      } else if (this.fadeInStartTime) {
+        square.opacity = opacity || 1;
+      }
+
       square.draw(
         this.ctx,
         opacity ? this.hoverColor : this.squareColor,
@@ -165,7 +190,7 @@ export class MainCanvas extends Canvas {
   /**
    * Draws the squares on the canvas.
    */
-  public drawSquares() {
+  public setSquares() {
     const numX = Math.ceil(this.canvas.width / Shared.squareSize);
     const numY = Math.ceil(this.canvas.height / Shared.squareSize);
 
