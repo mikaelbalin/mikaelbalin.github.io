@@ -148,12 +148,14 @@ export class MainCanvas extends Canvas {
 
       // Calculate the opacity based on the distance
       const opacity = Math.max(0, 1 - distance / 100);
+      const hasHover = !!opacity;
 
-      if (elapsedSinceFadeInStart < HOVER_ANIMATION_DURATION) {
+      if (hasHover && elapsedSinceFadeInStart < HOVER_ANIMATION_DURATION) {
         // Draw the hover effect on the canvas if the mouse is over the canvas. The effect fades in from 0 to `square.opacity`.
         square.opacity = Math.min(
           opacity,
-          elapsedSinceFadeInStart / HOVER_ANIMATION_DURATION,
+          (1 - distance / 100) *
+            (elapsedSinceFadeInStart / HOVER_ANIMATION_DURATION),
         );
       } else if (elapsedSinceFadeOutStart < HOVER_ANIMATION_DURATION) {
         // Draw the hover effect on the canvas if the mouse is out of the canvas. The effect fades out from `square.opacity` to 0.
@@ -168,7 +170,7 @@ export class MainCanvas extends Canvas {
       square.draw(
         this.ctx,
         opacity ? this.hoverColor : this.squareColor,
-        !!opacity,
+        hasHover,
       );
     });
   }
