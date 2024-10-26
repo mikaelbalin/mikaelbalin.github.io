@@ -30,7 +30,7 @@ export abstract class Canvas {
   constructor(
     canvas: HTMLCanvasElement,
     colorScheme: MantineColorScheme,
-    mousePos?: MousePosition
+    mousePos?: MousePosition,
   ) {
     this.canvas = canvas;
     this.ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
@@ -57,7 +57,7 @@ export abstract class Canvas {
    */
   protected abstract run(
     timeStamp: DOMHighResTimeStamp,
-    onAnimationFrameRequest: (id: number) => void
+    onAnimationFrameRequest: (id: number) => void,
   ): void;
 
   /**
@@ -66,7 +66,7 @@ export abstract class Canvas {
    */
   protected tick(onAnimationFrameRequest: (id: number) => void) {
     onAnimationFrameRequest(
-      requestAnimationFrame((time) => this.run(time, onAnimationFrameRequest))
+      requestAnimationFrame((time) => this.run(time, onAnimationFrameRequest)),
     );
   }
 
