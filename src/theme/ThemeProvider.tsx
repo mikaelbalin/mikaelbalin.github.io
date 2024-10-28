@@ -9,7 +9,11 @@ export const ThemeProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+  <MantineProvider
+    theme={theme}
+    cssVariablesResolver={resolver}
+    defaultColorScheme="auto"
+  >
     {children}
   </MantineProvider>
 );

@@ -6,19 +6,23 @@ import {
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import classes from "./ColorSchemeToggle.module.css";
+import { ChangeEventHandler } from "react";
 
 export const ColorSchemeToggle = () => {
-  const { setColorScheme } = useMantineColorScheme();
+  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
 
   const isLightScheme = computedColorScheme === "light";
 
+  const toggleColorScheme: ChangeEventHandler<HTMLInputElement> = () =>
+    setColorScheme(isLightScheme ? "dark" : "light");
+
   return (
     <Switch
       checked={!isLightScheme}
-      onChange={(event) => setColorScheme(isLightScheme ? "dark" : "light")}
+      onChange={toggleColorScheme}
       size="md"
       classNames={{
         track: classes.track,
@@ -26,8 +30,14 @@ export const ColorSchemeToggle = () => {
       }}
       thumbIcon={
         <>
-          <IconSunHigh className={cn(classes.icon, classes.dark)} stroke={3} />
-          <IconMoon className={cn(classes.icon, classes.light)} stroke={3} />
+          <IconSunHigh
+            className={cn("w-3 h-3 color-black", classes.dark)}
+            stroke={3}
+          />
+          <IconMoon
+            className={cn("w-3 h-3 color-white", classes.light)}
+            stroke={3}
+          />
         </>
       }
     />

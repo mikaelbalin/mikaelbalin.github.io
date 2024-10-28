@@ -40,7 +40,7 @@ export const PostItem = ({ title, slug, tags, publishedAt }: PostCardProps) => {
         </div>
       </div>
       <motion.div
-        className="h-px bg-black w-full"
+        className="h-px bg-black dark:bg-white w-full"
         initial={{
           scaleX: 0,
           transformOrigin: "left",

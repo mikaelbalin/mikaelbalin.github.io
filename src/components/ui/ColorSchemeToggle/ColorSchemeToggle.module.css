@@ -1,10 +1,4 @@
-.icon {
-  width: rem(12);
-  height: rem(12);
-}
-
 .dark {
-  color: var(--mantine-color-black);
   @mixin dark {
     display: none;
   }
@@ -15,8 +9,6 @@
 }
 
 .light {
-  color: var(--mantine-color-white);
-
   @mixin light {
     display: none;
   }
@@ -27,8 +19,12 @@
 }
 
 .thumb {
+  background-color: var(--mantine-color-white);
+  border-color: var(--mantine-color-white);
+
   @mixin dark {
     background-color: var(--mantine-color-black);
+    border-color: var(--mantine-color-black);
   }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, useMantineColorScheme, useMantineTheme } from "@mantine/core";
+import { Stack, useComputedColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import { cn } from "@/lib/utils";
 import {
@@ -30,7 +30,7 @@ export const HeroBackground = forwardRef<
   PropsWithChildren<HeroBackgroundProps>
 >((props, ref) => {
   const { children, variant = "default" } = props;
-  const { colorScheme } = useMantineColorScheme();
+  const colorScheme = useComputedColorScheme("light");
   const { breakpoints } = useMantineTheme();
   const matches = useMediaQuery(`(min-width: ${breakpoints.sm})`);
   const { ref: elementRef, width, height } = useElementSize<HTMLDivElement>();
