@@ -74,6 +74,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
             onBlur={onBlur}
             onFocus={onFocus}
             value={value}
+            description={email.description}
           />
 
           <Button

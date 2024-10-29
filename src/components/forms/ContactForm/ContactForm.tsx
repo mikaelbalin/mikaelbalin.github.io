@@ -1,8 +1,10 @@
 "use client";
 
+import { contactFormSchema } from "@/lib/schemas";
 import { ContactFormProps } from "@/types/data";
 import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
+import Link from "next/link";
 
 export const ContactForm = (props: ContactFormProps) => {
   const { name, message, email } = props;
@@ -14,11 +16,9 @@ export const ContactForm = (props: ContactFormProps) => {
       email: "",
       message: "",
       termsOfService: false,
+      subscribeToNewsletter: false,
     },
-    validate: {
-      name: (value) => (value?.trim().length > 0 ? null : "Name is required"),
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    },
+    validate: zodResolver(contactFormSchema),
   });
 
   return (
@@ -52,7 +52,8 @@ export const ContactForm = (props: ContactFormProps) => {
         <Checkbox
           label={
             <>
-              I agree to sell my <Link href="/privacy">privacy</Link>
+              I agree to the terms of service and{" "}
+              <Link href="/privacy">privacy policy</Link>
             </>
           }
           key={form.key("termsOfService")}
