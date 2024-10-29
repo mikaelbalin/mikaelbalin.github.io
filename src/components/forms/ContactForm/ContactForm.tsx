@@ -46,12 +46,23 @@ export const ContactForm = (props: ContactFormProps) => {
           placeholder={message.placeholder}
           key={form.key("message")}
           {...form.getInputProps("message")}
+          resize="vertical"
         />
 
         <Checkbox
-          label="I agree to sell my privacy"
+          label={
+            <>
+              I agree to sell my <Link href="/privacy">privacy</Link>
+            </>
+          }
           key={form.key("termsOfService")}
           {...form.getInputProps("termsOfService", { type: "checkbox" })}
+        />
+
+        <Checkbox
+          label="Also subscribe me to your newsletter"
+          key={form.key("subscribeToNewsletter")}
+          {...form.getInputProps("subscribeToNewsletter", { type: "checkbox" })}
         />
       </div>
 
