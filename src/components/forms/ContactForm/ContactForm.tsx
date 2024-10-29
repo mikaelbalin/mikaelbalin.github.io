@@ -1,9 +1,11 @@
 "use client";
 
-import { contactFormSchema } from "@/lib/schemas";
+import { contactSubmitAction } from "@/data/actions/contact-actions";
+import { ContactFormSchema, contactFormSchema } from "@/lib/schemas";
 import { ContactFormProps } from "@/types/data";
 import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import Link from "next/link";
 
 export const ContactForm = (props: ContactFormProps) => {
@@ -21,8 +23,28 @@ export const ContactForm = (props: ContactFormProps) => {
     validate: zodResolver(contactFormSchema),
   });
 
+  const handleError = (errors: typeof form.errors) => {
+    const firstErrorPath = Object.keys(errors)[0];
+    form.getInputNode(firstErrorPath)?.focus();
+  };
+
+  const handleSubmit = async (values: ContactFormSchema) => {
+    const result = await contactSubmitAction(values);
+
+    if (result?.errors) {
+      form.setErrors(result.errors);
+    }
+
+    if (result?.strapiError) {
+      notifications.show({
+        title: result.strapiError.name,
+        message: result.strapiError.message,
+      });
+    }
+  };
+
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
       <div className="flex flex-col gap-6">
         <TextInput
           withAsterisk
