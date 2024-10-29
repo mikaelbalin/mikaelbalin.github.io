@@ -9,6 +9,8 @@ const password = z
     message: "Password must be between 6 and 100 characters",
   });
 
+const email = z.string().email({ message: "Invalid email" }).min(3).max(20);
+
 export const signinSchema = z.object({
   identifier: z
     .string()
@@ -25,8 +27,12 @@ export type SigninSchema = z.infer<typeof signinSchema>;
 
 export const signupSchema = z.object({
   username: z.string().min(3).max(20),
-  email: z.string().email({ message: "Invalid email" }).min(3).max(20),
+  email,
   password,
 });
 
 export type SignupSchema = z.infer<typeof signupSchema>;
+
+export const subscriptionSchema = z.object({ email });
+
+export type SubscriptionSchema = z.infer<typeof subscriptionSchema>;
