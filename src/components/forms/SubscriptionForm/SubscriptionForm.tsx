@@ -41,12 +41,10 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
         message: result.strapiError.message,
         color: "red",
       });
-    }
-
-    if (result?.email) {
+    } else {
       notifications.show({
         title: "Thank you!",
-        message: result.message,
+        message: result?.message,
         color: "green",
       });
       setIsSubscribed(true);
