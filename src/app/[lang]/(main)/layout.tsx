@@ -6,9 +6,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
-import "./global.css";
+import "../../global.css";
 import { Notifications } from "@mantine/notifications";
-import { Locale } from "../../i18n-config";
+import { Locale } from "../../../i18n-config";
 import { getGlobalPageData } from "@/data/loaders";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 

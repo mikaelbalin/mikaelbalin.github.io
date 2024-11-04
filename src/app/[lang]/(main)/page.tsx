@@ -10,7 +10,7 @@ import {
 } from "@/data/loaders";
 import { Metadata } from "next";
 import { PostLatest } from "@/components/features/Post/PostLatest";
-import { i18n } from "../../i18n-config";
+import { i18n } from "../../../i18n-config";
 
 // export async function generateMetadata(): Promise<Metadata> {
 //   const { data } = await getHomePageMetaData();
