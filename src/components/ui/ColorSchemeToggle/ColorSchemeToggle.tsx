@@ -25,17 +25,17 @@ export const ColorSchemeToggle = () => {
       onChange={toggleColorScheme}
       size="md"
       classNames={{
-        track: classes.track,
-        thumb: classes.thumb,
+        track: "bg-black dark:bg-white text-black dark:text-white border-0",
+        thumb: "bg-white dark:bg-black border-white dark:border-black",
       }}
       thumbIcon={
         <>
           <IconSunHigh
-            className={cn("w-3 h-3 color-black", classes.dark)}
+            className={cn("w-3 h-3 color-black block dark:hidden")}
             stroke={3}
           />
           <IconMoon
-            className={cn("w-3 h-3 color-white", classes.light)}
+            className={cn("w-3 h-3 color-white hidden dark:block")}
             stroke={3}
           />
         </>
