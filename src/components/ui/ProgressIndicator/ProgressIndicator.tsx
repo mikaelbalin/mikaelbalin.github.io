@@ -5,7 +5,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Text } from "@mantine/core";
 
 interface ProgressIndicatorProps {
-  target: RefObject<HTMLDivElement>;
+  target: RefObject<HTMLDivElement | null>;
 }
 
 export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {

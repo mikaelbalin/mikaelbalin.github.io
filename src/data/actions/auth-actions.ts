@@ -61,7 +61,7 @@ export async function registerUserAction(data: SignupSchema): Promise<
     };
   }
 
-  cookies().set("jwt", responseData.jwt, config);
+  (await cookies()).set("jwt", responseData.jwt, config);
 
   redirect("/me");
 }
@@ -105,13 +105,13 @@ export async function loginUserAction(data: SigninSchema): Promise<
     };
   }
 
-  cookies().set("jwt", responseData.jwt, config);
+  (await cookies()).set("jwt", responseData.jwt, config);
 
   redirect("/me");
 }
 
 export async function logoutAction() {
-  cookies().set("jwt", "", { ...config, maxAge: 0 });
+  (await cookies()).set("jwt", "", { ...config, maxAge: 0 });
   // cookies().delete("jwt");
   redirect("/");
 }

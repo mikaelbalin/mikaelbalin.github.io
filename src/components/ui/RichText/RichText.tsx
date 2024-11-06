@@ -77,13 +77,13 @@ const components: Partial<Components> = {
   code: (props) => <Code>{props.children}</Code>,
   pre: (props) => {
     const element = props.node?.children.find(
-      (node) => node.type === "element",
+      (node: any) => node.type === "element",
     );
     if (!element) {
       return null;
     }
 
-    const text = element.children.find((node) => node.type === "text");
+    const text = element.children.find((node: any) => node.type === "text");
     if (!text) {
       return null;
     }

@@ -5,13 +5,16 @@ import { ArticleFooter } from "@/components/features/Article/ArticleFooter";
 import { PostList } from "@/components/features/Post/PostList";
 import { Title } from "@mantine/core";
 
-export default async function Page({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-  params: { slug: string };
-}>) {
+export default async function Page(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: { slug: string };
+  }>,
+) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const { slug } = params;
   const data = await getArticleBySlug(slug);
 

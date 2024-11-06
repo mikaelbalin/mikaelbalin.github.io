@@ -2,7 +2,10 @@ import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
 import { getArticles } from "@/data/loaders";
 
-export default async function Page({ params }: { params: { tag: string } }) {
+export default async function Page(props: {
+  params: Promise<{ tag: string }>;
+}) {
+  const params = await props.params;
   const { tag } = params;
   const { data: articles, meta } = await getArticles(
     0,
