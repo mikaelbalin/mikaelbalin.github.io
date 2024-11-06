@@ -59,6 +59,7 @@ export interface UsersPermissionsUser extends DateMetadata {
 export interface GetUserMeLoaderResult {
   ok: boolean;
   data: UsersPermissionsUser | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any | null;
 }
 

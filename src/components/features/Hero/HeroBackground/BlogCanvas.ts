@@ -1,5 +1,5 @@
 import { MantineColorScheme } from "@mantine/core";
-import { Canvas, MousePosition } from "./Canvas";
+import { Canvas } from "./Canvas";
 import { Shared, Square } from "./Square";
 
 /**
@@ -61,7 +61,7 @@ export class BlogCanvas extends Canvas {
   private isSquareInShape(xPos: number, yPos: number): boolean {
     const pointsToCheck = [{ x: xPos, y: yPos + Shared.squareSize / 2 }];
 
-    for (let point of pointsToCheck) {
+    for (const point of pointsToCheck) {
       if (this.ctx.isPointInPath(point.x, point.y)) {
         return true;
       }

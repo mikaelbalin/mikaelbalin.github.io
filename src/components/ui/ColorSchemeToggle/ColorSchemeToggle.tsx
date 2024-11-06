@@ -5,11 +5,10 @@ import {
 } from "@mantine/core";
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import classes from "./ColorSchemeToggle.module.css";
 import { ChangeEventHandler } from "react";
 
 export const ColorSchemeToggle = () => {
-  const { setColorScheme, clearColorScheme } = useMantineColorScheme();
+  const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });

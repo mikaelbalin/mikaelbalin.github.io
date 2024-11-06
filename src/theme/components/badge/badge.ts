@@ -18,6 +18,7 @@ export default Badge.extend({
             "text-sm text-appLightColorGrey dark:text-appDarkColorGreyLight normal-case font-normal tracking-normal",
         };
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   vars: (theme, props) => ({
     root: {
       "--badge-bg": "transparent",

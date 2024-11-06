@@ -1,7 +1,7 @@
 import { Title } from "@mantine/core";
 
 export default Title.extend({
-  classNames: (theme, { order, className, size }, ctx) => {
+  classNames: (theme, { order, className, size }) => {
     const titleSize = size !== undefined ? size : `h${order}`;
 
     switch (titleSize) {

@@ -15,7 +15,7 @@ function getLocale(request: NextRequest): string | undefined {
   const locales: string[] = [...i18n.locales];
 
   // Use negotiator and intl-localematcher to get best locale
-  let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales,
   );
 

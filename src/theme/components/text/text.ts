@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Text } from "@mantine/core";
 
 export default Text.extend({
-  classNames(theme, props, ctx) {
+  classNames(theme, props) {
     return {
       root: cn(
         props.size === "sm" && "text-sm",

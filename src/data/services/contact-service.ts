@@ -19,7 +19,7 @@ export async function contactService(
         name: string;
         message: string | null;
       };
-      meta?: {};
+      meta?: object;
     }
   | undefined
 > {

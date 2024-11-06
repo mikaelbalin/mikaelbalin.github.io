@@ -17,6 +17,7 @@ export default Chip.extend({
       "dark:hover:!bg-appDarkColorCoalBlack dark:hover:data-[checked=true]:!bg-appDarkColorGreyLight",
     ),
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   vars: (theme, props) => ({
     root: {
       "--chip-radius": "0",

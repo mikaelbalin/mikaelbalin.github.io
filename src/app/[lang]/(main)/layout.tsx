@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/theme";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ColorSchemeScript } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";

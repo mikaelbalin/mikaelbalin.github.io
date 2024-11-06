@@ -14,6 +14,7 @@ const baseUrl = getStrapiURL();
 
 async function fetchData<T>(url: string) {
   const authToken = null; // we will implement this later getAuthToken() later
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const headers = {
     method: "GET",
     headers: {

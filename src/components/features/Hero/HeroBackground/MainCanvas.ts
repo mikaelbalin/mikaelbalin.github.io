@@ -65,7 +65,7 @@ export class MainCanvas extends Canvas {
       return [];
     }
 
-    const filterSquares = (condition: (square: any) => boolean) =>
+    const filterSquares = (condition: (square: Square) => boolean) =>
       this.squares.filter(condition);
 
     const groupSquare = filterSquares(

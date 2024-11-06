@@ -1,6 +1,5 @@
 import { SignupForm } from "@/components/forms/SignupForm";
-import { cn } from "@/lib/utils";
-import { Text, Container, Title } from "@mantine/core";
+import { Text, Title } from "@mantine/core";
 import Link from "next/link";
 
 export default function SingUpRoute() {

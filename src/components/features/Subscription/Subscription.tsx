@@ -3,6 +3,7 @@ import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
 import { SubscriptionProps } from "@/types/data";
 
 export const Subscription = (props: SubscriptionProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { title, text, id, ...rest } = props;
   return (
     <Container component="section" className="mb-14 sm:mb-24">

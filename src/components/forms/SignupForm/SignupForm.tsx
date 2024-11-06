@@ -1,6 +1,5 @@
 "use client";
 
-import { StrapiErrors, StrapiErrorsProps } from "@/components/ui/StrapiErrors";
 import { registerUserAction } from "@/data/actions/auth-actions";
 import { signupSchema, SignupSchema } from "@/lib/schemas";
 import { Button, Paper, PasswordInput, TextInput } from "@mantine/core";

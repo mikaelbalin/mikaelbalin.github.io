@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Title,
   TitleOrder,
@@ -92,7 +93,7 @@ const components: Partial<Components> = {
   },
   kbd: (props) => <Kbd>{props.children}</Kbd>,
   mark: (props) => <Mark>{props.children}</Mark>,
-  hr: (props) => <Divider className="my-8" />,
+  hr: () => <Divider className="my-8" />,
   a: (props) => (
     <Anchor component={Link} href={props.href || "/"}>
       {props.children}

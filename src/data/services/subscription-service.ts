@@ -18,7 +18,7 @@ export async function subscribeService(data: SubscriptionSchema): Promise<
         name: string;
         message: string | null;
       };
-      meta?: {};
+      meta?: object;
     }
   | undefined
 > {
