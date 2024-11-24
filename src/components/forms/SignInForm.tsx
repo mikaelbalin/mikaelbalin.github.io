@@ -15,7 +15,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import React from "react";
 
-export function SigninForm() {
+export function SignInForm() {
   const form = useForm<SigninSchema>({
     mode: "uncontrolled",
     initialValues: {

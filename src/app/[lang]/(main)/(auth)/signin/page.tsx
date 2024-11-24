@@ -1,5 +1,5 @@
 import { Title, Text } from "@mantine/core";
-import { SigninForm } from "@/components/forms/SigninForm";
+import { SignInForm } from "@/components/forms/SignInForm";
 import Link from "next/link";
 
 export default function SignInRoute() {
@@ -9,7 +9,7 @@ export default function SignInRoute() {
       <Text c="dimmed" size="sm">
         Enter your details to sign in to your account
       </Text>
-      <SigninForm />
+      <SignInForm />
       <Text>
         Do not have an account yet? <Link href="/signup">Create account</Link>
       </Text>

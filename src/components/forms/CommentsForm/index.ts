@@ -1,1 +1,0 @@
-export { CommentsForm } from "./CommentsForm";
