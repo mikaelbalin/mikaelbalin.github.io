@@ -12,6 +12,7 @@ import { Notifications } from "@mantine/notifications";
 import { Locale } from "../../../i18n-config";
 import { getGlobalPageData } from "@/data/loaders";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,6 +52,7 @@ export default async function RootLayout(
           )}
           <Notifications position="bottom-center" />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
