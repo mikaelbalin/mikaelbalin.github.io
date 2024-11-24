@@ -35,6 +35,7 @@ export async function middleware(request: NextRequest) {
     [
       "/manifest.json",
       "/favicon.ico",
+      "/admin",
       // Your other files in `public`
     ].includes(pathname)
   ) {
