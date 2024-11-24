@@ -26,6 +26,8 @@ export default async function Page() {
   const subscriptionData = await getSubscriptionData();
   const { data: articlesData } = await getArticles();
 
+  if (!strapiData) return null;
+
   return (
     <>
       <HeroMain {...strapiData.hero} />

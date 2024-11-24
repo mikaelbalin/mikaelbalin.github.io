@@ -41,11 +41,13 @@ export default async function RootLayout(
       <head>{/* <ColorSchemeScript defaultColorScheme="auto" /> */}</head>
       <body className={inter.className}>
         <ThemeProvider>
-          <div className="relative flex flex-col min-h-screen">
-            <Header {...globalData.header} user={user} />
-            <main className="flex-1">{children}</main>
-            <Footer {...globalData.footer} />
-          </div>
+          {globalData && (
+            <div className="relative flex flex-col min-h-screen">
+              <Header {...globalData.header} user={user} />
+              <main className="flex-1">{children}</main>
+              <Footer {...globalData.footer} />
+            </div>
+          )}
           <Notifications position="bottom-center" />
         </ThemeProvider>
       </body>
