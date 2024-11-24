@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
-import { LogoutForm } from "@/components/forms/LogoutForm";
+// import { LogoutForm } from "@/components/forms/LogoutForm";
 
 type MenuItem = {
   link: Locale | string;
@@ -46,7 +46,10 @@ const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
 }));
 
 export function Header(props: HeaderProps) {
-  const { logoText, user } = props;
+  const {
+    logoText,
+    // user
+  } = props;
 
   const pathName = usePathname();
   const { lang } = useParams<{ lang: Locale }>();
@@ -152,13 +155,13 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
-            {user?.ok ? (
+            {/* {user?.ok ? (
               <LogoutForm />
             ) : (
               <Link href="/signin" className="hidden sm:block">
                 <IconLogin stroke={2} />
               </Link>
-            )}
+            )} */}
           </Group>
         </Group>
       </Container>
