@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: any,
   // : Readonly<
   //   {

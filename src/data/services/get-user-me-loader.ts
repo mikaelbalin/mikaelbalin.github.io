@@ -17,7 +17,7 @@ export async function getUserMeLoader(): Promise<GetUserMeLoaderResult> {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authToken}`,
       },
-      cache: "no-cache",
+      // cache: "no-cache",
     });
 
     const data = await response.json();

@@ -32,7 +32,7 @@ export async function loginUserService(userData: SigninSchema) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...userData }),
-      cache: "no-cache",
+      // cache: "no-cache",
     });
 
     return response.json();
