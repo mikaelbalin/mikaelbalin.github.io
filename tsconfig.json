@@ -32,11 +32,12 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
+    ".next/types/**/*.ts",
     "**/*.tsx",
-    "src/app/my-mdx-page/page.mdx"
+    "next-env.d.ts",
+    "src/app/my-mdx-page/page.mdx",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

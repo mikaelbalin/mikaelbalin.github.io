@@ -6,10 +6,12 @@ import { PostList } from "@/components/features/Post/PostList";
 import { Title } from "@mantine/core";
 
 export default async function Page(
-  props: Readonly<{
-    children: React.ReactNode;
-    params: { slug: string };
-  }>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: any,
+  // Readonly<{
+  //   children: React.ReactNode;
+  //   params: { slug: string };
+  // }>,
 ) {
   const params = await props.params;
 

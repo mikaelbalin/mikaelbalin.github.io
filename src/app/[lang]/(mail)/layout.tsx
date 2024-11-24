@@ -3,7 +3,7 @@ import "@mantine/core/styles.css";
 import "../global.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { Locale } from "../../../i18n-config";
+// import { Locale } from "../../../i18n-config";
 import { ColorSchemeScript } from "@mantine/core";
 import { cn } from "@/lib/utils";
 
@@ -15,13 +15,15 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout(
-  props: Readonly<
-    {
-      children: React.ReactNode;
-    } & {
-      params: { lang: Locale };
-    }
-  >,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  props: any,
+  // : Readonly<
+  //   {
+  //     children: React.ReactNode;
+  //   } & {
+  //     params: { lang: Locale };
+  //   }
+  // >,
 ) {
   const params = await props.params;
 
