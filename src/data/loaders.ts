@@ -26,13 +26,21 @@ async function fetchData<T>(url: string) {
   try {
     const response = await fetch(
       url,
-      { cache: "no-store" }, // opt out of Next.js cache
+      // { cache: "no-store" }, // opt out of Next.js cache
     );
     const data: T = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error; // or return null;
+    if (error instanceof TypeError) {
+      console.error("TypeError:", error.message);
+    } else if (error instanceof SyntaxError) {
+      console.error("SyntaxError:", error.message);
+    } else if (error instanceof Error) {
+      console.error("Generic Error:", error.message);
+    } else {
+      console.error("Unknown error type:", error);
+    }
+    throw null;
   }
 }
 
