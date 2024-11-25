@@ -15,6 +15,7 @@ export default tseslint.config(
     ignores: [".next/*", "node_modules/*"],
     rules: {
       "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 );
