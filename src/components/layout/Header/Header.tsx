@@ -16,39 +16,29 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { HeaderProps } from "@/types/data";
+import { DataLink, HeaderProps, MenuItem } from "@/types/data";
 import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
-
-type MenuItem = {
-  link: Locale | string;
-  label: string;
-  links?: Omit<MenuItem, "links">[];
-};
-
-const menuItems: MenuItem[] = [
-  { link: "/blog", label: "Blog" },
-  { link: "/#about", label: "About" },
-  { link: "/#contact", label: "Contact" },
-];
 
 const labels: Record<Locale, string> = {
   en: "English",
   pt: "Portugais",
 };
 
-const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
-  link: locale,
-  label: labels[locale],
+const languageMenuItems: DataLink[] = i18n.locales.map((locale) => ({
+  url: locale,
+  text: labels[locale],
 }));
 
 export function Header(props: HeaderProps) {
   const {
     logoText,
+    navLinks,
     // user
   } = props;
+  console.log({ navLinks });
 
   const pathName = usePathname();
   const { lang } = useParams<{ lang: Locale }>();
@@ -63,40 +53,43 @@ export function Header(props: HeaderProps) {
 
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
-      key={menuItem.label}
+      key={menuItem.text}
       className="flex items-center w-full h-11 px-6 dark:text-white"
-      href={menuItem.link}
+      href={menuItem.url}
     >
-      {menuItem.label}
+      {menuItem.text}
     </Link>
   ));
 
-  const redirectedPathName = (locale: Locale) => {
+  const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
     const segments = pathName.split("/");
     segments[1] = locale;
     return segments.join("/");
   };
 
-  const menu = [
-    ...menuItems,
-    { link: lang, label: labels[lang], links: languageMenuItems },
-  ].map((menuItem) => {
+  const langLink: MenuItem = {
+    url: lang,
+    text: labels[lang],
+    links: languageMenuItems,
+  };
+
+  const menu = [...navLinks, langLink].map((menuItem) => {
     const menuItems = menuItem.links?.map((item) => (
       <Menu.Item
-        key={item.link}
+        key={item.url}
         component={Link}
-        href={redirectedPathName(item.link as Locale)}
+        href={redirectedPathName(item.url)}
         className="dark:text-white"
       >
-        {item.label}
+        {item.text}
       </Menu.Item>
     ));
 
     if (menuItems) {
       return (
         <Menu
-          key={menuItem.link}
+          key={menuItem.url}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -116,7 +109,7 @@ export function Header(props: HeaderProps) {
                 "sm:text-lg sm:leading-13 sm:px-0",
               )}
             >
-              <LangugeToggle label={menuItem.label} linksOpened={linksOpened} />
+              <LangugeToggle label={menuItem.text} linksOpened={linksOpened} />
             </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
@@ -126,16 +119,16 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={menuItem.link}
+        key={menuItem.url}
         component={Link}
-        href={menuItem.link}
+        href={menuItem.url}
         className={cn(
           "flex items-center w-full h-11 px-4",
           "text-sm text-black dark:text-white font-medium",
           "sm:w-auto sm:h-full sm:px-0",
         )}
       >
-        {menuItem.label}
+        {menuItem.text}
       </Anchor>
     );
   });

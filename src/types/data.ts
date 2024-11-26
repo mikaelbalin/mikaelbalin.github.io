@@ -1,8 +1,8 @@
 export interface DataLink {
-  id: number;
+  id?: number;
   url: string;
   text: string;
-  isExternal: boolean;
+  isExternal?: boolean | null;
 }
 
 interface FormControl {
@@ -63,10 +63,14 @@ export interface GetUserMeLoaderResult {
   error: any | null;
 }
 
+export type MenuItem = DataLink & {
+  links?: Omit<DataLink, "links">[];
+};
+
 export interface HeaderProps {
   id: number;
   logoText: DataLink;
-  navLinks: DataLink[];
+  navLinks: MenuItem[];
   user?: GetUserMeLoaderResult;
 }
 
