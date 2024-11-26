@@ -1,6 +1,6 @@
 "use client";
 
-import { IconLogin } from "@tabler/icons-react";
+// import { IconLogin } from "@tabler/icons-react";
 import { ColorSchemeToggle } from "@/components/ui/ColorSchemeToggle";
 import { Logo } from "@/components/ui/Logo";
 import {
@@ -21,7 +21,6 @@ import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
-// import { LogoutForm } from "@/components/forms/LogoutForm";
 
 type MenuItem = {
   link: Locale | string;
@@ -200,12 +199,12 @@ export function Header(props: HeaderProps) {
                 <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
               </UnstyledButton>
               <Collapse in={linksOpened}>{languageButtons}</Collapse>
-              <Link
+              {/* <Link
                 href="/signin"
                 className="flex items-center w-full h-11 px-4"
               >
                 <IconLogin stroke={2} />
-              </Link>
+              </Link> */}
             </ScrollArea>
           </Drawer.Body>
         </Drawer.Content>
