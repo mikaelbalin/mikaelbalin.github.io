@@ -1,8 +1,14 @@
-import { createContext, PropsWithChildren, useContext, useRef } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useRef,
+  RefObject,
+} from "react";
 import { MotionValue } from "framer-motion";
 
 interface MotionContextProps {
-  y: React.MutableRefObject<MotionValue<number> | undefined>;
+  y: RefObject<MotionValue<number> | undefined>;
 }
 
 const MotionContext = createContext<MotionContextProps | undefined>(undefined);
