@@ -30,8 +30,8 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   { link: "/blog", label: "Blog" },
-  { link: "#about", label: "About" },
-  { link: "/contact", label: "Contact" },
+  { link: "/#about", label: "About" },
+  { link: "/#contact", label: "Contact" },
 ];
 
 const labels: Record<Locale, string> = {
