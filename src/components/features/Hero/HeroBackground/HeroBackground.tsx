@@ -134,7 +134,7 @@ export const HeroBackground = forwardRef<
     <Stack
       component="section"
       className={cn("relative overflow-hidden pt-16 sm:pt-19.5", {
-        "min-h-lvh": variant === "default",
+        "min-h-dvh": variant === "default",
       })}
     >
       <motion.div
