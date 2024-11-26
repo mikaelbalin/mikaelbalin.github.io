@@ -77,6 +77,10 @@ export async function getGlobalPageData() {
   url.searchParams.append(`populate[footer][populate][2]`, "form.name");
   url.searchParams.append(`populate[footer][populate][3]`, "form.email");
   url.searchParams.append(`populate[footer][populate][4]`, "form.message");
+  url.searchParams.append(
+    `populate[footer][populate][5]`,
+    "navigation.navLinks",
+  );
 
   const { data } = await fetchData<{ data?: GlobalPageData }>(url.href);
   return data;

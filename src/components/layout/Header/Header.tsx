@@ -38,7 +38,6 @@ export function Header(props: HeaderProps) {
     navLinks,
     // user
   } = props;
-  console.log({ navLinks });
 
   const pathName = usePathname();
   const { lang } = useParams<{ lang: Locale }>();

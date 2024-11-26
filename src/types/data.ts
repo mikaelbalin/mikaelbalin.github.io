@@ -100,6 +100,12 @@ export interface ContactProps {
 export interface FooterProps extends ContactProps {
   id: number;
   titles: [string[], string[]];
+  navigation: {
+    id: number;
+    title: string;
+    topButton: string;
+    navLinks: DataLink[];
+  };
 }
 
 export interface SubscriptionFormProps {

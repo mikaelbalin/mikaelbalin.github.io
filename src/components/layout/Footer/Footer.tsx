@@ -5,15 +5,9 @@ import { FooterProps } from "@/types/data";
 import Link from "next/link";
 import { ScrollTopButton } from "@/components/ui/ScrollTopButton";
 
-const links = [
-  { link: "#", label: "Contact" },
-  { link: "#", label: "Privacy" },
-  { link: "#", label: "Blog" },
-  { link: "#", label: "Careers" },
-];
-
 export function Footer(props: FooterProps) {
-  const { titles, contacts, social, form } = props;
+  const { titles, contacts, social, form, navigation } = props;
+  console.log({ props });
 
   return (
     <footer>
@@ -23,20 +17,23 @@ export function Footer(props: FooterProps) {
 
       <Container>
         <Box className="border-t border-black dark:border-white pt-14 pb-16 sm:pb-24">
-          <Text className="mb-6 sm:mb-8">Content</Text>
+          <Text className="mb-6 sm:mb-8">{navigation.title}</Text>
 
           <div className="flex flex-col gap-6 items-start sm:flex-row">
-            {links.map((link) => (
+            {navigation.navLinks.map((link) => (
               <Link
-                key={link.label}
-                href={link.link}
+                key={link.url}
+                href={link.url}
                 className="text-xl leading-7 sm:text-2xl"
               >
-                {link.label}
+                {link.text}
               </Link>
             ))}
 
-            <ScrollTopButton className="mt-4 sm:mt-0 sm:ml-auto" />
+            <ScrollTopButton
+              className="mt-4 sm:mt-0 sm:ml-auto"
+              title={navigation.topButton}
+            />
           </div>
         </Box>
       </Container>
