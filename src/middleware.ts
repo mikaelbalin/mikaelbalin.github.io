@@ -30,12 +30,13 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const user = await getUserMeLoader();
 
+  console.log({ pathname });
+
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   if (
     [
       "/manifest.json",
       "/favicon.ico",
-      "/admin",
       // Your other files in `public`
     ].includes(pathname)
   ) {
@@ -83,5 +84,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|admin).*)"],
 };

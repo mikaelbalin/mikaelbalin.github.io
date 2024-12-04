@@ -27,7 +27,8 @@
       "@/data/*": ["data/*"],
       "@/lib/*": ["lib/*"],
       "@/types/*": ["types/*"],
-      "@/context/*": ["context/*"]
+      "@/context/*": ["context/*"],
+      "@payload-config": ["./payload.config.ts"]
     },
     "forceConsistentCasingInFileNames": true
   },
