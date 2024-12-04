@@ -76,7 +76,7 @@ export function Header(props: HeaderProps) {
   const menu = [...navLinks, langLink].map((menuItem) => {
     const menuItems = menuItem.links?.map((item) => (
       <Menu.Item
-        key={item.url}
+        key={item.text}
         component={Link}
         href={redirectedPathName(item.url)}
         className="dark:text-white"
@@ -88,7 +88,7 @@ export function Header(props: HeaderProps) {
     if (menuItems) {
       return (
         <Menu
-          key={menuItem.url}
+          key={menuItem.text}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -118,7 +118,7 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={menuItem.url}
+        key={menuItem.text}
         component={Link}
         href={menuItem.url}
         className={cn(

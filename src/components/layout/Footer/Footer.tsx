@@ -7,7 +7,6 @@ import { ScrollTopButton } from "@/components/ui/ScrollTopButton";
 
 export function Footer(props: FooterProps) {
   const { titles, contacts, social, form, navigation } = props;
-  console.log({ props });
 
   return (
     <footer>
@@ -22,7 +21,7 @@ export function Footer(props: FooterProps) {
           <div className="flex flex-col gap-6 items-start sm:flex-row">
             {navigation.navLinks.map((link) => (
               <Link
-                key={link.url}
+                key={link.text}
                 href={link.url}
                 className="text-xl leading-7 sm:text-2xl"
               >
