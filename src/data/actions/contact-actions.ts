@@ -31,8 +31,6 @@ export async function contactSubmitAction(data: ContactFormSchema): Promise<
     await subscribeService({ email });
   }
 
-  console.log({ responseData });
-
   if (!responseData) {
     return {
       ...data,
