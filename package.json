@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "check-types": "tsc --noEmit --watch",
+    "check-types": "tsc --noEmit",
+    "check-types:watch": "pnpm check-types --watch",
     "analyze": "ANALYZE=true yarn build",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"

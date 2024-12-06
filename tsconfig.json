@@ -1,25 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "baseUrl": "src/",
+    "esModuleInterop": true,
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
-    "esModuleInterop": true,
+    "jsx": "preserve",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
+    "sourceMap": true,
     "isolatedModules": true,
-    "jsx": "preserve",
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "sourceMap": true,
-    "baseUrl": "src/",
+
     "paths": {
       "@/components/*": ["components/*"],
       "@/theme": ["theme/index.ts"],
@@ -29,8 +32,7 @@
       "@/types/*": ["types/*"],
       "@/context/*": ["context/*"],
       "@payload-config": ["./payload.config.ts"]
-    },
-    "forceConsistentCasingInFileNames": true
+    }
   },
   "include": [
     "**/*.ts",
