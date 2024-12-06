@@ -1,3 +1,5 @@
+// @ts-check
+
 import nextBundleAnalyzer from "@next/bundle-analyzer";
 import nextMDX from "@next/mdx";
 import { withPayload } from "@payloadcms/next/withPayload";
@@ -39,6 +41,7 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: true,
 };
 
 export default withBundleAnalyzer(withMDX(withPayload(nextConfig)));
