@@ -1,10 +1,14 @@
 import sharp from "sharp";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import path from "path";
+import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 
 const isDevelopment = process.env.NODE_ENV === "development";
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
   // If you'd like to use Rich Text, pass your editor here
@@ -33,4 +37,7 @@ export default buildConfig({
   // This is optional - if you don't need to do these things,
   // you don't need it!
   sharp,
+  typescript: {
+    outputFile: path.resolve(dirname, "payload-types.ts"),
+  },
 });
