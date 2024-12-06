@@ -34,11 +34,10 @@
   },
   "include": [
     "**/*.ts",
-    ".next/types/**/*.ts",
     "**/*.tsx",
+    ".next/types/**/*.ts",
     "next-env.d.ts",
-    "src/app/my-mdx-page/page.mdx",
-    ".next/types/**/*.ts"
+    "src/app/my-mdx-page/page.mdx"
   ],
   "exclude": ["node_modules"]
 }
