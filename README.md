@@ -7,20 +7,28 @@
 A quick introduction of the minimal setup you need to get a hello world up & running.
 
 ```shell
-yarn install
-yarn start
+pnpm install
 ```
 
 ### Initial Configuration
 
-Some projects require initial configuration (e.g. access tokens or keys, `npm i`).
+Some projects require initial configuration (e.g. access tokens or keys).
+
+```shell
+# Database connection string
+POSTGRES_URL=postgres://postgres:<password>@127.0.0.1:5432/payload
+# Used to encrypt JWT tokens
+PAYLOAD_SECRET=secret
+# Used to configure CORS, format links and more. No trailing slash
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+```
 
 ## Developing
 
 Here's a brief intro about what a developer must do in order to start developing the project further:
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 ### Building
@@ -29,7 +37,7 @@ If your project needs some additional steps for the developer to build the
 project after some code changes, state them here:
 
 ```shell
-yarn build
+pnpm build
 ```
 
 ### Deploying / Publishing
