@@ -17,14 +17,10 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AdminBar } from "@/components/AdminBar";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { draftMode } from "next/headers";
+import { getServerSideURL } from "@/utilities/getURL";
+import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Mikael Balin",
-  description:
-    "Full-stack developer crafting elegant solutions through clean code and thoughtful design. Explore my projects, technical articles, and insights into modern web development.",
-};
 
 export default async function RootLayout(
   props: Readonly<
@@ -72,3 +68,15 @@ export default async function RootLayout(
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Mikael Balin",
+  description:
+    "Full-stack developer crafting elegant solutions through clean code and thoughtful design. Explore my projects, technical articles, and insights into modern web development.",
+  metadataBase: new URL(getServerSideURL()),
+  openGraph: mergeOpenGraph(),
+  twitter: {
+    card: "summary_large_image",
+    creator: "@payloadcms",
+  },
+};
