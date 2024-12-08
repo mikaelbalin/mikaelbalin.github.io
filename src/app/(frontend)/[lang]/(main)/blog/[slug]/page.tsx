@@ -1,6 +1,6 @@
 import { ArticleContent } from "@/components/features/Article/ArticleContent";
 import { getArticleBySlug } from "@/data/loaders";
-import { i18n } from "../../../../../i18n-config";
+import { i18n } from "../../../../../../i18n-config";
 import { getArticles } from "@/data/loaders";
 
 export async function generateStaticParams() {

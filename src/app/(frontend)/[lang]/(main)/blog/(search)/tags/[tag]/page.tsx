@@ -1,7 +1,7 @@
 import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
 import { getArticles, getTags } from "@/data/loaders";
-import { i18n } from "../../../../../../../i18n-config";
+import { i18n } from "../../../../../../../../i18n-config";
 import { Metadata } from "next";
 
 type Props = {

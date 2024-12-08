@@ -1,7 +1,7 @@
 import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
 import { getArticles } from "@/data/loaders";
-import { generateLanguageParams } from "../../../../../i18n-config";
+import { generateLanguageParams } from "../../../../../../i18n-config";
 
 export const generateStaticParams = generateLanguageParams;
 
