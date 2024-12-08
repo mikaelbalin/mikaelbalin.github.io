@@ -14,6 +14,9 @@ import { getGlobalPageData } from "@/data/loaders";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AdminBar } from "@/components/AdminBar";
+import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { draftMode } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,12 +41,19 @@ export default async function RootLayout(
 
   const globalData = await getGlobalPageData();
   const user = await getUserMeLoader();
+  const { isEnabled } = await draftMode();
 
   return (
     <html lang={params.lang} className="relative">
       <head>{/* <ColorSchemeScript defaultColorScheme="auto" /> */}</head>
       <body className={inter.className}>
         <ThemeProvider>
+          <AdminBar
+            adminBarProps={{
+              preview: isEnabled,
+            }}
+          />
+          <LivePreviewListener />
           {globalData && (
             <div className="relative flex flex-col min-h-screen">
               <Header {...globalData.header} user={user} />
