@@ -45,7 +45,10 @@ export default async function RootLayout(
 
   return (
     <html lang={params.lang} className="relative">
-      <head>{/* <ColorSchemeScript defaultColorScheme="auto" /> */}</head>
+      <head>
+        <link href="/favicon.ico" rel="icon" sizes="32x32" />
+        {/* <ColorSchemeScript defaultColorScheme="auto" /> */}
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
           <AdminBar
