@@ -30,8 +30,6 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const user = await getUserMeLoader();
 
-  console.log({ pathname });
-
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   if (
     [

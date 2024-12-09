@@ -1,4 +1,5 @@
 "use client";
+
 import { useHeaderTheme } from "@/providers/HeaderTheme";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,7 +30,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
 
   return (
     <header
-      className="container relative z-20   "
+      className="container relative z-20"
       {...(theme ? { "data-theme": theme } : {})}
     >
       <div className="py-8 border-b border-border flex justify-between">
