@@ -13,6 +13,12 @@ const defaultOpenGraph: Metadata["openGraph"] = {
   title: "Payload Website Template",
 };
 
+/**
+ * Merges the provided Open Graph metadata with the default Open Graph metadata.
+ *
+ * @param og - The Open Graph metadata to merge. If not provided, the default Open Graph metadata will be used.
+ * @returns The merged Open Graph metadata.
+ */
 export const mergeOpenGraph = (
   og?: Metadata["openGraph"],
 ): Metadata["openGraph"] => {
