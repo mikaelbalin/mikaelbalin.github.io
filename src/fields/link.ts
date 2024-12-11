@@ -19,11 +19,17 @@ const appearanceOptions: Record<
 };
 
 type LinkType = (options?: {
+  /** An array of appearance options to use. */
   appearances?: LinkAppearances[] | false;
+  /** If true, the label field will be disabled. */
   disableLabel?: boolean;
+  /** Additional overrides to merge with the default link field configuration. */
   overrides?: Record<string, unknown>;
 }) => Field;
 
+/**
+ * Generates a link field configuration.
+ */
 export const link: LinkType = ({
   appearances,
   disableLabel = false,
