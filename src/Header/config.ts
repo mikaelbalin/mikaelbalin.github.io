@@ -1,6 +1,14 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
 import { link } from "@/fields/link";
-import { revalidateHeader } from "./hooks/revalidateHeader";
+import { revalidateTag } from "next/cache";
+
+const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {
+  payload.logger.info(`Revalidating header`);
+
+  revalidateTag("global_header");
+
+  return doc;
+};
 
 export const Header: GlobalConfig = {
   slug: "header",
