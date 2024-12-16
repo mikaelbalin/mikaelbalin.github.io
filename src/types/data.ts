@@ -63,17 +63,6 @@ export interface GetUserMeLoaderResult {
   error: any | null;
 }
 
-export type MenuItem = DataLink & {
-  links?: Omit<DataLink, "links">[];
-};
-
-export interface HeaderProps {
-  id: number;
-  logoText: DataLink;
-  navLinks: MenuItem[];
-  user?: GetUserMeLoaderResult;
-}
-
 export interface ContactFormProps {
   id: number;
   title: string;
@@ -123,7 +112,6 @@ export interface GlobalPageData extends DateMetadata {
   id: number;
   documentId: string;
   locale: string;
-  header: HeaderProps;
   footer: FooterProps;
 }
 

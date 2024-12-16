@@ -16,28 +16,26 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { DataLink, HeaderProps, MenuItem } from "@/types/data";
 import { cn } from "@/lib/utils";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
+import { Header as HeaderProps } from "@/payload-types";
+
+type MenuItem = NonNullable<HeaderProps["navItems"]>[number]["link"];
 
 const labels: Record<Locale, string> = {
   en: "English",
   pt: "Portugais",
 };
 
-const languageMenuItems: DataLink[] = i18n.locales.map((locale) => ({
+const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
   url: locale,
-  text: labels[locale],
+  label: labels[locale],
 }));
 
 export function Header(props: HeaderProps) {
-  const {
-    logoText,
-    navLinks,
-    // user
-  } = props;
+  const { logo, navItems: navLinks } = props;
 
   const pathName = usePathname();
   const { lang } = useParams<{ lang: Locale }>();
@@ -52,11 +50,11 @@ export function Header(props: HeaderProps) {
 
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
-      key={menuItem.text}
+      key={menuItem.label}
       className="flex items-center w-full h-11 px-6 dark:text-white"
-      href={menuItem.url}
+      href={menuItem.url || "/"}
     >
-      {menuItem.text}
+      {menuItem.label}
     </Link>
   ));
 
@@ -67,28 +65,30 @@ export function Header(props: HeaderProps) {
     return segments.join("/");
   };
 
-  const langLink: MenuItem = {
-    url: lang,
-    text: labels[lang],
-    links: languageMenuItems,
-  };
+  if (!navLinks) return null;
 
-  const menu = [...navLinks, langLink].map((menuItem) => {
-    const menuItems = menuItem.links?.map((item) => (
-      <Menu.Item
-        key={item.text}
-        component={Link}
-        href={redirectedPathName(item.url)}
-        className="dark:text-white"
-      >
-        {item.text}
-      </Menu.Item>
-    ));
+  const menu = [
+    ...navLinks,
+    {
+      id: 0,
+      link: { label: labels[lang], url: lang },
+    },
+  ].map(({ id, link }) => {
+    if (id === 0) {
+      const menuItems = languageMenuItems.map((item) => (
+        <Menu.Item
+          key={item.label}
+          component={Link}
+          href={redirectedPathName(item.url || "/")}
+          className="dark:text-white"
+        >
+          {item.label}
+        </Menu.Item>
+      ));
 
-    if (menuItems) {
       return (
         <Menu
-          key={menuItem.text}
+          key={link.label}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -108,7 +108,7 @@ export function Header(props: HeaderProps) {
                 "sm:text-lg sm:leading-13 sm:px-0",
               )}
             >
-              <LangugeToggle label={menuItem.text} linksOpened={linksOpened} />
+              <LangugeToggle label={link.label} linksOpened={linksOpened} />
             </UnstyledButton>
           </Menu.Target>
           <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
@@ -118,16 +118,16 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={menuItem.text}
+        key={id}
         component={Link}
-        href={menuItem.url}
+        href={link.url || "/"}
         className={cn(
           "flex items-center w-full h-11 px-4",
           "text-sm text-black dark:text-white font-medium",
           "sm:w-auto sm:h-full sm:px-0",
         )}
       >
-        {menuItem.text}
+        {link.label}
       </Anchor>
     );
   });
@@ -136,7 +136,7 @@ export function Header(props: HeaderProps) {
     <header className="absolute w-full z-10 motion-safe:animate-slide">
       <Container className="h-16 sm:h-19.5">
         <Group justify="space-between" className="h-full">
-          <Logo text={logoText.text} />
+          <Logo text={logo.link.label} />
           <Group gap="xl">
             <Group className="hidden sm:flex gap-8">{menu}</Group>
             <ColorSchemeToggle />
@@ -168,7 +168,7 @@ export function Header(props: HeaderProps) {
         <Drawer.Overlay backgroundOpacity={0.5} blur={4} />
         <Drawer.Content>
           <Drawer.Header>
-            <Logo text={logoText.text} />
+            <Logo text={logo.link.label} />
             <Group gap="xl">
               <ColorSchemeToggle />
               <Burger

@@ -17,6 +17,15 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: "logo",
+      type: "group",
+      fields: [
+        link({
+          appearances: false,
+        }),
+      ],
+    },
+    {
       name: "navItems",
       type: "array",
       fields: [
