@@ -6,7 +6,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { plugins } from "./plugins";
-import { Footer } from "./Footer/config";
+import { Footer } from "./config/Footer";
 import { Header } from "./config/Header";
 import { getServerSideURL } from "./utilities/getURL";
 import { Categories } from "./collections/Categories";
