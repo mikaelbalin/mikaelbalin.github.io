@@ -20,14 +20,69 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: "navItems",
-      type: "array",
+      name: "titles",
+      type: "json",
+    },
+    {
+      type: "group",
+      name: "contacts",
       fields: [
-        link({
-          appearances: false,
-        }),
+        {
+          name: "title",
+          type: "text",
+        },
+        {
+          name: "email",
+          type: "email",
+        },
+        {
+          name: "phone",
+          type: "text",
+        },
       ],
-      maxRows: 6,
+    },
+    {
+      type: "group",
+      name: "social",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+        },
+        {
+          name: "socialItems",
+          type: "array",
+          fields: [
+            link({
+              appearances: false,
+            }),
+          ],
+        },
+      ],
+    },
+    {
+      type: "group",
+      name: "navigation",
+      fields: [
+        {
+          name: "title",
+          type: "text",
+        },
+        {
+          name: "navItems",
+          type: "array",
+          fields: [
+            link({
+              appearances: false,
+            }),
+          ],
+          maxRows: 6,
+        },
+        {
+          name: "topButton",
+          type: "text",
+        },
+      ],
     },
   ],
   hooks: {

@@ -1296,21 +1296,57 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
+  titles?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?: {
-            relationTo: 'pages';
-            value: number | Page;
-          } | null;
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
     | null;
+  contacts?: {
+    title?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  };
+  social?: {
+    title?: string | null;
+    socialItems?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: number | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  navigation?: {
+    title?: string | null;
+    navItems?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: number | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    topButton?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1355,19 +1391,52 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  titles?: T;
+  contacts?:
     | T
     | {
-        link?:
+        title?: T;
+        email?: T;
+        phone?: T;
+      };
+  social?:
+    | T
+    | {
+        title?: T;
+        socialItems?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
-        id?: T;
+      };
+  navigation?:
+    | T
+    | {
+        title?: T;
+        navItems?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        topButton?: T;
       };
   updatedAt?: T;
   createdAt?: T;
