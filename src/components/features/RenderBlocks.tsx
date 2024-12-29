@@ -6,18 +6,22 @@ import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { About } from "@/components/features/About";
 
+type BlockType = Extract<Page["layout"][0], { blockType: string }>["blockType"];
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const blockComponents: Record<string, React.FC<any>> = {
+const blockComponents: Record<BlockType, React.FC<any>> = {
   archive: ArchiveBlock,
-  content: About,
+  about: About,
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
 };
 
-export const RenderBlocks: React.FC<{
+type RenderBlocksProps = {
   blocks: Page["layout"][0][];
-}> = (props) => {
+};
+
+export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
   const { blocks } = props;
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
