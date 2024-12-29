@@ -46,7 +46,7 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   return doc;
 };
 
-export const Pages: CollectionConfig<"pages"> = {
+export const pages: CollectionConfig<"pages"> = {
   slug: "pages",
   access: {
     create: authenticated,

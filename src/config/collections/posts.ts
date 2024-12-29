@@ -1,4 +1,8 @@
-import type { CollectionConfig } from "payload";
+import type {
+  CollectionConfig,
+  CollectionAfterReadHook,
+  CollectionAfterChangeHook,
+} from "payload";
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -12,10 +16,7 @@ import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
 import { Banner } from "../../blocks/Banner/config";
 import { Code } from "../../blocks/Code/config";
 import { MediaBlock } from "../../blocks/MediaBlock/config";
-import { generatePreviewPath } from "../../utilities/generatePreviewPath";
-import { populateAuthors } from "./hooks/populateAuthors";
-import { revalidatePost } from "./hooks/revalidatePost";
-
+import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -25,8 +26,69 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { slugField } from "@/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
+import { User, Post } from "@/payload-types";
+import { revalidatePath } from "next/cache";
 
-export const Posts: CollectionConfig<"posts"> = {
+export const revalidatePost: CollectionAfterChangeHook<Post> = ({
+  doc,
+  previousDoc,
+  req: { payload },
+}) => {
+  if (doc._status === "published") {
+    const path = `/posts/${doc.slug}`;
+
+    payload.logger.info(`Revalidating post at path: ${path}`);
+
+    revalidatePath(path);
+  }
+
+  // If the post was previously published, we need to revalidate the old path
+  if (previousDoc._status === "published" && doc._status !== "published") {
+    const oldPath = `/posts/${previousDoc.slug}`;
+
+    payload.logger.info(`Revalidating old post at path: ${oldPath}`);
+
+    revalidatePath(oldPath);
+  }
+
+  return doc;
+};
+
+// The `user` collection has access control locked so that users are not publicly accessible
+// This means that we need to populate the authors manually here to protect user privacy
+// GraphQL will not return mutated user data that differs from the underlying schema
+// So we use an alternative `populatedAuthors` field to populate the user data, hidden from the admin UI
+export const populateAuthors: CollectionAfterReadHook = async ({
+  doc,
+  req,
+  req: { payload },
+}) => {
+  if (doc?.authors) {
+    const authorDocs: User[] = [];
+
+    for (const author of doc.authors) {
+      const authorDoc = await payload.findByID({
+        id: typeof author === "object" ? author?.id : author,
+        collection: "users",
+        depth: 0,
+        req,
+      });
+
+      if (authorDoc) {
+        authorDocs.push(authorDoc);
+      }
+    }
+
+    doc.populatedAuthors = authorDocs.map((authorDoc) => ({
+      id: authorDoc.id,
+      name: authorDoc.name,
+    }));
+  }
+
+  return doc;
+};
+
+export const posts: CollectionConfig<"posts"> = {
   slug: "posts",
   access: {
     create: authenticated,
