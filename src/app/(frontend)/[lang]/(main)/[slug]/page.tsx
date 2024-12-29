@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { draftMode } from "next/headers";
 import React, { cache } from "react";
 import { homeStatic } from "@/endpoints/seed/home-static";
-
 import type { Page as PageType } from "@/payload-types";
-
 import { RenderBlocks } from "@/blocks/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
@@ -65,13 +62,12 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page;
 
   return (
-    <article className="pt-16 pb-24">
+    <>
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-
       <Hero {...hero} />
       {layout && <RenderBlocks blocks={layout} />}
-    </article>
+    </>
   );
 }
 

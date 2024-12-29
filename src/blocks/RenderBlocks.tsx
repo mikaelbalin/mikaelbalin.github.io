@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/blocks/ArchiveBlock/Component";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
@@ -24,7 +24,7 @@ export const RenderBlocks: React.FC<{
 
   if (hasBlocks) {
     return (
-      <Fragment>
+      <>
         {blocks.map((block, index) => {
           const { blockType } = block;
 
@@ -41,7 +41,7 @@ export const RenderBlocks: React.FC<{
           }
           return null;
         })}
-      </Fragment>
+      </>
     );
   }
 
