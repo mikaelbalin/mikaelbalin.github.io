@@ -30,7 +30,6 @@
 
 //   return (
 //     <>
-//       <HeroMain {...strapiData.hero} />
 //       <About {...strapiData.about} />
 //       <PostList initialData={articlesData}>
 //         <PostLatest

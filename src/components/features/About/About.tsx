@@ -1,9 +1,9 @@
 "use client";
 
 import { Container, Title, Text, Grid, GridCol } from "@mantine/core";
-import { AboutProps } from "@/types/data";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import type { AboutBlock as AboutBlockProps } from "@/payload-types";
 
 const splitText = (text: string) => {
   return text.split("").map((char, index) => {
@@ -27,7 +27,7 @@ const splitText = (text: string) => {
   });
 };
 
-export const About = (props: AboutProps) => {
+export const About = (props: AboutBlockProps) => {
   const { title, description } = props;
   const [isClient, setIsClient] = useState(false);
 

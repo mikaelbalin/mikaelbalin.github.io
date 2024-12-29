@@ -18,12 +18,6 @@ interface DateMetadata {
   publishedAt: string;
 }
 
-export interface AboutProps {
-  id: number;
-  title: string;
-  description: string;
-}
-
 export interface PostLatestProps {
   latestPostsTitle: string;
   latestPostsLink: DataLink;
@@ -33,7 +27,6 @@ export interface HomePageData extends DateMetadata, PostLatestProps {
   id: number;
   documentId: string;
   locale: string;
-  about: AboutProps;
 }
 
 export interface UsersPermissionsUser extends DateMetadata {

@@ -6,7 +6,7 @@ import { draftMode } from "next/headers";
 import React, { cache } from "react";
 import { homeStatic } from "@/endpoints/seed/home-static";
 import type { Page as PageType } from "@/payload-types";
-import { RenderBlocks } from "@/blocks/RenderBlocks";
+import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
 
