@@ -10,7 +10,7 @@ import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { getServerSideURL } from "./utilities/getURL";
 import { categories } from "@/config/collections/categories";
-import { Media } from "./collections/Media";
+import { media } from "@/config/collections/media";
 import { posts } from "@/config/collections/posts";
 import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
@@ -72,7 +72,7 @@ export default buildConfig({
         },
       }),
   // Define and configure your collections in this array
-  collections: [pages, posts, Media, categories, users],
+  collections: [pages, posts, media, categories, users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [header, footer],
   plugins: [
