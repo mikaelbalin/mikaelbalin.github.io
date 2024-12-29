@@ -11,9 +11,9 @@ import { header } from "@/config/header";
 import { getServerSideURL } from "./utilities/getURL";
 import { Categories } from "./collections/Categories";
 import { Media } from "./collections/Media";
-import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
+import { Pages } from "@/config/collections/pages";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
