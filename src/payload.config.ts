@@ -6,8 +6,8 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { plugins } from "./plugins";
-import { Footer } from "./config/Footer";
-import { Header } from "./config/Header";
+import { footer } from "@/config/footer";
+import { header } from "@/config/header";
 import { getServerSideURL } from "./utilities/getURL";
 import { Categories } from "./collections/Categories";
 import { Media } from "./collections/Media";
@@ -74,7 +74,7 @@ export default buildConfig({
   // Define and configure your collections in this array
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [header, footer],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

@@ -10,7 +10,7 @@ const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {
   return doc;
 };
 
-export const Header: GlobalConfig = {
+export const header: GlobalConfig = {
   slug: "header",
   access: {
     read: () => true,

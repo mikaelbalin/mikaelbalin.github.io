@@ -40,6 +40,7 @@
       "@/providers/*": ["providers/*"],
       "@/heros/*": ["heros/*"],
       "@/access/*": ["access/*"],
+      "@/config/*": ["config/*"],
       "@/payload-types": ["payload-types.ts"],
       "@payload-config": ["payload.config.ts"]
     }

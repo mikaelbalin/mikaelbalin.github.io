@@ -13,7 +13,7 @@ export const revalidateFooter: GlobalAfterChangeHook = ({
   return doc;
 };
 
-export const Footer: GlobalConfig = {
+export const footer: GlobalConfig = {
   slug: "footer",
   access: {
     read: () => true,
