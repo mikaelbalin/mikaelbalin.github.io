@@ -9,10 +9,10 @@ import { plugins } from "./plugins";
 import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { getServerSideURL } from "./utilities/getURL";
-import { Categories } from "./collections/Categories";
+import { categories } from "@/config/collections/categories";
 import { Media } from "./collections/Media";
 import { posts } from "@/config/collections/posts";
-import { Users } from "./collections/Users";
+import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -32,7 +32,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    user: Users.slug,
+    user: users.slug,
     livePreview: {
       breakpoints: [
         {
@@ -72,7 +72,7 @@ export default buildConfig({
         },
       }),
   // Define and configure your collections in this array
-  collections: [pages, posts, Media, Categories, Users],
+  collections: [pages, posts, Media, categories, users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [header, footer],
   plugins: [
