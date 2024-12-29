@@ -18,14 +18,6 @@ interface DateMetadata {
   publishedAt: string;
 }
 
-export interface HeroProps {
-  id: number;
-  title: string[];
-  description: string;
-  location: string;
-  contactLink: DataLink;
-}
-
 export interface AboutProps {
   id: number;
   title: string;
@@ -41,7 +33,6 @@ export interface HomePageData extends DateMetadata, PostLatestProps {
   id: number;
   documentId: string;
   locale: string;
-  hero: HeroProps;
   about: AboutProps;
 }
 

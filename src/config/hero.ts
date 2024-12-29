@@ -1,12 +1,7 @@
-import type { Field } from "payload";
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
+import type { Condition, Field } from "payload";
+import { link } from "@/config/link";
 
-import { linkGroup } from "@/fields/linkGroup";
+const condition: Condition = (data) => data.hero.type === "main";
 
 export const hero: Field = {
   name: "hero",
@@ -19,53 +14,56 @@ export const hero: Field = {
       label: "Type",
       options: [
         {
-          label: "None",
-          value: "none",
+          label: "Main",
+          value: "main",
         },
         {
-          label: "High Impact",
-          value: "highImpact",
-        },
-        {
-          label: "Medium Impact",
-          value: "mediumImpact",
-        },
-        {
-          label: "Low Impact",
-          value: "lowImpact",
+          label: "Blog",
+          value: "blog",
         },
       ],
       required: true,
     },
     {
-      name: "richText",
-      type: "richText",
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ];
-        },
-      }),
-      label: false,
-    },
-    linkGroup({
-      overrides: {
-        maxRows: 2,
-      },
-    }),
-    {
-      name: "media",
-      type: "upload",
+      name: "titles",
+      type: "json",
       admin: {
-        condition: (_, { type } = {}) =>
-          ["highImpact", "mediumImpact"].includes(type),
+        condition,
       },
-      relationTo: "media",
+    },
+    {
+      name: "title",
+      type: "text",
+      admin: {
+        condition: (data) => data.hero.type === "blog",
+      },
+    },
+    {
+      name: "description",
+      type: "text",
+      admin: {
+        condition,
+      },
+    },
+    {
+      name: "location",
+      type: "text",
       required: true,
+      admin: {
+        condition,
+      },
+    },
+    {
+      name: "contactLink",
+      type: "group",
+      fields: [
+        link({
+          appearances: false,
+        }),
+      ],
+      admin: {
+        condition,
+      },
     },
   ],
   label: false,

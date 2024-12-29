@@ -1,5 +1,5 @@
 import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
-import { link } from "@/fields/link";
+import { link } from "@/config/link";
 import { revalidateTag } from "next/cache";
 
 const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {

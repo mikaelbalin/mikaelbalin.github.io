@@ -3,7 +3,6 @@
 import { HeroBackground } from "@/components/features/Hero/HeroBackground";
 import { LiveTime } from "@/components/ui/LiveTime";
 import { Marquee } from "@/components/ui/Marquee";
-import { HeroProps } from "@/types/data";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 import { useEffect, useState, useRef } from "react";
 import {
@@ -14,16 +13,22 @@ import {
   SpringOptions,
 } from "framer-motion";
 import { MotionProvider, useMotionContext } from "@/context/motion-context";
+import { Page } from "@/payload-types";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
+function isArrayofStrings(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) && value.every((item) => typeof item === "string")
+  );
+}
 
 type HeroDescriptionProps = Pick<
-  HeroProps,
-  "title" | "description" | "contactLink"
+  Page["hero"],
+  "description" | "contactLink" | "titles"
 >;
 
-const HeroDescription = (props: HeroDescriptionProps) => {
-  const { title, description, contactLink } = props;
+const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
+  const { titles, description, contactLink } = props;
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,15 +42,19 @@ const HeroDescription = (props: HeroDescriptionProps) => {
 
   return (
     <Box className="my-auto" ref={ref}>
-      <Marquee texts={title} />
+      {isArrayofStrings(titles) && <Marquee texts={titles} />}
       <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
         <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <Text className="relative" size="lg">
             {description}
           </Text>
         </SimpleGrid>
-        <Button component="a" className="mt-7 sm:mt-8" href={contactLink.url}>
-          {contactLink.text}
+        <Button
+          component="a"
+          className="mt-7 sm:mt-8"
+          href={contactLink?.link.url || undefined}
+        >
+          {contactLink?.link.label}
         </Button>
       </Container>
     </Box>
@@ -56,8 +65,8 @@ function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-export const HeroMain = (props: Readonly<HeroProps>) => {
-  const { title, description, location, contactLink } = props;
+export const HeroMain: React.FC<Page["hero"]> = (props) => {
+  const { titles, description, location, contactLink } = props;
 
   const [isClient, setIsClient] = useState(false);
 
@@ -72,7 +81,7 @@ export const HeroMain = (props: Readonly<HeroProps>) => {
         {isClient && (
           <>
             <HeroDescription
-              title={title}
+              titles={titles}
               description={description}
               contactLink={contactLink}
             />

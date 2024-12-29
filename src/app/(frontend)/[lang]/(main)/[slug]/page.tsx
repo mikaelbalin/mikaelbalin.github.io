@@ -10,7 +10,7 @@ import { homeStatic } from "@/endpoints/seed/home-static";
 import type { Page as PageType } from "@/payload-types";
 
 import { RenderBlocks } from "@/blocks/RenderBlocks";
-import { RenderHero } from "@/heros/RenderHero";
+import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
 
 export async function generateStaticParams() {
@@ -69,8 +69,8 @@ export default async function Page({ params: paramsPromise }: Args) {
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
+      <Hero {...hero} />
+      {layout && <RenderBlocks blocks={layout} />}
     </article>
   );
 }
