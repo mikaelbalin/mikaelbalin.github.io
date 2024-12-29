@@ -36,13 +36,10 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
             const Block = blockComponents[blockType];
 
             if (Block) {
-              return (
-                <div className="my-16" key={index}>
-                  <Block {...block} />
-                </div>
-              );
+              return <Block key={index} {...block} />;
             }
           }
+
           return null;
         })}
       </>
