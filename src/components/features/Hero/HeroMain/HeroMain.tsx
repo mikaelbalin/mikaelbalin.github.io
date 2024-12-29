@@ -16,11 +16,6 @@ import { MotionProvider, useMotionContext } from "@/context/motion-context";
 import { Page } from "@/payload-types";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
-function isArrayofStrings(value: unknown): value is string[] {
-  return (
-    Array.isArray(value) && value.every((item) => typeof item === "string")
-  );
-}
 
 type HeroDescriptionProps = Pick<
   Page["hero"],
@@ -42,7 +37,7 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
 
   return (
     <Box className="my-auto" ref={ref}>
-      {isArrayofStrings(titles) && <Marquee texts={titles} />}
+      <Marquee texts={titles} />
       <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
         <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <Text className="relative" size="lg">

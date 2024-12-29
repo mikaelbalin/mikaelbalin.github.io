@@ -2,15 +2,12 @@
 
 import { contactSubmitAction } from "@/data/actions/contact-actions";
 import { ContactFormSchema, contactFormSchema } from "@/lib/schemas";
-import { ContactFormProps } from "@/types/data";
 import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import Link from "next/link";
 
-export const ContactForm = (props: ContactFormProps) => {
-  const { name, message, email } = props;
-
+export const ContactForm = () => {
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
@@ -48,24 +45,21 @@ export const ContactForm = (props: ContactFormProps) => {
       <div className="flex flex-col gap-6">
         <TextInput
           withAsterisk
-          label={name.label}
-          placeholder={name.placeholder}
+          label="Your name"
           key={form.key("name")}
           {...form.getInputProps("name")}
         />
 
         <TextInput
           withAsterisk
-          label={email.label}
-          placeholder={email.placeholder}
+          label="Email"
           key={form.key("email")}
           {...form.getInputProps("email")}
         />
 
         <Textarea
           withAsterisk
-          label={message.label}
-          placeholder={message.placeholder}
+          label="Message"
           key={form.key("message")}
           {...form.getInputProps("message")}
           resize="vertical"

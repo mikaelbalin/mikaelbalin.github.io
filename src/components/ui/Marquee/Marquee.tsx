@@ -11,13 +11,15 @@ import {
 import { cn } from "@/lib/utils";
 import { Fragment, useRef } from "react";
 
-function isArrayOfStrings(
-  texts: string[] | [string[], string[]],
-): texts is string[] {
+function isArrayOfStrings(texts: unknown): texts is string[] {
   return (
     Array.isArray(texts) && texts.every((item) => typeof item === "string")
   );
 }
+
+const isTuple = (titles: unknown): titles is string[][] => {
+  return Array.isArray(titles) && titles.every(isArrayOfStrings);
+};
 
 const Line = ({
   texts,
@@ -47,7 +49,16 @@ const BASE: number = 10;
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
 interface MarqueeProps {
-  texts: string[] | [string[], string[]];
+  texts:
+    | string
+    | number
+    | boolean
+    | unknown[]
+    | {
+        [k: string]: unknown;
+      }
+    | null
+    | undefined;
 }
 
 export const Marquee = ({ texts = [] }: MarqueeProps) => {
@@ -102,28 +113,29 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
   } else {
     return (
       <div ref={ref} className="pt-16 pb-14 sm:pt-24 sm:pb-18">
-        {texts.map((text, index) => (
-          <div
-            key={index}
-            className={cn(
-              "gap-8 sm:gap-20",
-              "flex justify-center overflow-hidden select-none",
-            )}
-          >
-            <motion.ul
+        {isTuple(texts) &&
+          texts.map((text, index) => (
+            <div
+              key={index}
               className={cn(
-                "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
                 "gap-8 sm:gap-20",
-                "list-none",
+                "flex justify-center overflow-hidden select-none",
               )}
-              style={{
-                translateX: index % 2 === 0 ? even : odd,
-              }}
             >
-              <Line texts={text} className="text-4.5xl sm:text-9xl" />
-            </motion.ul>
-          </div>
-        ))}
+              <motion.ul
+                className={cn(
+                  "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
+                  "gap-8 sm:gap-20",
+                  "list-none",
+                )}
+                style={{
+                  translateX: index % 2 === 0 ? even : odd,
+                }}
+              >
+                <Line texts={text} className="text-4.5xl sm:text-9xl" />
+              </motion.ul>
+            </div>
+          ))}
       </div>
     );
   }

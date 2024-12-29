@@ -54,39 +54,39 @@ export interface GetUserMeLoaderResult {
   error: any | null;
 }
 
-export interface ContactFormProps {
-  id: number;
-  title: string;
-  message: FormControl;
-  email: FormControl;
-  name: FormControl;
-}
+// export interface ContactFormProps {
+//   id: number;
+//   title: string;
+//   message: FormControl;
+//   email: FormControl;
+//   name: FormControl;
+// }
 
-export interface ContactProps {
-  contacts: {
-    id: number;
-    title: string;
-    email: string;
-    phone: string;
-  };
-  social: {
-    id: number;
-    title: string;
-    socialLink: DataLink[];
-  };
-  form: ContactFormProps;
-}
+// export interface ContactProps {
+//   contacts: {
+//     id: number;
+//     title: string;
+//     email: string;
+//     phone: string;
+//   };
+//   social: {
+//     id: number;
+//     title: string;
+//     socialLink: DataLink[];
+//   };
+//   form: ContactFormProps;
+// }
 
-export interface FooterProps extends ContactProps {
-  id: number;
-  titles: [string[], string[]];
-  navigation: {
-    id: number;
-    title: string;
-    topButton: string;
-    navLinks: DataLink[];
-  };
-}
+// export interface FooterProps extends ContactProps {
+//   id: number;
+//   titles: [string[], string[]];
+//   navigation: {
+//     id: number;
+//     title: string;
+//     topButton: string;
+//     navLinks: DataLink[];
+//   };
+// }
 
 export interface SubscriptionFormProps {
   button: string;
@@ -103,7 +103,7 @@ export interface GlobalPageData extends DateMetadata {
   id: number;
   documentId: string;
   locale: string;
-  footer: FooterProps;
+  // footer: FooterProps;
 }
 
 export interface SubscriptionResponse extends DateMetadata {

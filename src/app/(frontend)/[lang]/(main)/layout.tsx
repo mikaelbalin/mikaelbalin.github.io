@@ -18,7 +18,7 @@ import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { draftMode } from "next/headers";
 import { getServerSideURL } from "@/utilities/getURL";
 import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
-import { getCachedHeader } from "@/utilities/getGlobals";
+import { getCachedFooter, getCachedHeader } from "@/utilities/getGlobals";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +39,7 @@ export default async function RootLayout(
 
   const { isEnabled } = await draftMode();
   const header = await getCachedHeader()();
+  const footer = await getCachedFooter()();
 
   return (
     <html lang={params.lang} className="relative">
@@ -58,7 +59,7 @@ export default async function RootLayout(
             <div className="relative flex flex-col min-h-screen">
               <Header {...header} />
               <main className="flex-1">{children}</main>
-              <Footer {...globalData.footer} />
+              <Footer {...footer} />
             </div>
           )}
           <Notifications position="bottom-center" />
