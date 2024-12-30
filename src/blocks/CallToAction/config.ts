@@ -1,13 +1,11 @@
 import type { Block } from "payload";
-
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-
-import { linkGroup } from "../../fields/linkGroup";
+import { linkGroup } from "@/config/linkGroup";
 
 export const CallToAction: Block = {
   slug: "cta",
