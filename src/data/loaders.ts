@@ -4,7 +4,6 @@ import {
   HomePageData,
   StrapiMetadata,
   TagListResponse,
-  SubscriptionResponse,
   ArticleResponseDataObject,
   // Post,
 } from "../types/data";
@@ -86,14 +85,12 @@ export async function getGlobalPageData() {
   return data;
 }
 
-export async function getSubscriptionData() {
-  const url = new URL("/api/global", baseUrl);
-
-  url.searchParams.append(`populate[subscription][populate]`, "email");
-
-  const { data } = await fetchData<{ data: SubscriptionResponse }>(url.href);
-  return data;
-}
+// export async function getSubscriptionData() {
+//   const url = new URL("/api/global", baseUrl);
+//   url.searchParams.append(`populate[subscription][populate]`, "email");
+//   const { data } = await fetchData<{ data: SubscriptionResponse }>(url.href);
+//   return data;
+// }
 
 export async function getArticles(
   start: number = 0,

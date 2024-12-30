@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 type PostCardProps = Pick<
   Post,
-  "slug" | "categories" | "meta" | "title" | "publishedAt" | "createdAt"
+  "slug" | "categories" | "meta" | "title" | "publishedAt"
 > & {
   relationTo?: "blog";
 };

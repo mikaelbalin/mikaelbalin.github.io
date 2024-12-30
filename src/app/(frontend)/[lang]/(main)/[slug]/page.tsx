@@ -5,7 +5,7 @@ import { getPayload } from "payload";
 import { draftMode } from "next/headers";
 import React, { cache } from "react";
 import { homeStatic } from "@/endpoints/seed/home-static";
-import type { Page as PageType } from "@/payload-types";
+import type { Page as PageProps } from "@/payload-types";
 import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
@@ -44,7 +44,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = "home" } = await paramsPromise;
   const url = "/" + slug;
 
-  let page: PageType | null;
+  let page: PageProps | null;
 
   page = await queryPageBySlug({
     slug,

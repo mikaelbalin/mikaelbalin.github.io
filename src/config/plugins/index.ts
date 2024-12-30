@@ -16,6 +16,7 @@ import { searchFields } from "@/search/fieldOverrides";
 import { beforeSyncWithSearch } from "@/search/beforeSync";
 import { Page, Post } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
+import slugify from "@sindresorhus/slugify";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
@@ -29,6 +30,17 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   return doc?.slug ? `${url}/${doc.slug}` : url;
 };
 
+/**
+ * An array of plugins used in the application.
+ *
+ * @type {Plugin[]}
+ *
+ * @property {Plugin} redirectsPlugin - Handles redirects for specified collections with custom field descriptions and hooks.
+ * @property {Plugin} nestedDocsPlugin - Manages nested documents for specified collections with custom label and URL generation.
+ * @property {Plugin} seoPlugin - Generates SEO-related data such as titles and URLs.
+ * @property {Plugin} formBuilderPlugin - Customizes form fields and overrides with additional editor features.
+ * @property {Plugin} searchPlugin - Integrates search functionality for specified collections with custom fields and pre-sync actions.
+ */
 export const plugins: Plugin[] = [
   redirectsPlugin({
     collections: ["pages", "posts"],
@@ -54,8 +66,17 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+  // See https://payloadcms.com/docs/plugins/nested-docs
   nestedDocsPlugin({
     collections: ["categories"],
+    generateLabel: (docs, currentDoc) =>
+      typeof currentDoc.title === "string" ? currentDoc.title : "",
+    generateURL: (docs) =>
+      docs.reduce(
+        (url, doc) =>
+          `${url}/${slugify(typeof doc.title === "string" ? doc.title : "")}`,
+        "",
+      ),
   }),
   seoPlugin({
     generateTitle,

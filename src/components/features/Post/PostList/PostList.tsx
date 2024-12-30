@@ -14,7 +14,10 @@ import {
 import { Post } from "@/payload-types";
 
 interface PostListProps extends PropsWithChildren, Pick<BoxProps, "className"> {
-  posts: Post[];
+  posts: Pick<
+    Post,
+    "id" | "slug" | "categories" | "meta" | "title" | "publishedAt"
+  >[];
 }
 
 export const PostList = ({ children, posts, className }: PostListProps) => {

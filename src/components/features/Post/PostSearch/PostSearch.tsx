@@ -1,14 +1,14 @@
 "use client";
 
-import { Tag } from "@/types/data";
+import { Category } from "@/payload-types";
 import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
 import { useParams, useRouter } from "next/navigation";
 
 interface PostSearchProps {
-  tags: Tag[];
+  categories: Pick<Category, "id" | "breadcrumbs">[];
 }
 
-export const PostSearch = ({ tags }: PostSearchProps) => {
+export const PostSearch = ({ categories }: PostSearchProps) => {
   const params = useParams<{ lang: string; tag?: string }>();
   const router = useRouter();
 
@@ -27,11 +27,14 @@ export const PostSearch = ({ tags }: PostSearchProps) => {
         >
           <Group>
             <Chip value="all">All</Chip>
-            {tags.map(({ id, slug, name }) => (
-              <Chip key={id} value={slug}>
-                {name}
-              </Chip>
-            ))}
+            {categories.map(({ id, breadcrumbs }) => {
+              const breadcrumb = breadcrumbs?.[0];
+              return breadcrumb ? (
+                <Chip key={id} value={breadcrumb.url || ""}>
+                  {breadcrumb.label}
+                </Chip>
+              ) : null;
+            })}
           </Group>
         </ChipGroup>
       </Box>

@@ -99,12 +99,12 @@ export interface GlobalPageData extends DateMetadata {
   // footer: FooterProps;
 }
 
-export interface SubscriptionResponse extends DateMetadata {
-  id: number;
-  documentId: string;
-  locale: string;
-  // subscription: SubscriptionProps;
-}
+// export interface SubscriptionResponse extends DateMetadata {
+//   id: number;
+//   documentId: string;
+//   locale: string;
+//   subscription: SubscriptionProps;
+// }
 
 interface Seo {
   id: number;
@@ -158,18 +158,18 @@ export interface PostListResponse {
   // meta: Meta;
 }
 
-export interface Tag extends DateMetadata {
-  id: number;
-  documentId: string;
-  locale: null;
-  name: string;
-  slug: string;
-}
+// export interface Tag extends DateMetadata {
+//   id: number;
+//   documentId: string;
+//   locale: null;
+//   name: string;
+//   slug: string;
+// }
 
-export interface TagListResponse {
-  data: Tag[];
-  // meta: Meta;
-}
+// export interface TagListResponse {
+// data: Tag[];
+// meta: Meta;
+// }
 
 export interface RichTextBlock {
   __component: "shared.rich-text";
@@ -192,7 +192,7 @@ export interface Article {
   locale: string;
   timeToRead: number;
   slug: string;
-  tags: Tag[];
+  // tags: Tag[];
   blocks: (RichTextBlock | CalloutBlock)[];
   localizations: [];
 }

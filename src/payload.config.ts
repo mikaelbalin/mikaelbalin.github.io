@@ -5,7 +5,7 @@ import { buildConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
-import { plugins } from "./plugins";
+import { plugins } from "@/config/plugins";
 import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { getServerSideURL } from "./utilities/getURL";
