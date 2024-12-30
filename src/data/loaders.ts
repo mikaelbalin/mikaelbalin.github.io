@@ -1,9 +1,9 @@
 import {
-  PostListResponse,
+  // PostListResponse,
   GlobalPageData,
   HomePageData,
   StrapiMetadata,
-  TagListResponse,
+  // TagListResponse,
   ArticleResponseDataObject,
   // Post,
 } from "../types/data";
@@ -92,28 +92,28 @@ export async function getGlobalPageData() {
 //   return data;
 // }
 
-export async function getArticles(
-  start: number = 0,
-  limit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
-  filter?: string,
-) {
-  const url = new URL("/api/articles", baseUrl);
+// export async function getArticles(
+//   start: number = 0,
+//   limit: number = Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
+//   filter?: string,
+// ) {
+//   const url = new URL("/api/articles", baseUrl);
 
-  url.searchParams.append("sort[createdAt]", "desc");
-  url.searchParams.append("populate[0]", "tags");
-  url.searchParams.append("pagination[start]", start.toString());
-  url.searchParams.append("pagination[limit]", limit.toString());
-  filter && url.searchParams.append("filters[tags][slug]", filter);
+//   url.searchParams.append("sort[createdAt]", "desc");
+//   url.searchParams.append("populate[0]", "tags");
+//   url.searchParams.append("pagination[start]", start.toString());
+//   url.searchParams.append("pagination[limit]", limit.toString());
+//   filter && url.searchParams.append("filters[tags][slug]", filter);
 
-  const response = await fetchData<PostListResponse>(url.href);
-  return response;
-}
+//   const response = await fetchData<PostListResponse>(url.href);
+//   return response;
+// }
 
-export async function getTags() {
-  const url = new URL("/api/tags", baseUrl);
-  const { data } = await fetchData<TagListResponse>(url.href);
-  return data;
-}
+// export async function getTags() {
+//   const url = new URL("/api/tags", baseUrl);
+//   const { data } = await fetchData<any>(url.href);
+//   return data;
+// }
 
 export async function getArticlesByTag(tags: string[]) {
   const url = new URL("/api/articles", baseUrl);

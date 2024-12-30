@@ -152,11 +152,10 @@ export interface StrapiMetadata {
 //   tags: TagResponseDataObject[];
 // }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface PostListResponse {
-  // data: Post[];
-  // meta: Meta;
-}
+// export interface PostListResponse {
+// data: Post[];
+// meta: Meta;
+// }
 
 // export interface Tag extends DateMetadata {
 //   id: number;

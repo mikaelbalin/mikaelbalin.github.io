@@ -1,13 +1,22 @@
 import { TextBullet } from "@/components/ui/TextBullet";
-import { Tag } from "@/types/data";
-import { Badge, Container, Group, SimpleGrid, Title } from "@mantine/core";
+// import { Tag } from "@/types/data";
+import {
+  // Badge,
+  Container,
+  Group,
+  SimpleGrid,
+  Title,
+} from "@mantine/core";
 
 interface ArticleHeaderProps {
-  tags: Tag[];
+  // tags: Tag[];
   title: string;
 }
 
-export const ArticleHeader = ({ tags, title }: ArticleHeaderProps) => {
+export const ArticleHeader = ({
+  // tags,
+  title,
+}: ArticleHeaderProps) => {
   return (
     <Container
       component="header"
@@ -22,11 +31,11 @@ export const ArticleHeader = ({ tags, title }: ArticleHeaderProps) => {
           <TextBullet>15 min reads</TextBullet>
         </Group>
         <Group className="sm:justify-end">
-          {tags.map((tag) => (
+          {/* {tags.map((tag) => (
             <Badge key={tag.id} size="lg">
               {tag.name}
             </Badge>
-          ))}
+          ))} */}
         </Group>
       </SimpleGrid>
     </Container>
