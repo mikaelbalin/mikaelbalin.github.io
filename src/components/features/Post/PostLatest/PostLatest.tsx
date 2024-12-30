@@ -1,19 +1,25 @@
-import { PostLatestProps } from "@/types/data";
+import type { ArchiveBlock } from "@/payload-types";
 import { Button, Stack, Title } from "@mantine/core";
 import Link from "next/link";
 
+type PostLatestProps = Pick<ArchiveBlock, "title" | "latestPostsLink">;
+
 export const PostLatest = (props: PostLatestProps) => {
-  const { latestPostsLink, latestPostsTitle } = props;
+  const { title, latestPostsLink } = props;
   return (
     <Stack className="gap-0 items-start sm:flex-row sm:items-center sm:justify-between pt-16 sm:pt-24">
       <Title
         order={2}
         className="!text-3.5xl !leading-normal mb-8 md:!text-8xl sm:mb-0"
       >
-        {latestPostsTitle}
+        {title}
       </Title>
-      <Button component={Link} href={latestPostsLink.url} variant="outline">
-        {latestPostsLink.text}
+      <Button
+        component={Link}
+        href={latestPostsLink.url || ""}
+        variant="outline"
+      >
+        {latestPostsLink.label}
       </Button>
     </Stack>
   );

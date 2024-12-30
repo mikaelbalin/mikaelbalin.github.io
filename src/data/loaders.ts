@@ -6,7 +6,7 @@ import {
   TagListResponse,
   SubscriptionResponse,
   ArticleResponseDataObject,
-  Post,
+  // Post,
 } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
@@ -128,7 +128,8 @@ export async function getArticlesByTag(tags: string[]) {
   url.searchParams.append("populate[0]", "tags");
 
   const { data } = await fetchData<{
-    data: Post[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any[];
   }>(url.href);
   return data;
 }

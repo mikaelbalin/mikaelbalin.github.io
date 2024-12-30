@@ -1,31 +1,20 @@
+import { link } from "@/config/link";
 import type { Block } from "payload";
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
-
-export const Archive: Block = {
+export const archive: Block = {
   slug: "archive",
   interfaceName: "ArchiveBlock",
   fields: [
     {
-      name: "introContent",
-      type: "richText",
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ];
-        },
-      }),
-      label: "Intro Content",
+      name: "title",
+      type: "text",
     },
+    link({
+      overrides: {
+        name: "latestPostsLink",
+      },
+      appearances: false,
+    }),
     {
       name: "populateBy",
       type: "select",

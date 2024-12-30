@@ -1,6 +1,6 @@
 import React from "react";
 import type { Page } from "@/payload-types";
-import { ArchiveBlock } from "@/blocks/ArchiveBlock/Component";
+import { ArchiveBlock } from "@/components/features/ArchiveBlock";
 import { CallToActionBlock } from "@/blocks/CallToAction/Component";
 import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
@@ -10,8 +10,8 @@ type BlockType = Extract<Page["layout"][0], { blockType: string }>["blockType"];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const blockComponents: Record<BlockType, React.FC<any>> = {
-  archive: ArchiveBlock,
   about: About,
+  archive: ArchiveBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,

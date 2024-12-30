@@ -18,12 +18,12 @@ interface DateMetadata {
   publishedAt: string;
 }
 
-export interface PostLatestProps {
-  latestPostsTitle: string;
-  latestPostsLink: DataLink;
-}
+// export interface PostLatestProps {
+//   latestPostsTitle: string;
+//   latestPostsLink: DataLink;
+// }
 
-export interface HomePageData extends DateMetadata, PostLatestProps {
+export interface HomePageData extends DateMetadata {
   id: number;
   documentId: string;
   locale: string;
@@ -126,35 +126,36 @@ export interface StrapiMetadata {
   };
 }
 
-interface TagResponseDataObject extends DateMetadata {
-  id: number;
-  documentId: string;
-  locale: null;
-  name: string;
-  slug: string;
-}
+// interface TagResponseDataObject extends DateMetadata {
+//   id: number;
+//   documentId: string;
+//   locale: null;
+//   name: string;
+//   slug: string;
+// }
 
-export interface Meta {
-  pagination: {
-    start: number;
-    limit: number;
-    total: number;
-  };
-}
+// export interface Meta {
+//   pagination: {
+//     start: number;
+//     limit: number;
+//     total: number;
+//   };
+// }
 
-export interface Post extends DateMetadata {
-  id: number;
-  documentId: string;
-  title: string;
-  locale: string;
-  timeToRead: number;
-  slug: string;
-  tags: TagResponseDataObject[];
-}
+// export interface Post extends DateMetadata {
+//   id: number;
+//   documentId: string;
+//   title: string;
+//   locale: string;
+//   timeToRead: number;
+//   slug: string;
+//   tags: TagResponseDataObject[];
+// }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface PostListResponse {
-  data: Post[];
-  meta: Meta;
+  // data: Post[];
+  // meta: Meta;
 }
 
 export interface Tag extends DateMetadata {
@@ -167,7 +168,7 @@ export interface Tag extends DateMetadata {
 
 export interface TagListResponse {
   data: Tag[];
-  meta: Meta;
+  // meta: Meta;
 }
 
 export interface RichTextBlock {
@@ -198,5 +199,5 @@ export interface Article {
 
 export interface ArticleResponseDataObject extends DateMetadata {
   data: Article[];
-  meta: Meta;
+  // meta: Meta;
 }

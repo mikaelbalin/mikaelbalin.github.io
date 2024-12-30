@@ -2,21 +2,17 @@ import type { Post, ArchiveBlock as ArchiveBlockProps } from "@/payload-types";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import React from "react";
-import RichText from "@/components/RichText";
-import { CollectionArchive } from "@/components/CollectionArchive";
+import { PostList } from "@/components/features/Post/PostList";
+import { PostLatest } from "@/components/features/Post/PostLatest";
 
-export const ArchiveBlock: React.FC<
-  ArchiveBlockProps & {
-    id?: string;
-  }
-> = async (props) => {
+export const ArchiveBlock: React.FC<ArchiveBlockProps> = async (props) => {
   const {
-    id,
     categories,
-    introContent,
     limit: limitFromProps,
     populateBy,
     selectedDocs,
+    title,
+    latestPostsLink,
   } = props;
 
   const limit = limitFromProps || 3;
@@ -58,17 +54,8 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
-      {introContent && (
-        <div className="container mb-16">
-          <RichText
-            className="ml-0 max-w-[48rem]"
-            content={introContent}
-            enableGutter={false}
-          />
-        </div>
-      )}
-      <CollectionArchive posts={posts} />
-    </div>
+    <PostList posts={posts}>
+      <PostLatest title={title} latestPostsLink={latestPostsLink} />
+    </PostList>
   );
 };

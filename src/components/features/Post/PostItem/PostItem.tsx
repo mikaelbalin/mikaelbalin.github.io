@@ -1,18 +1,33 @@
+"use client";
+
 import { TextBullet } from "@/components/ui/TextBullet";
-import { Post } from "@/types/data";
+import { Post } from "@/payload-types";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-type PostCardProps = Post;
+type PostCardProps = Pick<
+  Post,
+  "slug" | "categories" | "meta" | "title" | "publishedAt" | "createdAt"
+> & {
+  relationTo?: "blog";
+};
 
-export const PostItem = ({ title, slug, tags, publishedAt }: PostCardProps) => {
-  const date = new Date(publishedAt);
+export const PostItem = (props: PostCardProps) => {
+  const { title, slug, categories, publishedAt, relationTo } = props;
+  const [date, setDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    publishedAt && setDate(new Date(publishedAt));
+  }, [publishedAt]);
+
+  const href = `/${relationTo}/${slug}`;
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={href}
       className="group transition-colors sm:hover:bg-appLightColorBeige dark:sm:hover:bg-appDarkColorCoalBlack"
     >
       <div className="flex py-8">
@@ -21,12 +36,18 @@ export const PostItem = ({ title, slug, tags, publishedAt }: PostCardProps) => {
             {title}
           </div>
           <Group>
-            {tags.map((tag) => (
-              <Badge key={tag.id}>{tag.name}</Badge>
-            ))}
+            {categories?.map((category, index) => {
+              if (typeof category === "object") {
+                const { title: titleFromCategory } = category;
+                const categoryTitle = titleFromCategory || "Untitled category";
+                return <Badge key={index}>{categoryTitle}</Badge>;
+              }
+
+              return null;
+            })}
           </Group>
           <Group>
-            <TextBullet>{date.toLocaleDateString()}</TextBullet>
+            {date && <TextBullet>{date.toLocaleDateString()}</TextBullet>}
             <TextBullet>0 min read</TextBullet>
           </Group>
         </div>

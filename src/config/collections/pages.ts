@@ -1,7 +1,7 @@
 import type { CollectionConfig, CollectionAfterChangeHook } from "payload";
 import { authenticated } from "@/access/authenticated";
 import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
-import { Archive } from "../../blocks/ArchiveBlock/config";
+import { archive } from "@/config/blocks/archive";
 import { CallToAction } from "../../blocks/CallToAction/config";
 import { about } from "@/config/blocks/about";
 import { FormBlock } from "../../blocks/Form/config";
@@ -101,7 +101,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [CallToAction, about, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, about, MediaBlock, archive, FormBlock],
               required: true,
             },
           ],
