@@ -2,7 +2,7 @@ import type { CollectionConfig, CollectionAfterChangeHook } from "payload";
 import { authenticated } from "@/access/authenticated";
 import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
 import { archive } from "@/config/blocks/archive";
-import { CallToAction } from "../../blocks/CallToAction/config";
+import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
 import { FormBlock } from "../../blocks/Form/config";
 import { MediaBlock } from "../../blocks/MediaBlock/config";
@@ -101,7 +101,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [CallToAction, about, MediaBlock, archive, FormBlock],
+              blocks: [subscription, about, MediaBlock, archive, FormBlock],
               required: true,
             },
           ],

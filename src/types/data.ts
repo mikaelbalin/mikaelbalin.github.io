@@ -5,12 +5,12 @@ export interface DataLink {
   isExternal?: boolean | null;
 }
 
-interface FormControl {
-  id: number;
-  label: string;
-  description: null | string;
-  placeholder: string;
-}
+// interface FormControl {
+//   id: number;
+//   label: string;
+//   description: null | string;
+//   placeholder: string;
+// }
 
 interface DateMetadata {
   createdAt: string;
@@ -81,16 +81,16 @@ export interface GetUserMeLoaderResult {
 //   };
 // }
 
-export interface SubscriptionFormProps {
-  button: string;
-  email: FormControl;
-}
+// export interface SubscriptionFormProps {
+//   button: string;
+//   email: FormControl;
+// }
 
-export interface SubscriptionProps extends SubscriptionFormProps {
-  id: number;
-  title: string;
-  text: string;
-}
+// export interface SubscriptionProps extends SubscriptionFormProps {
+//   id: number;
+//   title: string;
+//   text: string;
+// }
 
 export interface GlobalPageData extends DateMetadata {
   id: number;
@@ -103,7 +103,7 @@ export interface SubscriptionResponse extends DateMetadata {
   id: number;
   documentId: string;
   locale: string;
-  subscription: SubscriptionProps;
+  // subscription: SubscriptionProps;
 }
 
 interface Seo {

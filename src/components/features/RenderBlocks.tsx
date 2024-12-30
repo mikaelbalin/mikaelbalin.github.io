@@ -1,7 +1,7 @@
 import React from "react";
 import type { Page } from "@/payload-types";
 import { ArchiveBlock } from "@/components/features/ArchiveBlock";
-import { CallToActionBlock } from "@/blocks/CallToAction/Component";
+import { Subscription } from "@/components/features/Subscription";
 import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { About } from "@/components/features/About";
@@ -12,7 +12,7 @@ type BlockType = Extract<Page["layout"][0], { blockType: string }>["blockType"];
 const blockComponents: Record<BlockType, React.FC<any>> = {
   about: About,
   archive: ArchiveBlock,
-  cta: CallToActionBlock,
+  subscription: Subscription,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
 };

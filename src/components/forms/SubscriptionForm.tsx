@@ -2,14 +2,12 @@
 
 import { subscribeAction } from "@/data/actions/subscription-actions";
 import { subscriptionSchema, SubscriptionSchema } from "@/lib/schemas";
-import { SubscriptionFormProps } from "@/types/data";
 import { Button, Grid, GridCol, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 
-export const SubscriptionForm = (props: SubscriptionFormProps) => {
-  const { email, button } = props;
+export const SubscriptionForm = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const form = useForm<SubscriptionSchema>({
@@ -62,8 +60,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
           className="sm:flex items-end"
         >
           <TextInput
-            label={email.label}
-            placeholder={email.placeholder}
+            label="Email"
             className="w-full"
             variant="filled"
             onChange={onChange}
@@ -72,7 +69,6 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
             onBlur={onBlur}
             onFocus={onFocus}
             value={value}
-            description={email.description}
           />
 
           <Button
@@ -81,7 +77,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
             className="w-full sm:w-auto shrink-0"
             disabled={isSubscribed}
           >
-            {button}
+            Submit
           </Button>
         </GridCol>
       </Grid>

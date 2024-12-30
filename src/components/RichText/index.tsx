@@ -1,9 +1,8 @@
 import { cn } from "@/utilities/cn";
 import React from "react";
-
 import { serializeLexical } from "./serialize";
 
-type Props = {
+type RichTextProps = {
   className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   content: Record<string, any>;
@@ -11,7 +10,7 @@ type Props = {
   enableProse?: boolean;
 };
 
-const RichText: React.FC<Props> = ({
+const RichText: React.FC<RichTextProps> = ({
   className,
   content,
   enableGutter = true,
