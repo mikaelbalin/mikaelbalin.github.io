@@ -18,7 +18,7 @@ export default async function Page() {
       title: true,
       slug: true,
       categories: true,
-      meta: true,
+      publishedAt: true,
     },
   });
 

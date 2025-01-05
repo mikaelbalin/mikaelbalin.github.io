@@ -28,10 +28,10 @@ export const PostItem = (props: PostCardProps) => {
   return (
     <Link
       href={href}
-      className="group transition-colors sm:hover:bg-appLightColorBeige dark:sm:hover:bg-appDarkColorCoalBlack"
+      className="group transition-colors duration-500 sm:hover:bg-appLightColorBeige dark:sm:hover:bg-appDarkColorCoalBlack"
     >
       <div className="flex py-8">
-        <div className="flex flex-col gap-6 sm:w-1/2 transition-transform sm:group-hover:translate-x-6">
+        <div className="flex flex-col gap-6 sm:w-1/2 transition-transform duration-500 sm:group-hover:translate-x-6">
           <div className="text-xl leading-15 sm:text-4xl sm:font-medium">
             {title}
           </div>
@@ -51,10 +51,10 @@ export const PostItem = (props: PostCardProps) => {
             <TextBullet>0 min read</TextBullet>
           </Group>
         </div>
-        <div className="hidden sm:flex items-center justify-end sm:w-1/2 transition-transform group-hover:-translate-x-6">
+        <div className="hidden sm:flex items-center justify-end sm:w-1/2 transition-transform duration-500 group-hover:-translate-x-6">
           <Text
             size="xl"
-            className="opacity-0 transition-opacity group-hover:opacity-100"
+            className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           >
             Read article <IconArrowNarrowRight className="inline-block" />
           </Text>
