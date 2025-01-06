@@ -10,27 +10,13 @@ type RichTextProps = {
   enableProse?: boolean;
 };
 
-const RichText: React.FC<RichTextProps> = ({
-  className,
-  content,
-  enableGutter = true,
-  enableProse = true,
-}) => {
+const RichText: React.FC<RichTextProps> = ({ className, content }) => {
   if (!content) {
     return null;
   }
 
   return (
-    <section
-      className={cn(
-        // {
-        //   "container ": enableGutter,
-        //   "max-w-none": !enableGutter,
-        //   "mx-auto prose dark:prose-invert ": enableProse,
-        // },
-        className,
-      )}
-    >
+    <section className={cn(className)}>
       {content &&
         !Array.isArray(content) &&
         typeof content === "object" &&
