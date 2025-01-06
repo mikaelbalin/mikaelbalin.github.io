@@ -10,7 +10,6 @@ import "@mantine/notifications/styles.css";
 import "../global.css";
 import { Notifications } from "@mantine/notifications";
 import { Locale } from "../../../../i18n-config";
-import { getGlobalPageData } from "@/data/loaders";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AdminBar } from "@/components/AdminBar";
@@ -35,8 +34,6 @@ export default async function RootLayout(
 
   const { children } = props;
 
-  const globalData = await getGlobalPageData();
-
   const { isEnabled } = await draftMode();
   const header = await getCachedHeader()();
   const footer = await getCachedFooter()();
@@ -55,13 +52,11 @@ export default async function RootLayout(
             }}
           />
           <LivePreviewListener />
-          {globalData && (
-            <div className="relative flex flex-col min-h-screen">
-              <Header {...header} />
-              <main className="flex-1">{children}</main>
-              <Footer {...footer} />
-            </div>
-          )}
+          <div className="relative flex flex-col min-h-screen">
+            <Header {...header} />
+            <main className="flex-1">{children}</main>
+            <Footer {...footer} />
+          </div>
           <Notifications position="bottom-center" />
         </ThemeProvider>
         <Analytics />

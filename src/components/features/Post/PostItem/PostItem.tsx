@@ -2,11 +2,11 @@
 
 import { TextBullet } from "@/components/ui/TextBullet";
 import { Post } from "@/payload-types";
+import { formatDateTime } from "@/utilities/formatDateTime";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 type PostCardProps = Pick<
   Post,
@@ -17,11 +17,6 @@ type PostCardProps = Pick<
 
 export const PostItem = (props: PostCardProps) => {
   const { title, slug, categories, publishedAt, relationTo } = props;
-  const [date, setDate] = useState<Date | null>(null);
-
-  useEffect(() => {
-    publishedAt && setDate(new Date(publishedAt));
-  }, [publishedAt]);
 
   const href = `/${relationTo}/${slug}`;
 
@@ -47,7 +42,9 @@ export const PostItem = (props: PostCardProps) => {
             })}
           </Group>
           <Group>
-            {date && <TextBullet>{date.toLocaleDateString()}</TextBullet>}
+            {publishedAt && (
+              <TextBullet>{formatDateTime(publishedAt)}</TextBullet>
+            )}
             <TextBullet>0 min read</TextBullet>
           </Group>
         </div>

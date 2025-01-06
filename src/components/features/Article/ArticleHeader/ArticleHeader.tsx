@@ -1,21 +1,17 @@
 import { TextBullet } from "@/components/ui/TextBullet";
-// import { Tag } from "@/types/data";
-import {
-  // Badge,
-  Container,
-  Group,
-  SimpleGrid,
-  Title,
-} from "@mantine/core";
+import { Category } from "@/payload-types";
+import { Badge, Container, Group, SimpleGrid, Title } from "@mantine/core";
 
 interface ArticleHeaderProps {
-  // tags: Tag[];
+  categories: Category[];
   title: string;
+  date: string;
 }
 
 export const ArticleHeader = ({
-  // tags,
+  categories,
   title,
+  date,
 }: ArticleHeaderProps) => {
   return (
     <Container
@@ -27,15 +23,15 @@ export const ArticleHeader = ({
       </Title>
       <SimpleGrid cols={{ base: 1, sm: 2 }} className="gap-8">
         <Group className="gap-8">
-          <TextBullet>Feb 17, 2024</TextBullet>
+          <TextBullet>{date}</TextBullet>
           <TextBullet>15 min reads</TextBullet>
         </Group>
         <Group className="sm:justify-end">
-          {/* {tags.map((tag) => (
-            <Badge key={tag.id} size="lg">
-              {tag.name}
+          {categories.map((category) => (
+            <Badge key={category.id} size="lg">
+              {category.title}
             </Badge>
-          ))} */}
+          ))}
         </Group>
       </SimpleGrid>
     </Container>

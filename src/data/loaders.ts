@@ -1,19 +1,19 @@
-import {
-  // PostListResponse,
-  GlobalPageData,
-  HomePageData,
-  StrapiMetadata,
-  // TagListResponse,
-  ArticleResponseDataObject,
-  // Post,
-} from "../types/data";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// import {
+// PostListResponse,
+// GlobalPageData,
+// HomePageData,
+// StrapiMetadata,
+// TagListResponse,
+// ArticleResponseDataObject,
+// Post,
+// } from "../types/data";
 import { getStrapiURL } from "@/lib/utils";
 
 const baseUrl = getStrapiURL();
 
 async function fetchData<T>(url: string) {
   const authToken = null; // we will implement this later getAuthToken() later
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const headers = {
     method: "GET",
     headers: {
@@ -43,47 +43,47 @@ async function fetchData<T>(url: string) {
   }
 }
 
-export async function getHomePageMetaData() {
-  const url = new URL("/api/home", baseUrl);
+// export async function getHomePageMetaData() {
+//   const url = new URL("/api/home", baseUrl);
 
-  url.searchParams.set("populate[seo]", "true");
+//   url.searchParams.set("populate[seo]", "true");
 
-  const data = await fetchData<StrapiMetadata>(url.href);
-  return data;
-}
+//   const data = await fetchData<StrapiMetadata>(url.href);
+//   return data;
+// }
 
-export async function getHomePageData() {
-  const url = new URL("/api/home", baseUrl);
+// export async function getHomePageData() {
+//   const url = new URL("/api/home", baseUrl);
 
-  url.searchParams.set(
-    "populate[hero][populate][contactLink][populate]",
-    "true",
-  );
-  url.searchParams.set("populate[about][populate]", "true");
-  url.searchParams.set("populate", "latestPostsLink");
+//   url.searchParams.set(
+//     "populate[hero][populate][contactLink][populate]",
+//     "true",
+//   );
+//   url.searchParams.set("populate[about][populate]", "true");
+//   url.searchParams.set("populate", "latestPostsLink");
 
-  const { data } = await fetchData<{ data: HomePageData }>(url.href);
-  return data;
-}
+//   const { data } = await fetchData<{ data: HomePageData }>(url.href);
+//   return data;
+// }
 
-export async function getGlobalPageData() {
-  const url = new URL("/api/global", baseUrl);
+// export async function getGlobalPageData() {
+//   const url = new URL("/api/global", baseUrl);
 
-  url.searchParams.append(`populate[header][populate]`, "logoText");
-  url.searchParams.append(`populate[header][populate]`, "navLinks");
-  url.searchParams.append(`populate[footer][populate][0]`, "contacts");
-  url.searchParams.append(`populate[footer][populate][1]`, "social.socialLink");
-  url.searchParams.append(`populate[footer][populate][2]`, "form.name");
-  url.searchParams.append(`populate[footer][populate][3]`, "form.email");
-  url.searchParams.append(`populate[footer][populate][4]`, "form.message");
-  url.searchParams.append(
-    `populate[footer][populate][5]`,
-    "navigation.navLinks",
-  );
+//   url.searchParams.append(`populate[header][populate]`, "logoText");
+//   url.searchParams.append(`populate[header][populate]`, "navLinks");
+//   url.searchParams.append(`populate[footer][populate][0]`, "contacts");
+//   url.searchParams.append(`populate[footer][populate][1]`, "social.socialLink");
+//   url.searchParams.append(`populate[footer][populate][2]`, "form.name");
+//   url.searchParams.append(`populate[footer][populate][3]`, "form.email");
+//   url.searchParams.append(`populate[footer][populate][4]`, "form.message");
+//   url.searchParams.append(
+//     `populate[footer][populate][5]`,
+//     "navigation.navLinks",
+//   );
 
-  const { data } = await fetchData<{ data?: GlobalPageData }>(url.href);
-  return data;
-}
+//   const { data } = await fetchData<{ data?: GlobalPageData }>(url.href);
+//   return data;
+// }
 
 // export async function getSubscriptionData() {
 //   const url = new URL("/api/global", baseUrl);
@@ -105,7 +105,7 @@ export async function getGlobalPageData() {
 //   url.searchParams.append("pagination[limit]", limit.toString());
 //   filter && url.searchParams.append("filters[tags][slug]", filter);
 
-//   const response = await fetchData<PostListResponse>(url.href);
+//   const response = await fetchData<any>(url.href);
 //   return response;
 // }
 
@@ -115,28 +115,28 @@ export async function getGlobalPageData() {
 //   return data;
 // }
 
-export async function getArticlesByTag(tags: string[]) {
-  const url = new URL("/api/articles", baseUrl);
+// export async function getArticlesByTag(tags: string[]) {
+//   const url = new URL("/api/articles", baseUrl);
 
-  tags.forEach((tag) => {
-    url.searchParams.append("filters[tags][name][$in]", tag);
-  });
-  url.searchParams.append("pagination[limit]", "3");
-  url.searchParams.append("populate[0]", "tags");
+//   tags.forEach((tag) => {
+//     url.searchParams.append("filters[tags][name][$in]", tag);
+//   });
+//   url.searchParams.append("pagination[limit]", "3");
+//   url.searchParams.append("populate[0]", "tags");
 
-  const { data } = await fetchData<{
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any[];
-  }>(url.href);
-  return data;
-}
+//   const { data } = await fetchData<{
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     data: any[];
+//   }>(url.href);
+//   return data;
+// }
 
-export const getArticleBySlug = async (slug: string) => {
-  const url = new URL("/api/articles", baseUrl);
+// export const getArticleBySlug = async (slug: string) => {
+//   const url = new URL("/api/articles", baseUrl);
 
-  url.searchParams.append("filters[slug]", slug);
-  url.searchParams.append("populate", "*");
+//   url.searchParams.append("filters[slug]", slug);
+//   url.searchParams.append("populate", "*");
 
-  const { data } = await fetchData<ArticleResponseDataObject>(url.href);
-  return data;
-};
+//   const { data } = await fetchData<ArticleResponseDataObject>(url.href);
+//   return data;
+// };

@@ -1,20 +1,35 @@
-export const formatDateTime = (timestamp: string): string => {
+const shortMonths = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+/**
+ * Formats a given timestamp into a human-readable date string.
+ * If no timestamp is provided, the current date is used.
+ *
+ * @param {string | null} [timestamp] - The optional timestamp to format. If not provided, the current date is used.
+ * @returns {string} The formatted date string in the format "MMM DD, YYYY".
+ */
+export const formatDateTime = (timestamp?: string | null): string => {
   const now = new Date();
   let date = now;
   if (timestamp) date = new Date(timestamp);
-  const months = date.getMonth();
+  const month = date.getMonth();
   const days = date.getDate();
-  // const hours = date.getHours();
-  // const minutes = date.getMinutes();
-  // const seconds = date.getSeconds();
 
-  const MM = months + 1 < 10 ? `0${months + 1}` : months + 1;
+  const MMM = shortMonths[month];
   const DD = days < 10 ? `0${days}` : days;
   const YYYY = date.getFullYear();
-  // const AMPM = hours < 12 ? 'AM' : 'PM';
-  // const HH = hours > 12 ? hours - 12 : hours;
-  // const MinMin = (minutes < 10) ? `0${minutes}` : minutes;
-  // const SS = (seconds < 10) ? `0${seconds}` : seconds;
 
-  return `${MM}/${DD}/${YYYY}`;
+  return `${MMM} ${DD}, ${YYYY}`;
 };

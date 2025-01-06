@@ -3,6 +3,13 @@ import type { Page, Post } from "@/payload-types";
 import { mergeOpenGraph } from "./mergeOpenGraph";
 import { getServerSideURL } from "./getURL";
 
+/**
+ * Generates metadata for a given document.
+ *
+ * @param args - An object containing the document to generate metadata for.
+ * @param args.doc - A partial Page or Post object containing metadata information.
+ * @returns A promise that resolves to a Metadata object.
+ */
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post>;
 }): Promise<Metadata> => {
@@ -15,8 +22,8 @@ export const generateMeta = async (args: {
     `${getServerSideURL()}`;
 
   const title = doc?.meta?.title
-    ? doc?.meta?.title + " | Payload Website Template"
-    : "Payload Website Template";
+    ? doc?.meta?.title + " | Mikael's Blog"
+    : "Mikael's Blog";
 
   return {
     description: doc?.meta?.description,
