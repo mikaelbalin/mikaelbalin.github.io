@@ -1,4 +1,3 @@
-import { CalloutBlock } from "@/types/data";
 import { Text } from "@mantine/core";
 import {
   IconInfoCircle,
@@ -19,7 +18,8 @@ function getIcon(type: "note" | "tip" | "important") {
   }
 }
 
-type CalloutProps = CalloutBlock;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CalloutProps = any;
 
 export const Callout = (props: CalloutProps) => {
   const { type, title, body } = props;

@@ -13,9 +13,8 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { authenticated } from "@/access/authenticated";
 import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
-import { Banner } from "../../blocks/Banner/config";
-import { Code } from "../../blocks/Code/config";
-import { MediaBlock } from "../../blocks/MediaBlock/config";
+import { banner } from "@/config/blocks/banner";
+import { media } from "@/config/blocks/media";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import {
   MetaDescriptionField,
@@ -28,6 +27,7 @@ import { slugField } from "@/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
 import { User, Post } from "@/payload-types";
 import { revalidatePath } from "next/cache";
+import { code } from "@/config/blocks/code";
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -151,7 +151,7 @@ export const posts: CollectionConfig<"posts"> = {
                     HeadingFeature({
                       enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
                     }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                    BlocksFeature({ blocks: [banner, code, media] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),

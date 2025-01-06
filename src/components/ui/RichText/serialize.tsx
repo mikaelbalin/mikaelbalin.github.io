@@ -1,6 +1,5 @@
 import React, { Fragment, JSX } from "react";
 import { BannerBlock } from "@/blocks/Banner/Component";
-import { CodeBlock, CodeBlockProps } from "@/blocks/Code/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { CMSLink } from "@/components/Link";
 import {
@@ -20,6 +19,15 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from "@payloadcms/richtext-lexical/lexical";
+import { Code, Text } from "@mantine/core";
+import { CodeHighlight } from "@mantine/code-highlight";
+import "@mantine/code-highlight/styles.css";
+
+type CodeBlockProps = {
+  code: string;
+  language?: string;
+  blockType: "code";
+};
 
 export type NodeTypes =
   | DefaultNodeTypes
@@ -40,27 +48,35 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         if (node.type === "text") {
           let text = <React.Fragment key={index}>{node.text}</React.Fragment>;
           if (node.format & IS_BOLD) {
-            text = <strong key={index}>{text}</strong>;
+            text = (
+              <Text key={index} component="strong" fw={700}>
+                {text}
+              </Text>
+            );
           }
           if (node.format & IS_ITALIC) {
-            text = <em key={index}>{text}</em>;
+            text = (
+              <Text key={index} component="em" fs="italic">
+                {text}
+              </Text>
+            );
           }
           if (node.format & IS_STRIKETHROUGH) {
             text = (
-              <span key={index} style={{ textDecoration: "line-through" }}>
+              <Text key={index} component="span" td="line-through">
                 {text}
-              </span>
+              </Text>
             );
           }
           if (node.format & IS_UNDERLINE) {
             text = (
-              <span key={index} style={{ textDecoration: "underline" }}>
+              <Text key={index} component="span" td="underline">
                 {text}
-              </span>
+              </Text>
             );
           }
           if (node.format & IS_CODE) {
-            text = <code key={index}>{node.text}</code>;
+            text = <Code key={index}>{node.text}</Code>;
           }
           if (node.format & IS_SUBSCRIPT) {
             text = <sub key={index}>{text}</sub>;
@@ -118,16 +134,15 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 />
               );
             case "banner":
-              return (
-                <BannerBlock
-                  className="col-start-2 mb-4"
-                  key={index}
-                  {...block}
-                />
-              );
+              return <BannerBlock key={index} {...block} />;
             case "code":
               return (
-                <CodeBlock className="col-start-2" key={index} {...block} />
+                <CodeHighlight
+                  key={index}
+                  className="mb-8"
+                  code={block.code}
+                  language={block.language}
+                />
               );
             default:
               return null;
@@ -135,13 +150,13 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         } else {
           switch (node.type) {
             case "linebreak": {
-              return <br className="col-start-2" key={index} />;
+              return <br key={index} />;
             }
             case "paragraph": {
               return (
-                <p className="col-start-2" key={index}>
+                <Text key={index} className="mb-8">
                   {serializedChildren}
-                </p>
+                </Text>
               );
             }
             case "heading": {

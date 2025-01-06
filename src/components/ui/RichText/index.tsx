@@ -21,13 +21,13 @@ const RichText: React.FC<RichTextProps> = ({
   }
 
   return (
-    <div
+    <section
       className={cn(
-        {
-          "container ": enableGutter,
-          "max-w-none": !enableGutter,
-          "mx-auto prose dark:prose-invert ": enableProse,
-        },
+        // {
+        //   "container ": enableGutter,
+        //   "max-w-none": !enableGutter,
+        //   "mx-auto prose dark:prose-invert ": enableProse,
+        // },
         className,
       )}
     >
@@ -36,7 +36,7 @@ const RichText: React.FC<RichTextProps> = ({
         typeof content === "object" &&
         "root" in content &&
         serializeLexical({ nodes: content?.root?.children as NodeTypes[] })}
-    </div>
+    </section>
   );
 };
 

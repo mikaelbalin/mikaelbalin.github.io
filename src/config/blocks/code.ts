@@ -1,17 +1,21 @@
 import type { Block } from "payload";
 
-export const Code: Block = {
+export const code: Block = {
   slug: "code",
   interfaceName: "CodeBlock",
   fields: [
     {
       name: "language",
       type: "select",
-      defaultValue: "typescript",
+      defaultValue: "tsx",
       options: [
         {
           label: "Typescript",
           value: "typescript",
+        },
+        {
+          label: "TypeScript React",
+          value: "tsx",
         },
         {
           label: "Javascript",

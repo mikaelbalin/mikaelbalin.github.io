@@ -5,7 +5,6 @@ import { archive } from "@/config/blocks/archive";
 import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
 import { FormBlock } from "../../blocks/Form/config";
-import { MediaBlock } from "../../blocks/MediaBlock/config";
 import { hero } from "@/config/hero";
 import { slugField } from "@/fields/slug";
 import { populatePublishedAt } from "@/hooks/populatePublishedAt";
@@ -20,6 +19,7 @@ import {
 import { getServerSideURL } from "@/utilities/getURL";
 import { revalidatePath } from "next/cache";
 import type { Page } from "@/payload-types";
+import { media } from "@/config/blocks/media";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
@@ -101,7 +101,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [subscription, about, MediaBlock, archive, FormBlock],
+              blocks: [subscription, about, media, archive, FormBlock],
               required: true,
             },
           ],
