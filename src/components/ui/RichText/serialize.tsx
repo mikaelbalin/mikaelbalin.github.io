@@ -1,5 +1,4 @@
 import React, { Fragment, JSX } from "react";
-import { BannerBlock } from "@/blocks/Banner/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { CMSLink } from "@/components/Link";
 import {
@@ -7,7 +6,7 @@ import {
   SerializedBlockNode,
 } from "@payloadcms/richtext-lexical";
 import type {
-  BannerBlock as BannerBlockProps,
+  CalloutBlock as CalloutBlockProps,
   MediaBlock as MediaBlockProps,
 } from "@/payload-types";
 import {
@@ -22,6 +21,7 @@ import {
 import { Code, Text } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
 import "@mantine/code-highlight/styles.css";
+import { Callout } from "@/components/ui/Callout";
 
 type CodeBlockProps = {
   code: string;
@@ -31,7 +31,7 @@ type CodeBlockProps = {
 
 export type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<MediaBlockProps | BannerBlockProps | CodeBlockProps>;
+  | SerializedBlockNode<MediaBlockProps | CalloutBlockProps | CodeBlockProps>;
 
 type Props = {
   nodes: NodeTypes[];
@@ -133,8 +133,8 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                   disableInnerContainer={true}
                 />
               );
-            case "banner":
-              return <BannerBlock key={index} {...block} />;
+            case "callout":
+              return <Callout key={index} {...block} />;
             case "code":
               return (
                 <CodeHighlight

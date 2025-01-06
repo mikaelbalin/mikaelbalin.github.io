@@ -1,23 +1,25 @@
 import type { Block } from "payload";
-
 import {
+  BoldFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
+  ItalicFeature,
   lexicalEditor,
+  ParagraphFeature,
+  InlineCodeFeature,
 } from "@payloadcms/richtext-lexical";
 
-export const banner: Block = {
-  slug: "banner",
+export const callout: Block = {
+  slug: "callout",
   fields: [
     {
       name: "style",
       type: "select",
-      defaultValue: "info",
+      defaultValue: "note",
       options: [
-        { label: "Info", value: "info" },
-        { label: "Warning", value: "warning" },
-        { label: "Error", value: "error" },
-        { label: "Success", value: "success" },
+        { label: "Note", value: "note" },
+        { label: "Tip", value: "tip" },
+        { label: "Important", value: "important" },
       ],
       required: true,
     },
@@ -25,11 +27,14 @@ export const banner: Block = {
       name: "content",
       type: "richText",
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
+        features: () => {
           return [
-            ...rootFeatures,
+            ParagraphFeature(),
+            BoldFeature(),
+            ItalicFeature(),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
+            InlineCodeFeature(),
           ];
         },
       }),
@@ -37,5 +42,5 @@ export const banner: Block = {
       required: true,
     },
   ],
-  interfaceName: "BannerBlock",
+  interfaceName: "CalloutBlock",
 };

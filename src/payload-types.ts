@@ -1351,10 +1351,10 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlock".
+ * via the `definition` "CalloutBlock".
  */
-export interface BannerBlock {
-  style: 'info' | 'warning' | 'error' | 'success';
+export interface CalloutBlock {
+  style: 'note' | 'tip' | 'important';
   content: {
     root: {
       type: string;
@@ -1372,7 +1372,7 @@ export interface BannerBlock {
   };
   id?: string | null;
   blockName?: string | null;
-  blockType: 'banner';
+  blockType: 'callout';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

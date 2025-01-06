@@ -16,7 +16,7 @@ const RichText: React.FC<RichTextProps> = ({ className, content }) => {
   }
 
   return (
-    <section className={cn(className)}>
+    <section className={cn("-mb-8", className)}>
       {content &&
         !Array.isArray(content) &&
         typeof content === "object" &&

@@ -13,7 +13,7 @@ import {
 } from "@payloadcms/richtext-lexical";
 import { authenticated } from "@/access/authenticated";
 import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
-import { banner } from "@/config/blocks/banner";
+import { callout } from "@/config/blocks/callout";
 import { media } from "@/config/blocks/media";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import {
@@ -151,7 +151,7 @@ export const posts: CollectionConfig<"posts"> = {
                     HeadingFeature({
                       enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
                     }),
-                    BlocksFeature({ blocks: [banner, code, media] }),
+                    BlocksFeature({ blocks: [callout, code, media] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
