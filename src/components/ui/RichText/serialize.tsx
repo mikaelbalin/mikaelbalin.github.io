@@ -1,4 +1,4 @@
-import React, { Fragment, JSX } from "react";
+import React, { Fragment, JSX, PropsWithChildren } from "react";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
 import { CMSLink } from "@/components/Link";
 import {
@@ -18,10 +18,49 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from "@payloadcms/richtext-lexical/lexical";
-import { Blockquote, Code, Divider, Text } from "@mantine/core";
+import {
+  Blockquote,
+  Code,
+  Divider,
+  List,
+  ListItem,
+  Text,
+  Title,
+  TitleOrder,
+} from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
 import "@mantine/code-highlight/styles.css";
 import { Callout } from "@/components/ui/Callout";
+import Link from "next/link";
+
+const HeadingRenderer = (
+  props: PropsWithChildren<{
+    tag: string;
+  }>,
+) => {
+  const { tag, children } = props;
+  const order = parseInt(tag.match(/\d+/)?.[0] || "1", 10);
+  const childrenString = children?.toString();
+  const id = childrenString?.replace(/\s+/g, "-").toLowerCase();
+
+  return (
+    <Title
+      id={id}
+      order={order as TitleOrder}
+      size={`h${order + 1}`}
+      className="group mb-4"
+    >
+      {props.children}&nbsp;
+      <Link
+        href={`#${id}`}
+        aria-label={`Permalink: ${childrenString}`}
+        className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-[var(--mantine-color-blue-6)]"
+      >
+        #
+      </Link>
+    </Title>
+  );
+};
 
 type CodeBlockProps = {
   code: string;
@@ -160,25 +199,27 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               );
             }
             case "heading": {
-              const Tag = node?.tag;
               return (
-                <Tag className="col-start-2" key={index}>
+                <HeadingRenderer key={index} tag={node?.tag}>
                   {serializedChildren}
-                </Tag>
+                </HeadingRenderer>
               );
             }
             case "list": {
-              const Tag = node?.tag;
               return (
-                <Tag className="list col-start-2" key={index}>
+                <List
+                  key={index}
+                  type={node?.tag === "ol" ? "ordered" : "unordered"}
+                  listStyleType={node?.tag === "ol" ? "auto" : "initial"}
+                >
                   {serializedChildren}
-                </Tag>
+                </List>
               );
             }
             case "listitem": {
               if (node?.checked != null) {
                 return (
-                  <li
+                  <ListItem
                     aria-checked={node.checked ? "true" : "false"}
                     className={` ${node.checked ? "" : ""}`}
                     key={index}
@@ -187,13 +228,13 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     value={node?.value}
                   >
                     {serializedChildren}
-                  </li>
+                  </ListItem>
                 );
               } else {
                 return (
-                  <li key={index} value={node?.value}>
+                  <ListItem key={index} value={node?.value}>
                     {serializedChildren}
-                  </li>
+                  </ListItem>
                 );
               }
             }
