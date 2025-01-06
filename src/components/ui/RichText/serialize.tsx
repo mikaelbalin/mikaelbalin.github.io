@@ -18,7 +18,7 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from "@payloadcms/richtext-lexical/lexical";
-import { Code, Text } from "@mantine/core";
+import { Blockquote, Code, Divider, Text } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
 import "@mantine/code-highlight/styles.css";
 import { Callout } from "@/components/ui/Callout";
@@ -199,9 +199,9 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case "quote": {
               return (
-                <blockquote className="col-start-2" key={index}>
+                <Blockquote key={index} className="my-8">
                   {serializedChildren}
-                </blockquote>
+                </Blockquote>
               );
             }
             case "link": {
@@ -211,14 +211,16 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 <CMSLink
                   key={index}
                   newTab={Boolean(fields?.newTab)}
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  reference={fields.doc as any}
+                  reference={fields.doc}
                   type={fields.linkType === "internal" ? "reference" : "custom"}
                   url={fields.url}
                 >
                   {serializedChildren}
                 </CMSLink>
               );
+            }
+            case "horizontalrule": {
+              return <Divider key={index} className="mb-8" />;
             }
 
             default:

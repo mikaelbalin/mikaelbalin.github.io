@@ -4,8 +4,7 @@ import type { Form as FormType } from "@payloadcms/plugin-form-builder/types";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import RichText from "@/components/RichText";
-import { Button } from "@/components/ui/button";
+import RichText from "@/components/ui/RichText";
 import { buildInitialFormState } from "./buildInitialFormState";
 import { fields } from "./fields";
 import { getClientSideURL } from "@/utilities/getURL";
@@ -131,13 +130,13 @@ export const FormBlock: React.FC<
 
   return (
     <div className="container lg:max-w-[48rem]">
-      {enableIntro && introContent && !hasSubmitted && (
+      {/* {enableIntro && introContent && !hasSubmitted && (
         <RichText
           className="mb-8 lg:mb-12"
           content={introContent}
           enableGutter={false}
         />
-      )}
+      )} */}
       <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === "message" && (
@@ -173,9 +172,9 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
+              <button form={formID} type="submit">
                 {submitButtonLabel}
-              </Button>
+              </button>
             </form>
           )}
         </FormProvider>

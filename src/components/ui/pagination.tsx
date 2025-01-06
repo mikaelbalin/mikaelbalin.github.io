@@ -1,5 +1,3 @@
-import type { ButtonProps } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/utilities/cn";
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import * as React from "react";
@@ -36,26 +34,14 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"button">;
+} & React.ComponentProps<"button">;
 
 const PaginationLink = ({
   className,
   isActive,
-  size = "icon",
   ...props
 }: PaginationLinkProps) => (
-  <button
-    aria-current={isActive ? "page" : undefined}
-    className={cn(
-      buttonVariants({
-        size,
-        variant: isActive ? "outline" : "ghost",
-      }),
-      className,
-    )}
-    {...props}
-  />
+  <button aria-current={isActive ? "page" : undefined} {...props} />
 );
 PaginationLink.displayName = "PaginationLink";
 
@@ -66,7 +52,6 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     className={cn("gap-1 pl-2.5", className)}
-    size="default"
     {...props}
   >
     <ChevronLeft className="h-4 w-4" />
@@ -82,7 +67,6 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     className={cn("gap-1 pr-2.5", className)}
-    size="default"
     {...props}
   >
     <span>Next</span>
