@@ -1,11 +1,11 @@
 import { cn } from "@/utilities/cn";
 import React from "react";
-import { serializeLexical } from "./serialize";
+import { serializeLexical, type NodeTypes } from "./serialize";
+import { Post } from "@/payload-types";
 
 type RichTextProps = {
   className?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  content: Record<string, any>;
+  content: Post["content"];
   enableGutter?: boolean;
   enableProse?: boolean;
 };
@@ -35,7 +35,7 @@ const RichText: React.FC<RichTextProps> = ({
         !Array.isArray(content) &&
         typeof content === "object" &&
         "root" in content &&
-        serializeLexical({ nodes: content?.root?.children })}
+        serializeLexical({ nodes: content?.root?.children as NodeTypes[] })}
     </div>
   );
 };

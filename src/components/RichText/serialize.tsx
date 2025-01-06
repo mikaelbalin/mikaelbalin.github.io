@@ -1,7 +1,7 @@
+import React, { Fragment, JSX } from "react";
 import { BannerBlock } from "@/blocks/Banner/Component";
 import { CodeBlock, CodeBlockProps } from "@/blocks/Code/Component";
 import { MediaBlock } from "@/blocks/MediaBlock/Component";
-import React, { Fragment, JSX } from "react";
 import { CMSLink } from "@/components/Link";
 import {
   DefaultNodeTypes,
@@ -19,7 +19,7 @@ import {
   IS_SUBSCRIPT,
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
-} from "./nodeFormat";
+} from "@payloadcms/richtext-lexical/lexical";
 
 export type NodeTypes =
   | DefaultNodeTypes
