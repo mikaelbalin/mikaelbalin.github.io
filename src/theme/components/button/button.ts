@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 import { Button } from "@mantine/core";
 
 export default Button.extend({

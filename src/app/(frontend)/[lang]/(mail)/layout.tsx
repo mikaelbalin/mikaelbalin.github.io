@@ -3,9 +3,9 @@ import "@mantine/core/styles.css";
 import "../global.css";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-// import { Locale } from "../../../i18n-config";
+// import { Locale } from "@/i18n-config";
 import { ColorSchemeScript } from "@mantine/core";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 
 const inter = Inter({ subsets: ["latin"] });
 

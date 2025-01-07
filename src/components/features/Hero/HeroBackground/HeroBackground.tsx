@@ -2,7 +2,7 @@
 
 import { Stack, useComputedColorScheme, useMantineTheme } from "@mantine/core";
 import { useElementSize, useMediaQuery } from "@mantine/hooks";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 import {
   forwardRef,
   PropsWithChildren,

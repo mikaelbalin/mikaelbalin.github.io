@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 import { TextInput } from "@mantine/core";
 
 export default TextInput.extend({

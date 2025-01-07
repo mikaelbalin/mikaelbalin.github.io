@@ -4,7 +4,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 import { ChangeEventHandler } from "react";
 
 export const ColorSchemeToggle = () => {

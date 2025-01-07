@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Text, TextProps } from "@mantine/core";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 
 interface TextBulletProps
   extends PropsWithChildren,

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utilities/cn";
 import { Container, rem } from "@mantine/core";
 
 const CONTAINER_SIZES: Record<string, string> = {
