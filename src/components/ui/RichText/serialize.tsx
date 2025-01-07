@@ -1,5 +1,5 @@
 import React, { Fragment, JSX, PropsWithChildren } from "react";
-import { MediaBlock } from "@/blocks/MediaBlock/Component";
+import { MediaBlock } from "@/components/ui/MediaBlock";
 import { CMSLink } from "@/components/Link";
 import {
   DefaultNodeTypes,
@@ -163,12 +163,10 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case "mediaBlock":
               return (
                 <MediaBlock
-                  className="col-start-1 col-span-3"
                   imgClassName="m-0"
                   key={index}
                   {...block}
                   captionClassName="mx-auto max-w-[48rem]"
-                  enableGutter={false}
                   disableInnerContainer={true}
                 />
               );
