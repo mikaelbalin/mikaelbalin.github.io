@@ -12,7 +12,7 @@ import {
   HeadingFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { searchFields } from "@/search/fieldOverrides";
+import { searchFields } from "@/config/fields/searchFields";
 import { beforeSyncWithSearch } from "@/search/beforeSync";
 import { Page, Post } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
