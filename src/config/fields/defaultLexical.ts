@@ -8,6 +8,9 @@ import {
   UnderlineFeature,
 } from "@payloadcms/richtext-lexical";
 
+/**
+ * Unused
+ */
 export const defaultLexical: Config["editor"] = lexicalEditor({
   features: () => {
     return [
