@@ -33,7 +33,6 @@
       "@/context/*": ["context/*"],
       "@/utilities/*": ["utilities/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/search/*": ["search/*"],
       "@/fields/*": ["fields/*"],
       "@/blocks/*": ["blocks/*"],
       "@/endpoints/*": ["endpoints/*"],

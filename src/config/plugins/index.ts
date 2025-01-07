@@ -1,4 +1,3 @@
-// import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
@@ -13,10 +12,10 @@ import {
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { searchFields } from "@/config/fields/searchFields";
-import { beforeSyncWithSearch } from "@/search/beforeSync";
 import { Page, Post } from "@/payload-types";
 import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
+import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
@@ -28,6 +27,61 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   const url = getServerSideURL();
 
   return doc?.slug ? `${url}/${doc.slug}` : url;
+};
+
+const beforeSyncWithSearch: BeforeSync = async ({
+  originalDoc,
+  searchDoc,
+  // payload,
+}) => {
+  const {
+    doc: { relationTo: collection },
+  } = searchDoc;
+
+  const {
+    slug,
+    id,
+    categories,
+    title,
+    meta,
+    // excerpt
+  } = originalDoc;
+
+  const modifiedDoc: DocToSync = {
+    ...searchDoc,
+    slug,
+    meta: {
+      ...meta,
+      title: meta?.title || title,
+      image: meta?.image?.id || meta?.image,
+      description: meta?.description,
+    },
+    categories: [],
+  };
+
+  if (categories && Array.isArray(categories) && categories.length > 0) {
+    // get full categories and keep a flattened copy of their most important properties
+    try {
+      const mappedCategories = categories.map((category) => {
+        const { id, title } = category;
+
+        return {
+          relationTo: "categories",
+          id,
+          title,
+        };
+      });
+
+      modifiedDoc.categories = mappedCategories;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      console.error(
+        `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`,
+      );
+    }
+  }
+
+  return modifiedDoc;
 };
 
 /**
@@ -119,5 +173,4 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  //   payloadCloudPlugin(),
 ];
