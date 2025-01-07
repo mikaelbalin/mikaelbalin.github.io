@@ -37,7 +37,6 @@
       "@/fields/*": ["fields/*"],
       "@/blocks/*": ["blocks/*"],
       "@/endpoints/*": ["endpoints/*"],
-      "@/providers/*": ["providers/*"],
       "@/heros/*": ["heros/*"],
       "@/access/*": ["access/*"],
       "@/config/*": ["config/*"],
