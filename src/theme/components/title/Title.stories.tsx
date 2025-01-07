@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Title, TitleProps } from "@mantine/core";
 import { UnionToTuple } from "@/types/union-to-tuple";
 
+type TextWrapOptions = UnionToTuple<NonNullable<TitleProps["textWrap"]>>;
+
 const meta = {
   title: "Typography/Title",
   component: Title,
@@ -14,7 +16,7 @@ const meta = {
         "balance",
         "pretty",
         "stable",
-      ] satisfies UnionToTuple<NonNullable<TitleProps["textWrap"]>>,
+      ] satisfies TextWrapOptions,
       control: { type: "select" },
     },
     lineClamp: {
