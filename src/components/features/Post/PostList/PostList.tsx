@@ -18,7 +18,7 @@ export const PostList = ({ children, posts, className }: PostListProps) => {
       {children}
       <Stack gap={0} className="pt-14 sm:pt-20">
         {posts.map((item) => (
-          <PostItem key={item.id} {...item} relationTo="blog" />
+          <PostItem key={item.id} {...item} relationTo="posts" />
         ))}
       </Stack>
     </Container>

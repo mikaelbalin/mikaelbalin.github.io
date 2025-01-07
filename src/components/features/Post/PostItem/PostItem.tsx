@@ -12,7 +12,7 @@ type PostCardProps = Pick<
   Post,
   "slug" | "categories" | "meta" | "title" | "publishedAt"
 > & {
-  relationTo?: "blog";
+  relationTo?: "posts";
 };
 
 export const PostItem = (props: PostCardProps) => {
