@@ -192,7 +192,18 @@ export function serializeLexical({ nodes, className }: Props): JSX.Element {
             case "mediaBlock":
               return <MediaBlock key={index} {...block} />;
             case "callout":
-              return <Callout key={index} {...block} />;
+              return (
+                <Callout
+                  key={index}
+                  blockName={block.blockName}
+                  style={block.style}
+                >
+                  {serializeLexical({
+                    nodes: block.content.root.children as NodeTypes[],
+                    className: cn("mb-0", className),
+                  })}
+                </Callout>
+              );
             case "code":
               return (
                 <CodeHighlight
@@ -242,7 +253,7 @@ export function serializeLexical({ nodes, className }: Props): JSX.Element {
                 <List
                   key={index}
                   type={node?.tag === "ol" ? "ordered" : "unordered"}
-                  listStyleType={node?.tag === "ol" ? "auto" : "initial"}
+                  withPadding
                 >
                   {serializedChildren}
                 </List>

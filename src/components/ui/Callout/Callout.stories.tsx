@@ -12,8 +12,8 @@ type Story = StoryObj<typeof Callout>;
 
 export const Default: Story = {
   args: {
-    title: "Note",
-    body: "This is a note.",
-    type: "note",
+    blockName: "Info",
+    children: "This is a callout",
+    style: "note",
   },
 };

@@ -4,7 +4,7 @@ import {
   IconExclamationCircle,
 } from "@tabler/icons-react";
 import type { CalloutBlock } from "@/payload-types";
-import RichText from "@/components/ui/RichText";
+import React from "react";
 
 function getIcon(type: CalloutBlock["style"]) {
   switch (type) {
@@ -19,12 +19,14 @@ function getIcon(type: CalloutBlock["style"]) {
   }
 }
 
-type CalloutProps = {
-  className?: string;
-} & CalloutBlock;
+type CalloutProps = React.PropsWithChildren<
+  {
+    className?: string;
+  } & Pick<CalloutBlock, "style" | "blockName">
+>;
 
 export const Callout = (props: CalloutProps) => {
-  const { style, blockName, content } = props;
+  const { style, blockName, children } = props;
   const Icon = getIcon(style);
 
   return (
@@ -34,9 +36,7 @@ export const Callout = (props: CalloutProps) => {
           <Icon /> {blockName}
         </div>
       )}
-      <div className="py-6 px-4">
-        <RichText content={content} />
-      </div>
+      <div className="py-6 px-4">{children}</div>
     </div>
   );
 };

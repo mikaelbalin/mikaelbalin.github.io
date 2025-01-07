@@ -5,7 +5,6 @@ import type { MediaBlock as MediaBlockProps } from "@/payload-types";
 import { Media } from "@/components/ui/Media";
 
 type Props = MediaBlockProps & {
-  breakout?: boolean;
   staticImage?: StaticImageData;
 };
 
