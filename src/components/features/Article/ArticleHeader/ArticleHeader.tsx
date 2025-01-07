@@ -1,5 +1,5 @@
 import { TextBullet } from "@/components/ui/TextBullet";
-import { Category } from "@/payload-types";
+import { Category } from "@/types/payload";
 import { Badge, Container, Group, SimpleGrid, Title } from "@mantine/core";
 
 interface ArticleHeaderProps {

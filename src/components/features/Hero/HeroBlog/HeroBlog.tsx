@@ -4,7 +4,7 @@ import React from "react";
 import { HeroBackground } from "@/components/features/Hero/HeroBackground";
 import { Box, Container, Title } from "@mantine/core";
 import { MotionProvider } from "@/context/motion-context";
-import { Page } from "@/payload-types";
+import { Page } from "@/types/payload";
 
 export const HeroBlog: React.FC<Page["hero"]> = ({ title }) => {
   return (

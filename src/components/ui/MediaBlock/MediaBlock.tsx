@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 import React from "react";
 import RichText from "@/components/ui/RichText";
-import type { MediaBlock as MediaBlockProps } from "@/payload-types";
+import type { MediaBlock as MediaBlockProps } from "@/types/payload";
 import { Media } from "@/components/ui/Media";
 
 type Props = MediaBlockProps & {

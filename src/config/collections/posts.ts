@@ -24,7 +24,7 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { slugField } from "@/config/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
-import { User, Post } from "@/payload-types";
+import { User, Post } from "@/types/payload";
 import { revalidatePath } from "next/cache";
 import { code } from "@/config/blocks/code";
 import { kbd } from "@/config/blocks/kbd";

@@ -1,5 +1,5 @@
 import type { Access, AccessArgs } from "payload";
-import type { User } from "@/payload-types";
+import type { User } from "@/types/payload";
 
 export const anyone: Access = () => true;
 

@@ -1,4 +1,4 @@
-import type { Post, ArchiveBlock as ArchiveBlockProps } from "@/payload-types";
+import type { Post, ArchiveBlock as ArchiveBlockProps } from "@/types/payload";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import React from "react";

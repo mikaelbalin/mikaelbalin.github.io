@@ -1,6 +1,6 @@
 "use client";
 
-import { Category } from "@/payload-types";
+import { Category } from "@/types/payload";
 import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
 import { useParams, useRouter } from "next/navigation";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { TextBullet } from "@/components/ui/TextBullet";
-import { Post } from "@/payload-types";
+import { Post } from "@/types/payload";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";

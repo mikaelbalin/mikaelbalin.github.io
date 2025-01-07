@@ -20,7 +20,7 @@ import { cn } from "@/utilities/cn";
 import { i18n, type Locale } from "../../../i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
-import { Header as HeaderProps } from "@/payload-types";
+import { Header as HeaderProps } from "@/types/payload";
 
 type MenuItem = NonNullable<HeaderProps["navItems"]>[number]["link"];
 

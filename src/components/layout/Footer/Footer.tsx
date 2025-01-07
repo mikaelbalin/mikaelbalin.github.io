@@ -3,7 +3,7 @@ import { Contact } from "@/components/layout/Footer/Contact";
 import { Marquee } from "@/components/ui/Marquee";
 import Link from "next/link";
 import { ScrollTopButton } from "@/components/ui/ScrollTopButton";
-import { Footer as FooterProps } from "@/payload-types";
+import { Footer as FooterProps } from "@/types/payload";
 
 export function Footer(props: FooterProps) {
   const { titles, contacts, social, navigation } = props;

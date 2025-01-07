@@ -9,7 +9,7 @@ import type {
   CalloutBlock as CalloutBlockProps,
   MediaBlock as MediaBlockProps,
   TableBlock,
-} from "@/payload-types";
+} from "@/types/payload";
 import {
   IS_BOLD,
   IS_CODE,

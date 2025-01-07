@@ -1,6 +1,6 @@
 import { ElementType, FC, Fragment } from "react";
 import { serializeLexical, type NodeTypes } from "./serialize";
-import { Post } from "@/payload-types";
+import { Post } from "@/types/payload";
 
 type RichTextProps = {
   className?: string;

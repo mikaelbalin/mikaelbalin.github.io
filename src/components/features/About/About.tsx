@@ -3,7 +3,7 @@
 import { Container, Title, Text, Grid, GridCol } from "@mantine/core";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import type { AboutBlock as AboutBlockProps } from "@/payload-types";
+import type { AboutBlock as AboutBlockProps } from "@/types/payload";
 
 const splitText = (text: string) => {
   return text.split("").map((char, index) => {

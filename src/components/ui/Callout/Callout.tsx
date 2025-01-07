@@ -3,7 +3,7 @@ import {
   IconBulb,
   IconExclamationCircle,
 } from "@tabler/icons-react";
-import type { CalloutBlock } from "@/payload-types";
+import type { CalloutBlock } from "@/types/payload";
 import React from "react";
 
 function getIcon(type: CalloutBlock["style"]) {

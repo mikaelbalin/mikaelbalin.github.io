@@ -1,6 +1,6 @@
 import { Container, Title, Text, Box, Grid, GridCol } from "@mantine/core";
 import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
-import { Subscription as SubscriptionProps } from "@/payload-types";
+import { Subscription as SubscriptionProps } from "@/types/payload";
 
 export const Subscription = (props: SubscriptionProps) => {
   const { title, text } = props;

@@ -1,5 +1,5 @@
 import React from "react";
-import type { Page } from "@/payload-types";
+import type { Page } from "@/types/payload";
 import { ArchiveBlock } from "@/components/features/ArchiveBlock";
 import { Subscription } from "@/components/features/Subscription";
 import { FormBlock } from "@/blocks/Form/Component";

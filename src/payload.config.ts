@@ -88,6 +88,6 @@ export default buildConfig({
   // you don't need it!
   sharp,
   typescript: {
-    outputFile: path.resolve(dirname, "payload-types.ts"),
+    outputFile: path.resolve(dirname, "types/payload.ts"),
   },
 });

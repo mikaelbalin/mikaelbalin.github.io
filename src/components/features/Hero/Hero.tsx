@@ -1,5 +1,5 @@
 import React from "react";
-import type { Page } from "@/payload-types";
+import type { Page } from "@/types/payload";
 import { HeroMain } from "@/components/features/Hero/HeroMain";
 import { HeroBlog } from "@/components/features/Hero/HeroBlog";
 

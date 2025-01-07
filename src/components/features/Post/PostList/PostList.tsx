@@ -1,7 +1,7 @@
 import { Container, Stack, BoxProps } from "@mantine/core";
 import { PostItem } from "@/components/features/Post/PostItem";
 import { PropsWithChildren } from "react";
-import { Post } from "@/payload-types";
+import { Post } from "@/types/payload";
 
 type PostSummary = Pick<
   Post,

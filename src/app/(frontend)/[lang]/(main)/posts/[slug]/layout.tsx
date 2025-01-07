@@ -9,7 +9,7 @@ import { Title } from "@mantine/core";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { getClientSideURL } from "@/utilities/getURL";
-import { Category } from "@/payload-types";
+import { Category } from "@/types/payload";
 
 function filter<T>(categories: (number | T)[]): T[] {
   return categories.filter(

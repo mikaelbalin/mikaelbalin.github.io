@@ -39,7 +39,6 @@
       "@/heros/*": ["heros/*"],
       "@/access/*": ["access/*"],
       "@/config/*": ["config/*"],
-      "@/payload-types": ["payload-types.ts"],
       "@/i18n-config": ["i18n-config.ts"],
       "@payload-config": ["payload.config.ts"]
     }

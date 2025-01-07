@@ -1,4 +1,4 @@
-import type { ArchiveBlock } from "@/payload-types";
+import type { ArchiveBlock } from "@/types/payload";
 import { Button, Stack, Title } from "@mantine/core";
 import Link from "next/link";
 

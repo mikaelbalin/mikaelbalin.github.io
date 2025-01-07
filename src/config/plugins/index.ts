@@ -12,7 +12,7 @@ import {
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { searchFields } from "@/config/fields/searchFields";
-import { Page, Post } from "@/payload-types";
+import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";

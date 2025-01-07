@@ -1,6 +1,6 @@
 import { Container, Grid, Text, GridCol } from "@mantine/core";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { Footer as FooterProps } from "@/payload-types";
+import { Footer as FooterProps } from "@/types/payload";
 
 type ContactProps = {
   contacts: FooterProps["contacts"];

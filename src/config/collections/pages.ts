@@ -17,7 +17,7 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { getServerSideURL } from "@/utilities/getURL";
 import { revalidatePath } from "next/cache";
-import type { Page } from "@/payload-types";
+import type { Page } from "@/types/payload";
 import { media } from "@/config/blocks/media";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
