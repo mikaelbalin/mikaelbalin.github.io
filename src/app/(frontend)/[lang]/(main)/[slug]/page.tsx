@@ -4,8 +4,6 @@ import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { draftMode } from "next/headers";
 import React, { cache } from "react";
-import { homeStatic } from "@/endpoints/seed/home-static";
-import type { Page as PageProps } from "@/payload-types";
 import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
@@ -44,16 +42,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = "home" } = await paramsPromise;
   const url = "/" + slug;
 
-  let page: PageProps | null;
-
-  page = await queryPageBySlug({
+  const page = await queryPageBySlug({
     slug,
   });
-
-  // Remove this code once your website is seeded
-  if (!page && slug === "home") {
-    page = homeStatic;
-  }
 
   if (!page) {
     return <PayloadRedirects url={url} />;
