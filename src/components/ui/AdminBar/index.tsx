@@ -6,7 +6,6 @@ import { useSelectedLayoutSegments } from "next/navigation";
 import { PayloadAdminBar } from "payload-admin-bar";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { getClientSideURL } from "@/utilities/getURL";
 import { Container } from "@mantine/core";
 
@@ -37,8 +36,10 @@ export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps;
 }> = (props) => {
   const { adminBarProps } = props || {};
+
   const segments = useSelectedLayoutSegments();
   const [show, setShow] = useState<string | undefined | boolean>(false);
+
   const collection = collectionLabels?.[segments?.[1]]
     ? segments?.[1]
     : "pages";
