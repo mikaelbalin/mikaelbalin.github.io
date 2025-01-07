@@ -161,17 +161,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
 
           switch (blockType) {
             case "mediaBlock":
-              return (
-                <MediaBlock
-                  className="col-start-1 col-span-3"
-                  imgClassName="m-0"
-                  key={index}
-                  {...block}
-                  captionClassName="mx-auto max-w-[48rem]"
-                  enableGutter={false}
-                  disableInnerContainer={true}
-                />
-              );
+              return <MediaBlock key={index} {...block} />;
             case "callout":
               return <Callout key={index} {...block} />;
             case "code":
