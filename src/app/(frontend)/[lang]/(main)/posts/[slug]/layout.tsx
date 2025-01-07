@@ -8,6 +8,7 @@ import { PostList } from "@/components/features/Post/PostList";
 import { Title } from "@mantine/core";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
+import { getClientSideURL } from "@/utilities/getURL";
 
 function filter<T>(categories: (number | T)[]): T[] {
   return categories.filter(
@@ -40,6 +41,7 @@ export default async function Layout(props: LayoutProps) {
   if (!data) return <PayloadRedirects url={url} />;
 
   const { categories, title, relatedPosts, publishedAt } = data;
+  const currentUrl = `${getClientSideURL()}/posts/${slug}`;
 
   return (
     <>
@@ -50,7 +52,7 @@ export default async function Layout(props: LayoutProps) {
           date={formatDateTime(publishedAt)}
         />
         {children}
-        <ArticleFooter />
+        <ArticleFooter url={currentUrl} />
       </article>
 
       {Array.isArray(relatedPosts) && relatedPosts.length > 0 && (

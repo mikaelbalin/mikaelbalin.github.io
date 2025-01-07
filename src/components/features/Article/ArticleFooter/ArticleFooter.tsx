@@ -1,7 +1,26 @@
+"use client";
+
+import { ShareButton } from "@/components/ui/ShareButton";
 import { Container, Grid, GridCol, Text } from "@mantine/core";
 // import { Comments } from "@/components/features/Comments";
 
-export const ArticleFooter = () => {
+interface ArticleFooterProps {
+  url: string;
+}
+
+export const ArticleFooter = (props: ArticleFooterProps) => {
+  const { url } = props;
+
+  const shareOnLinkedIn = () => {
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    window.open(linkedInUrl, "_blank");
+  };
+
+  const shareOnBlueSky = () => {
+    const blueSkyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(url)}`;
+    window.open(blueSkyUrl, "_blank");
+  };
+
   return (
     <Container className="py-10 sm:py-24">
       <Grid
@@ -19,8 +38,8 @@ export const ArticleFooter = () => {
         >
           <Text className="mb-6 sm:mb-8">Share this article</Text>
           <div className="flex gap-6 text-xl">
-            <div>BlueSky</div>
-            <div>LinkedIn</div>
+            <ShareButton onClick={shareOnBlueSky}>BlueSky</ShareButton>
+            <ShareButton onClick={shareOnLinkedIn}>LinkedIn</ShareButton>
           </div>
         </GridCol>
       </Grid>
