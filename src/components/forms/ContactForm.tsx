@@ -1,6 +1,5 @@
 "use client";
 
-import { contactSubmitAction } from "@/data/actions/contact-actions";
 import { ContactFormSchema, contactFormSchema } from "@/lib/schemas";
 import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
@@ -26,18 +25,10 @@ export const ContactForm = () => {
   };
 
   const handleSubmit = async (values: ContactFormSchema) => {
-    const result = await contactSubmitAction(values);
-
-    if (result?.errors) {
-      form.setErrors(result.errors);
-    }
-
-    if (result?.strapiError) {
-      notifications.show({
-        title: result.strapiError.name,
-        message: result.strapiError.message,
-      });
-    }
+    notifications.show({
+      title: "Submitting message...",
+      message: JSON.stringify(values),
+    });
   };
 
   return (

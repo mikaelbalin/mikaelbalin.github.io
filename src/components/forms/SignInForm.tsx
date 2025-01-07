@@ -1,6 +1,5 @@
 "use client";
 
-import { loginUserAction } from "@/data/actions/auth-actions";
 import { signinSchema, SigninSchema } from "@/lib/schemas";
 import {
   Anchor,
@@ -31,18 +30,10 @@ export function SignInForm() {
   };
 
   const handleSubmit = async (values: SigninSchema) => {
-    const result = await loginUserAction(values);
-
-    if (result?.errors) {
-      form.setErrors(result.errors);
-    }
-
-    if (result?.strapiError) {
-      notifications.show({
-        title: result.strapiError.name,
-        message: result.strapiError.message,
-      });
-    }
+    notifications.show({
+      title: "Signing in...",
+      message: JSON.stringify(values),
+    });
   };
 
   return (

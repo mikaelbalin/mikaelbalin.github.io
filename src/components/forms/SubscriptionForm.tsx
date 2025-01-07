@@ -1,6 +1,5 @@
 "use client";
 
-import { subscribeAction } from "@/data/actions/subscription-actions";
 import { subscriptionSchema, SubscriptionSchema } from "@/lib/schemas";
 import { Button, Grid, GridCol, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
@@ -27,26 +26,12 @@ export const SubscriptionForm = () => {
   };
 
   const handleSubmit = async (values: SubscriptionSchema) => {
-    const result = await subscribeAction(values);
-
-    if (result?.errors) {
-      form.setErrors(result.errors);
-    }
-
-    if (result?.strapiError) {
-      notifications.show({
-        title: result.strapiError.name,
-        message: result.strapiError.message,
-        color: "red",
-      });
-    } else {
-      notifications.show({
-        title: "Thank you!",
-        message: result?.message,
-        color: "green",
-      });
-      setIsSubscribed(true);
-    }
+    notifications.show({
+      title: "Thank you!",
+      message: JSON.stringify(values),
+      color: "green",
+    });
+    setIsSubscribed(true);
   };
 
   const { onChange, checked, defaultValue, onBlur, onFocus, value } =
