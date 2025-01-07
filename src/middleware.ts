@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
 import { i18n } from "./i18n-config";
-
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { getUserMeLoader } from "./data/services/get-user-me-loader";
+// import { getUserMeLoader } from "./data/services/get-user-me-loader";
 
 function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
@@ -24,11 +22,11 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-const protectedRoutes = ["/me"];
+// const protectedRoutes = ["/me"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const user = await getUserMeLoader();
+  // const user = await getUserMeLoader();
 
   // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   if (
@@ -48,22 +46,22 @@ export async function middleware(request: NextRequest) {
   );
 
   // Extract locale from pathname if it exists
-  const pathnameLocale = i18n.locales.find((locale) =>
-    pathname.startsWith(`/${locale}`),
-  );
+  // const pathnameLocale = i18n.locales.find((locale) =>
+  //   pathname.startsWith(`/${locale}`),
+  // );
 
   // Check if the pathname matches any of the protected routes
-  const isProtectedRoute = protectedRoutes.some(
-    (route) =>
-      pathname === route ||
-      pathname.startsWith(route) ||
-      pathname === `/${pathnameLocale}${route}` ||
-      pathname.startsWith(`/${pathnameLocale}${route}`),
-  );
+  // const isProtectedRoute = protectedRoutes.some(
+  //   (route) =>
+  //     pathname === route ||
+  //     pathname.startsWith(route) ||
+  //     pathname === `/${pathnameLocale}${route}` ||
+  //     pathname.startsWith(`/${pathnameLocale}${route}`),
+  // );
 
-  if (isProtectedRoute && user.ok === false) {
-    return NextResponse.redirect(new URL(`/signin`, request.url));
-  }
+  // if (isProtectedRoute && user.ok === false) {
+  //   return NextResponse.redirect(new URL(`/signin`, request.url));
+  // }
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
@@ -81,6 +79,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|admin|next).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|admin|next|media).*)",
+  ],
 };
