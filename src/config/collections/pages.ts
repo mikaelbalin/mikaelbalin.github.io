@@ -6,7 +6,7 @@ import { about } from "@/config/blocks/about";
 import { FormBlock } from "../../blocks/Form/config";
 import { hero } from "@/config/hero";
 import { slugField } from "@/config/fields/slug";
-import { populatePublishedAt } from "@/hooks/populatePublishedAt";
+import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import {
   MetaDescriptionField,

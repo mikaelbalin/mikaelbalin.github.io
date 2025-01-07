@@ -5,7 +5,7 @@ import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
 import { Field, Plugin } from "payload";
-import { revalidateRedirects } from "@/hooks/revalidateRedirects";
+import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import {
   FixedToolbarFeature,

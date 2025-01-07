@@ -10,7 +10,7 @@ import {
   useFormFields,
   useForm,
 } from "@payloadcms/ui";
-import { formatSlug } from "../../../config/fields/slug/formatSlug";
+import { formatSlug } from "@/config/fields/slug/formatSlug";
 import "./index.scss";
 
 type SlugProps = {
