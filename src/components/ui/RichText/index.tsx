@@ -1,28 +1,38 @@
-import { cn } from "@/utilities/cn";
-import React from "react";
+import { ElementType, FC, Fragment } from "react";
 import { serializeLexical, type NodeTypes } from "./serialize";
 import { Post } from "@/payload-types";
 
 type RichTextProps = {
   className?: string;
   content: Post["content"];
-  enableGutter?: boolean;
-  enableProse?: boolean;
+  htmlElement?: ElementType;
 };
 
-const RichText: React.FC<RichTextProps> = ({ className, content }) => {
+const RichText: FC<RichTextProps> = ({
+  className,
+  content,
+  htmlElement = "div",
+}) => {
   if (!content) {
     return null;
   }
 
+  const Tag = className ? htmlElement : Fragment;
+
   return (
-    <section className={cn("-mb-8", className)}>
+    <Tag
+      {...(typeof Tag === "string"
+        ? {
+            className,
+          }
+        : {})}
+    >
       {content &&
         !Array.isArray(content) &&
         typeof content === "object" &&
         "root" in content &&
         serializeLexical({ nodes: content?.root?.children as NodeTypes[] })}
-    </section>
+    </Tag>
   );
 };
 

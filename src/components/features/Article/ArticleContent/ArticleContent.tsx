@@ -18,11 +18,7 @@ export const ArticleContent = (props: ArticleContentProps) => {
     <Container>
       <Grid>
         <GridCol span={{ base: 12, sm: 9 }} ref={ref}>
-          <RichText
-            className="max-w-[48rem] mx-auto"
-            content={content}
-            enableGutter={false}
-          />
+          <RichText content={content} className="-mb-8" />
         </GridCol>
         <GridCol
           component="aside"

@@ -21,7 +21,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
       <Media resource={media} src={staticImage} />
       {caption && (
         <div className={cn("")}>
-          <RichText content={caption} enableGutter={false} />
+          <RichText content={caption} />
         </div>
       )}
     </div>
