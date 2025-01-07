@@ -1,5 +1,5 @@
 import { Container, Grid, GridCol, Text } from "@mantine/core";
-import { Comments } from "../../Comments";
+// import { Comments } from "@/components/features/Comments";
 
 export const ArticleFooter = () => {
   return (
@@ -10,12 +10,12 @@ export const ArticleFooter = () => {
           inner: "gap-y-10",
         }}
       >
-        <GridCol span={{ base: 12, sm: 6 }} className="flex items-center">
+        {/* <GridCol span={{ base: 12, sm: 6 }} className="flex items-center">
           <Comments />
-        </GridCol>
+        </GridCol> */}
         <GridCol
-          span={{ base: 12, sm: 6 }}
-          className="flex flex-col justify-center"
+          // span={{ base: 12, sm: 6 }}
+          className="flex flex-col justify-center items-center"
         >
           <Text className="mb-6 sm:mb-8">Share this article</Text>
           <div className="flex gap-6 text-xl">
