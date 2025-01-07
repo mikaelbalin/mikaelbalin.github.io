@@ -1,5 +1,4 @@
 import type { StaticImageData } from "next/image";
-import { cn } from "@/utilities/cn";
 import React from "react";
 import RichText from "@/components/ui/RichText";
 import type { MediaBlock as MediaBlockProps } from "@/payload-types";
@@ -17,11 +16,11 @@ export const MediaBlock: React.FC<Props> = (props) => {
   if (media && typeof media === "object") caption = media.caption;
 
   return (
-    <div className={cn("")}>
+    <div className="mb-8">
       <Media resource={media} src={staticImage} />
       {caption && (
-        <div className={cn("")}>
-          <RichText content={caption} />
+        <div className="mt-4 text-center">
+          <RichText content={caption} textClassName="!text-sm" />
         </div>
       )}
     </div>

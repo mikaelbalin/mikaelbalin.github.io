@@ -4,12 +4,14 @@ import { Post } from "@/payload-types";
 
 type RichTextProps = {
   className?: string;
+  textClassName?: string;
   content: Post["content"];
   htmlElement?: ElementType;
 };
 
 const RichText: FC<RichTextProps> = ({
   className,
+  textClassName,
   content,
   htmlElement = "div",
 }) => {
@@ -31,7 +33,10 @@ const RichText: FC<RichTextProps> = ({
         !Array.isArray(content) &&
         typeof content === "object" &&
         "root" in content &&
-        serializeLexical({ nodes: content?.root?.children as NodeTypes[] })}
+        serializeLexical({
+          nodes: content?.root?.children as NodeTypes[],
+          className: textClassName,
+        })}
     </Tag>
   );
 };

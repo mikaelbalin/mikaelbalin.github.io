@@ -8,6 +8,7 @@ import {
 import type {
   CalloutBlock as CalloutBlockProps,
   MediaBlock as MediaBlockProps,
+  TableBlock,
 } from "@/payload-types";
 import {
   IS_BOLD,
@@ -22,8 +23,11 @@ import {
   Blockquote,
   Code,
   Divider,
+  Kbd,
   List,
   ListItem,
+  Table,
+  TableData,
   Text,
   Title,
   TitleOrder,
@@ -32,6 +36,8 @@ import { CodeHighlight } from "@mantine/code-highlight";
 import "@mantine/code-highlight/styles.css";
 import { Callout } from "@/components/ui/Callout";
 import Link from "next/link";
+import { JsonObject } from "payload";
+import { cn } from "@/utilities/cn";
 
 const HeadingRenderer = (
   props: PropsWithChildren<{
@@ -68,15 +74,35 @@ type CodeBlockProps = {
   blockType: "code";
 };
 
+type KbdInlineBlockProps = {
+  key: string;
+  id?: string | null;
+  blockType: "kbd";
+};
+
+type CustomBlockNode<TBlockFields extends JsonObject = JsonObject> = Omit<
+  SerializedBlockNode<TBlockFields>,
+  "type"
+> & {
+  type: "inlineBlock" | "block";
+};
+
 export type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<MediaBlockProps | CalloutBlockProps | CodeBlockProps>;
+  | CustomBlockNode<
+      | MediaBlockProps
+      | CalloutBlockProps
+      | CodeBlockProps
+      | KbdInlineBlockProps
+      | TableBlock
+    >;
 
 type Props = {
   nodes: NodeTypes[];
+  className?: string;
 };
 
-export function serializeLexical({ nodes }: Props): JSX.Element {
+export function serializeLexical({ nodes, className }: Props): JSX.Element {
   return (
     <Fragment>
       {nodes?.map((node, index): JSX.Element | null => {
@@ -143,14 +169,17 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                 }
               }
             }
-            return serializeLexical({ nodes: node.children as NodeTypes[] });
+            return serializeLexical({
+              nodes: node.children as NodeTypes[],
+              className,
+            });
           }
         };
 
         const serializedChildren =
           "children" in node ? serializedChildrenFn(node) : "";
 
-        if (node.type === "block") {
+        if (node.type === "block" || node.type === "inlineBlock") {
           const block = node.fields;
 
           const blockType = block?.blockType;
@@ -173,6 +202,19 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                   language={block.language}
                 />
               );
+            case "table":
+              return (
+                <Table
+                  key={index}
+                  className="mb-8"
+                  data={block.content as TableData}
+                  highlightOnHover
+                  withTableBorder
+                  stickyHeader
+                />
+              );
+            case "kbd":
+              return <Kbd key={index}>{block.key}</Kbd>;
             default:
               return null;
           }
@@ -183,7 +225,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             }
             case "paragraph": {
               return (
-                <Text key={index} className="mb-8">
+                <Text key={index} className={cn("mb-8", className)}>
                   {serializedChildren}
                 </Text>
               );
@@ -240,6 +282,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
 
               return (
                 <CMSLink
+                  className={className}
                   key={index}
                   newTab={Boolean(fields?.newTab)}
                   reference={fields.doc}

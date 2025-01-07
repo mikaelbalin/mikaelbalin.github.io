@@ -1,8 +1,11 @@
 import type { CollectionConfig } from "payload";
 import {
   FixedToolbarFeature,
-  InlineToolbarFeature,
+  BoldFeature,
   lexicalEditor,
+  ParagraphFeature,
+  ItalicFeature,
+  LinkFeature,
 } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -30,11 +33,13 @@ export const media: CollectionConfig = {
       name: "caption",
       type: "richText",
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
+        features: () => {
           return [
-            ...rootFeatures,
             FixedToolbarFeature(),
-            InlineToolbarFeature(),
+            BoldFeature(),
+            ItalicFeature(),
+            ParagraphFeature(),
+            LinkFeature(),
           ];
         },
       }),

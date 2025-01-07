@@ -1,10 +1,9 @@
 "use client";
 
 import type { StaticImageData } from "next/image";
-import { cn } from "@/utilities/cn";
 import NextImage from "next/image";
 import React from "react";
-import type { Props as MediaProps } from "../types";
+import type { Props as MediaProps } from "@/components/ui/Media/types";
 import { cssVariables } from "../../../../cssVariables";
 import { getClientSideURL } from "@/utilities/getURL";
 
@@ -33,7 +32,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   if (!src && resource && typeof resource === "object") {
     const {
       alt: altFromResource,
-      filename: fullFilename,
+      // filename: fullFilename,
       height: fullHeight,
       url,
       width: fullWidth,

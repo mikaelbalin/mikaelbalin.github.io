@@ -28,6 +28,8 @@ import { getServerSideURL } from "@/utilities/getURL";
 import { User, Post } from "@/payload-types";
 import { revalidatePath } from "next/cache";
 import { code } from "@/config/blocks/code";
+import { kbd } from "@/config/blocks/kbd";
+import { table } from "@/config/blocks/table";
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -151,7 +153,10 @@ export const posts: CollectionConfig<"posts"> = {
                     HeadingFeature({
                       enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
                     }),
-                    BlocksFeature({ blocks: [callout, code, media] }),
+                    BlocksFeature({
+                      blocks: [callout, code, media, table],
+                      inlineBlocks: [kbd],
+                    }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
