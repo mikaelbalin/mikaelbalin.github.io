@@ -8,6 +8,8 @@ import { Media } from "@/components/ui/Media";
 type Props = MediaBlockProps & {
   breakout?: boolean;
   captionClassName?: string;
+  className?: string;
+  enableGutter?: boolean;
   imgClassName?: string;
   staticImage?: StaticImageData;
   disableInnerContainer?: boolean;
@@ -16,6 +18,8 @@ type Props = MediaBlockProps & {
 export const MediaBlock: React.FC<Props> = (props) => {
   const {
     captionClassName,
+    className,
+    enableGutter = true,
     imgClassName,
     media,
     staticImage,
@@ -26,7 +30,15 @@ export const MediaBlock: React.FC<Props> = (props) => {
   if (media && typeof media === "object") caption = media.caption;
 
   return (
-    <div className={cn("")}>
+    <div
+      className={cn(
+        "",
+        {
+          container: enableGutter,
+        },
+        className,
+      )}
+    >
       <Media
         imgClassName={cn("border border-border rounded-[0.8rem]", imgClassName)}
         resource={media}

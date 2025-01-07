@@ -23,6 +23,8 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
     }
   }, []);
 
+  console.log({ resource });
+
   if (resource && typeof resource === "object") {
     const { filename } = resource;
 
