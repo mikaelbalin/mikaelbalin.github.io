@@ -6,11 +6,9 @@ import { useSelectedLayoutSegments } from "next/navigation";
 import { PayloadAdminBar } from "payload-admin-bar";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import "./index.scss";
 
 import { getClientSideURL } from "@/utilities/getURL";
-
-const baseClass = "admin-bar";
+import { Container } from "@mantine/core";
 
 const collectionLabels: Record<
   string,
@@ -52,12 +50,12 @@ export const AdminBar: React.FC<{
 
   return (
     <div
-      className={cn(baseClass, "py-2 bg-black text-white", {
+      className={cn("py-2 bg-black text-white", {
         block: show,
         hidden: !show,
       })}
     >
-      <div className="container">
+      <Container>
         <PayloadAdminBar
           {...adminBarProps}
           className="py-2 text-white"
@@ -87,7 +85,7 @@ export const AdminBar: React.FC<{
             zIndex: "unset",
           }}
         />
-      </div>
+      </Container>
     </div>
   );
 };
