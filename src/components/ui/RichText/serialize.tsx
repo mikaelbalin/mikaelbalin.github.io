@@ -28,6 +28,7 @@ import {
   ListItem,
   Table,
   TableData,
+  TableScrollContainer,
   Text,
   Title,
   TitleOrder,
@@ -215,14 +216,19 @@ export function serializeLexical({ nodes, className }: Props): JSX.Element {
               );
             case "table":
               return (
-                <Table
+                <TableScrollContainer
                   key={index}
+                  minWidth={undefined}
+                  type="native"
                   className="mb-8"
-                  data={block.content as TableData}
-                  highlightOnHover
-                  withTableBorder
-                  stickyHeader
-                />
+                >
+                  <Table
+                    data={block.content as TableData}
+                    highlightOnHover
+                    withTableBorder
+                    stickyHeader
+                  />
+                </TableScrollContainer>
               );
             case "kbd":
               return <Kbd key={index}>{block.key}</Kbd>;
