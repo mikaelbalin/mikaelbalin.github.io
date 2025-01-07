@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * // https://payloadcms.com/docs/admin/components#root-components
+ */
 const BeforeLogin: React.FC = () => {
   return (
     <div>
