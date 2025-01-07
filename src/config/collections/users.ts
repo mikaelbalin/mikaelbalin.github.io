@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { authenticated } from "@/access/authenticated";
+import { authenticated } from "@/lib/access";
 
 export const users: CollectionConfig = {
   slug: "users",

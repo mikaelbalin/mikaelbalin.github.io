@@ -1,6 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { anyone } from "@/access/anyone";
-import { authenticated } from "@/access/authenticated";
+import { anyone, authenticated } from "@/lib/access";
 
 export const categories: CollectionConfig = {
   slug: "categories",

@@ -11,8 +11,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { authenticated } from "@/access/authenticated";
-import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
+import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { callout } from "@/config/blocks/callout";
 import { media } from "@/config/blocks/media";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";

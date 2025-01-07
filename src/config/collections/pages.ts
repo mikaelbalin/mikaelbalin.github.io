@@ -1,6 +1,5 @@
 import type { CollectionConfig, CollectionAfterChangeHook } from "payload";
-import { authenticated } from "@/access/authenticated";
-import { authenticatedOrPublished } from "@/access/authenticatedOrPublished";
+import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { archive } from "@/config/blocks/archive";
 import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
