@@ -9,10 +9,20 @@ import { Title } from "@mantine/core";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { getClientSideURL } from "@/utilities/getURL";
+import { Category } from "@/payload-types";
 
 function filter<T>(categories: (number | T)[]): T[] {
   return categories.filter(
     (category): category is T => typeof category !== "number",
+  );
+}
+
+function isCategory(value: unknown): value is Category {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "id" in value &&
+    "title" in value
   );
 }
 
@@ -91,5 +101,37 @@ const queryPostLayoutData = cache(async ({ slug }: { slug: string }) => {
     },
   });
 
-  return result.docs?.[0];
+  const firstCategory = result.docs[0]?.categories?.[0];
+
+  const similarPosts = isCategory(firstCategory)
+    ? await payload.find({
+        collection: "posts",
+        limit: 3,
+        pagination: false,
+        where: {
+          and: [
+            {
+              "categories.title": {
+                equals: firstCategory.title,
+              },
+            },
+            {
+              slug: {
+                not_equals: slug,
+              },
+            },
+          ],
+        },
+      })
+    : null;
+
+  const doc = result.docs?.[0];
+
+  return {
+    ...doc,
+    relatedPosts:
+      Array.isArray(doc.relatedPosts) && doc.relatedPosts.length === 0
+        ? similarPosts?.docs
+        : doc.relatedPosts,
+  };
 });
