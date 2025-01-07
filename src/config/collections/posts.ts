@@ -22,7 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from "@payloadcms/plugin-seo/fields";
-import { slugField } from "@/fields/slug";
+import { slugField } from "@/config/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
 import { User, Post } from "@/payload-types";
 import { revalidatePath } from "next/cache";

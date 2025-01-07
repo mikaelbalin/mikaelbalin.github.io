@@ -40,7 +40,7 @@ export const slugField: Slug = (fieldToUse = "title", overrides = {}) => {
       ...(slugOverrides?.admin || {}),
       components: {
         Field: {
-          path: "@/fields/slug/SlugComponent#SlugComponent",
+          path: "@/components/admin/Slug#Slug",
           clientProps: {
             fieldToUse,
             checkboxFieldPath: checkBoxField.name,

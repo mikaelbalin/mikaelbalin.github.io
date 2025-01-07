@@ -10,15 +10,15 @@ import {
   useFormFields,
   useForm,
 } from "@payloadcms/ui";
-import { formatSlug } from "./formatSlug";
+import { formatSlug } from "../../../config/fields/slug/formatSlug";
 import "./index.scss";
 
-type SlugComponentProps = {
+type SlugProps = {
   fieldToUse: string;
   checkboxFieldPath: string;
 } & TextFieldClientProps;
 
-export const SlugComponent: React.FC<SlugComponentProps> = ({
+export const Slug: React.FC<SlugProps> = ({
   field,
   fieldToUse,
   checkboxFieldPath: checkboxFieldPathFromProps,

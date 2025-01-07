@@ -5,7 +5,7 @@ import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
 import { FormBlock } from "../../blocks/Form/config";
 import { hero } from "@/config/hero";
-import { slugField } from "@/fields/slug";
+import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import {
