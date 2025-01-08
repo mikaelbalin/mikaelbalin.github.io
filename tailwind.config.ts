@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { screens } from "./src/theme/screens";
 
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -15,13 +16,7 @@ export default {
       appDarkColorCoalBlack: "var(--app-color-coal-black)",
       appDarkColorCoalBlackLight: "var(--app-color-coal-black-light)",
     },
-    screens: {
-      xs: "36em", // 576px
-      sm: "48em", // 768px
-      md: "62em", // 992px
-      lg: "75em", // 1200px
-      xl: "88em", // 1400px
-    },
+    screens,
     fontSize: {
       sm: ["0.875rem", "1.085rem"],
       base: ["1rem", "1.24rem"],

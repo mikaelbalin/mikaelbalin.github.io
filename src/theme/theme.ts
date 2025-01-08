@@ -2,6 +2,7 @@
 
 import { DEFAULT_THEME, createTheme, mergeMantineTheme } from "@mantine/core";
 import { components } from "./components";
+import { screens } from "./screens";
 
 const themeOverride = createTheme({
   fontFamily: `Inter, ${DEFAULT_THEME.fontFamily}`,
@@ -10,13 +11,7 @@ const themeOverride = createTheme({
   },
   white: "#FDFCF9",
   black: "#101010",
-  breakpoints: {
-    xs: "36em", // 576px
-    sm: "48em", // 768px
-    md: "62em", // 992px
-    lg: "75em", // 1200px
-    xl: "88em", // 1408px
-  },
+  breakpoints: screens,
   components,
   defaultRadius: 0,
   colors: {},
