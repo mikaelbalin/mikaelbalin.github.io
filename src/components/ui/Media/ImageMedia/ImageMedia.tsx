@@ -4,10 +4,9 @@ import type { StaticImageData } from "next/image";
 import NextImage from "next/image";
 import React from "react";
 import type { Props as MediaProps } from "@/components/ui/Media/types";
-import { cssVariables } from "../../../../cssVariables";
 import { getClientSideURL } from "@/utilities/getURL";
-
-const { breakpoints } = cssVariables;
+import { useMantineTheme } from "@mantine/core";
+import { useRootFontSize } from "@/lib/hooks/useRootFontSize";
 
 // A base64 encoded image to use as a placeholder while the image is loading
 const placeholderBlur =
@@ -23,6 +22,9 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     src: srcFromProps,
     loading: loadingFromProps,
   } = props;
+
+  const { breakpoints } = useMantineTheme();
+  const rootFontSize = useRootFontSize();
 
   let width: number | undefined;
   let height: number | undefined;
@@ -51,7 +53,10 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   const sizes = sizeFromProps
     ? sizeFromProps
     : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
+        .map(([, value]) => {
+          const numericValue = parseFloat(value.replace("em", ""));
+          return `(max-width: ${value}) ${numericValue * rootFontSize * 2}w`;
+        })
         .join(", ");
 
   return (
