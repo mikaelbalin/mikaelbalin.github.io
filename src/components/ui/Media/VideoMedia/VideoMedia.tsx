@@ -2,9 +2,7 @@
 
 import { cn } from "@/utilities/cn";
 import React, { useEffect, useRef } from "react";
-
-import type { Props as MediaProps } from "../types";
-
+import type { Props as MediaProps } from "@/components/ui/Media/types";
 import { getClientSideURL } from "@/utilities/getURL";
 
 export const VideoMedia: React.FC<MediaProps> = (props) => {
