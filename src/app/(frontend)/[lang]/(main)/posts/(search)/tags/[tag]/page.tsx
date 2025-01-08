@@ -19,7 +19,7 @@ type PageProps = Args;
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
-  const { tag } = params;
+  const { tag = "all" } = params;
 
   const payload = await getPayload({ config: configPromise });
   const posts = await payload.find({
