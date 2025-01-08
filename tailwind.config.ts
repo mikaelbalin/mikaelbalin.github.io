@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: ["selector", '[data-mantine-color-scheme="dark"]'],
   theme: {
@@ -79,8 +80,8 @@ module.exports = {
           to: { transform: "translateY(0)" },
         },
         show: {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
       },
       animation: {
@@ -92,4 +93,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+} satisfies Config;
