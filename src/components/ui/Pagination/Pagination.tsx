@@ -2,8 +2,8 @@
 
 import { cn } from "@/utilities/cn";
 import { Container, Pagination as MantinePagination } from "@mantine/core";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export const Pagination: React.FC<{
   totalPages: number;
@@ -11,23 +11,50 @@ export const Pagination: React.FC<{
   const { totalPages } = props;
 
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [activePage, setPage] = useState(1);
+
+  useEffect(() => {
+    const page = searchParams.get("page");
+    const pageNumber = page ? parseInt(page) : 1;
+
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setPage(pageNumber);
+    }
+  }, [searchParams, totalPages]);
+
+  const createQueryString = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    return params.toString();
+  };
+
+  const handlePageChange = (value: number) => {
+    setPage(value);
+    const query = createQueryString(value);
+    router.replace(`${pathname}?${query}`);
+  };
+
+  const handlePreviousPage = () => {
+    const newPage = activePage - 1;
+    handlePageChange(newPage);
+  };
+
+  const handleNextPage = () => {
+    const newPage = activePage + 1;
+    handlePageChange(newPage);
+  };
 
   return (
     <Container className={cn("flex justify-center", "mt-14 sm:mt-26")}>
       <MantinePagination
         total={totalPages}
         value={activePage}
-        onChange={(value) => {
-          setPage(value);
-        }}
+        onChange={handlePageChange}
         withEdges
-        onPreviousPage={() => {
-          router.push(`/posts/page/${activePage - 1}`);
-        }}
-        onNextPage={() => {
-          router.push(`/posts/page/${activePage + 1}`);
-        }}
+        onPreviousPage={handlePreviousPage}
+        onNextPage={handleNextPage}
       />
     </Container>
   );

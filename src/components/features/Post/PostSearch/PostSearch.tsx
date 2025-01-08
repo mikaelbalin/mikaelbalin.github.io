@@ -2,19 +2,29 @@
 
 import { Category } from "@/types/payload";
 import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
-import { useParams, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface PostSearchProps {
   categories: Pick<Category, "id" | "breadcrumbs">[];
 }
 
 export const PostSearch = ({ categories }: PostSearchProps) => {
-  const params = useParams<{ lang: string; tag?: string }>();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
 
-  function filterPosts(value: string): void {
-    router.push(`/posts/tags/${value}`);
-  }
+  const createQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(name, value);
+    params.set("page", "1"); // Reset to page 1 when changing category
+    return params.toString();
+  };
+
+  const handleCategoryChange = (value: string) => {
+    const query = createQueryString("category", value);
+    router.replace(`${pathname}?${query}`);
+  };
 
   return (
     <Container component="section" className="pt-17">
@@ -22,8 +32,8 @@ export const PostSearch = ({ categories }: PostSearchProps) => {
         <Text className="mb-8">Search by category</Text>
         <ChipGroup
           multiple={false}
-          value={params.tag || "all"}
-          onChange={filterPosts}
+          value={category || "all"}
+          onChange={handleCategoryChange}
         >
           <Group>
             <Chip value="all">All</Chip>
