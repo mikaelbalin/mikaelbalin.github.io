@@ -1,6 +1,6 @@
 import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
-import { generateLanguageParams } from "../../../../../../i18n-config";
+import { generateLanguageParams } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 
@@ -12,7 +12,7 @@ export default async function Page() {
   const posts = await payload.find({
     collection: "posts",
     depth: 1,
-    limit: 12,
+    limit: 10,
     overrideAccess: false,
     select: {
       title: true,
