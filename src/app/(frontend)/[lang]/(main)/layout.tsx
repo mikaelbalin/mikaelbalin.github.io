@@ -13,7 +13,7 @@ import { Locale } from "../../../../i18n-config";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AdminBar } from "@/components/ui/AdminBar";
-import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
 import { draftMode } from "next/headers";
 import { getServerSideURL } from "@/utilities/getURL";
 import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
