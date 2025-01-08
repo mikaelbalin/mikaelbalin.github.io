@@ -13,7 +13,7 @@ export const PostSearch = ({ categories }: PostSearchProps) => {
   const router = useRouter();
 
   function filterPosts(value: string): void {
-    router.push(`/blog/tags/${value}`);
+    router.push(`/posts/tags/${value}`);
   }
 
   return (

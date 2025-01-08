@@ -1,21 +1,13 @@
-// import React from "react";
-// import { PostList } from "@/components/features/Post/PostList";
-// import { getArticles, getTags } from "@/data/loaders";
-// import { i18n } from "../../../../../../../../i18n-config";
+import { PostList } from "@/components/features/Post/PostList";
 import { Metadata } from "next";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
 
-type Props = {
+type Args = {
   params: Promise<{ tag: string; lang: "en" | "pt" }>;
 };
 
-// export async function generateStaticParams() {
-//   const tags = await getTags();
-//   return tags.flatMap(({ slug }) =>
-//     i18n.locales.map((lang) => ({ tag: slug, lang })),
-//   );
-// }
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const tag = (await params).tag;
 
   return {
@@ -23,15 +15,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function Page(props: Props) {
-  // const params = await props.params;
-  // const { tag } = params;
-  // const { data: articles, meta } = await getArticles(
-  //   0,
-  //   Number(process.env.NEXT_PUBLIC_PAGE_LIMIT),
-  //   tag === "all" ? undefined : tag,
-  // );
+type PageProps = Args;
 
-  return null; //  <PostList initialData={articles} initialMeta={meta} />;
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+  const { tag } = params;
+
+  const payload = await getPayload({ config: configPromise });
+  const posts = await payload.find({
+    collection: "posts",
+    limit: 10,
+    pagination: false,
+    ...(tag !== "all" && {
+      where: {
+        and: [
+          {
+            "categories.breadcrumbs.url": {
+              equals: `/${tag}`,
+            },
+          },
+        ],
+      },
+    }),
+  });
+
+  return <PostList posts={posts.docs} />;
 }
