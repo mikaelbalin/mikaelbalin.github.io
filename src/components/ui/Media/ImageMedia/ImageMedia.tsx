@@ -34,7 +34,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   if (!src && resource && typeof resource === "object") {
     const {
       alt: altFromResource,
-      // filename: fullFilename,
       height: fullHeight,
       url,
       width: fullWidth,
@@ -43,7 +42,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     width = fullWidth!;
     height = fullHeight!;
     alt = altFromResource || "";
-
     src = `${getClientSideURL()}${url}`;
   }
 
