@@ -23,8 +23,6 @@ export default async function Page() {
     },
   });
 
-  console.log({ posts });
-
   return (
     <>
       <PostList posts={posts.docs} />
