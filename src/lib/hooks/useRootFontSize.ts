@@ -13,12 +13,25 @@ export const useRootFontSize = () => {
 
     setRootFontSize(getRootFontSize());
 
-    const observer = new ResizeObserver(() => {
+    // Watch for style attribute changes
+    const mutationObserver = new MutationObserver(() => {
       setRootFontSize(getRootFontSize());
     });
 
-    observer.observe(document.documentElement);
-    return () => observer.disconnect();
+    mutationObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["style"],
+    });
+
+    // Watch for browser zoom changes
+    const mediaQuery = window.matchMedia("(resolution: 1dppx)");
+    const handleZoom = () => setRootFontSize(getRootFontSize());
+    mediaQuery.addEventListener("change", handleZoom);
+
+    return () => {
+      mutationObserver.disconnect();
+      mediaQuery.removeEventListener("change", handleZoom);
+    };
   }, []);
 
   return rootFontSize;
