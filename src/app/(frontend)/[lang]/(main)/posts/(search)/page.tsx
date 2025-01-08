@@ -3,6 +3,7 @@ import { PostList } from "@/components/features/Post/PostList";
 import { generateLanguageParams } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import { Pagination } from "@/components/ui/Pagination/Pagination";
 
 export const generateStaticParams = generateLanguageParams;
 
@@ -12,7 +13,7 @@ export default async function Page() {
   const posts = await payload.find({
     collection: "posts",
     depth: 1,
-    limit: 10,
+    limit: 5,
     overrideAccess: false,
     select: {
       title: true,
@@ -22,5 +23,12 @@ export default async function Page() {
     },
   });
 
-  return <PostList posts={posts.docs} />;
+  console.log({ posts });
+
+  return (
+    <>
+      <PostList posts={posts.docs} />
+      <Pagination totalPages={posts.totalPages} />
+    </>
+  );
 }

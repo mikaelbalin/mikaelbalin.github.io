@@ -2,6 +2,7 @@ import { PostList } from "@/components/features/Post/PostList";
 import { Metadata } from "next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import { Pagination } from "@/components/ui/Pagination/Pagination";
 
 type Args = {
   params: Promise<{ tag: string; lang: "en" | "pt" }>;
@@ -22,6 +23,7 @@ export default async function Page(props: PageProps) {
   const { tag = "all" } = params;
 
   const payload = await getPayload({ config: configPromise });
+
   const posts = await payload.find({
     collection: "posts",
     limit: 10,
@@ -39,5 +41,10 @@ export default async function Page(props: PageProps) {
     }),
   });
 
-  return <PostList posts={posts.docs} />;
+  return (
+    <>
+      <PostList posts={posts.docs} />
+      <Pagination totalPages={posts.totalPages} />
+    </>
+  );
 }
