@@ -1,6 +1,6 @@
 import React, { Fragment, JSX, PropsWithChildren } from "react";
 import { MediaBlock } from "@/components/ui/MediaBlock";
-import { CMSLink } from "@/components/Link";
+import { CMSLink } from "@/components/ui/Link";
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
