@@ -6,7 +6,7 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { PostList } from "@/components/features/Post/PostList";
 import { Title } from "@mantine/core";
-import { PayloadRedirects } from "@/components/PayloadRedirects";
+import { PayloadRedirects } from "@/components/ui/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { getClientSideURL } from "@/utilities/getURL";
 import { Category } from "@/types/payload";
