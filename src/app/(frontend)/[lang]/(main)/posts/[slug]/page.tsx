@@ -5,29 +5,6 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { Metadata } from "next";
 import { generateMeta } from "@/utilities/generateMeta";
-// import { i18n } from "@/i18n-config";
-
-type Args = {
-  params: Promise<{
-    slug?: string;
-    lang?: string;
-  }>;
-};
-
-type PageProps = Readonly<
-  {
-    children: React.ReactNode;
-  } & Args
->;
-
-export default async function Page(props: PageProps) {
-  const params = await props.params;
-  const { slug = "" } = params;
-
-  const post = await queryPostBySlug({ slug });
-
-  return <ArticleContent content={post.content} />;
-}
 
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode();
@@ -53,6 +30,13 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   return result.docs?.[0] || null;
 });
 
+type Args = {
+  params: Promise<{
+    slug?: string;
+    lang?: string;
+  }>;
+};
+
 export async function generateMetadata({
   params: paramsPromise,
 }: Args): Promise<Metadata> {
@@ -64,27 +48,6 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  // const { data } = await getArticles();
-
-  // [
-  //   {
-  //     slug: 'decide-to-render-a-partial-or-not-dynamically-in-astro',
-  //     lang: 'en'
-  //   },
-  //   {
-  //     slug: 'decide-to-render-a-partial-or-not-dynamically-in-astro',
-  //     lang: 'pt'
-  //   }
-  // ]
-
-  // console.log({
-  //   data,
-  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   lang: data.flatMap(({ slug }: any) =>
-  //     i18n.locales.map((lang) => ({ slug, lang })),
-  //   ),
-  // });
-
   const payload = await getPayload({ config: configPromise });
 
   const posts = await payload.find({
@@ -103,4 +66,19 @@ export async function generateStaticParams() {
   });
 
   return params;
+}
+
+type PageProps = Readonly<
+  {
+    children: React.ReactNode;
+  } & Args
+>;
+
+export default async function Page(props: PageProps) {
+  const params = await props.params;
+  const { slug = "" } = params;
+
+  const post = await queryPostBySlug({ slug });
+
+  return <ArticleContent content={post.content} />;
 }
