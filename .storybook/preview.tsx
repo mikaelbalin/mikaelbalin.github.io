@@ -1,5 +1,6 @@
 import React from "react";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import type { Preview } from "@storybook/react";
 import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
@@ -27,6 +28,9 @@ const preview: Preview = {
       ],
       // 👇 Specify which background is shown by default
       default: "Light",
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
     },
   },
   decorators: [
