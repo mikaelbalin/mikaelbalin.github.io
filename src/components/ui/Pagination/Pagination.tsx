@@ -2,6 +2,13 @@
 
 import { cn } from "@/utilities/cn";
 import { Container, Pagination as MantinePagination } from "@mantine/core";
+import {
+  IconArrowRight,
+  IconArrowLeft,
+  IconArrowBarToLeft,
+  IconArrowBarToRight,
+  IconDots,
+} from "@tabler/icons-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -46,7 +53,7 @@ export const Pagination: React.FC<{
     handlePageChange(newPage);
   };
 
-  return (
+  return totalPages > 1 ? (
     <Container className={cn("flex justify-center", "mt-14 sm:mt-26")}>
       <MantinePagination
         total={totalPages}
@@ -55,7 +62,12 @@ export const Pagination: React.FC<{
         withEdges
         onPreviousPage={handlePreviousPage}
         onNextPage={handleNextPage}
+        nextIcon={IconArrowRight}
+        previousIcon={IconArrowLeft}
+        firstIcon={IconArrowBarToLeft}
+        lastIcon={IconArrowBarToRight}
+        dotsIcon={IconDots}
       />
     </Container>
-  );
+  ) : null;
 };

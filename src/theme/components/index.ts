@@ -11,6 +11,7 @@ import { TypographyStylesProvider } from "./typography-styles-provider";
 import { CodeHighlight } from "./code-highlight";
 import { PasswordInput } from "./password-input";
 import { List } from "./list";
+import { Pagination } from "./pagination";
 
 export const components: MantineThemeComponents = {
   Anchor: Anchor.extend({
@@ -30,4 +31,5 @@ export const components: MantineThemeComponents = {
   CodeHighlight,
   PasswordInput,
   List,
+  Pagination,
 };
