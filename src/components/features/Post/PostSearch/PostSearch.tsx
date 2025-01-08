@@ -30,7 +30,7 @@ export const PostSearch = ({ categories }: PostSearchProps) => {
             {categories.map(({ id, breadcrumbs }) => {
               const breadcrumb = breadcrumbs?.[0];
               return breadcrumb ? (
-                <Chip key={id} value={breadcrumb.url || ""}>
+                <Chip key={id} value={breadcrumb.url?.replace("/", "") || ""}>
                   {breadcrumb.label}
                 </Chip>
               ) : null;
