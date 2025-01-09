@@ -3,7 +3,7 @@ import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
 import { Subscription as SubscriptionProps } from "@/types/payload";
 
 export const Subscription = (props: SubscriptionProps) => {
-  const { title, text } = props;
+  const { title, text, form } = props;
 
   return (
     <Container component="section" className="mb-14 sm:mb-24">
@@ -20,7 +20,9 @@ export const Subscription = (props: SubscriptionProps) => {
             <Text>{text}</Text>
           </GridCol>
         </Grid>
-        <SubscriptionForm />
+        {Array.isArray(form) && form.length > 0 && (
+          <SubscriptionForm {...form[0]} />
+        )}
       </Box>
     </Container>
   );

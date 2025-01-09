@@ -1,19 +1,44 @@
 "use client";
 
-import { subscriptionSchema, SubscriptionSchema } from "@/lib/schemas";
-import { Button, Grid, GridCol, TextInput } from "@mantine/core";
+import { useState } from "react";
+import { subscriptionSchema } from "@/lib/schemas";
+import { Form, FormBlock } from "@/types/payload";
+import { Button, Grid, GridCol } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import { useState } from "react";
+import { buildInitialFormState } from "@/lib/buildInitialFormState";
+import { fields } from "@/blocks/Form/fields";
+import { getClientSideURL } from "@/utilities/getURL";
 
-export const SubscriptionForm = () => {
-  const [isSubscribed, setIsSubscribed] = useState(false);
+const isValidForm = (form: unknown): form is Form => {
+  return (
+    typeof form === "object" &&
+    form !== null &&
+    "fields" in form &&
+    Array.isArray((form as Form).fields)
+  );
+};
 
-  const form = useForm<SubscriptionSchema>({
+type SubscriptionFormProps = FormBlock;
+
+export const SubscriptionForm = (props: SubscriptionFormProps) => {
+  const { form: formFromProps } = props;
+
+  if (!isValidForm(formFromProps)) {
+    throw new Error("Invalid form configuration provided");
+  }
+
+  const { id, submitButtonLabel } = formFromProps;
+
+  const formID = String(id);
+  const initialValues = buildInitialFormState(formFromProps.fields);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>();
+
+  const form = useForm({
     mode: "uncontrolled",
-    initialValues: {
-      email: "",
-    },
+    initialValues: initialValues,
     validate: zodResolver(subscriptionSchema),
   });
 
@@ -25,44 +50,105 @@ export const SubscriptionForm = () => {
     });
   };
 
-  const handleSubmit = async (values: SubscriptionSchema) => {
-    notifications.show({
-      title: "Thank you!",
-      message: JSON.stringify(values),
-      color: "green",
-    });
-    setIsSubscribed(true);
+  const handleSubmit = async (values: typeof initialValues) => {
+    if (values) {
+      const dataToSend = Object.entries(values).map(([name, value]) => ({
+        field: name,
+        value,
+      }));
+
+      setIsLoading(true);
+
+      try {
+        const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
+          body: JSON.stringify({
+            form: formID,
+            submissionData: dataToSend,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        });
+
+        const res = await req.json();
+
+        if (req.status >= 400) {
+          setIsLoading(false);
+
+          notifications.show({
+            title: `Subscription error: ${res.status}`,
+            message: res.errors?.[0]?.message || "Internal Server Error",
+            color: "red",
+          });
+
+          return;
+        }
+
+        setIsLoading(false);
+        setHasSubmitted(true);
+        notifications.show({
+          title: "Thank you!",
+          message: "You have successfully subscribed to newsletter.",
+          color: "green",
+        });
+      } catch (error) {
+        setIsLoading(false);
+        notifications.show({
+          title: "Subscription error",
+          message: error instanceof Error ? error.message : "An error occurred",
+          color: "red",
+        });
+      }
+    }
   };
 
-  const { onChange, checked, defaultValue, onBlur, onFocus, value } =
-    form.getInputProps("email");
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
+    <form id={formID} onSubmit={form.onSubmit(handleSubmit, handleError)}>
       <Grid className="mt-8 sm:mt-14">
         <GridCol
           span={{ base: 12, sm: 8, lg: 7 }}
           className="sm:flex items-end"
         >
-          <TextInput
-            label="Email"
-            className="w-full"
-            variant="filled"
-            onChange={onChange}
-            checked={checked}
-            defaultValue={defaultValue}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            value={value}
-          />
+          {formFromProps?.fields?.map((field) => {
+            const Field = fields?.[field.blockType];
+            if (Field && "name" in field) {
+              const {
+                onChange,
+                checked,
+                defaultValue,
+                onBlur,
+                onFocus,
+                value,
+              } = form.getInputProps(field.name);
+
+              return (
+                <Field
+                  key={form.key(field.name)}
+                  label={field.label}
+                  className="w-full"
+                  variant="filled"
+                  onChange={onChange}
+                  checked={checked}
+                  defaultValue={defaultValue}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  value={value}
+                />
+              );
+            }
+            return null;
+          })}
 
           <Button
+            form={formID}
             type="submit"
             size="xs"
             className="w-full sm:w-auto shrink-0"
-            disabled={isSubscribed}
+            disabled={hasSubmitted}
+            loading={isLoading}
           >
-            Submit
+            {submitButtonLabel}
           </Button>
         </GridCol>
       </Grid>
