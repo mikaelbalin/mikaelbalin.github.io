@@ -48,6 +48,7 @@ export default async function Page({
       slug: true,
       categories: true,
       publishedAt: true,
+      timeToRead: true,
     },
     page: sanitizedPageNumber,
     ...(category !== "all" && {

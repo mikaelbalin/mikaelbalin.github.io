@@ -334,6 +334,11 @@ export interface Post {
     | null;
   slug?: string | null;
   slugLock?: boolean | null;
+  /**
+   * Estimated time to read in minutes
+   */
+  timeToRead?: number | null;
+  timeToReadLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -853,6 +858,8 @@ export interface PostsSelect<T extends boolean = true> {
       };
   slug?: T;
   slugLock?: T;
+  timeToRead?: T;
+  timeToReadLock?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

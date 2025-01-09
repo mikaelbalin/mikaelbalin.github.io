@@ -10,13 +10,14 @@ import Link from "next/link";
 
 type PostCardProps = Pick<
   Post,
-  "slug" | "categories" | "meta" | "title" | "publishedAt"
+  "slug" | "categories" | "meta" | "title" | "publishedAt" | "timeToRead"
 > & {
   relationTo?: "posts";
 };
 
 export const PostItem = (props: PostCardProps) => {
-  const { title, slug, categories, publishedAt, relationTo } = props;
+  const { title, slug, categories, publishedAt, relationTo, timeToRead } =
+    props;
 
   const href = `/${relationTo}/${slug}`;
 
@@ -45,7 +46,7 @@ export const PostItem = (props: PostCardProps) => {
             {publishedAt && (
               <TextBullet>{formatDateTime(publishedAt)}</TextBullet>
             )}
-            <TextBullet>0 min read</TextBullet>
+            {timeToRead && <TextBullet>{timeToRead} min read</TextBullet>}
           </Group>
         </div>
         <div className="hidden sm:flex items-center justify-end sm:w-1/2 transition-transform duration-500 group-hover:-translate-x-6">

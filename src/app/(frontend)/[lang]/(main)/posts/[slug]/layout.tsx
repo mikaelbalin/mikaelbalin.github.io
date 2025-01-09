@@ -50,7 +50,7 @@ export default async function Layout(props: LayoutProps) {
   const url = "/posts/" + slug;
   if (!data) return <PayloadRedirects url={url} />;
 
-  const { categories, title, relatedPosts, publishedAt } = data;
+  const { categories, title, relatedPosts, publishedAt, timeToRead } = data;
   const currentUrl = `${getClientSideURL()}/posts/${slug}`;
 
   return (
@@ -60,6 +60,7 @@ export default async function Layout(props: LayoutProps) {
           title={title}
           categories={Array.isArray(categories) ? filter(categories) : []}
           date={formatDateTime(publishedAt)}
+          timeToRead={timeToRead}
         />
         {children}
         <ArticleFooter url={currentUrl} />
@@ -98,6 +99,7 @@ const queryPostLayoutData = cache(async ({ slug }: { slug: string }) => {
       categories: true,
       relatedPosts: true,
       publishedAt: true,
+      timeToRead: true,
     },
   });
 

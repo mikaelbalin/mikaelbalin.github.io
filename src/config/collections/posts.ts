@@ -29,6 +29,7 @@ import { revalidatePath } from "next/cache";
 import { code } from "@/config/blocks/code";
 import { kbd } from "@/config/blocks/kbd";
 import { table } from "@/config/blocks/table";
+import { timeToReadField } from "@/config/fields/time";
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -281,6 +282,7 @@ export const posts: CollectionConfig<"posts"> = {
       ],
     },
     ...slugField(),
+    ...timeToReadField(),
   ],
   hooks: {
     afterChange: [revalidatePost],

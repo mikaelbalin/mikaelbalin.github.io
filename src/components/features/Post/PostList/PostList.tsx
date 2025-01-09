@@ -5,7 +5,7 @@ import { Post } from "@/types/payload";
 
 type PostSummary = Pick<
   Post,
-  "id" | "slug" | "categories" | "title" | "publishedAt"
+  "id" | "slug" | "categories" | "title" | "publishedAt" | "timeToRead"
 >;
 
 interface PostListProps extends PropsWithChildren, Pick<BoxProps, "className"> {

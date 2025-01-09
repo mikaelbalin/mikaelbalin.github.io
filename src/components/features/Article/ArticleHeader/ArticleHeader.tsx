@@ -6,12 +6,14 @@ interface ArticleHeaderProps {
   categories: Category[];
   title: string;
   date: string;
+  timeToRead?: number | null;
 }
 
 export const ArticleHeader = ({
   categories,
   title,
   date,
+  timeToRead,
 }: ArticleHeaderProps) => {
   return (
     <Container
@@ -24,7 +26,7 @@ export const ArticleHeader = ({
       <SimpleGrid cols={{ base: 1, sm: 2 }} className="gap-8">
         <Group className="gap-8">
           <TextBullet>{date}</TextBullet>
-          <TextBullet>15 min reads</TextBullet>
+          {timeToRead && <TextBullet>{timeToRead} min read</TextBullet>}
         </Group>
         <Group className="sm:justify-end">
           {categories.map((category) => (
