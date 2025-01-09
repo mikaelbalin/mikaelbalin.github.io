@@ -2,7 +2,6 @@ import sharp from "sharp";
 import path from "path";
 import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { plugins } from "@/config/plugins";
@@ -14,6 +13,7 @@ import { media } from "@/config/collections/media";
 import { posts } from "@/config/collections/posts";
 import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
+import { defaultLexical } from "@/config/fields/defaultLexical";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
@@ -58,7 +58,7 @@ export default buildConfig({
     },
   },
   // If you'd like to use Rich Text, pass your editor here
-  editor: lexicalEditor(),
+  editor: defaultLexical,
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: isDevelopment
