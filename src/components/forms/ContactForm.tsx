@@ -9,7 +9,7 @@ import { isValidForm } from "@/lib/isValidForm";
 import { buildInitialFormState } from "@/lib/buildInitialFormState";
 import { useState } from "react";
 import { getClientSideURL } from "@/utilities/getURL";
-import { fields } from "@/blocks/Form/fields";
+import { fields } from "@/components/forms/fields";
 
 type ContactFormProps = FormBlock;
 

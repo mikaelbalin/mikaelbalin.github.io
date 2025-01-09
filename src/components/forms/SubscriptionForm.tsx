@@ -7,7 +7,7 @@ import { Button, Grid, GridCol } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { buildInitialFormState } from "@/lib/buildInitialFormState";
-import { fields } from "@/blocks/Form/fields";
+import { fields } from "@/components/forms/fields";
 import { getClientSideURL } from "@/utilities/getURL";
 import { isValidForm } from "@/lib/isValidForm";
 
