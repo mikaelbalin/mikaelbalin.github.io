@@ -1,6 +1,7 @@
 import type { GlobalConfig, GlobalAfterChangeHook } from "payload";
 import { link } from "@/config/link";
 import { revalidateTag } from "next/cache";
+import { formBlock } from "./blocks/formBlock";
 
 export const revalidateFooter: GlobalAfterChangeHook = ({
   doc,
@@ -59,6 +60,12 @@ export const footer: GlobalConfig = {
           ],
         },
       ],
+    },
+    {
+      name: "form",
+      type: "blocks",
+      blocks: [formBlock],
+      // required: true,
     },
     {
       type: "group",

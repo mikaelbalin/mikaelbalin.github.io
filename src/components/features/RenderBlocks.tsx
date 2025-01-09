@@ -2,7 +2,6 @@ import React from "react";
 import type { Page } from "@/types/payload";
 import { ArchiveBlock } from "@/components/features/ArchiveBlock";
 import { Subscription } from "@/components/features/Subscription";
-import { FormBlock } from "@/blocks/Form/Component";
 import { MediaBlock } from "@/components/ui/MediaBlock";
 import { About } from "@/components/features/About";
 
@@ -13,7 +12,6 @@ const blockComponents: Record<BlockType, React.FC<any>> = {
   about: About,
   archive: ArchiveBlock,
   subscription: Subscription,
-  formBlock: FormBlock,
   mediaBlock: MediaBlock,
 };
 

@@ -3,7 +3,6 @@ import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { archive } from "@/config/blocks/archive";
 import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
-import { FormBlock } from "../../blocks/Form/config";
 import { hero } from "@/config/hero";
 import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
@@ -100,7 +99,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [subscription, about, media, archive, FormBlock],
+              blocks: [subscription, about, media, archive],
               required: true,
             },
           ],
