@@ -2,22 +2,14 @@
 
 import { useState } from "react";
 import { subscriptionSchema } from "@/lib/schemas";
-import { Form, FormBlock } from "@/types/payload";
+import { FormBlock } from "@/types/payload";
 import { Button, Grid, GridCol } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { buildInitialFormState } from "@/lib/buildInitialFormState";
 import { fields } from "@/blocks/Form/fields";
 import { getClientSideURL } from "@/utilities/getURL";
-
-const isValidForm = (form: unknown): form is Form => {
-  return (
-    typeof form === "object" &&
-    form !== null &&
-    "fields" in form &&
-    Array.isArray((form as Form).fields)
-  );
-};
+import { isValidForm } from "@/lib/isValidForm";
 
 type SubscriptionFormProps = FormBlock;
 
@@ -34,7 +26,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
   const initialValues = buildInitialFormState(formFromProps.fields);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>();
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const form = useForm({
     mode: "uncontrolled",

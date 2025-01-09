@@ -29,7 +29,7 @@ async function getFooter() {
 
   const global = await payload.findGlobal<"footer", FooterSelect>({
     slug: "footer",
-    depth: 0,
+    depth: 1,
   });
 
   return global;

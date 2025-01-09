@@ -5,10 +5,11 @@ import { Footer as FooterProps } from "@/types/payload";
 type ContactProps = {
   contacts: FooterProps["contacts"];
   social: FooterProps["social"];
+  form: FooterProps["form"];
 };
 
 export const Contact = (props: ContactProps) => {
-  const { contacts, social } = props;
+  const { contacts, social, form } = props;
 
   return (
     <Container id="contact" className="pb-14 sm:pb-18">
@@ -55,7 +56,10 @@ export const Contact = (props: ContactProps) => {
 
         <GridCol span={{ base: 12, sm: 6 }}>
           <Text className="mb-8">Send me a message </Text>
-          <ContactForm />
+
+          {Array.isArray(form) && form.length > 0 && (
+            <ContactForm {...form[0]} />
+          )}
         </GridCol>
       </Grid>
     </Container>

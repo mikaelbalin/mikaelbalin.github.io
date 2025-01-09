@@ -1,21 +1,36 @@
 "use client";
 
-import { ContactFormSchema, contactFormSchema } from "@/lib/schemas";
-import { TextInput, Checkbox, Button, Group, Textarea } from "@mantine/core";
+import { contactFormSchema } from "@/lib/schemas";
+import { Button, Group } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
-import Link from "next/link";
+import { FormBlock } from "@/types/payload";
+import { isValidForm } from "@/lib/isValidForm";
+import { buildInitialFormState } from "@/lib/buildInitialFormState";
+import { useState } from "react";
+import { getClientSideURL } from "@/utilities/getURL";
+import { fields } from "@/blocks/Form/fields";
 
-export const ContactForm = () => {
+type ContactFormProps = FormBlock;
+
+export const ContactForm = (props: ContactFormProps) => {
+  const { form: formFromProps } = props;
+
+  if (!isValidForm(formFromProps)) {
+    throw new Error("Invalid form configuration provided");
+  }
+
+  const { id, submitButtonLabel } = formFromProps;
+
+  const formID = String(id);
+  const initialValues = buildInitialFormState(formFromProps.fields);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
   const form = useForm({
     mode: "uncontrolled",
-    initialValues: {
-      name: "",
-      email: "",
-      message: "",
-      termsOfService: false,
-      subscribeToNewsletter: false,
-    },
+    initialValues: initialValues,
     validate: zodResolver(contactFormSchema),
   });
 
@@ -24,59 +39,103 @@ export const ContactForm = () => {
     form.getInputNode(firstErrorPath)?.focus();
   };
 
-  const handleSubmit = async (values: ContactFormSchema) => {
-    notifications.show({
-      title: "Submitting message...",
-      message: JSON.stringify(values),
-    });
+  const handleSubmit = async (values: typeof initialValues) => {
+    if (values) {
+      const dataToSend = Object.entries(values).map(([name, value]) => ({
+        field: name,
+        value,
+      }));
+
+      setIsLoading(true);
+
+      try {
+        const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
+          body: JSON.stringify({
+            form: formID,
+            submissionData: dataToSend,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        });
+
+        const res = await req.json();
+
+        if (req.status >= 400) {
+          setIsLoading(false);
+
+          notifications.show({
+            title: `Form submit error: ${res.status}`,
+            message: res.errors?.[0]?.message || "Internal Server Error",
+            color: "red",
+          });
+
+          return;
+        }
+
+        setIsLoading(false);
+        setHasSubmitted(true);
+        notifications.show({
+          title: "Thank you!",
+          message: "I'll get back to you as soon as possible",
+          color: "green",
+        });
+      } catch (error) {
+        setIsLoading(false);
+        notifications.show({
+          title: "Form submit error",
+          message: error instanceof Error ? error.message : "An error occurred",
+          color: "red",
+        });
+      }
+    }
   };
 
   return (
-    <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
+    <form id={formID} onSubmit={form.onSubmit(handleSubmit, handleError)}>
       <div className="flex flex-col gap-6">
-        <TextInput
-          withAsterisk
-          label="Your name"
-          key={form.key("name")}
-          {...form.getInputProps("name")}
-        />
-
-        <TextInput
-          withAsterisk
-          label="Email"
-          key={form.key("email")}
-          {...form.getInputProps("email")}
-        />
-
-        <Textarea
-          withAsterisk
-          label="Message"
-          key={form.key("message")}
-          {...form.getInputProps("message")}
-          resize="vertical"
-        />
-
-        <Checkbox
-          label={
-            <>
-              I agree to the terms of service and{" "}
-              <Link href="/privacy">privacy policy</Link>
-            </>
+        {formFromProps?.fields?.map((field) => {
+          const Field = fields?.[field.blockType];
+          if (Field && "name" in field) {
+            return field.blockType === "checkbox" ? (
+              <Field
+                key={form.key(field.name)}
+                label={field.label}
+                {...form.getInputProps(field.name, {
+                  type: "checkbox",
+                })}
+              />
+            ) : field.blockType === "textarea" ? (
+              <Field
+                withAsterisk
+                key={form.key(field.name)}
+                label={field.label}
+                {...form.getInputProps(field.name)}
+                resize="vertical"
+              />
+            ) : (
+              <Field
+                withAsterisk
+                key={form.key(field.name)}
+                label={field.label}
+                {...form.getInputProps(field.name)}
+              />
+            );
           }
-          key={form.key("termsOfService")}
-          {...form.getInputProps("termsOfService", { type: "checkbox" })}
-        />
-
-        <Checkbox
-          label="Also subscribe me to your newsletter"
-          key={form.key("subscribeToNewsletter")}
-          {...form.getInputProps("subscribeToNewsletter", { type: "checkbox" })}
-        />
+          return null;
+        })}
       </div>
 
       <Group className="mt-8 justify-end">
-        <Button type="submit" size="xs">
-          Submit message
+        <Button
+          form={formID}
+          type="submit"
+          size="xs"
+          disabled={hasSubmitted}
+          loading={isLoading}
+        >
+          {submitButtonLabel}
         </Button>
       </Group>
     </form>

@@ -9,7 +9,7 @@ export const buildInitialFormState = (fields?: Form["fields"] | null) => {
           [field.name]: Boolean(field.defaultValue),
         };
       }
-      if (field.blockType === "country") {
+      if (field.blockType === "textarea") {
         return {
           ...initialSchema,
           [field.name]: "",

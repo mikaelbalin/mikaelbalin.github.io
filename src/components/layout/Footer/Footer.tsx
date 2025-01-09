@@ -6,13 +6,13 @@ import { ScrollTopButton } from "@/components/ui/ScrollTopButton";
 import { Footer as FooterProps } from "@/types/payload";
 
 export function Footer(props: FooterProps) {
-  const { titles, contacts, social, navigation } = props;
+  const { titles, contacts, social, navigation, form } = props;
 
   return (
     <footer>
       <Marquee texts={titles} />
 
-      <Contact contacts={contacts} social={social} />
+      <Contact contacts={contacts} social={social} form={form} />
 
       {navigation && (
         <Container>
