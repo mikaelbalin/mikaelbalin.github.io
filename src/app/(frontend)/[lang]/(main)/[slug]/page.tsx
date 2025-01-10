@@ -8,29 +8,29 @@ import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
 
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise });
-  const pages = await payload.find({
-    collection: "pages",
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  });
+// export async function generateStaticParams() {
+//   const payload = await getPayload({ config: configPromise });
+//   const pages = await payload.find({
+//     collection: "pages",
+//     draft: false,
+//     limit: 1000,
+//     overrideAccess: false,
+//     pagination: false,
+//     select: {
+//       slug: true,
+//     },
+//   });
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== "home";
-    })
-    .map(({ slug }) => {
-      return { slug };
-    });
+//   const params = pages.docs
+//     ?.filter((doc) => {
+//       return doc.slug !== "home";
+//     })
+//     .map(({ slug }) => {
+//       return { slug };
+//     });
 
-  return params;
-}
+//   return params;
+// }
 
 type Args = {
   params: Promise<{

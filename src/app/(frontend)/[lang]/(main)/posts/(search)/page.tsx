@@ -1,13 +1,13 @@
 import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
-import { generateLanguageParams } from "@/i18n-config";
+// import { generateLanguageParams } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { Pagination } from "@/components/ui/Pagination/Pagination";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
-export const generateStaticParams = generateLanguageParams;
+// export const generateStaticParams = generateLanguageParams;
 
 type Args = {
   params: Promise<{ lang: "en" | "pt" }>;
