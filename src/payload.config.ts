@@ -5,14 +5,14 @@ import { buildConfig } from "payload";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { plugins } from "@/config/plugins";
-import { footer } from "@/config/footer";
-import { header } from "@/config/header";
-import { getServerSideURL } from "./utilities/getURL";
+import { getServerSideURL } from "@/utilities/getURL";
 import { categories } from "@/config/collections/categories";
 import { media } from "@/config/collections/media";
 import { posts } from "@/config/collections/posts";
 import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
+import { footer } from "@/config/footer";
+import { header } from "@/config/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
 
 const isDevelopment = process.env.NODE_ENV === "development";
