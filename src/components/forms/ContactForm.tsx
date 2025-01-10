@@ -8,7 +8,6 @@ import { FormBlock } from "@/types/payload";
 import { isValidForm } from "@/lib/isValidForm";
 import { buildInitialFormState } from "@/lib/buildInitialFormState";
 import { useState } from "react";
-import { getClientSideURL } from "@/utilities/getURL";
 import { fields } from "@/components/forms/fields";
 
 type ContactFormProps = FormBlock;
@@ -49,7 +48,7 @@ export const ContactForm = (props: ContactFormProps) => {
       setIsLoading(true);
 
       try {
-        const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
+        const req = await fetch("/next/form", {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,

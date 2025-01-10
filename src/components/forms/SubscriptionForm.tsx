@@ -52,7 +52,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
       setIsLoading(true);
 
       try {
-        const req = await fetch(`${getClientSideURL()}/api/form-submissions`, {
+        const req = await fetch(`${getClientSideURL()}/next/form`, {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,
