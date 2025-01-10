@@ -1,5 +1,5 @@
 {
-  "id": "ba73e247-9673-48a0-8d35-7203467ffab5",
+  "id": "5912c69f-186c-4c0f-96c7-c0034bfd15fe",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -699,8 +699,7 @@
           "type": "enum_pages_hero_type",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'lowImpact'"
+          "notNull": false
         },
         "hero_titles": {
           "name": "hero_titles",
@@ -1840,8 +1839,7 @@
           "type": "enum__pages_v_version_hero_type",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false,
-          "default": "'lowImpact'"
+          "notNull": false
         },
         "version_hero_titles": {
           "name": "version_hero_titles",

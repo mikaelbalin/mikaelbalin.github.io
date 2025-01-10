@@ -81,7 +81,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE IF NOT EXISTS "pages" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"title" varchar,
-  	"hero_type" "enum_pages_hero_type" DEFAULT 'lowImpact',
+  	"hero_type" "enum_pages_hero_type",
   	"hero_titles" jsonb,
   	"hero_title" varchar,
   	"hero_description" varchar,
@@ -176,7 +176,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
   	"version_title" varchar,
-  	"version_hero_type" "enum__pages_v_version_hero_type" DEFAULT 'lowImpact',
+  	"version_hero_type" "enum__pages_v_version_hero_type",
   	"version_hero_titles" jsonb,
   	"version_hero_title" varchar,
   	"version_hero_description" varchar,
