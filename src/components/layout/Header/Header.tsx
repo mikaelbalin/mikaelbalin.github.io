@@ -6,6 +6,7 @@ import { Logo } from "@/components/ui/Logo";
 import {
   Anchor,
   Burger,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Collapse,
   Container,
   Drawer,
@@ -45,9 +46,11 @@ export function Header(props: HeaderProps) {
 
   const [
     linksOpened,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
       key={menuItem.label}
@@ -182,15 +185,15 @@ export function Header(props: HeaderProps) {
           <Drawer.Body>
             <ScrollArea mx="-md">
               {menu.slice(0, -1)}
-              <UnstyledButton
+              {/* <UnstyledButton
                 onClick={toggleLinks}
                 className={
                   "flex items-center w-full h-11 px-4 text-black dark:text-white"
                 }
               >
                 <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
-              </UnstyledButton>
-              <Collapse in={linksOpened}>{languageButtons}</Collapse>
+              </UnstyledButton> */}
+              {/* <Collapse in={linksOpened}>{languageButtons}</Collapse> */}
               {/* <Link
                 href="/signin"
                 className="flex items-center w-full h-11 px-4"
