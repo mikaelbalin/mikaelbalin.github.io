@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 // import { IconLogin } from "@tabler/icons-react";
@@ -6,7 +7,6 @@ import { Logo } from "@/components/ui/Logo";
 import {
   Anchor,
   Burger,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Collapse,
   Container,
   Drawer,
@@ -46,11 +46,9 @@ export function Header(props: HeaderProps) {
 
   const [
     linksOpened,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
       key={menuItem.label}
@@ -72,52 +70,52 @@ export function Header(props: HeaderProps) {
 
   const menu = [
     ...navLinks,
-    {
-      id: 0,
-      link: { label: labels[lang], url: lang },
-    },
+    // {
+    //   id: 0,
+    //   link: { label: labels[lang], url: lang },
+    // },
   ].map(({ id, link }) => {
-    if (id === 0) {
-      const menuItems = languageMenuItems.map((item) => (
-        <Menu.Item
-          key={item.label}
-          component={Link}
-          href={redirectedPathName(item.url || "/")}
-          className="dark:text-white"
-        >
-          {item.label}
-        </Menu.Item>
-      ));
+    // if (id === 0) {
+    //   const menuItems = languageMenuItems.map((item) => (
+    //     <Menu.Item
+    //       key={item.label}
+    //       component={Link}
+    //       href={redirectedPathName(item.url || "/")}
+    //       className="dark:text-white"
+    //     >
+    //       {item.label}
+    //     </Menu.Item>
+    //   ));
 
-      return (
-        <Menu
-          key={link.label}
-          trigger="click-hover"
-          closeDelay={400}
-          position="bottom-start"
-          withinPortal
-          onChange={(opened) => {
-            if (!opened) {
-              closeLinks();
-            } else {
-              openLinks();
-            }
-          }}
-        >
-          <Menu.Target>
-            <UnstyledButton
-              className={cn(
-                "px-4 flex items-center text-sm text-black dark:text-white font-medium",
-                "sm:text-lg sm:leading-13 sm:px-0",
-              )}
-            >
-              <LangugeToggle label={link.label} linksOpened={linksOpened} />
-            </UnstyledButton>
-          </Menu.Target>
-          <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
-        </Menu>
-      );
-    }
+    //   return (
+    //     <Menu
+    //       key={link.label}
+    //       trigger="click-hover"
+    //       closeDelay={400}
+    //       position="bottom-start"
+    //       withinPortal
+    //       onChange={(opened) => {
+    //         if (!opened) {
+    //           closeLinks();
+    //         } else {
+    //           openLinks();
+    //         }
+    //       }}
+    //     >
+    //       <Menu.Target>
+    //         <UnstyledButton
+    //           className={cn(
+    //             "px-4 flex items-center text-sm text-black dark:text-white font-medium",
+    //             "sm:text-lg sm:leading-13 sm:px-0",
+    //           )}
+    //         >
+    //           <LangugeToggle label={link.label} linksOpened={linksOpened} />
+    //         </UnstyledButton>
+    //       </Menu.Target>
+    //       <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
+    //     </Menu>
+    //   );
+    // }
 
     return (
       <Anchor
