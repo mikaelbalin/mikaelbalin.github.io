@@ -14,6 +14,7 @@ import { pages } from "@/config/collections/pages";
 import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
+import { migrations } from "migrations";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
@@ -68,6 +69,7 @@ export default buildConfig({
         },
       })
     : vercelPostgresAdapter({
+        prodMigrations: migrations,
         pool: {
           connectionString: process.env.POSTGRES_URL || "",
         },
