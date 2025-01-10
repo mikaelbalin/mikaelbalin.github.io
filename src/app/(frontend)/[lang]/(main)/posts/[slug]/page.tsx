@@ -68,11 +68,7 @@ export async function generateStaticParams() {
   return params;
 }
 
-type PageProps = Readonly<
-  {
-    children: React.ReactNode;
-  } & Args
->;
+type PageProps = Args;
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
