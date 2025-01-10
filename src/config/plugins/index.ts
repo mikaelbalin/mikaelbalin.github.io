@@ -16,6 +16,7 @@ import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
@@ -172,5 +173,14 @@ export const plugins: Plugin[] = [
         return [...defaultFields, ...searchFields];
       },
     },
+  }),
+  vercelBlobStorage({
+    enabled: process.env.NODE_ENV !== "development", // Optional, defaults to true
+    // Specify which collections should use Vercel Blob
+    collections: {
+      media: true,
+    },
+    // Token provided by Vercel once Blob storage is added to your Vercel project
+    token: process.env.BLOB_READ_WRITE_TOKEN,
   }),
 ];
