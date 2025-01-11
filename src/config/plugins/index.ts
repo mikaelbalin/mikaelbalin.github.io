@@ -8,7 +8,6 @@ import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import {
   FixedToolbarFeature,
-  HeadingFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { searchFields } from "@/config/fields/searchFields";
@@ -149,13 +148,7 @@ export const plugins: Plugin[] = [
               ...field,
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({
-                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
-                    }),
-                  ];
+                  return [...rootFeatures, FixedToolbarFeature()];
                 },
               }),
             };

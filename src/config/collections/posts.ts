@@ -6,7 +6,6 @@ import type {
 import {
   BlocksFeature,
   FixedToolbarFeature,
-  HeadingFeature,
   HorizontalRuleFeature,
   InlineToolbarFeature,
   lexicalEditor,
@@ -150,9 +149,6 @@ export const posts: CollectionConfig<"posts"> = {
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
-                    HeadingFeature({
-                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
-                    }),
                     BlocksFeature({
                       blocks: [callout, code, media, table],
                       inlineBlocks: [kbd],

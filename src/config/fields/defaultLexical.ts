@@ -6,11 +6,15 @@ import {
   ParagraphFeature,
   lexicalEditor,
   UnderlineFeature,
+  InlineCodeFeature,
+  HeadingFeature,
+  SuperscriptFeature,
+  SubscriptFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
+  StrikethroughFeature,
 } from "@payloadcms/richtext-lexical";
 
-/**
- * Unused
- */
 export const defaultLexical: Config["editor"] = lexicalEditor({
   features: () => {
     return [
@@ -20,26 +24,14 @@ export const defaultLexical: Config["editor"] = lexicalEditor({
       ItalicFeature(),
       LinkFeature({
         enabledCollections: ["pages", "posts"],
-        fields: ({ defaultFields }) => {
-          const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
-            if ("name" in field && field.name === "url") return false;
-            return true;
-          });
-
-          return [
-            ...defaultFieldsWithoutUrl,
-            {
-              name: "url",
-              type: "text",
-              admin: {
-                condition: ({ linkType }) => linkType !== "internal",
-              },
-              label: ({ t }) => t("fields:enterURL"),
-              required: true,
-            },
-          ];
-        },
       }),
+      InlineCodeFeature(),
+      HeadingFeature({ enabledHeadingSizes: ["h2", "h3", "h4"] }),
+      SuperscriptFeature(),
+      SubscriptFeature(),
+      OrderedListFeature(),
+      UnorderedListFeature(),
+      StrikethroughFeature(),
     ];
   },
 });

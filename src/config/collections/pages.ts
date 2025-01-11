@@ -6,7 +6,7 @@ import { about } from "@/config/blocks/about";
 import { hero } from "@/config/hero";
 import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
-import { generatePreviewPath } from "../../utilities/generatePreviewPath";
+import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -120,12 +120,10 @@ export const pages: CollectionConfig<"pages"> = {
             MetaImageField({
               relationTo: "media",
             }),
-
             MetaDescriptionField({}),
             PreviewField({
               // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
               // field paths to match the target field for data
               titlePath: "meta.title",
               descriptionPath: "meta.description",
