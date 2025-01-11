@@ -1432,7 +1432,7 @@ export interface CalloutBlock {
  * via the `definition` "CodeBlock".
  */
 export interface CodeBlock {
-  language?: ('typescript' | 'tsx' | 'javascript' | 'css') | null;
+  language?: ('typescript' | 'tsx' | 'javascript' | 'css' | 'html') | null;
   code: string;
   id?: string | null;
   blockName?: string | null;

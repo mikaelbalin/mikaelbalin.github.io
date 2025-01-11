@@ -25,6 +25,10 @@ export const code: Block = {
           label: "CSS",
           value: "css",
         },
+        {
+          label: "HTML",
+          value: "html",
+        },
       ],
     },
     {
