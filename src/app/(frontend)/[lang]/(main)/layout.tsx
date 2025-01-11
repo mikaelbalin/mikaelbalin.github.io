@@ -1,42 +1,61 @@
+import { cache } from "react";
+import type { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
+import { Locale } from "@/i18n-config";
 import { ThemeProvider } from "@/theme";
+import { AdminBar } from "@/components/ui/AdminBar";
+import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { ColorSchemeScript } from "@mantine/core";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { getServerSideURL } from "@/utilities/getURL";
+import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
+import type { FooterSelect, HeaderSelect } from "@/types/payload";
+import { Notifications } from "@mantine/notifications";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "../global.css";
-import { Notifications } from "@mantine/notifications";
-import { Locale } from "../../../../i18n-config";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { AdminBar } from "@/components/ui/AdminBar";
-import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
-import { draftMode } from "next/headers";
-import { getServerSideURL } from "@/utilities/getURL";
-import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
-import { getCachedFooter, getCachedHeader } from "@/utilities/getGlobals";
+
+const getHeader = cache(async () => {
+  const payload = await getPayload({ config: configPromise });
+
+  const global = await payload.findGlobal<"header", HeaderSelect>({
+    slug: "header",
+    depth: 0,
+  });
+
+  return global;
+});
+
+const getFooter = cache(async () => {
+  const payload = await getPayload({ config: configPromise });
+
+  const global = await payload.findGlobal<"footer", FooterSelect>({
+    slug: "footer",
+    depth: 1,
+  });
+
+  return global;
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout(
-  props: Readonly<
-    {
-      children: React.ReactNode;
-    } & {
-      params: { lang: Locale };
-    }
-  >,
+  props: Readonly<{
+    children: React.ReactNode;
+    params: { lang: Locale };
+  }>,
 ) {
   const params = await props.params;
-
   const { children } = props;
 
   const { isEnabled } = await draftMode();
-  const header = await getCachedHeader()();
-  const footer = await getCachedFooter()();
+  const header = await getHeader();
+  const footer = await getFooter();
 
   return (
     <html lang={params.lang} className="relative">
@@ -67,13 +86,6 @@ export default async function RootLayout(
 }
 
 export const metadata: Metadata = {
-  title: "Mikael Balin",
-  description:
-    "Full-stack developer crafting elegant solutions through clean code and thoughtful design. Explore my projects, technical articles, and insights into modern web development.",
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
-  twitter: {
-    card: "summary_large_image",
-    creator: "@payloadcms",
-  },
 };

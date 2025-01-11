@@ -9,7 +9,9 @@ interface Props {
   url: string;
 }
 
-/* This component helps us with SSR based dynamic redirects */
+/**
+ * This component helps us with SSR based dynamic redirects
+ */
 export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
   url,
