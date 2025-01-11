@@ -29,6 +29,10 @@ export const code: Block = {
           label: "HTML",
           value: "html",
         },
+        {
+          label: "XML",
+          value: "xml",
+        },
       ],
     },
     {
