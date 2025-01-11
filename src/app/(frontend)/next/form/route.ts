@@ -6,7 +6,7 @@ import { ipAddress } from "@vercel/functions";
 
 const rateLimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.fixedWindow(5, "60000 s"),
+  limiter: Ratelimit.fixedWindow(5, "60 s"),
 });
 
 export async function POST(req: NextRequest) {
