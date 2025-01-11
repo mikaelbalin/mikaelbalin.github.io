@@ -84,11 +84,11 @@
     "graphql": "^16.10.0",
     "jsonwebtoken": "^9.0.2",
     "negotiator": "^1.0.0",
-    "next": "15.0.3",
+    "next": "15.1.4",
     "payload": "3.16.0",
     "payload-admin-bar": "^1.0.6",
-    "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.6.0",
     "zod": "^3.24.1"
@@ -96,11 +96,5 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@9.15.0+sha256.09a8fe31a34fda706354680619f4002f4ccef6dadff93240d24ef6c831f0fd28",
-  "pnpm": {
-    "overrides": {
-      "@types/react": "npm:types-react@19.0.0-rc.1",
-      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
-    }
-  }
+  "packageManager": "pnpm@9.15.0+sha256.09a8fe31a34fda706354680619f4002f4ccef6dadff93240d24ef6c831f0fd28"
 }
