@@ -1,16 +1,7 @@
 import React, { Fragment, JSX, PropsWithChildren } from "react";
 import { MediaBlock } from "@/components/ui/MediaBlock";
 import { CMSLink } from "@/components/ui/Link";
-import {
-  DefaultNodeTypes,
-  SerializedBlockNode,
-  SerializedTextNode,
-} from "@payloadcms/richtext-lexical";
-import type {
-  CalloutBlock as CalloutBlockProps,
-  MediaBlock as MediaBlockProps,
-  TableBlock,
-} from "@/types/payload";
+import { SerializedTextNode } from "@payloadcms/richtext-lexical";
 import {
   IS_BOLD,
   IS_CODE,
@@ -38,9 +29,9 @@ import { CodeHighlight } from "@mantine/code-highlight";
 import "@mantine/code-highlight/styles.css";
 import { Callout } from "@/components/ui/Callout";
 import Link from "next/link";
-import { JsonObject } from "payload";
 import { cn } from "@/utilities/cn";
 import slugify from "@sindresorhus/slugify";
+import { NodeType } from "./types";
 
 const HeadingRenderer = (
   props: PropsWithChildren<{
@@ -120,35 +111,6 @@ function formatTextNode(index: number, node: SerializedTextNode): JSX.Element {
 
   return element;
 }
-
-type CodeBlockProps = {
-  code: string;
-  language?: string;
-  blockType: "code";
-};
-
-type KbdInlineBlockProps = {
-  key: string;
-  id?: string | null;
-  blockType: "kbd";
-};
-
-type CustomBlockNode<TBlockFields extends JsonObject = JsonObject> = Omit<
-  SerializedBlockNode<TBlockFields>,
-  "type"
-> & {
-  type: "inlineBlock" | "block";
-};
-
-export type NodeType =
-  | DefaultNodeTypes
-  | CustomBlockNode<
-      | MediaBlockProps
-      | CalloutBlockProps
-      | CodeBlockProps
-      | KbdInlineBlockProps
-      | TableBlock
-    >;
 
 type Args = {
   nodes?: NodeType[];
