@@ -1,5 +1,5 @@
 import { ElementType, FC, Fragment } from "react";
-import { serializeLexical, type NodeTypes } from "./serialize";
+import { serializeLexical, type NodeType } from "./serialize";
 import { Post } from "@/types/payload";
 
 type RichTextProps = {
@@ -34,7 +34,7 @@ const RichText: FC<RichTextProps> = ({
         typeof content === "object" &&
         "root" in content &&
         serializeLexical({
-          nodes: content?.root?.children as NodeTypes[],
+          nodes: content?.root?.children as NodeType[],
           className: textClassName,
         })}
     </Tag>

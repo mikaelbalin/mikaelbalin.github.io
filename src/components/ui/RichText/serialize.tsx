@@ -4,6 +4,7 @@ import { CMSLink } from "@/components/ui/Link";
 import {
   DefaultNodeTypes,
   SerializedBlockNode,
+  SerializedTextNode,
 } from "@payloadcms/richtext-lexical";
 import type {
   CalloutBlock as CalloutBlockProps,
@@ -39,28 +40,28 @@ import { Callout } from "@/components/ui/Callout";
 import Link from "next/link";
 import { JsonObject } from "payload";
 import { cn } from "@/utilities/cn";
+import slugify from "@sindresorhus/slugify";
 
 const HeadingRenderer = (
   props: PropsWithChildren<{
     tag: string;
+    fragmentID: string;
   }>,
 ) => {
-  const { tag, children } = props;
+  const { tag, children, fragmentID } = props;
   const order = parseInt(tag.match(/\d+/)?.[0] || "1", 10);
-  const childrenString = children?.toString();
-  const id = childrenString?.replace(/\s+/g, "-").toLowerCase();
 
   return (
     <Title
-      id={id}
+      id={fragmentID}
       order={order as TitleOrder}
       size={`h${order + 1}`}
       className="group mb-4"
     >
-      {props.children}&nbsp;
+      {children}&nbsp;
       <Link
-        href={`#${id}`}
-        aria-label={`Permalink: ${childrenString}`}
+        href={`#${fragmentID}`}
+        aria-label={`Permalink: ${fragmentID}`}
         className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-[var(--mantine-color-blue-6)]"
       >
         #
@@ -68,6 +69,57 @@ const HeadingRenderer = (
     </Title>
   );
 };
+
+function formatTextNode(index: number, node: SerializedTextNode): JSX.Element {
+  const { text } = node;
+  let element: JSX.Element = <Fragment key={index}>{text}</Fragment>;
+
+  if (node.format & IS_BOLD) {
+    element = (
+      <Text key={index} component="strong" fw={700}>
+        {text}
+      </Text>
+    );
+  }
+
+  if (node.format & IS_ITALIC) {
+    element = (
+      <Text key={index} component="em" fs="italic">
+        {text}
+      </Text>
+    );
+  }
+
+  if (node.format & IS_STRIKETHROUGH) {
+    element = (
+      <Text key={index} component="span" td="line-through">
+        {text}
+      </Text>
+    );
+  }
+
+  if (node.format & IS_UNDERLINE) {
+    element = (
+      <Text key={index} component="span" td="underline">
+        {text}
+      </Text>
+    );
+  }
+
+  if (node.format & IS_CODE) {
+    element = <Code key={index}>{text}</Code>;
+  }
+
+  if (node.format & IS_SUBSCRIPT) {
+    element = <sub key={index}>{text}</sub>;
+  }
+
+  if (node.format & IS_SUPERSCRIPT) {
+    element = <sup key={index}>{text}</sup>;
+  }
+
+  return element;
+}
 
 type CodeBlockProps = {
   code: string;
@@ -88,7 +140,7 @@ type CustomBlockNode<TBlockFields extends JsonObject = JsonObject> = Omit<
   type: "inlineBlock" | "block";
 };
 
-export type NodeTypes =
+export type NodeType =
   | DefaultNodeTypes
   | CustomBlockNode<
       | MediaBlockProps
@@ -98,227 +150,195 @@ export type NodeTypes =
       | TableBlock
     >;
 
-type Props = {
-  nodes: NodeTypes[];
+type Args = {
+  nodes?: NodeType[];
   className?: string;
 };
 
-export function serializeLexical({ nodes, className }: Props): JSX.Element {
-  return (
-    <Fragment>
-      {nodes?.map((node, index): JSX.Element | null => {
-        if (node == null) {
+export function serializeLexical({
+  nodes,
+  className,
+}: Args): (JSX.Element | null)[] | undefined {
+  return nodes?.map((node, index): JSX.Element | null => {
+    if (!node) {
+      return null;
+    }
+
+    if (node.type === "text") {
+      return formatTextNode(index, node);
+    }
+
+    if (node.type === "block" || node.type === "inlineBlock") {
+      const block = node.fields;
+
+      const blockType = block?.blockType;
+
+      if (!block || !blockType) {
+        return null;
+      }
+
+      switch (blockType) {
+        case "mediaBlock":
+          return (
+            <MediaBlock
+              key={index}
+              media={block.media}
+              blockType={block.blockType}
+            >
+              {serializeLexical({
+                nodes:
+                  typeof block.media === "object"
+                    ? (block.media.caption?.root.children as NodeType[])
+                    : [],
+                className: cn("!text-sm", className),
+              })}
+            </MediaBlock>
+          );
+        case "callout":
+          return (
+            <Callout
+              key={index}
+              blockName={block.blockName}
+              style={block.style}
+            >
+              {serializeLexical({
+                nodes: block.content.root.children as NodeType[],
+                className: cn("mb-0", className),
+              })}
+            </Callout>
+          );
+        case "code":
+          return (
+            <CodeHighlight
+              key={index}
+              className="mb-8"
+              code={block.code}
+              language={block.language}
+            />
+          );
+        case "table":
+          return (
+            <TableScrollContainer
+              key={index}
+              minWidth={undefined}
+              type="native"
+              className="mb-8"
+            >
+              <Table
+                data={block.content as TableData}
+                highlightOnHover
+                withTableBorder
+                stickyHeader
+              />
+            </TableScrollContainer>
+          );
+        case "kbd":
+          return <Kbd key={index}>{block.key}</Kbd>;
+        default:
           return null;
+      }
+    } else {
+      const serializedChildren =
+        "children" in node
+          ? node.children == null
+            ? undefined
+            : serializeLexical({
+                nodes: node.children as NodeType[],
+                className,
+              })
+          : undefined;
+
+      switch (node.type) {
+        case "heading": {
+          const fragmentID = slugify(
+            (node.children as NodeType[])
+              .map((n) => (n.type === "text" ? n.text : ""))
+              .join(""),
+          );
+
+          return (
+            <HeadingRenderer
+              key={index}
+              tag={node?.tag}
+              fragmentID={fragmentID}
+            >
+              {serializedChildren}
+            </HeadingRenderer>
+          );
         }
-
-        if (node.type === "text") {
-          let text = <React.Fragment key={index}>{node.text}</React.Fragment>;
-          if (node.format & IS_BOLD) {
-            text = (
-              <Text key={index} component="strong" fw={700}>
-                {text}
-              </Text>
-            );
-          }
-          if (node.format & IS_ITALIC) {
-            text = (
-              <Text key={index} component="em" fs="italic">
-                {text}
-              </Text>
-            );
-          }
-          if (node.format & IS_STRIKETHROUGH) {
-            text = (
-              <Text key={index} component="span" td="line-through">
-                {text}
-              </Text>
-            );
-          }
-          if (node.format & IS_UNDERLINE) {
-            text = (
-              <Text key={index} component="span" td="underline">
-                {text}
-              </Text>
-            );
-          }
-          if (node.format & IS_CODE) {
-            text = <Code key={index}>{node.text}</Code>;
-          }
-          if (node.format & IS_SUBSCRIPT) {
-            text = <sub key={index}>{text}</sub>;
-          }
-          if (node.format & IS_SUPERSCRIPT) {
-            text = <sup key={index}>{text}</sup>;
-          }
-
-          return text;
+        case "paragraph": {
+          return (
+            <Text key={index} className={cn("mb-8", className)}>
+              {serializedChildren}
+            </Text>
+          );
         }
-
-        // NOTE: Hacky fix for
-        // https://github.com/facebook/lexical/blob/d10c4e6e55261b2fdd7d1845aed46151d0f06a8c/packages/lexical-list/src/LexicalListItemNode.ts#L133
-        // which does not return checked: false (only true - i.e. there is no prop for false)
-        const serializedChildrenFn = (node: NodeTypes): JSX.Element | null => {
-          if (node.children == null) {
-            return null;
+        case "linebreak": {
+          return <br key={index} />;
+        }
+        case "list": {
+          return (
+            <List
+              key={index}
+              type={node?.tag === "ol" ? "ordered" : "unordered"}
+              withPadding
+            >
+              {serializedChildren}
+            </List>
+          );
+        }
+        case "listitem": {
+          if (node?.checked != null) {
+            return (
+              <ListItem
+                aria-checked={node.checked ? "true" : "false"}
+                className={` ${node.checked ? "" : ""}`}
+                key={index}
+                role="checkbox"
+                tabIndex={-1}
+                value={node?.value}
+              >
+                {serializedChildren}
+              </ListItem>
+            );
           } else {
-            if (node?.type === "list" && node?.listType === "check") {
-              for (const item of node.children) {
-                if ("checked" in item) {
-                  if (!item?.checked) {
-                    item.checked = false;
-                  }
-                }
-              }
-            }
-            return serializeLexical({
-              nodes: node.children as NodeTypes[],
-              className,
-            });
-          }
-        };
-
-        const serializedChildren =
-          "children" in node ? serializedChildrenFn(node) : "";
-
-        if (node.type === "block" || node.type === "inlineBlock") {
-          const block = node.fields;
-
-          const blockType = block?.blockType;
-
-          if (!block || !blockType) {
-            return null;
-          }
-
-          switch (blockType) {
-            case "mediaBlock":
-              return <MediaBlock key={index} {...block} />;
-            case "callout":
-              return (
-                <Callout
-                  key={index}
-                  blockName={block.blockName}
-                  style={block.style}
-                >
-                  {serializeLexical({
-                    nodes: block.content.root.children as NodeTypes[],
-                    className: cn("mb-0", className),
-                  })}
-                </Callout>
-              );
-            case "code":
-              return (
-                <CodeHighlight
-                  key={index}
-                  className="mb-8"
-                  code={block.code}
-                  language={block.language}
-                />
-              );
-            case "table":
-              return (
-                <TableScrollContainer
-                  key={index}
-                  minWidth={undefined}
-                  type="native"
-                  className="mb-8"
-                >
-                  <Table
-                    data={block.content as TableData}
-                    highlightOnHover
-                    withTableBorder
-                    stickyHeader
-                  />
-                </TableScrollContainer>
-              );
-            case "kbd":
-              return <Kbd key={index}>{block.key}</Kbd>;
-            default:
-              return null;
-          }
-        } else {
-          switch (node.type) {
-            case "linebreak": {
-              return <br key={index} />;
-            }
-            case "paragraph": {
-              return (
-                <Text key={index} className={cn("mb-8", className)}>
-                  {serializedChildren}
-                </Text>
-              );
-            }
-            case "heading": {
-              return (
-                <HeadingRenderer key={index} tag={node?.tag}>
-                  {serializedChildren}
-                </HeadingRenderer>
-              );
-            }
-            case "list": {
-              return (
-                <List
-                  key={index}
-                  type={node?.tag === "ol" ? "ordered" : "unordered"}
-                  withPadding
-                >
-                  {serializedChildren}
-                </List>
-              );
-            }
-            case "listitem": {
-              if (node?.checked != null) {
-                return (
-                  <ListItem
-                    aria-checked={node.checked ? "true" : "false"}
-                    className={` ${node.checked ? "" : ""}`}
-                    key={index}
-                    role="checkbox"
-                    tabIndex={-1}
-                    value={node?.value}
-                  >
-                    {serializedChildren}
-                  </ListItem>
-                );
-              } else {
-                return (
-                  <ListItem key={index} value={node?.value}>
-                    {serializedChildren}
-                  </ListItem>
-                );
-              }
-            }
-            case "quote": {
-              return (
-                <Blockquote key={index} className="my-8">
-                  {serializedChildren}
-                </Blockquote>
-              );
-            }
-            case "link": {
-              const fields = node.fields;
-
-              return (
-                <CMSLink
-                  className={className}
-                  key={index}
-                  newTab={Boolean(fields?.newTab)}
-                  reference={fields.doc}
-                  type={fields.linkType === "internal" ? "reference" : "custom"}
-                  url={fields.url}
-                >
-                  {serializedChildren}
-                </CMSLink>
-              );
-            }
-            case "horizontalrule": {
-              return <Divider key={index} className="mb-8" />;
-            }
-
-            default:
-              return null;
+            return (
+              <ListItem key={index} value={node?.value}>
+                {serializedChildren}
+              </ListItem>
+            );
           }
         }
-      })}
-    </Fragment>
-  );
+        case "quote": {
+          return (
+            <Blockquote key={index} className="my-8">
+              {serializedChildren}
+            </Blockquote>
+          );
+        }
+        case "link": {
+          const fields = node.fields;
+
+          return (
+            <CMSLink
+              className={className}
+              key={index}
+              newTab={Boolean(fields?.newTab)}
+              reference={fields.doc}
+              type={fields.linkType === "internal" ? "reference" : "custom"}
+              url={fields.url}
+            >
+              {serializedChildren}
+            </CMSLink>
+          );
+        }
+        case "horizontalrule": {
+          return <Divider key={index} className="mb-8" />;
+        }
+
+        default:
+          return null;
+      }
+    }
+  });
 }

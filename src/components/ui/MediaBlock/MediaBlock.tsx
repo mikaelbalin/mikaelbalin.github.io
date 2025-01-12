@@ -1,27 +1,16 @@
-import type { StaticImageData } from "next/image";
-import React from "react";
-import RichText from "@/components/ui/RichText";
+import React, { PropsWithChildren } from "react";
 import type { MediaBlock as MediaBlockProps } from "@/types/payload";
 import { Media } from "@/components/ui/Media";
 
-type Props = MediaBlockProps & {
-  staticImage?: StaticImageData;
-};
+type Props = PropsWithChildren<MediaBlockProps>;
 
 export const MediaBlock: React.FC<Props> = (props) => {
-  const { media, staticImage } = props;
-
-  let caption;
-  if (media && typeof media === "object") caption = media.caption;
+  const { media, children } = props;
 
   return (
     <div className="mb-8">
-      <Media resource={media} src={staticImage} />
-      {caption && (
-        <div className="mt-4 text-center">
-          <RichText content={caption} textClassName="!text-sm" />
-        </div>
-      )}
+      <Media resource={media} />
+      {children && <div className="mt-4 text-center">{children}</div>}
     </div>
   );
 };
