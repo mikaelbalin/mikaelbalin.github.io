@@ -10,7 +10,7 @@ type RichTextProps = {
   htmlElement?: ElementType;
 };
 
-const RichText: FC<RichTextProps> = ({
+export const RichText: FC<RichTextProps> = ({
   className,
   textClassName,
   content,
@@ -41,5 +41,3 @@ const RichText: FC<RichTextProps> = ({
     </Tag>
   );
 };
-
-export default RichText;
