@@ -39,6 +39,7 @@ export const renderNode = ({
 
       return (
         <Title
+          key={index}
           id={fragmentID}
           order={order as TitleOrder}
           size={`h${order + 1}`}
