@@ -6,14 +6,10 @@ import {
 import type {
   CalloutBlock as CalloutBlockProps,
   MediaBlock as MediaBlockProps,
-  TableBlock,
+  TableBlock as TableBlockProps,
+  CodeBlock as CodeBlockProps,
 } from "@/types/payload";
-
-export type CodeBlockProps = {
-  code: string;
-  language?: string;
-  blockType: "code";
-};
+import { JSX } from "react";
 
 export type KbdInlineBlockProps = {
   key: string;
@@ -37,5 +33,15 @@ export type NodeType =
       | CalloutBlockProps
       | CodeBlockProps
       | KbdInlineBlockProps
-      | TableBlock
+      | TableBlockProps
     >;
+
+type Args = {
+  nodes?: NodeType[];
+  className?: string;
+};
+
+export type SerializeLexical = ({
+  nodes,
+  className,
+}: Args) => (JSX.Element | null)[] | undefined;
