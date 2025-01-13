@@ -1,12 +1,20 @@
 import slugify from "@sindresorhus/slugify";
-import { Blockquote, List, ListItem, Text, Divider } from "@mantine/core";
+import {
+  Blockquote,
+  List,
+  ListItem,
+  Text,
+  Divider,
+  Title,
+  TitleOrder,
+} from "@mantine/core";
 import { CMSLink } from "@/components/ui/Link";
-import { HeadingRenderer } from "./HeadingRenderer";
 import { NodeType } from "./types";
 import { cn } from "@/utilities/cn";
 import { JSX } from "react";
+import Link from "next/link";
 
-export const nodeRenderer = ({
+export const renderNode = ({
   node,
   index,
   children,
@@ -19,16 +27,32 @@ export const nodeRenderer = ({
 }) => {
   switch (node.type) {
     case "heading": {
+      const tag = node.tag;
+
       const fragmentID = slugify(
         (node.children as NodeType[])
           .map((n) => (n.type === "text" ? n.text : ""))
           .join(""),
       );
 
+      const order = parseInt(tag.match(/\d+/)?.[0] || "1", 10);
+
       return (
-        <HeadingRenderer key={index} tag={node?.tag} fragmentID={fragmentID}>
-          {children}
-        </HeadingRenderer>
+        <Title
+          id={fragmentID}
+          order={order as TitleOrder}
+          size={`h${order + 1}`}
+          className="group mb-4"
+        >
+          {children}&nbsp;
+          <Link
+            href={`#${fragmentID}`}
+            aria-label={`Permalink: ${fragmentID}`}
+            className="inline-flex opacity-0 group-hover:opacity-100 transition-opacity ml-2 text-[var(--mantine-color-blue-6)]"
+          >
+            #
+          </Link>
+        </Title>
       );
     }
     case "paragraph": {

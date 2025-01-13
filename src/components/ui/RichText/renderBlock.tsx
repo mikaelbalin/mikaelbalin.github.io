@@ -12,7 +12,7 @@ import type {
 import { BlockFields } from "@payloadcms/richtext-lexical";
 import { Callout } from "../Callout";
 
-export const blockRenderer = ({
+export const renderBlock = ({
   index,
   block,
   className,

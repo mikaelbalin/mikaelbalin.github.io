@@ -1,9 +1,9 @@
 import { JSX } from "react";
 import "@mantine/code-highlight/styles.css";
 import { NodeType, SerializeLexical } from "./types";
-import { formatTextNode } from "./formatters";
-import { nodeRenderer } from "./nodeRenderers";
-import { blockRenderer } from "./blockRenderers";
+import { renderText } from "./renderText";
+import { renderNode } from "./renderNode";
+import { renderBlock } from "./renderBlock";
 
 export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
   return nodes?.map((node, index): JSX.Element | null => {
@@ -12,11 +12,11 @@ export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
     }
 
     if (node.type === "text") {
-      return formatTextNode(index, node);
+      return renderText(index, node);
     }
 
     if (node.type === "block" || node.type === "inlineBlock") {
-      return blockRenderer({
+      return renderBlock({
         block: node.fields,
         index,
         className,
@@ -33,7 +33,7 @@ export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
               })
           : undefined;
 
-      return nodeRenderer({
+      return renderNode({
         node,
         index,
         children: serializedChildren,

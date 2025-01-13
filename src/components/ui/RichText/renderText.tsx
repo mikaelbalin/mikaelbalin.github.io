@@ -37,7 +37,7 @@ export const formatMap = {
   [IS_SUPERSCRIPT]: (text: string, key: number) => <sup key={key}>{text}</sup>,
 };
 
-export const formatTextNode = (
+export const renderText = (
   index: number,
   node: SerializedTextNode,
 ): JSX.Element => {
