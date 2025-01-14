@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import type { MediaBlock as MediaBlockProps } from "@/types/payload";
-import { Media } from "@/components/ui/Media";
+import { Media } from "@/components/ui/Media/Media";
 
 type Props = PropsWithChildren<MediaBlockProps>;
 
