@@ -8,7 +8,7 @@ import {
   Title,
   TitleOrder,
 } from "@mantine/core";
-import { CMSLink } from "@/components/ui/Link";
+import { CMSLink } from "@/components/ui/CMSLink";
 import { NodeType } from "./types";
 import { cn } from "@/utilities/cn";
 import { JSX } from "react";
