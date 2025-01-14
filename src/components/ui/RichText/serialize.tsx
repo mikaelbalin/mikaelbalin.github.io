@@ -33,12 +33,16 @@ export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
               })
           : undefined;
 
-      return renderNode({
-        node,
-        index,
-        children: serializedChildren,
-        className,
-      });
+      if (serializedChildren && serializedChildren.filter(Boolean).length > 0) {
+        return renderNode({
+          node,
+          index,
+          children: serializedChildren,
+          className,
+        });
+      }
+
+      return null;
     }
   });
 };

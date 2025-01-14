@@ -40,13 +40,19 @@ export const formatMap = {
 export const renderText = (
   index: number,
   node: SerializedTextNode,
-): JSX.Element => {
+): JSX.Element | null => {
   const { text, format } = node;
+
+  const trimmedText = text.trim();
+
+  if (!trimmedText) {
+    return null;
+  }
 
   const formatter = formatMap[format];
   if (formatter) {
-    return formatter(text, index);
+    return formatter(trimmedText, index);
   }
 
-  return <Fragment key={index}>{text}</Fragment>;
+  return <Fragment key={index}>{trimmedText}</Fragment>;
 };
