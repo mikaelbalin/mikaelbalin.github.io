@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { AdminBar } from "./index";
+import { AdminBar } from "./AdminBar";
 
 const meta = {
   title: "AdminBar",
