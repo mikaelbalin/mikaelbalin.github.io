@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/utilities/cn";
 import { Fragment, useRef } from "react";
+import { Footer } from "@/types/payload";
 
 function isArrayOfStrings(texts: unknown): texts is string[] {
   return (
@@ -49,19 +50,10 @@ const BASE: number = 10;
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
 interface MarqueeProps {
-  texts:
-    | string
-    | number
-    | boolean
-    | unknown[]
-    | {
-        [k: string]: unknown;
-      }
-    | null
-    | undefined;
+  titles: Footer["titles"];
 }
 
-export const Marquee = ({ texts = [] }: MarqueeProps) => {
+export const Marquee = ({ titles = [] }: MarqueeProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -78,7 +70,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
   const even = useMotionTemplate`${transformEvenSpring}%`;
   const odd = useMotionTemplate`${transformOddSpring}%`;
 
-  if (isArrayOfStrings(texts)) {
+  if (isArrayOfStrings(titles)) {
     return (
       <div
         ref={ref}
@@ -102,7 +94,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
             aria-hidden={index === 1}
           >
             <Line
-              texts={texts}
+              texts={titles}
               className="text-9xl sm:text-10xl"
               showFirstSeparator
             />
@@ -113,8 +105,8 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
   } else {
     return (
       <div ref={ref} className="pt-16 pb-14 sm:pt-24 sm:pb-18">
-        {isTuple(texts) &&
-          texts.map((text, index) => (
+        {isTuple(titles) &&
+          titles.map((title, index) => (
             <div
               key={index}
               className={cn(
@@ -132,7 +124,7 @@ export const Marquee = ({ texts = [] }: MarqueeProps) => {
                   translateX: index % 2 === 0 ? even : odd,
                 }}
               >
-                <Line texts={text} className="text-4.5xl sm:text-9xl" />
+                <Line texts={title} className="text-4.5xl sm:text-9xl" />
               </motion.ul>
             </div>
           ))}

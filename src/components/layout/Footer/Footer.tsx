@@ -10,11 +10,16 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer>
-      <Marquee texts={titles} />
+      {titles && <Marquee titles={titles} />}
 
-      <Contact contacts={contacts} social={social} form={form} />
+      {(form || []).length > 0 &&
+        contacts &&
+        Object.keys(contacts).length > 0 &&
+        (social?.socialItems || []).length > 0 && (
+          <Contact contacts={contacts} social={social} form={form} />
+        )}
 
-      {navigation && (
+      {navigation?.title && navigation.topButton && (
         <Container>
           <Box className="border-t border-black dark:border-white pt-14 pb-16 sm:pb-24">
             <Text className="mb-6 sm:mb-8">{navigation.title}</Text>
@@ -32,7 +37,7 @@ export function Footer(props: FooterProps) {
 
               <ScrollTopButton
                 className="mt-4 sm:mt-0 sm:ml-auto"
-                title={navigation.topButton || ""}
+                title={navigation.topButton}
               />
             </div>
           </Box>
