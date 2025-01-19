@@ -14,7 +14,12 @@ export async function POST(req: NextRequest) {
   const { success } = await rateLimit.limit(ip || "127.0.0.1");
 
   if (!success) {
-    return new NextResponse("Too many requests", { status: 429 });
+    return NextResponse.json(
+      {
+        error: "Too many requests",
+      },
+      { status: 429 },
+    );
   }
 
   const { form, submissionData } = await req.json();
@@ -31,26 +36,26 @@ export async function POST(req: NextRequest) {
       method: "POST",
     });
 
-    const result = await response.json();
+    const json = await response.json();
 
     if (response.status >= 400) {
       return NextResponse.json(
         {
           status: response.status,
-          errors: result.errors,
         },
         { status: response.status },
       );
     }
 
-    return NextResponse.json(result);
+    return NextResponse.json(json);
   } catch (error) {
     return NextResponse.json(
       {
-        status: 500,
-        message: error instanceof Error ? error.message : "An error occurred",
+        error: error instanceof Error ? error.message : "An error occurred",
       },
-      { status: 500 },
+      {
+        status: 500,
+      },
     );
   }
 }

@@ -52,7 +52,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
       setIsLoading(true);
 
       try {
-        const req = await fetch(`${getClientSideURL()}/next/form`, {
+        const response = await fetch(`${getClientSideURL()}/next/form`, {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,
@@ -63,14 +63,14 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
           method: "POST",
         });
 
-        const res = await req.json();
+        const json = await response.json();
 
-        if (req.status >= 400) {
+        if (response.status >= 400) {
           setIsLoading(false);
 
           notifications.show({
-            title: `Subscription error: ${res.status}`,
-            message: res.errors?.[0]?.message || "Internal Server Error",
+            title: `Subscription error: ${response.status}`,
+            message: json.error || "Internal Server Error",
             color: "red",
           });
 
@@ -126,6 +126,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
                   onBlur={onBlur}
                   onFocus={onFocus}
                   value={value}
+                  autoComplete="email"
                 />
               );
             }
