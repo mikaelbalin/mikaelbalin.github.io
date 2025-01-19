@@ -13,13 +13,13 @@ type Story = StoryObj<typeof Marquee>;
 
 export const Default: Story = {
   args: {
-    texts: ["Hello", "Olá", "Hallå", "Bonjour"],
+    titles: ["Hello", "Olá", "Hallå", "Bonjour"],
   },
 };
 
 export const Multiline: Story = {
   args: {
-    texts: [
+    titles: [
       ["Hello", "Olá", "Hallå", "Bonjour"],
       ["Hello", "Olá", "Hallå", "Bonjour"],
     ],
