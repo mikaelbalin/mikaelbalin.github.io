@@ -1,0 +1,22 @@
+import { Meta, ColorPalette, ColorItem } from "@storybook/blocks";
+import { theme } from "../theme";
+
+<Meta title="Colors" />
+
+<ColorPalette>
+  <ColorItem
+    title="white"
+    subtitle="Main white"
+    colors={{ white: theme.white }}
+  />
+  <ColorItem
+    title="black"
+    subtitle="Main black"
+    colors={{ black: theme.black }}
+  />
+  {Object.entries(theme.other)
+    .filter(([key]) => key.startsWith("app"))
+    .map(([key, value]) => (
+      <ColorItem key={key} title={key} colors={{ [key]: value }} />
+    ))}
+</ColorPalette>
