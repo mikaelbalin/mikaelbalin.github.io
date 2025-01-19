@@ -48,7 +48,7 @@ export const ContactForm = (props: ContactFormProps) => {
       setIsLoading(true);
 
       try {
-        const req = await fetch("/next/form", {
+        const response = await fetch("/next/form", {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,
@@ -59,14 +59,14 @@ export const ContactForm = (props: ContactFormProps) => {
           method: "POST",
         });
 
-        const res = await req.json();
+        const json = await response.json();
 
-        if (req.status >= 400) {
+        if (response.status >= 400) {
           setIsLoading(false);
 
           notifications.show({
-            title: `Form submit error: ${res.status}`,
-            message: res.errors?.[0]?.message || "Internal Server Error",
+            title: `Form submit error: ${json.status}`,
+            message: json.error || "Internal Server Error",
             color: "red",
           });
 
