@@ -37,7 +37,7 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
 
   return (
     <Box className="my-auto" ref={ref}>
-      <Marquee texts={titles} />
+      <Marquee titles={titles} />
       <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
         <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <Text className="relative" size="lg">
