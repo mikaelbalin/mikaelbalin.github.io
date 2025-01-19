@@ -57,6 +57,14 @@ export default buildConfig({
         },
       ],
     },
+    meta: {
+      icons: [
+        {
+          type: "favicon",
+          url: "/favicon.ico",
+        },
+      ],
+    },
   },
   // If you'd like to use Rich Text, pass your editor here
   editor: defaultLexical,
