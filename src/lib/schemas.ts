@@ -48,10 +48,10 @@ export const contactFormSchema = z.object({
     .max(20, { message: "Name must be at most 20 characters long" }),
   email,
   message: z.string().min(1, "Message is required").max(500),
-  termsOfService: z.boolean().refine((val) => val === true, {
+  terms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms of service",
   }),
-  subscribeToNewsletter: z.boolean(),
+  newsletter: z.boolean(),
 });
 
 export type ContactFormSchema = z.infer<typeof contactFormSchema>;
