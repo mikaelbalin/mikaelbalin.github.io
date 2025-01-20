@@ -5,7 +5,7 @@ import {
   useRef,
   RefObject,
 } from "react";
-import { MotionValue } from "framer-motion";
+import { MotionValue } from "motion/react";
 
 interface MotionContextProps {
   y: RefObject<MotionValue<number> | undefined>;

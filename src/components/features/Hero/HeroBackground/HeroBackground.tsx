@@ -19,7 +19,7 @@ import {
 import { MainCanvas } from "./MainCanvas";
 import { Shared } from "./Square";
 import { useMotionContext } from "@/context/motion-context";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface HeroBackgroundProps {
   variant?: BackgroundVariant;

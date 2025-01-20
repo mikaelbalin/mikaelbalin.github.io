@@ -1,7 +1,7 @@
 "use client";
 
 import { RefObject } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "motion/react";
 import { Text } from "@mantine/core";
 
 interface ProgressIndicatorProps {

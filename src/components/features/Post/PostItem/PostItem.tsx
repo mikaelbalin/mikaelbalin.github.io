@@ -5,7 +5,7 @@ import { Post } from "@/types/payload";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { Badge, Group, Text } from "@mantine/core";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 
 type PostCardProps = Pick<

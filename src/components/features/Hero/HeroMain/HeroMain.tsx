@@ -11,7 +11,7 @@ import {
   useTransform,
   MotionValue,
   SpringOptions,
-} from "framer-motion";
+} from "motion/react";
 import { MotionProvider, useMotionContext } from "@/context/motion-context";
 import { Page } from "@/types/payload";
 

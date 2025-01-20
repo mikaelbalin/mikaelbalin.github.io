@@ -7,7 +7,7 @@ import {
   useSpring,
   type SpringOptions,
   useMotionTemplate,
-} from "framer-motion";
+} from "motion/react";
 import { cn } from "@/utilities/cn";
 import { Fragment, useRef } from "react";
 import { Footer } from "@/types/payload";
