@@ -8,10 +8,13 @@ interface ProgressIndicatorProps {
   target: RefObject<HTMLDivElement | null>;
 }
 
+/**
+ * `useMotionValueEvent` is a hook that allows you to listen to changes in a `motionValue` and execute a callback function when the value changes.
+ */
 export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {
   const { scrollYProgress } = useScroll({
     target,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
   });
 
   const scaleY = useSpring(scrollYProgress, {

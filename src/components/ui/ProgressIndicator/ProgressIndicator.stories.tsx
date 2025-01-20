@@ -18,14 +18,14 @@ export const Default: Story = {
         <div className="bg-[var(--mantine-color-blue-light)] w-full h-10 mb-2" />
         <div className="flex">
           <div
-            className="bg-[var(--mantine-color-blue-light)] w-32 h-[300px]"
+            className="bg-[var(--mantine-color-blue-light)] w-32 h-[3000px]"
             ref={ref}
           />
           <div className="px-2">
             <ProgressIndicator target={ref} />
           </div>
         </div>
-        <div className="bg-[var(--mantine-color-blue-light)] w-full h-[500px] mt-2" />
+        <div className="bg-[var(--mantine-color-blue-light)] w-full h-[600px] mt-2" />
       </div>
     );
   },
