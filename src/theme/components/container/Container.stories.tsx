@@ -5,7 +5,6 @@ const meta = {
   title: "Container",
   component: Container,
   parameters: {},
-  tags: ["autodocs"],
   argTypes: {
     size: {
       options: ["sm", "md"],
