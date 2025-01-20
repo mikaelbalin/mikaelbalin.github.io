@@ -122,6 +122,7 @@ export function Header(props: HeaderProps) {
         key={id}
         component={Link}
         href={link.url || "/"}
+        onClick={closeDrawer}
         className={cn(
           "flex items-center w-full h-11 px-4",
           "text-sm text-black dark:text-white font-medium",
@@ -182,7 +183,7 @@ export function Header(props: HeaderProps) {
 
           <Drawer.Body>
             <ScrollArea mx="-md">
-              {menu.slice(0, -1)}
+              {menu}
               {/* <UnstyledButton
                 onClick={toggleLinks}
                 className={
