@@ -64,16 +64,22 @@ export const HeroBackground = forwardRef<
         ? new BlogCanvas(canvas, colorScheme)
         : new MainCanvas(canvas, colorScheme, mousePos.current);
 
-    const handleMouseMove = (event: MouseEvent) => {
-      if (!mousePos.current) return;
+    const handleMouseMove = (event: PointerEvent) => {
+      if (!mousePos.current || event.pointerType === "touch") return;
+
       mousePos.current = utilsRef.current?.setMousePos({
         clientX: event.clientX,
         clientY: event.clientY,
       });
     };
 
-    const handleMouseOver = (event: MouseEvent) => {
-      if (!(utilsRef.current instanceof MainCanvas)) return;
+    const handleMouseOver = (event: PointerEvent) => {
+      if (
+        !(utilsRef.current instanceof MainCanvas) ||
+        event.pointerType === "touch"
+      ) {
+        return;
+      }
 
       if (!utilsRef.current.fadeInStartTime) {
         utilsRef.current.fadeInStartTime = event.timeStamp;
@@ -86,8 +92,13 @@ export const HeroBackground = forwardRef<
       };
     };
 
-    const handleMouseLeave = (event: MouseEvent) => {
-      if (!(utilsRef.current instanceof MainCanvas)) return;
+    const handleMouseLeave = (event: PointerEvent) => {
+      if (
+        !(utilsRef.current instanceof MainCanvas) ||
+        event.pointerType === "touch"
+      ) {
+        return;
+      }
 
       if (!utilsRef.current.fadeOutStartTime) {
         utilsRef.current.fadeOutStartTime = event.timeStamp;
@@ -104,16 +115,16 @@ export const HeroBackground = forwardRef<
     }
 
     if (body) {
-      body.addEventListener("mousemove", handleMouseMove);
-      body.addEventListener("mouseover", handleMouseOver);
-      body.addEventListener("mouseleave", handleMouseLeave);
+      body.addEventListener("pointermove", handleMouseMove);
+      body.addEventListener("pointerover", handleMouseOver);
+      body.addEventListener("pointerleave", handleMouseLeave);
     }
 
     return () => {
       if (body) {
-        body.removeEventListener("mousemove", handleMouseMove);
-        body.removeEventListener("mouseover", handleMouseOver);
-        body.removeEventListener("mouseleave", handleMouseLeave);
+        body.removeEventListener("pointermove", handleMouseMove);
+        body.removeEventListener("pointerover", handleMouseOver);
+        body.removeEventListener("pointerleave", handleMouseLeave);
       }
 
       if (animationFrameIdRef.current !== null) {
