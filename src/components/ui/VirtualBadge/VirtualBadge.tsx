@@ -18,6 +18,7 @@ import {
   Environment,
   Lightformer,
 } from "@react-three/drei";
+import type { GLTF } from "three-stdlib";
 
 interface MeshLineMaterialProps {
   transparent?: boolean;
@@ -38,6 +39,18 @@ declare module "@react-three/fiber" {
       MeshLineMaterialProps;
   }
 }
+
+type GLTFResult = GLTF & {
+  nodes: {
+    card: THREE.Mesh;
+    clip: THREE.Mesh;
+    clamp: THREE.Mesh;
+  };
+  materials: {
+    base: THREE.MeshStandardMaterial;
+    metal: THREE.MeshStandardMaterial;
+  };
+};
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -121,9 +134,10 @@ function Band() {
     angularDamping: 2,
     linearDamping: 2,
   };
+
   const { nodes, materials } = useGLTF(
     "https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/5huRVDzcoDwnbgrKUo1Lzs/53b6dd7d6b4ffcdbd338fa60265949e1/tag.glb",
-  );
+  ) as GLTFResult;
   const texture = useTexture(
     "https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/SOT1hmCesOHxEYxL7vkoZ/c57b29c85912047c414311723320c16b/band.jpg",
   );
@@ -213,6 +227,7 @@ function Band() {
           type={dragged ? "kinematicPosition" : "dynamic"}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          {/* card */}
           <group
             scale={2.25}
             position={[0, -1.2, -0.05]}

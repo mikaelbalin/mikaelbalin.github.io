@@ -6,7 +6,9 @@ const meta = {
   component: App,
   decorators: [
     (Story) => (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div
+        style={{ width: "calc(100vw - 32px)", height: "calc(100vh - 32px)" }}
+      >
         <Story />
       </div>
     ),
