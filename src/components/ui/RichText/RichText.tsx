@@ -10,26 +10,13 @@ type RichTextProps = {
   htmlElement?: ElementType;
 };
 
-export const RichText: FC<RichTextProps> = ({
-  className,
-  textClassName,
-  content,
-  htmlElement = "div",
-}) => {
+export const RichText: FC<RichTextProps> = ({ textClassName, content }) => {
   if (!content) {
     return null;
   }
 
-  const Tag = className ? htmlElement : Fragment;
-
   return (
-    <Tag
-      {...(typeof Tag === "string"
-        ? {
-            className,
-          }
-        : {})}
-    >
+    <>
       {content &&
         !Array.isArray(content) &&
         typeof content === "object" &&
@@ -38,6 +25,6 @@ export const RichText: FC<RichTextProps> = ({
           nodes: content?.root?.children as NodeType[],
           className: textClassName,
         })}
-    </Tag>
+    </>
   );
 };
