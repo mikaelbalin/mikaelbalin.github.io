@@ -1,4 +1,4 @@
-import { ElementType, FC, Fragment } from "react";
+import { FC } from "react";
 import { serializeLexical } from "./serialize";
 import { Post } from "@/types/payload";
 import { NodeType } from "./types";
@@ -7,16 +7,19 @@ type RichTextProps = {
   className?: string;
   textClassName?: string;
   content: Post["content"];
-  htmlElement?: ElementType;
 };
 
-export const RichText: FC<RichTextProps> = ({ textClassName, content }) => {
+export const RichText: FC<RichTextProps> = ({
+  className,
+  textClassName,
+  content,
+}) => {
   if (!content) {
     return null;
   }
 
   return (
-    <>
+    <div className={className}>
       {content &&
         !Array.isArray(content) &&
         typeof content === "object" &&
@@ -25,6 +28,6 @@ export const RichText: FC<RichTextProps> = ({ textClassName, content }) => {
           nodes: content?.root?.children as NodeType[],
           className: textClassName,
         })}
-    </>
+    </div>
   );
 };
