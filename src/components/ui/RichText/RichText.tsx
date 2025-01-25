@@ -25,7 +25,7 @@ export const RichText: FC<RichTextProps> = ({
         typeof content === "object" &&
         "root" in content &&
         serializeLexical({
-          nodes: content?.root?.children as NodeType[],
+          nodes: content.root.children as NodeType[],
           className: textClassName,
         })}
     </div>
