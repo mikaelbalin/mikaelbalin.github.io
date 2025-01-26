@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { resendAdapter } from "@payloadcms/email-resend";
 import { plugins } from "@/config/plugins";
 import { getServerSideURL } from "@/utilities/getURL";
 import { categories } from "@/config/collections/categories";
@@ -100,4 +101,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "types/payload.ts"),
   },
+  email: resendAdapter({
+    defaultFromAddress: "notifications@updates.mikaelbalin.com",
+    defaultFromName: "Mikael Balin",
+    apiKey: process.env.RESEND_API_KEY || "",
+  }),
 });

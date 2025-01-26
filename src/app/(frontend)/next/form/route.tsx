@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { render } from "@react-email/render";
 import { getClientSideURL } from "@/utilities/getURL";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 import { ipAddress } from "@vercel/functions";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
+import SubscriptionEmail from "../../../../../emails/subscription";
 
 const rateLimit = new Ratelimit({
   redis: kv,
@@ -46,6 +50,18 @@ export async function POST(req: NextRequest) {
         { status: response.status },
       );
     }
+
+    const html = await render(<SubscriptionEmail />);
+    const payload = await getPayload({ config: configPromise });
+    const email = await payload.sendEmail({
+      from: "Mikael Balin <notifications@updates.mikaelbalin.com>",
+      to: "michbalin@gmail.com",
+      replyTo: "m.balin@icloud.com",
+      subject: "This is a test email",
+      html,
+    });
+
+    console.log("Email sent", email, json);
 
     return NextResponse.json(json);
   } catch (error) {
