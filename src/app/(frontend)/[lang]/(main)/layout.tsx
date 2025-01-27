@@ -16,6 +16,7 @@ import { getServerSideURL } from "@/utilities/getURL";
 import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
 import type { FooterSelect, HeaderSelect } from "@/types/payload";
 import { Notifications } from "@mantine/notifications";
+import { ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "../global.css";
@@ -58,10 +59,14 @@ export default async function RootLayout(
   const footer = await getFooter();
 
   return (
-    <html lang={params.lang} className="relative">
+    <html lang={params.lang} className="relative" suppressHydrationWarning>
       <head>
+        <ColorSchemeScript defaultColorScheme="auto" />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        {/* <ColorSchemeScript defaultColorScheme="auto" /> */}
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+        />
       </head>
       <body className={inter.className}>
         <ThemeProvider>

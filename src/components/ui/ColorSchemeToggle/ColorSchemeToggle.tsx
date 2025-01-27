@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Switch,
   useComputedColorScheme,
@@ -22,6 +24,8 @@ export const ColorSchemeToggle = () => {
     <Switch
       checked={!isLightScheme}
       onChange={toggleColorScheme}
+      suppressHydrationWarning
+      wrapperProps={{ suppressHydrationWarning: true }}
       size="md"
       classNames={{
         track: "bg-black dark:bg-white text-black dark:text-white border-0",
