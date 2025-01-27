@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-// import { IconLogin } from "@tabler/icons-react";
 import { ColorSchemeToggle } from "@/components/ui/ColorSchemeToggle";
 import { Logo } from "@/components/ui/Logo";
 import {
@@ -70,52 +68,52 @@ export function Header(props: HeaderProps) {
 
   const menu = [
     ...navLinks,
-    // {
-    //   id: 0,
-    //   link: { label: labels[lang], url: lang },
-    // },
+    {
+      id: 0,
+      link: { label: labels[lang], url: lang },
+    },
   ].map(({ id, link }) => {
-    // if (id === 0) {
-    //   const menuItems = languageMenuItems.map((item) => (
-    //     <Menu.Item
-    //       key={item.label}
-    //       component={Link}
-    //       href={redirectedPathName(item.url || "/")}
-    //       className="dark:text-white"
-    //     >
-    //       {item.label}
-    //     </Menu.Item>
-    //   ));
+    if (id === 0) {
+      const menuItems = languageMenuItems.map((item) => (
+        <Menu.Item
+          key={item.label}
+          component={Link}
+          href={redirectedPathName(item.url || "/")}
+          className="dark:text-white"
+        >
+          {item.label}
+        </Menu.Item>
+      ));
 
-    //   return (
-    //     <Menu
-    //       key={link.label}
-    //       trigger="click-hover"
-    //       closeDelay={400}
-    //       position="bottom-start"
-    //       withinPortal
-    //       onChange={(opened) => {
-    //         if (!opened) {
-    //           closeLinks();
-    //         } else {
-    //           openLinks();
-    //         }
-    //       }}
-    //     >
-    //       <Menu.Target>
-    //         <UnstyledButton
-    //           className={cn(
-    //             "px-4 flex items-center text-sm text-black dark:text-white font-medium",
-    //             "sm:text-lg sm:leading-13 sm:px-0",
-    //           )}
-    //         >
-    //           <LangugeToggle label={link.label} linksOpened={linksOpened} />
-    //         </UnstyledButton>
-    //       </Menu.Target>
-    //       <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
-    //     </Menu>
-    //   );
-    // }
+      return (
+        <Menu
+          key={link.label}
+          trigger="click-hover"
+          closeDelay={400}
+          position="bottom-start"
+          withinPortal
+          onChange={(opened) => {
+            if (!opened) {
+              closeLinks();
+            } else {
+              openLinks();
+            }
+          }}
+        >
+          <Menu.Target>
+            <UnstyledButton
+              className={cn(
+                "px-4 flex items-center text-sm text-black dark:text-white font-medium",
+                "sm:text-lg sm:leading-13 sm:px-0",
+              )}
+            >
+              <LangugeToggle label={link.label} linksOpened={linksOpened} />
+            </UnstyledButton>
+          </Menu.Target>
+          <Menu.Dropdown className="shadow-lg">{menuItems}</Menu.Dropdown>
+        </Menu>
+      );
+    }
 
     return (
       <Anchor
@@ -148,13 +146,6 @@ export function Header(props: HeaderProps) {
               hiddenFrom="sm"
               aria-label="Open navigation"
             />
-            {/* {user?.ok ? (
-              <LogoutForm />
-            ) : (
-              <Link href="/signin" className="hidden sm:block">
-                <IconLogin stroke={2} />
-              </Link>
-            )} */}
           </Group>
         </Group>
       </Container>
@@ -184,21 +175,15 @@ export function Header(props: HeaderProps) {
           <Drawer.Body>
             <ScrollArea mx="-md">
               {menu}
-              {/* <UnstyledButton
+              <UnstyledButton
                 onClick={toggleLinks}
                 className={
                   "flex items-center w-full h-11 px-4 text-black dark:text-white"
                 }
               >
                 <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
-              </UnstyledButton> */}
-              {/* <Collapse in={linksOpened}>{languageButtons}</Collapse> */}
-              {/* <Link
-                href="/signin"
-                className="flex items-center w-full h-11 px-4"
-              >
-                <IconLogin stroke={2} />
-              </Link> */}
+              </UnstyledButton>
+              <Collapse in={linksOpened}>{languageButtons}</Collapse>
             </ScrollArea>
           </Drawer.Body>
         </Drawer.Content>
