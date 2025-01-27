@@ -50,7 +50,10 @@ export function Header(props: HeaderProps) {
   const languageButtons = languageMenuItems.map((menuItem) => (
     <Link
       key={menuItem.label}
-      className="flex items-center w-full h-11 px-6 dark:text-white"
+      className={cn(
+        "flex items-center w-full h-11 px-6 dark:text-white",
+        "text-sm font-medium",
+      )}
       href={menuItem.url || "/"}
     >
       {menuItem.label}
@@ -79,7 +82,7 @@ export function Header(props: HeaderProps) {
           key={item.label}
           component={Link}
           href={redirectedPathName(item.url || "/")}
-          className="dark:text-white"
+          className={cn("dark:text-white", "font-medium")}
         >
           {item.label}
         </Menu.Item>
@@ -103,7 +106,8 @@ export function Header(props: HeaderProps) {
           <Menu.Target>
             <UnstyledButton
               className={cn(
-                "px-4 flex items-center text-sm text-black dark:text-white font-medium",
+                "px-4 flex items-center text-black dark:text-white",
+                "text-sm font-medium",
                 "sm:text-lg sm:leading-13 sm:px-0",
               )}
             >
@@ -174,12 +178,13 @@ export function Header(props: HeaderProps) {
 
           <Drawer.Body>
             <ScrollArea mx="-md">
-              {menu}
+              {menu.slice(0, -1)}
               <UnstyledButton
                 onClick={toggleLinks}
-                className={
-                  "flex items-center w-full h-11 px-4 text-black dark:text-white"
-                }
+                className={cn(
+                  "flex items-center w-full h-11 px-4 text-black dark:text-white",
+                  "text-sm font-medium",
+                )}
               >
                 <LangugeToggle label={labels[lang]} linksOpened={linksOpened} />
               </UnstyledButton>
