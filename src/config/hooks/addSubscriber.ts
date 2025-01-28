@@ -9,7 +9,6 @@ export const addSubscriber: CollectionAfterChangeHook<FormSubmission> = async ({
   const email = doc?.submissionData?.find(
     (field) => field.field === "email",
   )?.value;
-  console.log("addSubscriber", { doc, email });
 
   if (email) {
     const token = crypto.randomBytes(20).toString("hex");

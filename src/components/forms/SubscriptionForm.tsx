@@ -65,7 +65,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
 
         const json = await response.json();
 
-        if (response.status >= 400) {
+        if (!response.ok) {
           setIsLoading(false);
 
           notifications.show({
