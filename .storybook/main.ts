@@ -10,6 +10,11 @@ function getAbsolutePath(value: string): string {
 }
 
 const config: StorybookConfig = {
+  core: {
+    disableWhatsNewNotifications: true,
+    disableTelemetry: true,
+    enableCrashReports: false,
+  },
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),

@@ -34,6 +34,7 @@ const preview: Preview = {
     },
   },
   decorators: [
+    // https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#writing-a-custom-decorator
     withThemeByDataAttribute({
       themes: {
         light: "light",
