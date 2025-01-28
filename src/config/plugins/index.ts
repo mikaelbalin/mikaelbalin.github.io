@@ -1,17 +1,19 @@
 import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
+import type { BeforeEmail } from "@payloadcms/plugin-form-builder/types";
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
 import { Field, Plugin } from "payload";
 import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
+import { addSubscriber } from "@/config/hooks/addSubscriber";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import {
   FixedToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import { searchFields } from "@/config/fields/searchFields";
-import { Page, Post } from "@/types/payload";
+import { Page, Post, FormSubmission } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
@@ -82,6 +84,21 @@ const beforeSyncWithSearch: BeforeSync = async ({
   }
 
   return modifiedDoc;
+};
+
+const beforeEmail: BeforeEmail<FormSubmission> = (
+  emailsToSend,
+  beforeChangeParams,
+) => {
+  // modify the emails in any way before they are sent
+  const { data } = beforeChangeParams;
+
+  console.log({ emailsToSend, submissionData: data.submissionData });
+
+  return emailsToSend.map((email) => ({
+    ...email,
+    html: email.html, // transform the html in any way you'd like (maybe wrap it in an html template?)
+  }));
 };
 
 /**
@@ -157,6 +174,12 @@ export const plugins: Plugin[] = [
         });
       },
     },
+    formSubmissionOverrides: {
+      hooks: {
+        afterChange: [addSubscriber],
+      },
+    },
+    beforeEmail,
   }),
   searchPlugin({
     collections: ["posts"],

@@ -12,6 +12,7 @@ import { media } from "@/config/collections/media";
 import { posts } from "@/config/collections/posts";
 import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
+import { subscribers } from "@/config/collections/subscribers";
 import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
@@ -84,7 +85,7 @@ export default buildConfig({
         },
       }),
   // Define and configure your collections in this array
-  collections: [pages, posts, media, categories, users],
+  collections: [pages, posts, media, categories, users, subscribers],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [header, footer],
   plugins: [
