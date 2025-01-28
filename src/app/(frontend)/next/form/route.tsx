@@ -10,7 +10,7 @@ import SubscriptionEmail from "../../../../../emails/subscription";
 
 const rateLimit = new Ratelimit({
   redis: kv,
-  limiter: Ratelimit.fixedWindow(5, "60 s"),
+  limiter: Ratelimit.fixedWindow(2, "60 s"),
 });
 
 export async function POST(req: NextRequest) {
