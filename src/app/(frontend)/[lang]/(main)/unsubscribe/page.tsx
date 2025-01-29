@@ -2,6 +2,7 @@ import { Title, Text, Container, Paper, Button } from "@mantine/core";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import Link from "next/link";
 
 type PageProps = {
   params: Promise<{ lang: "en" | "pt" }>;
@@ -37,12 +38,19 @@ export default async function Page({
   });
 
   return (
-    <Container size="sm" className="my-16 sm:my-19.5">
-      <Paper withBorder className="p-8 shadow-lg flex flex-col gap-6">
-        <Title size="h3">{subscriber.email} successfully unsubscribed</Title>
-        <Text>You have been unsubscribed from future emails.</Text>
-        <Button>Subscribe back</Button>
-      </Paper>
+    <Container
+      size="sm"
+      className="flex flex-col items-center justify-center min-h-screen"
+    >
+      <div className="space-y-4">
+        <Paper withBorder className="p-8 shadow-lg flex flex-col gap-6">
+          <Title size="h3">Successfully unsubscribed</Title>
+          <Text>You have been unsubscribed from future emails.</Text>
+          <Button component={Link} href={"/#subscription"}>
+            Subscribe back
+          </Button>
+        </Paper>
+      </div>
     </Container>
   );
 }

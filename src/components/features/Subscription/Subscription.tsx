@@ -6,7 +6,7 @@ export const Subscription = (props: SubscriptionProps) => {
   const { title, text, form } = props;
 
   return (
-    <Container component="section" className="mb-14 sm:mb-24">
+    <Container id="subscription" component="section" className="mb-14 sm:mb-24">
       <Box className="bg-appLightColorBeige dark:bg-appDarkColorCoalBlack py-14 px-4 mt-14 sm:py-20 sm:px-12 sm:mt-26">
         <Grid>
           <GridCol span={{ base: 12, sm: 8, lg: 7 }}>
