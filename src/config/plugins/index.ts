@@ -5,7 +5,6 @@ import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
 import { CollectionAfterErrorHook, Field, Plugin } from "payload";
 import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
-import { addSubscriber } from "@/config/hooks/addSubscriber";
 import { beforeEmail } from "@/config/hooks/beforeEmail";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import {
@@ -177,9 +176,9 @@ export const plugins: Plugin[] = [
             };
           }
 
-          // if ("name" in field && field.name === "emails") {
-          //   console.log("defaultFields", field);
-          // }
+          if ("name" in field && field.name === "emails") {
+            // console.log("formOverrides", field);
+          }
 
           return field;
         });
@@ -187,7 +186,6 @@ export const plugins: Plugin[] = [
     },
     formSubmissionOverrides: {
       hooks: {
-        afterChange: [addSubscriber],
         afterError: [afterErrorHook],
       },
     },
