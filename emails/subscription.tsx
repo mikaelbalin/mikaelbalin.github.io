@@ -10,12 +10,13 @@ import {
   Tailwind,
 } from "@react-email/components";
 import config from "./tailwind.config";
+import { getClientSideURL } from "@/utilities/getURL";
 
 type SubscriptionEmailProps = Readonly<{
-  loginCode?: string;
+  token: string;
 }>;
 
-export const SubscriptionEmail = ({ loginCode }: SubscriptionEmailProps) => (
+const SubscriptionEmail = ({ token }: SubscriptionEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head>
       <meta name="color-scheme" content="light only"></meta>
@@ -38,7 +39,10 @@ export const SubscriptionEmail = ({ loginCode }: SubscriptionEmailProps) => (
           </Text>
           <Text>
             If you ever wish to unsubscribe, simply click{" "}
-            <Link href="https://notion.so" target="_blank">
+            <Link
+              href={`${getClientSideURL()}/unsubscribe?token=${token}`}
+              target="_blank"
+            >
               unsubscribe link
             </Link>
             .
@@ -71,7 +75,7 @@ export const SubscriptionEmail = ({ loginCode }: SubscriptionEmailProps) => (
 );
 
 SubscriptionEmail.PreviewProps = {
-  loginCode: "sparo-ndigo-amurt-secan",
+  token: "sparo-ndigo-amurt-secan",
 } satisfies SubscriptionEmailProps;
 
 export default SubscriptionEmail;

@@ -11,7 +11,7 @@ export const addSubscriber: CollectionAfterChangeHook<FormSubmission> = async ({
   )?.value;
 
   if (email) {
-    const token = crypto.randomBytes(20).toString("hex");
+    const token = crypto.randomBytes(150).toString("hex");
 
     await payload.create({
       collection: "subscribers",

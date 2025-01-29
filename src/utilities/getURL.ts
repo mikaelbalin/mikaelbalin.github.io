@@ -38,7 +38,7 @@ export const getClientSideURL = (): string => {
     const domain = window.location.hostname;
     const port = window.location.port;
 
-    return `${protocol}//${domain}${port ? `:${port}` : ""}`;
+    return `${protocol}//${domain}${port ? `:3000` : ""}`;
   }
 
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
