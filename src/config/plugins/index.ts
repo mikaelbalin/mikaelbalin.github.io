@@ -107,17 +107,6 @@ const afterErrorHook: CollectionAfterErrorHook = async ({
   };
 };
 
-/**
- * An array of plugins used in the application.
- *
- * @type {Plugin[]}
- *
- * @property {Plugin} redirectsPlugin - Handles redirects for specified collections with custom field descriptions and hooks.
- * @property {Plugin} nestedDocsPlugin - Manages nested documents for specified collections with custom label and URL generation.
- * @property {Plugin} seoPlugin - Generates SEO-related data such as titles and URLs.
- * @property {Plugin} formBuilderPlugin - Customizes form fields and overrides with additional editor features.
- * @property {Plugin} searchPlugin - Integrates search functionality for specified collections with custom fields and pre-sync actions.
- */
 export const plugins: Plugin[] = [
   redirectsPlugin({
     collections: ["pages", "posts"],
