@@ -60,14 +60,14 @@ const SubscriptionEmail = ({ token }: SubscriptionEmailProps) => (
               mikaelbalin.com
             </Link>
           </Text>
-          <Text>
+          {/* <Text>
             Please do not reply to this email. If you have any questions,
             contact me at{" "}
             <Link href="mailto:hello@mikaelbalin.com">
               hello@mikaelbalin.com
             </Link>
             .
-          </Text>
+          </Text> */}
         </Container>
       </Body>
     </Tailwind>
