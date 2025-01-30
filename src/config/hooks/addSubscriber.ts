@@ -6,6 +6,7 @@ export const addSubscriber: CollectionBeforeChangeHook<
   FormSubmission
 > = async ({ data, req: { payload, context } }) => {
   const { token } = context;
+
   const email = data?.submissionData?.find(
     (field) => field.field === "email",
   )?.value;

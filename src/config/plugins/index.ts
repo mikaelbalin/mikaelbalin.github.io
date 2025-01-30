@@ -93,7 +93,7 @@ const afterErrorHook: CollectionAfterErrorHook = async ({
 }) => {
   if ("code" in error && error.code === "SQLITE_CONSTRAINT_UNIQUE") {
     return {
-      status: 400,
+      status: 409,
       response: {
         errors: ["The email address is already subscribed."],
       },
