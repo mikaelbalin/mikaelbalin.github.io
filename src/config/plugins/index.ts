@@ -17,6 +17,7 @@ import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
+import { addSubscriber } from "@/config/hooks/addSubscriber";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
@@ -186,6 +187,7 @@ export const plugins: Plugin[] = [
     },
     formSubmissionOverrides: {
       hooks: {
+        beforeChange: [addSubscriber],
         afterError: [afterErrorHook],
       },
     },

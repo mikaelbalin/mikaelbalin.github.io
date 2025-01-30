@@ -10,25 +10,11 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
 ) => {
   // modify the emails in any way before they are sent
   const {
-    data,
-    req: { payload },
+    req: { context },
   } = beforeChangeParams;
 
   const token = crypto.randomBytes(150).toString("hex");
-  const email = data?.submissionData?.find(
-    (field) => field.field === "email",
-  )?.value;
-
-  if (email) {
-    await payload.create({
-      collection: "subscribers",
-      data: {
-        email,
-        token,
-        subscribed: true,
-      },
-    });
-  }
+  context.token = token;
 
   const html = await render(<SubscriptionEmail token={token} />);
 

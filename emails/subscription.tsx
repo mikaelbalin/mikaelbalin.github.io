@@ -40,7 +40,7 @@ const SubscriptionEmail = ({ token }: SubscriptionEmailProps) => (
           <Text>
             If you ever wish to unsubscribe, simply click{" "}
             <Link
-              href={`${getClientSideURL()}/unsubscribe?token=${token}`}
+              href={`${getClientSideURL()}/unsubscribe?ut=${token}`}
               target="_blank"
             >
               unsubscribe link

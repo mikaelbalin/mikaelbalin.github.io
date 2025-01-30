@@ -1,18 +1,16 @@
-import { CollectionAfterChangeHook } from "payload";
-import crypto from "crypto";
+import { CollectionBeforeChangeHook } from "payload";
+
 import { FormSubmission } from "@/types/payload";
 
-export const addSubscriber: CollectionAfterChangeHook<FormSubmission> = async ({
-  doc,
-  req: { payload },
-}) => {
-  const email = doc?.submissionData?.find(
+export const addSubscriber: CollectionBeforeChangeHook<
+  FormSubmission
+> = async ({ data, req: { payload, context } }) => {
+  const { token } = context;
+  const email = data?.submissionData?.find(
     (field) => field.field === "email",
   )?.value;
 
-  if (email) {
-    const token = crypto.randomBytes(150).toString("hex");
-
+  if (email && token && typeof token === "string") {
     await payload.create({
       collection: "subscribers",
       data: {
@@ -23,5 +21,5 @@ export const addSubscriber: CollectionAfterChangeHook<FormSubmission> = async ({
     });
   }
 
-  return doc;
+  return data;
 };
