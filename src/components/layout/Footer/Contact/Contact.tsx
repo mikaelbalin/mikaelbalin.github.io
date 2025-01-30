@@ -1,6 +1,7 @@
 import { Container, Grid, Text, GridCol } from "@mantine/core";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Footer as FooterProps } from "@/types/payload";
+import { Phone } from "./Phone";
 
 type ContactProps = {
   contacts: FooterProps["contacts"];
@@ -25,9 +26,7 @@ export const Contact = (props: ContactProps) => {
                 <Text component="a" size="xl" href={`mailto:${contacts.email}`}>
                   {contacts.email}
                 </Text>
-                <Text component="a" size="xl" href={`tel:${contacts.phone}`}>
-                  {contacts.phone}
-                </Text>
+                {contacts.phone && <Phone phone={contacts.phone} />}
               </GridCol>
             )}
 
