@@ -3,7 +3,7 @@ import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
-import { CollectionAfterErrorHook, Field, Plugin } from "payload";
+import { CollectionAfterErrorHook, Plugin, TextField } from "payload";
 import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
 import { beforeEmail } from "@/config/hooks/beforeEmail";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
@@ -124,11 +124,14 @@ export const plugins: Plugin[] = [
     overrides: {
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
-          if ("name" in field && field.name === "from") {
-            const nextField: Field = {
+          if (
+            "name" in field &&
+            field.name === "from" &&
+            field.type === "text"
+          ) {
+            const nextField: TextField = {
               ...field,
               admin: {
-                // @ts-expect-error - This is a custom field
                 description:
                   "You will need to rebuild the website when changing this field.",
               },
