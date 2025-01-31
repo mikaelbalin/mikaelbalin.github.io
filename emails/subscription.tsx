@@ -21,7 +21,7 @@ const SubscriptionEmail = ({ token }: SubscriptionEmailProps) => (
     <Head>
       <meta name="color-scheme" content="light only"></meta>
     </Head>
-    <Preview>Thank you for subscribtion!</Preview>
+    <Preview>Thank you for subscription!</Preview>
     <Tailwind
       config={{
         ...config,
