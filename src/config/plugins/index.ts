@@ -1,23 +1,17 @@
-import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
-import { CollectionAfterErrorHook, Plugin, TextField } from "payload";
+import { Plugin, TextField } from "payload";
 import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
-import { beforeEmail } from "@/config/hooks/beforeEmail";
 import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
-import {
-  FixedToolbarFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
 import { searchFields } from "@/config/fields/searchFields";
 import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
-import { addSubscriber } from "@/config/hooks/addSubscriber";
+import { formBuilderPluginConfig } from "./form";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
@@ -86,27 +80,6 @@ const beforeSyncWithSearch: BeforeSync = async ({
   return modifiedDoc;
 };
 
-const afterErrorHook: CollectionAfterErrorHook = async ({
-  error,
-  result,
-  graphqlResult,
-}) => {
-  if ("code" in error && error.code === "SQLITE_CONSTRAINT_UNIQUE") {
-    return {
-      status: 409,
-      response: {
-        errors: ["The email address is already subscribed."],
-      },
-    };
-  }
-
-  return {
-    status: 500,
-    graphqlResult: graphqlResult,
-    response: result,
-  };
-};
-
 export const plugins: Plugin[] = [
   redirectsPlugin({
     collections: ["pages", "posts"],
@@ -151,40 +124,7 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
-  formBuilderPlugin({
-    fields: {
-      payment: false,
-    },
-    formOverrides: {
-      fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ("name" in field && field.name === "confirmationMessage") {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [...rootFeatures, FixedToolbarFeature()];
-                },
-              }),
-            };
-          }
-
-          if ("name" in field && field.name === "emails") {
-            // console.log("formOverrides", field);
-          }
-
-          return field;
-        });
-      },
-    },
-    formSubmissionOverrides: {
-      hooks: {
-        beforeChange: [addSubscriber],
-        afterError: [afterErrorHook],
-      },
-    },
-    beforeEmail,
-  }),
+  formBuilderPluginConfig,
   searchPlugin({
     collections: ["posts"],
     beforeSync: beforeSyncWithSearch,
