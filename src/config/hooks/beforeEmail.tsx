@@ -36,9 +36,9 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
   }
 
   const html = await render(<SubscriptionEmail token={token} />);
-
-  return emailsToSend.map((email) => ({
-    ...email,
+  console.log({ emailsToSend, beforeChangeParams });
+  return emailsToSend.map((item) => ({
+    ...item,
     html,
   }));
 };
