@@ -10,7 +10,7 @@ const compat = new FlatCompat({
 
 export default tseslint.config(
   {
-    ignores: [".next/*", "node_modules/*"],
+    ignores: [".next/*", "node_modules/*", "src/migrations/*"],
   },
   ...tseslint.configs.recommended,
   ...storybook.configs["flat/recommended"],
