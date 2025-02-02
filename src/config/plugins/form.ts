@@ -11,7 +11,7 @@ import {
   ParagraphFeature,
   UnorderedListFeature,
 } from "@payloadcms/richtext-lexical";
-import { addSubscriber } from "@/config/hooks/addSubscriber";
+import { handleSubscriber } from "@/config/hooks/handleSubscriber";
 import { CollectionAfterErrorHook } from "payload";
 
 const afterErrorHook: CollectionAfterErrorHook = async ({
@@ -102,7 +102,7 @@ export const formBuilderPluginConfig = formBuilderPlugin({
   },
   formSubmissionOverrides: {
     hooks: {
-      beforeChange: [addSubscriber],
+      beforeChange: [handleSubscriber],
       afterError: [afterErrorHook],
     },
   },

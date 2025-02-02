@@ -1,6 +1,6 @@
+import crypto from "crypto";
 import type { BeforeEmail } from "@payloadcms/plugin-form-builder/types";
 import { FormSubmission } from "@/types/payload";
-import crypto from "crypto";
 import { getServerSideURL } from "@/utilities/getURL";
 
 export const beforeEmail: BeforeEmail<FormSubmission> = async (
@@ -15,12 +15,11 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
   const token = crypto.randomBytes(150).toString("hex");
   context.token = token;
 
-  const email = data?.submissionData?.find(
-    (field) => field.field === "email",
-  )?.value;
+  const submissionData = data?.submissionData;
+  const email = submissionData?.find((field) => field.field === "email")?.value;
 
   if (email) {
-    const existingSubscriber = await payload.find({
+    const subscribersData = await payload.find({
       collection: "subscribers",
       where: {
         email: {
@@ -29,7 +28,11 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
       },
     });
 
-    if (existingSubscriber.totalDocs > 0) {
+    const newsletterField = submissionData?.find(
+      (field) => field.field === "newsletter",
+    );
+
+    if (!newsletterField && subscribersData.totalDocs > 0) {
       return [];
     }
   }
@@ -37,8 +40,10 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
   return emailsToSend.map((item) => {
     let htmlTemplate = item.html;
 
-    htmlTemplate = htmlTemplate.replace("{{url}}", getServerSideURL());
-    htmlTemplate = htmlTemplate.replace("{{token}}", `token`);
+    htmlTemplate = htmlTemplate.replace(
+      "unsubscribe_url",
+      `<a href="${getServerSideURL()}/en/unsubscribe?ut=${token}" target="_blank" rel="noopener noreferrer">unsubscribe</a>`,
+    );
 
     return {
       ...item,
