@@ -9,41 +9,42 @@ export const handleSubscriber: CollectionBeforeChangeHook<
   const submissionData = data?.submissionData;
 
   const email = submissionData?.find((field) => field.field === "email")?.value;
-
   const newsletterField = submissionData?.find(
     (field) => field.field === "newsletter",
   );
+  const shouldSubscribe = !newsletterField || newsletterField.value;
 
-  if (token && typeof token === "string" && email) {
-    const subscribersData = await payload.find({
-      collection: "subscribers",
-      where: {
-        email: {
-          equals: email,
-        },
+  if (!token || typeof token !== "string" || !email || !shouldSubscribe) {
+    return data;
+  }
+
+  const subscribersData = await payload.find({
+    collection: "subscribers",
+    where: {
+      email: {
+        equals: email,
       },
-    });
+    },
+  });
+  const subscriber = subscribersData.docs[0];
 
-    if (subscribersData.totalDocs > 0) {
-      if (!newsletterField || newsletterField.value) {
-        await payload.update({
-          collection: "subscribers",
-          id: subscribersData.docs[0].id,
-          data: {
-            subscribed: true,
-          },
-        });
-      }
-    } else {
-      await payload.create({
+  if (subscribersData.totalDocs > 0) {
+    if (!subscriber.subscribed) {
+      await payload.update({
         collection: "subscribers",
-        data: {
-          email,
-          token,
-          subscribed: true,
-        },
+        id: subscriber.id,
+        data: { subscribed: true },
       });
     }
+  } else {
+    await payload.create({
+      collection: "subscribers",
+      data: {
+        email,
+        token,
+        subscribed: true,
+      },
+    });
   }
 
   return data;
