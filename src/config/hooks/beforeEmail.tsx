@@ -1,8 +1,7 @@
 import type { BeforeEmail } from "@payloadcms/plugin-form-builder/types";
 import { FormSubmission } from "@/types/payload";
-import { render } from "@react-email/render";
-import SubscriptionEmail from "../../../emails/subscription";
 import crypto from "crypto";
+import { getServerSideURL } from "@/utilities/getURL";
 
 export const beforeEmail: BeforeEmail<FormSubmission> = async (
   emailsToSend,
@@ -35,10 +34,15 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
     }
   }
 
-  const html = await render(<SubscriptionEmail token={token} />);
-  console.log({ emailsToSend, beforeChangeParams });
-  return emailsToSend.map((item) => ({
-    ...item,
-    html,
-  }));
+  return emailsToSend.map((item) => {
+    let htmlTemplate = item.html;
+
+    htmlTemplate = htmlTemplate.replace("{{url}}", getServerSideURL());
+    htmlTemplate = htmlTemplate.replace("{{token}}", `token`);
+
+    return {
+      ...item,
+      html: htmlTemplate,
+    };
+  });
 };
