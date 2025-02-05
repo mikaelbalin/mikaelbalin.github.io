@@ -16,12 +16,17 @@ import { subscribers } from "@/config/collections/subscribers";
 import { footer } from "@/config/footer";
 import { header } from "@/config/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
+import { i18n } from "@/i18n-config";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  localization: {
+    defaultLocale: i18n.defaultLocale,
+    locales: [...i18n.locales],
+  },
   admin: {
     // https://payloadcms.com/docs/admin/components#root-components
     components: {
