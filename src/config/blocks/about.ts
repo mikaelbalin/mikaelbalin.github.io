@@ -8,11 +8,13 @@ export const about: Block = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "description",
       type: "text",
       required: true,
+      localized: true,
     },
   ],
 };

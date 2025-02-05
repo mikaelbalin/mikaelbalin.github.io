@@ -2,6 +2,7 @@ import type { GlobalConfig, GlobalAfterChangeHook } from "payload";
 import { link } from "@/config/link";
 import { revalidateTag } from "next/cache";
 import { formBlock } from "./blocks/formBlock";
+import { anyone } from "@/lib/access";
 
 export const revalidateFooter: GlobalAfterChangeHook = ({
   doc,
@@ -17,7 +18,7 @@ export const revalidateFooter: GlobalAfterChangeHook = ({
 export const footer: GlobalConfig = {
   slug: "footer",
   access: {
-    read: () => true,
+    read: anyone,
   },
   fields: [
     {
@@ -31,6 +32,7 @@ export const footer: GlobalConfig = {
         {
           name: "title",
           type: "text",
+          localized: true,
         },
         {
           name: "email",
@@ -49,6 +51,7 @@ export const footer: GlobalConfig = {
         {
           name: "title",
           type: "text",
+          localized: true,
         },
         {
           name: "socialItems",
@@ -65,7 +68,8 @@ export const footer: GlobalConfig = {
       name: "form",
       type: "blocks",
       blocks: [formBlock],
-      // required: true,
+      required: true,
+      localized: true,
     },
     {
       type: "group",
@@ -90,6 +94,7 @@ export const footer: GlobalConfig = {
           type: "text",
         },
       ],
+      localized: true,
     },
   ],
   hooks: {

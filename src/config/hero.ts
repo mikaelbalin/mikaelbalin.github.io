@@ -36,6 +36,7 @@ export const hero: Field = {
       admin: {
         condition: (data) => data.hero.type === "blog",
       },
+      localized: true,
     },
     {
       name: "description",
@@ -43,6 +44,7 @@ export const hero: Field = {
       admin: {
         condition,
       },
+      localized: true,
     },
     {
       name: "location",
@@ -51,6 +53,7 @@ export const hero: Field = {
       admin: {
         condition,
       },
+      localized: true,
     },
     {
       name: "contactLink",

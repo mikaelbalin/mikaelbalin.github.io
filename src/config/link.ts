@@ -124,6 +124,7 @@ export const link: LinkType = ({
           },
           label: "Label",
           required: true,
+          localized: true,
         },
       ],
     });

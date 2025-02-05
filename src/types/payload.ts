@@ -136,7 +136,7 @@ export interface Page {
 export interface Subscription {
   title: string;
   text: string;
-  form?: FormBlock[] | null;
+  form: FormBlock[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'subscription';
@@ -1311,7 +1311,7 @@ export interface Footer {
         }[]
       | null;
   };
-  form?: FormBlock[] | null;
+  form: FormBlock[];
   navigation?: {
     title?: string | null;
     navItems?:

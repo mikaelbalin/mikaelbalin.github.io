@@ -8,6 +8,7 @@ export const archive: Block = {
     {
       name: "title",
       type: "text",
+      localized: true,
     },
     link({
       overrides: {

@@ -1,6 +1,7 @@
 import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
 import { link } from "@/config/link";
 import { revalidateTag } from "next/cache";
+import { anyone } from "@/lib/access";
 
 const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {
   payload.logger.info(`Revalidating header`);
@@ -13,7 +14,7 @@ const revalidateHeader: GlobalAfterChangeHook = ({ doc, req: { payload } }) => {
 export const header: GlobalConfig = {
   slug: "header",
   access: {
-    read: () => true,
+    read: anyone,
   },
   fields: [
     {
@@ -34,6 +35,7 @@ export const header: GlobalConfig = {
         }),
       ],
       maxRows: 6,
+      localized: true,
     },
   ],
   hooks: {

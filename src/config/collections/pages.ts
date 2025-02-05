@@ -86,6 +86,7 @@ export const pages: CollectionConfig<"pages"> = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       type: "tabs",
@@ -129,6 +130,7 @@ export const pages: CollectionConfig<"pages"> = {
               descriptionPath: "meta.description",
             }),
           ],
+          localized: true,
         },
       ],
     },

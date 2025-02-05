@@ -9,17 +9,20 @@ export const subscription: Block = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "text",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       name: "form",
       type: "blocks",
       blocks: [formBlock],
-      // required: true,
+      required: true,
+      localized: true,
     },
   ],
   labels: {
