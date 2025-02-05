@@ -3,8 +3,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { resendAdapter } from "@payloadcms/email-resend";
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { plugins } from "@/config/plugins";
 import { getServerSideURL } from "@/utilities/getURL";
 import { categories } from "@/config/collections/categories";
@@ -73,9 +73,9 @@ export default buildConfig({
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: isDevelopment
-    ? sqliteAdapter({
-        client: {
-          url: process.env.DATABASE_URI || "",
+    ? postgresAdapter({
+        pool: {
+          connectionString: process.env.POSTGRES_URL || "",
         },
       })
     : vercelPostgresAdapter({
