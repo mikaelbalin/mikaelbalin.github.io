@@ -1,6 +1,9 @@
 {
   "name": "mikhailbalin.github.io",
   "scripts": {
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down",
+    "dev:db": "pnpm db:up && wait-on tcp:5432 && pnpm dev",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -55,6 +58,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0",
+    "wait-on": "^8.0.2",
     "webpack": "^5.97.1"
   },
   "dependencies": {
@@ -111,5 +115,10 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@10.2.0+sha256.72f1630812107c8723eb5be4517725f3e13f09cfd8f71571cf29f23ce318bdb7",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights"
+    ]
+  }
 }
