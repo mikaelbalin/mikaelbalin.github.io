@@ -6,11 +6,12 @@ import configPromise from "@payload-config";
 import { Pagination } from "@/components/ui/Pagination/Pagination";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import type { LocaleParams } from "@/i18n-config";
 
 // export const generateStaticParams = generateLanguageParams;
 
 type Args = {
-  params: Promise<{ lang: "en" | "pt" }>;
+  params: Promise<LocaleParams>;
   searchParams: Promise<{
     category: string;
     page: number;

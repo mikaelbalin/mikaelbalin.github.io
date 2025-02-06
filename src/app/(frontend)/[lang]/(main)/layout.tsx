@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import { Locale } from "@/i18n-config";
+import type { LocaleParams } from "@/i18n-config";
 import { ThemeProvider } from "@/theme";
 import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
@@ -48,7 +48,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: { lang: Locale };
+    params: LocaleParams;
   }>,
 ) {
   const params = await props.params;

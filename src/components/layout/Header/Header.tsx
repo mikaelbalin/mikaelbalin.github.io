@@ -21,7 +21,8 @@ import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
 import { Header as HeaderProps } from "@/types/payload";
 
-type MenuItem = NonNullable<HeaderProps["navItems"]>[number]["link"];
+type NavLink = NonNullable<HeaderProps["navItems"]>[number];
+type MenuItem = NavLink["link"];
 
 const labels: Record<Locale, string> = {
   en: "English",
@@ -69,14 +70,12 @@ export function Header(props: HeaderProps) {
 
   if (!navLinks) return null;
 
-  const menu = [
-    ...navLinks,
-    {
-      id: 0,
-      link: { label: labels[lang], url: lang },
-    },
-  ].map(({ id, link }) => {
-    if (id === 0) {
+  const localeNavLink: NavLink = {
+    link: { label: labels[lang], url: lang },
+  };
+
+  const menu = [localeNavLink, ...navLinks].map(({ id, link }, index) => {
+    if (index === 0) {
       const menuItems = languageMenuItems.map((item) => (
         <Menu.Item
           key={item.label}

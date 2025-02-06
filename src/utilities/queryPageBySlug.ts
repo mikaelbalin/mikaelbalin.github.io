@@ -2,10 +2,11 @@ import { cache } from "react";
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { draftMode } from "next/headers";
+import { Locale } from "@/i18n-config";
 
 export type QueryPageBySlugArgs = {
   slug: string;
-  lang: "en" | "pt" | "all";
+  lang: Locale | "all";
 };
 
 export const queryPageBySlug = cache(

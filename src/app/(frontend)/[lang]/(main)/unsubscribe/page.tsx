@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import Link from "next/link";
+import type { LocaleParams } from "@/i18n-config";
 
 type PageProps = {
-  params: Promise<{ lang: "en" | "pt" }>;
+  params: Promise<LocaleParams>;
   searchParams: Promise<{
     ut?: string;
   }>;
