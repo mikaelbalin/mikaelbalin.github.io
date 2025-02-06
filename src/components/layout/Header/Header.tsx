@@ -16,7 +16,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { cn } from "@/utilities/cn";
-import { i18n, type Locale } from "@/i18n-config";
+import { i18n, type LocaleParams, type Locale } from "@/i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";
 import { Header as HeaderProps } from "@/types/payload";
@@ -37,7 +37,7 @@ export function Header(props: HeaderProps) {
   const { logo, navItems: navLinks } = props;
 
   const pathName = usePathname();
-  const { lang } = useParams<{ lang: Locale }>();
+  const { lang } = useParams<LocaleParams>();
 
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
