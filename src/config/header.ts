@@ -35,7 +35,6 @@ export const header: GlobalConfig = {
         }),
       ],
       maxRows: 6,
-      localized: true,
     },
   ],
   hooks: {

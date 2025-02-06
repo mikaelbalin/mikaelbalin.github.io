@@ -22,7 +22,6 @@ export const subscription: Block = {
       type: "blocks",
       blocks: [formBlock],
       required: true,
-      localized: true,
     },
   ],
   labels: {

@@ -69,7 +69,6 @@ export const footer: GlobalConfig = {
       type: "blocks",
       blocks: [formBlock],
       required: true,
-      localized: true,
     },
     {
       type: "group",
@@ -78,6 +77,7 @@ export const footer: GlobalConfig = {
         {
           name: "title",
           type: "text",
+          localized: true,
         },
         {
           name: "navItems",
@@ -92,9 +92,9 @@ export const footer: GlobalConfig = {
         {
           name: "topButton",
           type: "text",
+          localized: true,
         },
       ],
-      localized: true,
     },
   ],
   hooks: {
