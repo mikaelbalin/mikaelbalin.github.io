@@ -54,8 +54,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <>
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+      <PayloadRedirects url={url} />
       <Hero {...hero} />
       {layout && <RenderBlocks blocks={layout} />}
     </>

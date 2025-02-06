@@ -10,7 +10,7 @@ interface Props {
 }
 
 /**
- * This component helps us with SSR based dynamic redirects
+ * Allows redirects for valid pages
  */
 export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
