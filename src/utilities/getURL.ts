@@ -8,7 +8,7 @@ import canUseDOM from "./canUseDOM";
  * a URL using that value.
  * If neither of these environment variables are set, it defaults to `http://localhost:3000`.
  *
- * @returns {string} The server-side URL.
+ * @returns The server-side URL.
  */
 export const getServerSideURL = (): string => {
   let url = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -30,7 +30,7 @@ export const getServerSideURL = (): string => {
  * If running in a browser environment, constructs the URL using the current window location's protocol, hostname, and port.
  * If not running in a browser environment, attempts to use environment variables to determine the URL.
  *
- * @returns {string} The client-side URL.
+ * @returns The client-side URL.
  */
 export const getClientSideURL = (): string => {
   if (canUseDOM) {
