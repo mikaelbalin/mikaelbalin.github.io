@@ -7,17 +7,11 @@ import { hero } from "@/config/hero";
 import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from "@payloadcms/plugin-seo/fields";
 import { getServerSideURL } from "@/utilities/getURL";
 import { revalidatePath } from "next/cache";
 import type { Page } from "@/types/payload";
 import { media } from "@/config/blocks/media";
+import { meta } from "@/config/plugins/seo";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
@@ -106,32 +100,7 @@ export const pages: CollectionConfig<"pages"> = {
           ],
           label: "Content",
         },
-        {
-          name: "meta",
-          label: "SEO",
-          fields: [
-            OverviewField({
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-              imagePath: "meta.image",
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: "media",
-            }),
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-              // field paths to match the target field for data
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-            }),
-          ],
-          localized: true,
-        },
+        meta,
       ],
     },
     {

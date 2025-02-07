@@ -1,47 +1,21 @@
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
-import { seoPlugin } from "@payloadcms/plugin-seo";
 import { searchPlugin } from "@payloadcms/plugin-search";
 import { Plugin, TextField } from "payload";
 import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import { searchFields } from "@/config/fields/searchFields";
-import { Page, Post } from "@/types/payload";
-import { getServerSideURL } from "@/utilities/getURL";
 import slugify from "@sindresorhus/slugify";
 import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { formBuilderPluginConfig } from "./form";
+import { seoPluginConfig } from "./seo";
 
-const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title
-    ? `${doc.title} | Payload Website Template`
-    : "Payload Website Template";
-};
-
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
-  const url = getServerSideURL();
-
-  return doc?.slug ? `${url}/${doc.slug}` : url;
-};
-
-const beforeSyncWithSearch: BeforeSync = async ({
-  originalDoc,
-  searchDoc,
-  // payload,
-}) => {
+const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc }) => {
   const {
     doc: { relationTo: collection },
   } = searchDoc;
 
-  const {
-    slug,
-    id,
-    categories,
-    title,
-    meta,
-    // excerpt
-  } = originalDoc;
+  const { slug, id, categories, title, meta } = originalDoc;
 
   const modifiedDoc: DocToSync = {
     ...searchDoc,
@@ -120,10 +94,7 @@ export const plugins: Plugin[] = [
         "",
       ),
   }),
-  seoPlugin({
-    generateTitle,
-    generateURL,
-  }),
+  seoPluginConfig,
   formBuilderPluginConfig,
   searchPlugin({
     collections: ["posts"],

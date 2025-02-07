@@ -14,13 +14,6 @@ import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { callout } from "@/config/blocks/callout";
 import { media } from "@/config/blocks/media";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from "@payloadcms/plugin-seo/fields";
 import { slugField } from "@/config/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
 import { User, Post } from "@/types/payload";
@@ -29,6 +22,7 @@ import { code } from "@/config/blocks/code";
 import { kbd } from "@/config/blocks/kbd";
 import { table } from "@/config/blocks/table";
 import { timeToReadField } from "@/config/fields/time";
+import { meta } from "@/config/plugins/seo";
 
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
@@ -195,33 +189,7 @@ export const posts: CollectionConfig<"posts"> = {
           ],
           label: "Meta",
         },
-        {
-          name: "meta",
-          label: "SEO",
-          fields: [
-            OverviewField({
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-              imagePath: "meta.image",
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: "media",
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: "meta.title",
-              descriptionPath: "meta.description",
-            }),
-          ],
-        },
+        meta,
       ],
     },
     {
