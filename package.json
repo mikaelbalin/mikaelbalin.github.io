@@ -94,6 +94,7 @@
     "@vercel/analytics": "^1.4.1",
     "@vercel/functions": "^2.0.0",
     "@vercel/kv": "^3.0.0",
+    "@vercel/og": "^0.6.5",
     "@vercel/speed-insights": "^1.1.0",
     "clsx": "^2.1.1",
     "graphql": "^16.10.0",
