@@ -1,8 +1,6 @@
-import { seoPlugin } from "@payloadcms/plugin-seo";
-import { Page, Post } from "@/types/payload";
-import { getServerSideURL } from "@/utilities/getURL";
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import { Tab } from "payload";
+import { seoPlugin } from "@payloadcms/plugin-seo";
+import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -10,6 +8,8 @@ import {
   OverviewField,
   PreviewField,
 } from "@payloadcms/plugin-seo/fields";
+import { Page, Post } from "@/types/payload";
+import { getServerSideURL } from "@/utilities/getURL";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title
