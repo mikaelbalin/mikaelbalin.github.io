@@ -1,5 +1,4 @@
 import { cache } from "react";
-import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
@@ -12,8 +11,6 @@ import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { getServerSideURL } from "@/utilities/getURL";
-import { mergeOpenGraph } from "@/utilities/mergeOpenGraph";
 import type { FooterSelect, HeaderSelect } from "@/types/payload";
 import { Notifications } from "@mantine/notifications";
 import { ColorSchemeScript } from "@mantine/core";
@@ -89,8 +86,3 @@ export default async function RootLayout(
     </html>
   );
 }
-
-export const metadata: Metadata = {
-  metadataBase: new URL(getServerSideURL()),
-  openGraph: mergeOpenGraph(),
-};
