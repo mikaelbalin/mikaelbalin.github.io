@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import type { Page, Post } from "@/types/payload";
-import { mergeOpenGraph } from "./mergeOpenGraph";
 import { getServerSideURL } from "./getURL";
 
 /**
@@ -12,20 +11,24 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc } = args || {};
 
+  if (!doc?.meta) return {};
+
+  const title = doc.meta.title;
+
   const ogImage =
-    typeof doc?.meta?.image === "object" &&
+    typeof doc.meta.image === "object" &&
     doc.meta.image !== null &&
     "url" in doc.meta.image &&
-    `${getServerSideURL()}`;
-
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + " | Mikael's Blog"
-    : "Mikael's Blog";
+    `${getServerSideURL()}/media/${doc.meta.image.id}`;
 
   return {
-    description: doc?.meta?.description,
-    openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || "",
+    title,
+    description: doc.meta.description,
+    openGraph: {
+      type: "website",
+      title,
+      description: doc.meta.description,
+      url: doc.slug ? `${getServerSideURL()}/${doc.slug}` : getServerSideURL(),
       images: ogImage
         ? [
             {
@@ -33,9 +36,6 @@ export const generateMeta = async (args: {
             },
           ]
         : undefined,
-      title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join("/") : "/",
-    }),
-    title,
+    },
   };
 };

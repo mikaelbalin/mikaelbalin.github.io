@@ -17,6 +17,8 @@ import { ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 import "../global.css";
+import { Metadata } from "next";
+import { getServerSideURL } from "@/utilities/getURL";
 
 const getHeader = cache(async () => {
   const payload = await getPayload({ config: configPromise });
@@ -86,3 +88,7 @@ export default async function RootLayout(
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getServerSideURL()),
+};

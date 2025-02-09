@@ -1,7 +1,6 @@
 import { Tab } from "payload";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import {
-  GenerateDescription,
   GenerateImage,
   GenerateTitle,
   GenerateURL,
@@ -16,34 +15,30 @@ import {
 import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 
+const TITLE = "Mikael's Blog";
+
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title
-    ? `${doc.title} | Payload Website Template`
-    : "Payload Website Template";
+  return doc?.title ? `${doc.title} | ${TITLE}` : TITLE;
 };
 
 const generateURL: GenerateURL<Post | Page> = ({ doc, collectionSlug }) => {
   const url = getServerSideURL();
-  console.log({ url, collectionSlug });
+  const slug = doc?.slug;
 
-  return doc?.slug ? `${url}/${doc.slug}` : url;
-};
-
-const generateDescription: GenerateDescription<Post | Page> = ({ doc }) => {
-  return "An open-source website built with Payload and Next.js.";
+  return slug && slug !== "home" ? `${url}/${collectionSlug}/${slug}` : url;
 };
 
 const generateImage: GenerateImage<Post | Page> = async ({
   doc,
   req: { payload },
 }) => {
-  const url = getServerSideURL();
-  const title = doc?.title || "Default Title";
+  const baseURL = getServerSideURL();
+  const title = baseURL || doc?.title;
+  const url = new URL("/next/og", baseURL);
+  url.searchParams.set("title", title);
 
   // Fetch the image from the OG route
-  const response = await fetch(
-    `${url}/next/og?title=${encodeURIComponent(title)}`,
-  );
+  const response = await fetch(url);
   const arrayBuffer = await response.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
 
@@ -51,11 +46,11 @@ const generateImage: GenerateImage<Post | Page> = async ({
   const media = await payload.create({
     collection: "media",
     data: {
-      alt: "OG Image",
+      alt: title,
     },
     file: {
       data: buffer,
-      name: "og-image.png",
+      name: `${title}.png`,
       mimetype: "image/png",
       size: buffer.length,
     },
@@ -75,18 +70,25 @@ export const meta: Tab = {
     }),
     MetaTitleField({
       hasGenerateFn: true,
+      overrides: {
+        required: true,
+      },
     }),
     MetaImageField({
       relationTo: "media",
       hasGenerateFn: true,
+      overrides: {
+        required: true,
+      },
     }),
     MetaDescriptionField({
-      hasGenerateFn: true,
+      hasGenerateFn: false,
+      overrides: {
+        required: true,
+      },
     }),
     PreviewField({
-      // if the `generateUrl` function is configured
       hasGenerateFn: true,
-      // field paths to match the target field for data
       titlePath: "meta.title",
       descriptionPath: "meta.description",
     }),
@@ -97,6 +99,6 @@ export const meta: Tab = {
 export const seoPluginConfig = seoPlugin({
   generateTitle,
   generateURL,
-  generateDescription,
   generateImage,
+  // implement `generateDescription`
 });

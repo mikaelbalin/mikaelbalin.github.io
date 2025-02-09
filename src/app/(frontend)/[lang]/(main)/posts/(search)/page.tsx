@@ -23,7 +23,7 @@ export async function generateMetadata({
 }: Args): Promise<Metadata> {
   const { page, category } = await searchParamsPromise;
   return {
-    title: `Posts page ${page || ""} with ${category} category`,
+    title: `Posts page${page ? ` ${page}` : ""} with${category ? ` ${category}` : ""} category`,
   };
 }
 
@@ -32,7 +32,7 @@ type PageProps = Args;
 export default async function Page({
   searchParams: searchParamsPromise,
 }: PageProps) {
-  const { category = "all", page = 1 } = await searchParamsPromise;
+  const { page = 1, category = "all" } = await searchParamsPromise;
   const sanitizedPageNumber = Number(page);
 
   if (!Number.isInteger(sanitizedPageNumber)) notFound();
