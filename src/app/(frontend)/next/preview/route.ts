@@ -1,11 +1,9 @@
-import jwt from "jsonwebtoken";
 import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { CollectionSlug } from "payload";
-
-const payloadToken = "payload-token";
+import { verifyPayloadUser } from "@/utilities/verifyPayloadUser";
 
 export async function GET(
   req: Request & {
@@ -17,7 +15,8 @@ export async function GET(
   },
 ): Promise<Response> {
   const payload = await getPayload({ config: configPromise });
-  const token = req.cookies.get(payloadToken)?.value;
+  const { user, token, error } = await verifyPayloadUser();
+
   const { searchParams } = new URL(req.url);
   const path = searchParams.get("path");
   const collection = searchParams.get("collection") as CollectionSlug;
@@ -43,21 +42,13 @@ export async function GET(
     }
 
     if (!token) {
-      new Response("You are not allowed to preview this page", { status: 403 });
+      new Response(error, { status: 403 });
     }
 
     if (!path.startsWith("/")) {
       new Response("This endpoint can only be used for internal previews", {
         status: 500,
       });
-    }
-
-    let user;
-
-    try {
-      user = jwt.verify(token, payload.secret);
-    } catch (error) {
-      payload.logger.error("Error verifying token for live preview:", error);
     }
 
     const draft = await draftMode();
