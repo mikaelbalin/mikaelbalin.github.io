@@ -5,18 +5,41 @@ export const HomeOG = ({ title }: { title?: string }) => {
         height: "100%",
         width: "100%",
         display: "flex",
-        textAlign: "center",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
-        flexWrap: "nowrap",
-        backgroundColor: "#e5e5f7",
-        opacity: 0.8,
-        backgroundImage: "radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px)",
-        backgroundSize: "10px 10px",
+        backgroundColor: "#101010",
       }}
     >
-      {title}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 32,
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            top: "6px",
+            backgroundColor: "#FDFCF9",
+            width: "36px",
+            height: "36px",
+            boxShadow: "0px 0px 5px #FDFCF9",
+          }}
+        />
+        <div
+          style={{
+            fontFamily: "Inter",
+            fontSize: "64px",
+            lineHeight: 1,
+            color: "#FDFCF9",
+            textShadow: "0px 0px 5px #FDFCF9",
+          }}
+        >
+          {title}
+        </div>
+      </div>
     </div>
   );
 };

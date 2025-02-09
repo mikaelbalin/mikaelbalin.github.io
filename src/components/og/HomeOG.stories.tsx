@@ -24,6 +24,6 @@ type Story = StoryObj<typeof HomeOG>;
 
 export const Default: Story = {
   args: {
-    title: "My default title",
+    title: "mikaelbalin.com",
   },
 };
