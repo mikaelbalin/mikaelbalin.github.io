@@ -1,6 +1,11 @@
 import { Tab } from "payload";
 import { seoPlugin } from "@payloadcms/plugin-seo";
-import { GenerateTitle, GenerateURL } from "@payloadcms/plugin-seo/types";
+import {
+  GenerateDescription,
+  GenerateImage,
+  GenerateTitle,
+  GenerateURL,
+} from "@payloadcms/plugin-seo/types";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -17,10 +22,46 @@ const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
     : "Payload Website Template";
 };
 
-const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
+const generateURL: GenerateURL<Post | Page> = ({ doc, collectionSlug }) => {
   const url = getServerSideURL();
+  console.log({ url, collectionSlug });
 
   return doc?.slug ? `${url}/${doc.slug}` : url;
+};
+
+const generateDescription: GenerateDescription<Post | Page> = ({ doc }) => {
+  return "An open-source website built with Payload and Next.js.";
+};
+
+const generateImage: GenerateImage<Post | Page> = async ({
+  doc,
+  req: { payload },
+}) => {
+  const url = getServerSideURL();
+  const title = doc?.title || "Default Title";
+
+  // Fetch the image from the OG route
+  const response = await fetch(
+    `${url}/next/og?title=${encodeURIComponent(title)}`,
+  );
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+
+  // Upload to Payload media collection
+  const media = await payload.create({
+    collection: "media",
+    data: {
+      alt: "OG Image",
+    },
+    file: {
+      data: buffer,
+      name: "og-image.png",
+      mimetype: "image/png",
+      size: buffer.length,
+    },
+  });
+
+  return media.id.toString();
 };
 
 export const meta: Tab = {
@@ -37,8 +78,11 @@ export const meta: Tab = {
     }),
     MetaImageField({
       relationTo: "media",
+      hasGenerateFn: true,
     }),
-    MetaDescriptionField({}),
+    MetaDescriptionField({
+      hasGenerateFn: true,
+    }),
     PreviewField({
       // if the `generateUrl` function is configured
       hasGenerateFn: true,
@@ -53,4 +97,6 @@ export const meta: Tab = {
 export const seoPluginConfig = seoPlugin({
   generateTitle,
   generateURL,
+  generateDescription,
+  generateImage,
 });

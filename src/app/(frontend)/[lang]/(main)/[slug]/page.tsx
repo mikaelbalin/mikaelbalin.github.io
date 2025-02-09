@@ -27,8 +27,6 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />;
   }
 
-  console.log({ page, slug, lang });
-
   const { hero, layout } = page;
 
   return (
