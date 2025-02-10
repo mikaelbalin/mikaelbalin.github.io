@@ -25,7 +25,7 @@ export async function GET(req: Request): Promise<Response> {
     const param = hasTitle ? searchParams.get("title")! : getServerSideURL();
     const title = param.length > 17 ? `${param.slice(0, 17)} ...` : param;
 
-    const fontPath = join(process.cwd(), "public/Inter_24pt-Regular.ttf");
+    const fontPath = join(process.cwd(), "public/fonts/Inter_24pt-Regular.ttf");
     const fontData = await readFile(fontPath);
 
     return new ImageResponse(<HomeOG title={title} />, {
