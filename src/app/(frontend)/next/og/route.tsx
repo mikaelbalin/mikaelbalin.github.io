@@ -3,10 +3,26 @@ import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { getServerSideURL } from "@/utilities/getURL";
+import { verifyPayloadUser } from "@/utilities/verifyPayloadUser";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
 
-export async function GET(request: Request) {
+export async function GET(req: Request): Promise<Response> {
+  const { user } = await verifyPayloadUser();
+
+  if (!user) {
+    return new Response(null, {
+      status: 404,
+      headers: {
+        Location: "/not-found",
+      },
+    });
+  }
+
+  const payload = await getPayload({ config: configPromise });
+
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(req.url);
 
     const hasTitle = searchParams.has("title");
     const param = hasTitle ? searchParams.get("title")! : getServerSideURL();
@@ -27,13 +43,10 @@ export async function GET(request: Request) {
         },
       ],
     });
-  } catch (e) {
-    if (e instanceof Error) {
-      console.log(e.message);
-    } else {
-      console.log(String(e));
-    }
-    return new Response(`Failed to generate the image`, {
+  } catch (err) {
+    payload.logger.error("Error verifying token for image generation:", err);
+
+    return new Response("Failed to generate the image", {
       status: 500,
     });
   }

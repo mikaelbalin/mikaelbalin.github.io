@@ -5,17 +5,9 @@ import configPromise from "@payload-config";
 import { CollectionSlug } from "payload";
 import { verifyPayloadUser } from "@/utilities/verifyPayloadUser";
 
-export async function GET(
-  req: Request & {
-    cookies: {
-      get: (name: string) => {
-        value: string;
-      };
-    };
-  },
-): Promise<Response> {
+export async function GET(req: Request): Promise<Response> {
   const payload = await getPayload({ config: configPromise });
-  const { user, token, error } = await verifyPayloadUser();
+  const { user, token } = await verifyPayloadUser();
 
   const { searchParams } = new URL(req.url);
   const path = searchParams.get("path");
@@ -42,7 +34,7 @@ export async function GET(
     }
 
     if (!token) {
-      new Response(error, { status: 403 });
+      new Response("You are not allowed to preview this page", { status: 403 });
     }
 
     if (!path.startsWith("/")) {
