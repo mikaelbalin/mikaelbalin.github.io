@@ -16,7 +16,7 @@ type Args = {
 
 export default async function Page({ params: paramsPromise }: Args) {
   const { slug = "home", lang = i18n.defaultLocale } = await paramsPromise;
-  const url = "/" + slug;
+  const path = `/${slug}`;
 
   const page = await queryPageBySlug({
     slug,
@@ -24,14 +24,14 @@ export default async function Page({ params: paramsPromise }: Args) {
   });
 
   if (!page) {
-    return <PayloadRedirects url={url} />;
+    return <PayloadRedirects path={path} />;
   }
 
   const { hero, layout } = page;
 
   return (
     <>
-      <PayloadRedirects disableNotFound url={url} />
+      <PayloadRedirects disableNotFound path={path} />
       <Hero {...hero} />
       {layout && <RenderBlocks blocks={layout} />}
     </>

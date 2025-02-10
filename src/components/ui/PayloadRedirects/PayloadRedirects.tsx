@@ -1,12 +1,37 @@
 import type React from "react";
-import type { Page, Post } from "@/types/payload";
+import type { Redirect } from "@/types/payload";
 import { getCachedDocument } from "@/utilities/getDocument";
 import { getCachedRedirects } from "@/utilities/getRedirects";
 import { notFound, redirect } from "next/navigation";
 
+type Reference = NonNullable<Redirect["to"]>["reference"];
+
+const buildRedirectUrl = (relationTo: string, slug?: string | null): string => {
+  const prefix = relationTo !== "pages" ? `/${relationTo}` : "";
+  return `${prefix}/${slug}`;
+};
+
+const getRedirectUrlFromReference = async (
+  reference?: Reference,
+): Promise<string | null> => {
+  if (!reference?.relationTo) return null;
+
+  if (typeof reference.value === "string") {
+    const document = await getCachedDocument(
+      reference.relationTo,
+      reference.value,
+    );
+
+    return buildRedirectUrl(reference.relationTo, document?.slug);
+  }
+
+  const slug = typeof reference.value === "object" ? reference.value?.slug : "";
+  return buildRedirectUrl(reference.relationTo, slug);
+};
+
 interface Props {
   disableNotFound?: boolean;
-  url: string;
+  path: string;
 }
 
 /**
@@ -14,43 +39,27 @@ interface Props {
  */
 export const PayloadRedirects: React.FC<Props> = async ({
   disableNotFound,
-  url,
+  path,
 }) => {
-  const slug = url.startsWith("/") ? url : `${url}`;
+  const slug = path.startsWith("/") ? path : `/${path}`;
 
-  const redirects = await getCachedRedirects()();
+  const redirects = await getCachedRedirects();
 
   const redirectItem = redirects.find((redirect) => redirect.from === slug);
 
-  if (redirectItem) {
-    if (redirectItem.to?.url) {
-      redirect(redirectItem.to.url);
-    }
-
-    let redirectUrl: string;
-
-    if (typeof redirectItem.to?.reference?.value === "string") {
-      const collection = redirectItem.to?.reference?.relationTo;
-      const id = redirectItem.to?.reference?.value;
-
-      const document = (await getCachedDocument(collection, id)()) as
-        | Page
-        | Post;
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
-        document?.slug
-      }`;
-    } else {
-      redirectUrl = `${redirectItem.to?.reference?.relationTo !== "pages" ? `/${redirectItem.to?.reference?.relationTo}` : ""}/${
-        typeof redirectItem.to?.reference?.value === "object"
-          ? redirectItem.to?.reference?.value?.slug
-          : ""
-      }`;
-    }
-
-    if (redirectUrl) redirect(redirectUrl);
+  if (!redirectItem) {
+    return disableNotFound ? null : notFound();
   }
 
-  if (disableNotFound) return null;
+  if (redirectItem.to?.url) {
+    redirect(redirectItem.to.url);
+  }
 
-  notFound();
+  const redirectUrl = await getRedirectUrlFromReference(
+    redirectItem.to?.reference,
+  );
+
+  if (redirectUrl) {
+    redirect(redirectUrl);
+  }
 };
