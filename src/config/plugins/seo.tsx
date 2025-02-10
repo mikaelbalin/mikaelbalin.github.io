@@ -14,6 +14,10 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
+import { readFile } from "fs/promises";
+import { join } from "path";
+import { HomeOG } from "@/components/og/HomeOG";
+import { ImageResponse } from "next/og";
 
 const TITLE = "Mikael's Blog";
 
@@ -32,14 +36,33 @@ const generateImage: GenerateImage<Post | Page> = async ({
   doc,
   req: { payload },
 }) => {
-  const baseURL = getServerSideURL();
-  const title = baseURL || doc?.title;
-  const url = new URL("/api/og", baseURL);
-  url.searchParams.set("title", title);
+  const title = doc?.title || getServerSideURL();
+  const truncatedTitle =
+    title.length > 17 ? `${title.slice(0, 17)} ...` : title;
 
-  // Fetch the image from the OG route
-  const response = await fetch(url);
-  const arrayBuffer = await response.arrayBuffer();
+  // Read font file
+  const fontPath = join(process.cwd(), "public/fonts/Inter_24pt-Regular.ttf");
+  const fontData = await readFile(fontPath);
+
+  // Generate image directly
+  const imageResponse = await new ImageResponse(
+    <HomeOG title={truncatedTitle} />,
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        {
+          name: "Inter",
+          data: fontData,
+          style: "normal",
+          weight: 400,
+        },
+      ],
+    },
+  );
+
+  // Convert response to buffer
+  const arrayBuffer = await imageResponse.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
 
   // Upload to Payload media collection

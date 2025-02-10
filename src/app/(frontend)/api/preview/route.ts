@@ -4,8 +4,9 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { CollectionSlug } from "payload";
 import { verifyPayloadUser } from "@/utilities/verifyPayloadUser";
+import { NextRequest } from "next/server";
 
-export async function GET(req: Request): Promise<Response> {
+export async function GET(req: NextRequest) {
   const payload = await getPayload({ config: configPromise });
   const { user, token } = await verifyPayloadUser();
 
