@@ -25,5 +25,5 @@ export const generatePreviewPath = ({ collection, slug }: Props) => {
     encodedParams.append(key, value);
   });
 
-  return `/next/preview?${encodedParams.toString()}`;
+  return `/api/preview?${encodedParams.toString()}`;
 };

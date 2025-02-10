@@ -34,7 +34,7 @@ const generateImage: GenerateImage<Post | Page> = async ({
 }) => {
   const baseURL = getServerSideURL();
   const title = baseURL || doc?.title;
-  const url = new URL("/next/og", baseURL);
+  const url = new URL("/api/og", baseURL);
   url.searchParams.set("title", title);
 
   // Fetch the image from the OG route

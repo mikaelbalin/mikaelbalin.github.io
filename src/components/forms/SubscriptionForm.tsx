@@ -8,7 +8,6 @@ import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { buildInitialFormState } from "@/lib/buildInitialFormState";
 import { fields } from "@/components/forms/fields";
-import { getClientSideURL } from "@/utilities/getURL";
 import { isValidForm } from "@/lib/isValidForm";
 
 type SubscriptionFormProps = FormBlock;
@@ -52,7 +51,7 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`${getClientSideURL()}/next/form`, {
+        const response = await fetch("/api/form", {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,

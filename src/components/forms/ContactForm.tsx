@@ -48,7 +48,7 @@ export const ContactForm = (props: ContactFormProps) => {
       setIsLoading(true);
 
       try {
-        const response = await fetch("/next/form", {
+        const response = await fetch("/api/form", {
           body: JSON.stringify({
             form: formID,
             submissionData: dataToSend,
