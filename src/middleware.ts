@@ -18,13 +18,13 @@ export async function middleware(request: NextRequest) {
   }
 
   // Check if there is any supported locale in the pathname
-  const pathnameHasValidLocale = i18n.locales.some(
+  const pathnameIsMissingLocale = i18n.locales.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
   // Redirect if there is no locale
-  if (!pathnameHasValidLocale) {
+  if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
     const url = new URL(
@@ -34,8 +34,8 @@ export async function middleware(request: NextRequest) {
 
     url.search = search;
 
-    // e.g. incoming request is /posts
-    // The new URL is now /en/posts
+    // e.g. incoming request is /products
+    // The new URL is now /en/products
     return NextResponse.redirect(url);
   }
 }

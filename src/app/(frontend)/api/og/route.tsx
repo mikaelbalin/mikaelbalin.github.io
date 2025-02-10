@@ -13,9 +13,6 @@ export async function GET(req: Request): Promise<Response> {
   if (!user) {
     return new Response(null, {
       status: 404,
-      headers: {
-        Location: "/not-found",
-      },
     });
   }
 
