@@ -74,7 +74,7 @@ export function Header(props: HeaderProps) {
     link: { label: labels[lang], url: lang },
   };
 
-  const menu = [localeNavLink, ...navLinks].map(({ id, link }, index) => {
+  const menu = [localeNavLink, ...navLinks].map(({ link }, index) => {
     if (index === 0) {
       const menuItems = languageMenuItems.map((item) => (
         <Menu.Item
@@ -89,7 +89,7 @@ export function Header(props: HeaderProps) {
 
       return (
         <Menu
-          key={link.label}
+          key={index}
           trigger="click-hover"
           closeDelay={400}
           position="bottom-start"
@@ -120,7 +120,7 @@ export function Header(props: HeaderProps) {
 
     return (
       <Anchor
-        key={id}
+        key={index}
         component={Link}
         href={link.url || "/"}
         onClick={closeDrawer}
