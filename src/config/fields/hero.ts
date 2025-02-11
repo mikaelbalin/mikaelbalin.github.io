@@ -1,5 +1,5 @@
 import type { Condition, Field } from "payload";
-import { link } from "@/config/link";
+import { link } from "@/config/fields/link";
 
 const condition: Condition = (data) => data.hero.type === "main";
 

@@ -1,4 +1,4 @@
-import { link } from "@/config/link";
+import { link } from "@/config/fields/link";
 import type { Block } from "payload";
 
 export const archive: Block = {

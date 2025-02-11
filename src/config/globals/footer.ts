@@ -1,5 +1,5 @@
 import type { GlobalConfig, GlobalAfterChangeHook } from "payload";
-import { link } from "@/config/link";
+import { link } from "@/config/fields/link";
 import { revalidateTag } from "next/cache";
 import { formBlock } from "@/config/blocks/formBlock";
 import { anyone } from "@/lib/access";
