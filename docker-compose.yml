@@ -1,3 +1,5 @@
+name: payload
+
 services:
   postgres:
     container_name: payload_postgres
