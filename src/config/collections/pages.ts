@@ -1,7 +1,6 @@
 import type { CollectionConfig, CollectionAfterChangeHook } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { archive } from "@/config/blocks/archive";
-import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
 import { hero } from "@/config/fields/hero";
 import { slugField } from "@/config/fields/slug";
@@ -11,6 +10,7 @@ import { getServerSideURL } from "@/utilities/getURL";
 import { revalidatePath } from "next/cache";
 import type { Page } from "@/types/payload";
 import { meta } from "@/config/plugins/seo";
+import { reusableBlock } from "@/config/blocks/reusableBlock";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
@@ -93,7 +93,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [about, subscription, archive],
+              blocks: [about, archive, reusableBlock],
               required: true,
             },
           ],

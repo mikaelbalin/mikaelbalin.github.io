@@ -17,6 +17,7 @@ import { footer } from "@/config/globals/footer";
 import { header } from "@/config/globals/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
 import { i18n } from "@/i18n-config";
+import { reusableBlocks } from "@/config/collections/reusableBlocks";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
@@ -72,10 +73,7 @@ export default buildConfig({
       ],
     },
   },
-  // If you'd like to use Rich Text, pass your editor here
   editor: defaultLexical,
-  // Whichever Database Adapter you're using should go here
-  // Mongoose is shown as an example, but you can also use Postgres
   db: isDevelopment
     ? postgresAdapter({
         pool: {
@@ -87,15 +85,19 @@ export default buildConfig({
           connectionString: process.env.POSTGRES_URL || "",
         },
       }),
-  // Define and configure your collections in this array
-  collections: [pages, posts, media, categories, users, subscribers],
-  cors: [getServerSideURL()].filter(Boolean),
   globals: [header, footer],
-  plugins: [
-    ...plugins,
-    // storage-adapter-placeholder
+  collections: [
+    pages,
+    posts,
+    media,
+    categories,
+    users,
+    subscribers,
+    reusableBlocks,
   ],
-  // Your Payload secret - should be a complex and secure string, unguessable
+  cors: [getServerSideURL()].filter(Boolean),
+  plugins,
+  // Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || "",
   // If you want to resize images, crop, set focal point, etc.
   // make sure to install it and pass it to the config.
