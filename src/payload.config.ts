@@ -13,8 +13,8 @@ import { posts } from "@/config/collections/posts";
 import { users } from "@/config/collections/users";
 import { pages } from "@/config/collections/pages";
 import { subscribers } from "@/config/collections/subscribers";
-import { footer } from "@/config/footer";
-import { header } from "@/config/header";
+import { footer } from "@/config/globals/footer";
+import { header } from "@/config/globals/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
 import { i18n } from "@/i18n-config";
 
