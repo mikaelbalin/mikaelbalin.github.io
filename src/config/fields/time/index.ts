@@ -28,7 +28,7 @@ export const timeToReadField: TimeToRead = (
     ...checkboxOverrides,
   };
 
-  const slugField: NumberField = {
+  const timeToReadField: NumberField = {
     name: "timeToRead",
     type: "number",
     index: true,
@@ -60,5 +60,5 @@ export const timeToReadField: TimeToRead = (
     validate: undefined,
   };
 
-  return [slugField, checkBoxField];
+  return [timeToReadField, checkBoxField];
 };
