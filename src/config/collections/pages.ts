@@ -3,7 +3,7 @@ import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { archive } from "@/config/blocks/archive";
 import { subscription } from "@/config/blocks/subscription";
 import { about } from "@/config/blocks/about";
-import { hero } from "@/config/hero";
+import { hero } from "@/config/fields/hero";
 import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
