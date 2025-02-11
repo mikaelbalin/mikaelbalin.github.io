@@ -5,7 +5,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import type { LocaleParams } from "@/i18n-config";
+import { getLocale } from "@/utilities/getLocale";
+import { headers } from "next/headers";
 import { ThemeProvider } from "@/theme";
 import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
@@ -47,18 +48,19 @@ const inter = Inter({ subsets: ["latin"] });
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: LocaleParams;
   }>,
 ) {
-  const params = await props.params;
   const { children } = props;
+
+  const headersList = await headers();
+  const lang = getLocale(headersList);
 
   const { isEnabled } = await draftMode();
   const header = await getHeader();
   const footer = await getFooter();
 
   return (
-    <html lang={params.lang} className="relative" suppressHydrationWarning>
+    <html lang={lang} className="relative" suppressHydrationWarning>
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
