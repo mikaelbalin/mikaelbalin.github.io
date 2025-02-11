@@ -10,7 +10,6 @@ import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import { getServerSideURL } from "@/utilities/getURL";
 import { revalidatePath } from "next/cache";
 import type { Page } from "@/types/payload";
-import { media } from "@/config/blocks/media";
 import { meta } from "@/config/plugins/seo";
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
@@ -94,7 +93,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [subscription, about, media, archive],
+              blocks: [about, subscription, archive],
               required: true,
             },
           ],
