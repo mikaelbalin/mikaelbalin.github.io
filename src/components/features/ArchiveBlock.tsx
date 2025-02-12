@@ -45,9 +45,9 @@ export const ArchiveBlock: React.FC<ArchiveBlockProps> = async (props) => {
     posts = fetchedPosts.docs;
   } else {
     if (selectedDocs?.length) {
-      const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === "object") return post.value;
-      }) as Post[];
+      const filteredSelectedPosts = selectedDocs
+        .map((post) => (typeof post.value === "object" ? post.value : null))
+        .filter((post): post is Post => post !== null);
 
       posts = filteredSelectedPosts;
     }
