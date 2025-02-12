@@ -93,22 +93,13 @@ export const meta: Tab = {
     }),
     MetaTitleField({
       hasGenerateFn: true,
-      overrides: {
-        required: true,
-      },
     }),
     MetaImageField({
       relationTo: "media",
       hasGenerateFn: true,
-      overrides: {
-        required: true,
-      },
     }),
     MetaDescriptionField({
       hasGenerateFn: false,
-      overrides: {
-        required: true,
-      },
     }),
     PreviewField({
       hasGenerateFn: true,
