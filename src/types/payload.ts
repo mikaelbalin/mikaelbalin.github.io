@@ -170,13 +170,13 @@ export interface Page {
     };
   };
   layout: (AboutBlock | ArchiveBlock | ReusableBlock)[];
-  meta: {
-    title: string;
+  meta?: {
+    title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image: number | Media;
-    description: string;
+    image?: (number | null) | Media;
+    description?: string | null;
   };
   publishedAt?: string | null;
   slug?: string | null;
@@ -269,13 +269,13 @@ export interface Post {
   };
   relatedPosts?: (number | Post)[] | null;
   categories?: (number | Category)[] | null;
-  meta: {
-    title: string;
+  meta?: {
+    title?: string | null;
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image: number | Media;
-    description: string;
+    image?: (number | null) | Media;
+    description?: string | null;
   };
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
