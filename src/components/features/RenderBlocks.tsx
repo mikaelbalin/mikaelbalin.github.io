@@ -1,6 +1,6 @@
 import React from "react";
 import type { AboutBlock, Page, ReusableBlock } from "@/types/payload";
-import { Archive, ArchiveBlockProps } from "@/components/features/ArchiveBlock";
+import { Archive, ArchiveBlockProps } from "@/components/features/Archive";
 import { Subscription } from "@/components/features/Subscription";
 import { About } from "@/components/features/About";
 
