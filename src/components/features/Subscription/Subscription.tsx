@@ -1,9 +1,15 @@
 import { Container, Title, Text, Box, Grid, GridCol } from "@mantine/core";
 import { SubscriptionForm } from "@/components/forms/SubscriptionForm";
-import { Subscription as SubscriptionProps } from "@/types/payload";
+import { ReusableBlock } from "@/types/payload";
 
-export const Subscription = (props: SubscriptionProps) => {
-  const { title, text, form } = props;
+export const Subscription = (props: ReusableBlock) => {
+  const { block } = props;
+
+  if (!block || typeof block === "number" || block.blockType.length === 0) {
+    return null;
+  }
+
+  const { title, text, form } = block.blockType[0];
 
   return (
     <Container id="subscription" component="section" className="mb-14 sm:mb-24">

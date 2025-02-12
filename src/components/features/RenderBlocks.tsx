@@ -1,22 +1,28 @@
 import React from "react";
-import type { Page } from "@/types/payload";
+import type {
+  AboutBlock,
+  Page,
+  ArchiveBlock as TArchiveBlock,
+  ReusableBlock,
+} from "@/types/payload";
 import { ArchiveBlock } from "@/components/features/ArchiveBlock";
 import { Subscription } from "@/components/features/Subscription";
-import { MediaBlock } from "@/components/ui/MediaBlock";
 import { About } from "@/components/features/About";
 
-type BlockType = Extract<Page["layout"][0], { blockType: string }>["blockType"];
+type Block = Page["layout"][0];
+type BlockType = Extract<Block, { blockType: string }>["blockType"];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const blockComponents: Record<BlockType, React.FC<any>> = {
+const blockComponents: Record<
+  BlockType,
+  React.FC<AboutBlock> | React.FC<TArchiveBlock> | React.FC<ReusableBlock>
+> = {
   about: About,
   archive: ArchiveBlock,
-  subscription: Subscription,
-  mediaBlock: MediaBlock,
+  reusableBlock: Subscription,
 };
 
 type RenderBlocksProps = {
-  blocks: Page["layout"][0][];
+  blocks: Block[];
 };
 
 export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
@@ -24,25 +30,27 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
 
-  if (hasBlocks) {
-    return (
-      <>
-        {blocks.map((block, index) => {
-          const { blockType } = block;
+  if (!hasBlocks) return null;
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType];
+  return (
+    <>
+      {blocks.map((block, index) => {
+        const { blockType } = block;
 
-            if (Block) {
-              return <Block key={index} {...block} />;
-            }
-          }
+        const Block = blockComponents[blockType];
 
-          return null;
-        })}
-      </>
-    );
-  }
+        if (blockType === "archive" && Block === ArchiveBlock) {
+          return <Block key={index} {...block} />;
+        }
+        if (blockType === "about" && Block === About) {
+          return <Block key={index} {...block} />;
+        }
+        if (blockType === "reusableBlock" && Block === Subscription) {
+          return <Block key={index} {...block} />;
+        }
 
-  return null;
+        return null;
+      })}
+    </>
+  );
 };
