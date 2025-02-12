@@ -1,57 +1,17 @@
-import type { Post, ArchiveBlock as ArchiveBlockProps } from "@/types/payload";
-import configPromise from "@payload-config";
-import { getPayload } from "payload";
+import type { ArchiveBlock } from "@/types/payload";
+
 import React from "react";
 import { PostList } from "@/components/features/Post/PostList";
 import { PostLatest } from "@/components/features/Post/PostLatest";
+import { queryArchivePosts } from "@/utilities/queryArchivePosts";
 
-export const ArchiveBlock: React.FC<ArchiveBlockProps> = async (props) => {
-  const {
-    categories,
-    limit: limitFromProps,
-    populateBy,
-    selectedDocs,
-    title,
-    latestPostsLink,
-  } = props;
+export interface ArchiveBlockProps extends ArchiveBlock {
+  locale: "en" | "pt" | "all";
+}
 
-  const limit = limitFromProps || 3;
-
-  let posts: Post[] = [];
-
-  if (populateBy === "collection") {
-    const payload = await getPayload({ config: configPromise });
-
-    const flattenedCategories = categories?.map((category) => {
-      if (typeof category === "object") return category.id;
-      else return category;
-    });
-
-    const fetchedPosts = await payload.find({
-      collection: "posts",
-      depth: 1,
-      limit,
-      ...(flattenedCategories && flattenedCategories.length > 0
-        ? {
-            where: {
-              categories: {
-                in: flattenedCategories,
-              },
-            },
-          }
-        : {}),
-    });
-
-    posts = fetchedPosts.docs;
-  } else {
-    if (selectedDocs?.length) {
-      const filteredSelectedPosts = selectedDocs
-        .map((post) => (typeof post.value === "object" ? post.value : null))
-        .filter((post): post is Post => post !== null);
-
-      posts = filteredSelectedPosts;
-    }
-  }
+export const Archive: React.FC<ArchiveBlockProps> = async (props) => {
+  const { title, latestPostsLink, ...rest } = props;
+  const posts = await queryArchivePosts(rest);
 
   return (
     <PostList posts={posts}>

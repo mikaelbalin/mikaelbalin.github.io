@@ -1,11 +1,6 @@
 import React from "react";
-import type {
-  AboutBlock,
-  Page,
-  ArchiveBlock as TArchiveBlock,
-  ReusableBlock,
-} from "@/types/payload";
-import { ArchiveBlock } from "@/components/features/ArchiveBlock";
+import type { AboutBlock, Page, ReusableBlock } from "@/types/payload";
+import { Archive, ArchiveBlockProps } from "@/components/features/ArchiveBlock";
 import { Subscription } from "@/components/features/Subscription";
 import { About } from "@/components/features/About";
 
@@ -14,19 +9,20 @@ type BlockType = Extract<Block, { blockType: string }>["blockType"];
 
 const blockComponents: Record<
   BlockType,
-  React.FC<AboutBlock> | React.FC<TArchiveBlock> | React.FC<ReusableBlock>
+  React.FC<AboutBlock> | React.FC<ArchiveBlockProps> | React.FC<ReusableBlock>
 > = {
   about: About,
-  archive: ArchiveBlock,
+  archive: Archive,
   reusableBlock: Subscription,
 };
 
 type RenderBlocksProps = {
   blocks: Block[];
+  locale: "en" | "pt" | "all";
 };
 
 export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
-  const { blocks } = props;
+  const { blocks, locale } = props;
 
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
 
@@ -39,8 +35,8 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
 
         const Block = blockComponents[blockType];
 
-        if (blockType === "archive" && Block === ArchiveBlock) {
-          return <Block key={index} {...block} />;
+        if (blockType === "archive" && Block === Archive) {
+          return <Block key={index} {...block} locale={locale} />;
         }
         if (blockType === "about" && Block === About) {
           return <Block key={index} {...block} />;

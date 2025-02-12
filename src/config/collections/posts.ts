@@ -1,8 +1,4 @@
-import type {
-  CollectionConfig,
-  CollectionAfterReadHook,
-  CollectionAfterChangeHook,
-} from "payload";
+import type { CollectionConfig, CollectionAfterReadHook } from "payload";
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -16,38 +12,12 @@ import { media } from "@/config/blocks/media";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import { slugField } from "@/config/fields/slug";
 import { getServerSideURL } from "@/utilities/getURL";
-import { User, Post } from "@/types/payload";
-import { revalidatePath } from "next/cache";
+import { User } from "@/types/payload";
 import { code } from "@/config/blocks/code";
 import { kbd } from "@/config/blocks/kbd";
 import { table } from "@/config/blocks/table";
 import { timeToReadField } from "@/config/fields/time";
 import { meta } from "@/config/plugins/seo";
-
-export const revalidatePost: CollectionAfterChangeHook<Post> = ({
-  doc,
-  previousDoc,
-  req: { payload },
-}) => {
-  if (doc._status === "published") {
-    const path = `/posts/${doc.slug}`;
-
-    payload.logger.info(`Revalidating post at path: ${path}`);
-
-    revalidatePath(path);
-  }
-
-  // If the post was previously published, we need to revalidate the old path
-  if (previousDoc._status === "published" && doc._status !== "published") {
-    const oldPath = `/posts/${previousDoc.slug}`;
-
-    payload.logger.info(`Revalidating old post at path: ${oldPath}`);
-
-    revalidatePath(oldPath);
-  }
-
-  return doc;
-};
 
 // The `user` collection has access control locked so that users are not publicly accessible
 // This means that we need to populate the authors manually here to protect user privacy
@@ -130,6 +100,7 @@ export const posts: CollectionConfig<"posts"> = {
       name: "title",
       type: "text",
       required: true,
+      localized: true,
     },
     {
       type: "tabs",
@@ -249,7 +220,6 @@ export const posts: CollectionConfig<"posts"> = {
     ...timeToReadField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
     afterRead: [populateAuthors],
   },
   versions: {

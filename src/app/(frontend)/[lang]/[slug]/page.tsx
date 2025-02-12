@@ -33,7 +33,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <>
       <PayloadRedirects disableNotFound path={path} />
       <Hero {...hero} />
-      {layout && <RenderBlocks blocks={layout} />}
+      {layout && <RenderBlocks blocks={layout} locale={lang} />}
     </>
   );
 }

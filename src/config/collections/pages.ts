@@ -1,4 +1,4 @@
-import type { CollectionConfig, CollectionAfterChangeHook } from "payload";
+import type { CollectionConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/lib/access";
 import { archive } from "@/config/blocks/archive";
 import { about } from "@/config/blocks/about";
@@ -7,35 +7,8 @@ import { slugField } from "@/config/fields/slug";
 import { populatePublishedAt } from "@/config/hooks/populatePublishedAt";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import { getServerSideURL } from "@/utilities/getURL";
-import { revalidatePath } from "next/cache";
-import type { Page } from "@/types/payload";
 import { meta } from "@/config/plugins/seo";
 import { reusableBlock } from "@/config/blocks/reusableBlock";
-
-export const revalidatePage: CollectionAfterChangeHook<Page> = ({
-  doc,
-  previousDoc,
-  req: { payload },
-}) => {
-  if (doc._status === "published") {
-    const path = doc.slug === "home" ? "/" : `/${doc.slug}`;
-
-    payload.logger.info(`Revalidating page at path: ${path}`);
-
-    revalidatePath(path);
-  }
-
-  // If the page was previously published, we need to revalidate the old path
-  if (previousDoc?._status === "published" && doc._status !== "published") {
-    const oldPath = previousDoc.slug === "home" ? "/" : `/${previousDoc.slug}`;
-
-    payload.logger.info(`Revalidating old page at path: ${oldPath}`);
-
-    revalidatePath(oldPath);
-  }
-
-  return doc;
-};
 
 export const pages: CollectionConfig<"pages"> = {
   slug: "pages",
@@ -112,7 +85,6 @@ export const pages: CollectionConfig<"pages"> = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePage],
     beforeChange: [populatePublishedAt],
   },
   versions: {
