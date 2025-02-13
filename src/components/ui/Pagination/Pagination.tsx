@@ -40,7 +40,9 @@ export const Pagination: React.FC<{
   const handlePageChange = (value: number) => {
     setPage(value);
     const query = createQueryString(value);
-    router.replace(`${pathname}?${query}`);
+    router.replace(`${pathname}?${query}`, {
+      scroll: false,
+    });
   };
 
   const handlePreviousPage = () => {
