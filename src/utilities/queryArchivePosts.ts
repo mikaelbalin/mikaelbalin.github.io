@@ -13,7 +13,6 @@ export interface queryArchivePostsArgs
 
 export const queryArchivePosts = cache(async (args: queryArchivePostsArgs) => {
   const { categories, limit, populateBy, selectedDocs, locale } = args;
-  // console.log({ categories });
 
   let posts: Post[] = [];
 

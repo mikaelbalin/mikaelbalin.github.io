@@ -28,21 +28,14 @@ export const Search: React.FC<SearchBlockProps> = async ({
     overrideAccess: false,
     select: {
       breadcrumbs: true,
+      relatedPosts: true,
     },
     pagination: false,
-    where: {
-      // Find only categories that are referenced in posts
-      id: {
-        exists: true,
-        in: {
-          relationTo: "posts",
-          value: {
-            key: "categories.id",
-          },
-        },
-      },
-    },
   });
+
+  const filteredCategories = categories.docs.filter(
+    (category) => category.relatedPosts?.docs?.length,
+  );
 
   const posts = await payload.find({
     collection: "posts",
@@ -70,11 +63,9 @@ export const Search: React.FC<SearchBlockProps> = async ({
     }),
   });
 
-  // console.log({ categories });
-
   return (
     <>
-      <PostSearch categories={categories.docs} />
+      <PostSearch categories={filteredCategories} />
       <PostList posts={posts.docs} />
       <Pagination totalPages={posts.totalPages} />
     </>

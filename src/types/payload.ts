@@ -80,7 +80,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      relatedPosts: 'posts';
+    };
+  };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -233,6 +237,10 @@ export interface ArchiveBlock {
 export interface Category {
   id: number;
   title: string;
+  relatedPosts?: {
+    docs?: (number | Post)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
   parent?: (number | null) | Category;
   breadcrumbs?:
     | {
@@ -1040,6 +1048,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
+  relatedPosts?: T;
   parent?: T;
   breadcrumbs?:
     | T

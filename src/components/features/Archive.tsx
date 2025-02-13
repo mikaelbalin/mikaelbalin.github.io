@@ -13,8 +13,6 @@ export const Archive: React.FC<ArchiveBlockProps> = async (props) => {
   const { title, latestPostsLink, ...rest } = props;
   const posts = await queryArchivePosts(rest);
 
-  // console.log({ posts });
-
   return (
     <PostList posts={posts}>
       <PostLatest title={title} latestPostsLink={latestPostsLink} />
