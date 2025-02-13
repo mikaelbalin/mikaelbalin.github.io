@@ -23,7 +23,9 @@ export const PostSearch = ({ categories }: PostSearchProps) => {
 
   const handleCategoryChange = (value: string) => {
     const query = createQueryString("category", value);
-    router.replace(`${pathname}?${query}`);
+    router.replace(`${pathname}?${query}`, {
+      scroll: false,
+    });
   };
 
   return (
