@@ -9,6 +9,7 @@ import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 import { getServerSideURL } from "@/utilities/getURL";
 import { meta } from "@/config/plugins/seo";
 import { reusableBlock } from "@/config/blocks/reusableBlock";
+import { search } from "@/config/blocks/search";
 
 export const pages: CollectionConfig<"pages"> = {
   slug: "pages",
@@ -66,7 +67,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [about, archive, reusableBlock],
+              blocks: [about, archive, search, reusableBlock],
               required: true,
             },
           ],

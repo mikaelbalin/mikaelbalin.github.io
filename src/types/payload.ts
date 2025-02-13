@@ -169,7 +169,7 @@ export interface Page {
       };
     };
   };
-  layout: (AboutBlock | ArchiveBlock | ReusableBlock)[];
+  layout: (AboutBlock | ArchiveBlock | SearchBlock | ReusableBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -397,6 +397,16 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SearchBlock".
+ */
+export interface SearchBlock {
+  title?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'search';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -841,6 +851,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         about?: T | AboutBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
+        search?: T | SearchBlockSelect<T>;
         reusableBlock?: T | ReusableBlockSelect<T>;
       };
   meta?:
@@ -887,6 +898,15 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   categories?: T;
   limit?: T;
   selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SearchBlock_select".
+ */
+export interface SearchBlockSelect<T extends boolean = true> {
+  title?: T;
   id?: T;
   blockName?: T;
 }
