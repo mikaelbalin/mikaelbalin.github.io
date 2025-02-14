@@ -9,6 +9,8 @@ import {
   type QueryPageBySlugArgs,
 } from "@/utilities/queryPageBySlug";
 import { i18n } from "@/i18n-config";
+import { getPayload } from "payload";
+import configPromise from "@payload-config";
 
 type Args = {
   params: Promise<Partial<QueryPageBySlugArgs>>;
@@ -65,26 +67,25 @@ export async function generateMetadata({
   return generateMeta({ doc: page });
 }
 
-// export async function generateStaticParams() {
-//   const payload = await getPayload({ config: configPromise });
-//   const pages = await payload.find({
-//     collection: "pages",
-//     draft: false,
-//     limit: 1000,
-//     overrideAccess: false,
-//     pagination: false,
-//     select: {
-//       slug: true,
-//     },
-//   });
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise });
+  const pages = await payload.find({
+    collection: "pages",
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+    pagination: false,
+    select: {
+      slug: true,
+    },
+  });
 
-//   const params = pages.docs
-//     ?.filter((doc) => {
-//       return doc.slug !== "home";
-//     })
-//     .map(({ slug }) => {
-//       return { slug };
-//     });
+  const params = pages.docs.flatMap(({ slug }) => {
+    return i18n.locales.map((lang) => ({
+      lang,
+      slug,
+    }));
+  });
 
-//   return params;
-// }
+  return params;
+}
