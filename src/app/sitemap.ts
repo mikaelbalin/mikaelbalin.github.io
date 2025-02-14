@@ -19,49 +19,53 @@ function generateLanguageAlternates(path: string): Languages<string> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const payload = await getPayload({ config: configPromise });
+  try {
+    const payload = await getPayload({ config: configPromise });
 
-  const pages = await payload.find({
-    collection: "pages",
-    select: {
-      slug: true,
-      updatedAt: true,
-    },
-    depth: 0,
-    pagination: false,
-  });
-
-  const posts = await payload.find({
-    collection: "posts",
-    select: {
-      slug: true,
-      updatedAt: true,
-    },
-    depth: 0,
-    pagination: false,
-  });
-
-  const routes: MetadataRoute.Sitemap = [];
-
-  pages.docs.forEach(({ slug, updatedAt }) => {
-    const path = !slug || slug === "home" ? "" : slug;
-    routes.push({
-      url: slug === "home" ? baseUrl : `${baseUrl}/${slug}`,
-      lastModified: updatedAt,
-      alternates: { languages: generateLanguageAlternates(path) },
-    });
-  });
-
-  posts.docs.forEach(({ slug, updatedAt }) => {
-    const path = `posts/${slug}`;
-    routes.push({
-      url: `${baseUrl}/${path}`,
-      lastModified: updatedAt,
-      alternates: {
-        languages: generateLanguageAlternates(path),
+    const pages = await payload.find({
+      collection: "pages",
+      select: {
+        slug: true,
+        updatedAt: true,
       },
+      depth: 0,
+      pagination: false,
     });
-  });
 
-  return routes;
+    const posts = await payload.find({
+      collection: "posts",
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+      depth: 0,
+      pagination: false,
+    });
+
+    const routes: MetadataRoute.Sitemap = [];
+
+    pages.docs.forEach(({ slug, updatedAt }) => {
+      const path = !slug || slug === "home" ? "" : slug;
+      routes.push({
+        url: slug === "home" ? baseUrl : `${baseUrl}/${slug}`,
+        lastModified: updatedAt,
+        alternates: { languages: generateLanguageAlternates(path) },
+      });
+    });
+
+    posts.docs.forEach(({ slug, updatedAt }) => {
+      const path = `posts/${slug}`;
+      routes.push({
+        url: `${baseUrl}/${path}`,
+        lastModified: updatedAt,
+        alternates: {
+          languages: generateLanguageAlternates(path),
+        },
+      });
+    });
+    return routes;
+  } catch (error) {
+    console.error("Error generating sitemap", error);
+    return [];
+  }
 }
