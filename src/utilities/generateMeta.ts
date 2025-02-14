@@ -26,8 +26,8 @@ export const generateMeta = async (args: {
     description: doc.meta.description,
     openGraph: {
       type: "website",
-      title,
-      description: doc.meta.description,
+      title: title || "",
+      description: doc.meta.description || "",
       url: doc.slug ? `${getServerSideURL()}/${doc.slug}` : getServerSideURL(),
       images: ogImage
         ? [
