@@ -12,6 +12,8 @@ import { CodeHighlight } from "./code-highlight";
 import { PasswordInput } from "./password-input";
 import { List } from "./list";
 import { Pagination } from "./pagination";
+import { Code, Kbd } from "@mantine/core";
+import { cn } from "@/utilities/cn";
 
 export const components: MantineThemeComponents = {
   Anchor: Anchor.extend({
@@ -32,4 +34,14 @@ export const components: MantineThemeComponents = {
   PasswordInput,
   List,
   Pagination,
+  Code: Code.extend({
+    classNames: (_, { className }) => ({
+      root: cn("text-[0.75em]", className),
+    }),
+  }),
+  Kbd: Kbd.extend({
+    classNames: (_, { className }) => ({
+      root: cn("text-[0.65em]", className),
+    }),
+  }),
 };

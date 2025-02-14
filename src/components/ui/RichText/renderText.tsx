@@ -54,5 +54,5 @@ export const renderText = (
     return formatter(trimmedText, index);
   }
 
-  return <Fragment key={index}>{trimmedText}</Fragment>;
+  return <Fragment key={index}>{text}</Fragment>;
 };
