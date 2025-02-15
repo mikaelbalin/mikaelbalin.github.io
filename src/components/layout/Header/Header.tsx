@@ -74,8 +74,10 @@ export function Header(props: HeaderProps) {
     link: { label: labels[lang], url: lang },
   };
 
-  const menu = [localeNavLink, ...navLinks].map(({ link }, index) => {
-    if (index === 0) {
+  const links = [...navLinks, localeNavLink];
+
+  const menu = links.map(({ link }, index) => {
+    if (index === links.length - 1) {
       const menuItems = languageMenuItems.map((item) => (
         <Menu.Item
           key={item.label}
