@@ -5,6 +5,17 @@ import { renderText } from "./renderText";
 import { renderNode } from "./renderNode";
 import { renderBlock } from "./renderBlock";
 
+const getSerializedChildren = (node: NodeType, className?: string) => {
+  if (!("children" in node) || node.children == null) {
+    return undefined;
+  }
+
+  return serializeLexical({
+    nodes: node.children as NodeType[],
+    className,
+  });
+};
+
 export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
   return nodes?.map((node, index): JSX.Element | null => {
     if (!node) {
@@ -23,15 +34,7 @@ export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
         serializeLexical,
       });
     } else {
-      const serializedChildren =
-        "children" in node
-          ? node.children == null
-            ? undefined
-            : serializeLexical({
-                nodes: node.children as NodeType[],
-                className,
-              })
-          : undefined;
+      const serializedChildren = getSerializedChildren(node, className);
 
       if (serializedChildren && serializedChildren.filter(Boolean).length > 0) {
         return renderNode({
