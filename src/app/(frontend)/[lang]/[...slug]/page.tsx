@@ -11,6 +11,7 @@ import {
 import { i18n } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import { hasSlug } from "@/utilities/hasSlug";
 
 type Args = {
   params: Promise<Partial<QueryPageBySlugArgs>>;
@@ -90,10 +91,10 @@ export async function generateStaticParams(): Promise<
   const params: {
     lang: "en" | "pt";
     slug: string[];
-  }[] = pages.docs.flatMap(({ slug }) => {
+  }[] = pages.docs.filter(hasSlug).flatMap(({ slug }) => {
     return i18n.locales.map((lang) => ({
       lang,
-      slug: [slug || ""],
+      slug: [slug],
     }));
   });
 
