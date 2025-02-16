@@ -34,6 +34,12 @@ const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
   label: labels[locale],
 }));
 
+const redirectedPathName = (pathName: string, locale?: null | string) => {
+  const segments = pathName.split("/");
+  segments[1] = locale || i18n.defaultLocale;
+  return segments.join("/");
+};
+
 export function Header(props: HeaderProps) {
   const { logo, navItems: navLinks } = props;
 
@@ -48,41 +54,35 @@ export function Header(props: HeaderProps) {
     { toggle: toggleLinks, close: closeLinks, open: openLinks },
   ] = useDisclosure(false);
 
-  const languageButtons = languageMenuItems.map((menuItem) => (
+  // Mobile language menu items
+  const languageButtons = languageMenuItems.map((item) => (
     <Link
-      key={menuItem.label}
+      key={item.label}
       className={cn(
         "flex items-center w-full h-11 px-6 dark:text-white",
         "text-sm font-medium",
       )}
-      href={menuItem.url || "/"}
+      onClick={closeDrawer}
+      href={redirectedPathName(pathName, item.url)}
     >
-      {menuItem.label}
+      {item.label}
     </Link>
   ));
-
-  const redirectedPathName = (locale: string) => {
-    if (!pathName) return "/";
-    const segments = pathName.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
-
-  if (!navLinks) return null;
 
   const localeNavLink: NavLink = {
     link: { label: labels[lang], url: lang },
   };
 
-  const links = [...navLinks, localeNavLink];
+  const links = [...(navLinks || []), localeNavLink];
 
   const menu = links.map(({ link }, index) => {
     if (index === links.length - 1) {
+      // Desktop language menu items
       const menuItems = languageMenuItems.map((item) => (
         <Menu.Item
           key={item.label}
           component={Link}
-          href={redirectedPathName(item.url || "/")}
+          href={redirectedPathName(pathName, item.url)}
           className={cn("dark:text-white", "font-medium")}
         >
           {item.label}
@@ -90,6 +90,7 @@ export function Header(props: HeaderProps) {
       ));
 
       return (
+        // Desktop language menu
         <Menu
           key={index}
           trigger="click-hover"
@@ -121,10 +122,15 @@ export function Header(props: HeaderProps) {
     }
 
     return (
+      // All other menu items
       <Anchor
         key={index}
         component={Link}
-        href={link.url || "/"}
+        href={
+          link.url?.includes("contact")
+            ? `${pathName}${link.url}`
+            : `/${lang}${link.url}`
+        }
         onClick={closeDrawer}
         className={cn(
           "flex items-center w-full h-11 px-4",
@@ -137,11 +143,13 @@ export function Header(props: HeaderProps) {
     );
   });
 
+  const logoElement = <Logo text={logo.link.label} lang={lang} />;
+
   return (
     <header className="absolute w-full z-10 motion-safe:animate-slide">
       <Container className="h-16 sm:h-19.5">
         <Group justify="space-between" className="h-full">
-          <Logo text={logo.link.label} />
+          {logoElement}
           <Group gap="xl">
             <Group className="hidden sm:flex gap-8">{menu}</Group>
             <ColorSchemeToggle />
@@ -166,7 +174,7 @@ export function Header(props: HeaderProps) {
         <Drawer.Overlay backgroundOpacity={0.5} blur={4} />
         <Drawer.Content>
           <Drawer.Header>
-            <Logo text={logo.link.label} />
+            {logoElement}
             <Group gap="xl">
               <ColorSchemeToggle />
               <Burger

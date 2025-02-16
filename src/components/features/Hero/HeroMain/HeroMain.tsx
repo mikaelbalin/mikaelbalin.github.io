@@ -14,8 +14,14 @@ import {
 } from "motion/react";
 import { MotionProvider, useMotionContext } from "@/context/motion-context";
 import { Page } from "@/types/payload";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
+
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance]);
+}
 
 type HeroDescriptionProps = Pick<
   Page["hero"],
@@ -24,6 +30,11 @@ type HeroDescriptionProps = Pick<
 
 const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
   const { titles, description, contactLink } = props;
+  const url = contactLink?.link.url;
+  const label = contactLink?.link.label;
+
+  const pathname = usePathname();
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -44,21 +55,19 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
             {description}
           </Text>
         </SimpleGrid>
-        <Button
-          component="a"
-          className="mt-7 sm:mt-8"
-          href={contactLink?.link.url || undefined}
-        >
-          {contactLink?.link.label}
-        </Button>
+        {url && (
+          <Button
+            component={Link}
+            className="mt-7 sm:mt-8"
+            href={`${pathname}${url}`}
+          >
+            {label}
+          </Button>
+        )}
       </Container>
     </Box>
   );
 };
-
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
-}
 
 export const HeroMain: React.FC<Page["hero"]> = (props) => {
   const { titles, description, location, contactLink } = props;
