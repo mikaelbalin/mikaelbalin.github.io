@@ -43,6 +43,7 @@ export const ColorSchemeToggle = () => {
           />
         </>
       }
+      label="Toggle color scheme"
     />
   );
 };
