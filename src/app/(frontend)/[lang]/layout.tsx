@@ -5,8 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import { getLocale } from "@/utilities/getLocale";
-import { headers } from "next/headers";
 import { ThemeProvider } from "@/theme";
 import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
@@ -20,6 +18,7 @@ import "@mantine/notifications/styles.css";
 import "./global.css";
 import { Metadata } from "next";
 import { getServerSideURL } from "@/utilities/getURL";
+import { LocaleParams } from "@/i18n-config";
 
 const getHeader = cache(async () => {
   const payload = await getPayload({ config: configPromise });
@@ -48,19 +47,18 @@ const inter = Inter({ subsets: ["latin"] });
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
+    params: LocaleParams;
   }>,
 ) {
   const { children } = props;
-
-  const headersList = await headers();
-  const lang = getLocale(headersList);
+  const params = await props.params;
 
   const { isEnabled } = await draftMode();
   const header = await getHeader();
   const footer = await getFooter();
 
   return (
-    <html lang={lang} className="relative" suppressHydrationWarning>
+    <html lang={params.lang} className="relative" suppressHydrationWarning>
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
