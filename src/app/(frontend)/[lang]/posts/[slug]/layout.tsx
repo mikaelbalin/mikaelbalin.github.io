@@ -10,6 +10,8 @@ import { PayloadRedirects } from "@/components/ui/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { getClientSideURL } from "@/utilities/getURL";
 import { Category } from "@/types/payload";
+import { i18n } from "@/i18n-config";
+import { QueryPageBySlugArgs } from "@/utilities/queryPageBySlug";
 
 function filter<T>(categories: (number | T)[]): T[] {
   return categories.filter(
@@ -27,10 +29,7 @@ function isCategory(value: unknown): value is Category {
 }
 
 type Args = {
-  params: Promise<{
-    slug?: string;
-    lang?: string;
-  }>;
+  params: Promise<QueryPageBySlugArgs>;
 };
 
 type LayoutProps = Readonly<
@@ -42,7 +41,7 @@ type LayoutProps = Readonly<
 export default async function Layout(props: LayoutProps) {
   const { children } = props;
   const params = await props.params;
-  const { slug = "" } = params;
+  const { slug = "", lang = i18n.defaultLocale } = params;
   const data = await queryPostLayoutData({
     slug,
   });
@@ -70,6 +69,7 @@ export default async function Layout(props: LayoutProps) {
         <PostList
           posts={filter(relatedPosts)}
           className="hidden sm:block py-24"
+          locale={lang}
         >
           <Title order={2}>Similar articles</Title>
         </PostList>
