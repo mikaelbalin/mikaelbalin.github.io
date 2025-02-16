@@ -42,7 +42,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
   const posts = await payload.find({
     collection: "posts",
     depth: 1,
-    limit: 2,
+    limit: 25,
     overrideAccess: false,
     select: {
       title: true,
