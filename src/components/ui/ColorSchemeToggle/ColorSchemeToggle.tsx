@@ -30,6 +30,7 @@ export const ColorSchemeToggle = () => {
       classNames={{
         track: "bg-black dark:bg-white text-black dark:text-white border-0",
         thumb: "bg-white dark:bg-black border-white dark:border-black",
+        label: "sr-only",
       }}
       thumbIcon={
         <>
