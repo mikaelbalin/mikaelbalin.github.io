@@ -73,7 +73,7 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   {
     lang: "pt" | "en";
-    slug: string[];
+    slug?: string[];
   }[]
 > {
   const payload = await getPayload({ config: configPromise });
@@ -90,11 +90,11 @@ export async function generateStaticParams(): Promise<
 
   const params: {
     lang: "en" | "pt";
-    slug: string[];
+    slug?: string[];
   }[] = pages.docs.filter(hasSlug).flatMap(({ slug }) => {
     return i18n.locales.map((lang) => ({
       lang,
-      slug: [slug],
+      slug: slug === "home" ? undefined : [slug],
     }));
   });
 

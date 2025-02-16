@@ -1,5 +1,5 @@
-import Page, { generateMetadata } from "./[...slug]/page";
+import Page, { generateMetadata, generateStaticParams } from "./[...slug]/page";
 
 export default Page;
 
-export { generateMetadata };
+export { generateMetadata, generateStaticParams };
