@@ -24,14 +24,16 @@ export default async function Page({
   params: paramsPromise,
   searchParams: searchParamsPromise,
 }: Args) {
-  const { slug = "home", lang = i18n.defaultLocale } = await paramsPromise;
+  const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
   const { page = 1, category = "all" } = await searchParamsPromise;
-  const path = `/${slug}`;
+  const path = `/${slug[0]}`;
 
   const pageData = await queryPageBySlug({
     slug,
     lang,
   });
+
+  // console.log({ pageData });
 
   if (!pageData) {
     return <PayloadRedirects path={path} />;
@@ -58,7 +60,7 @@ export default async function Page({
 export async function generateMetadata({
   params: paramsPromise,
 }: Args): Promise<Metadata> {
-  const { slug = "home", lang = i18n.defaultLocale } = await paramsPromise;
+  const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
   const page = await queryPageBySlug({
     slug,
     lang,
@@ -67,7 +69,12 @@ export async function generateMetadata({
   return generateMeta({ doc: page });
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<
+  {
+    lang: "pt" | "en";
+    slug: string[];
+  }[]
+> {
   const payload = await getPayload({ config: configPromise });
   const pages = await payload.find({
     collection: "pages",
@@ -80,10 +87,13 @@ export async function generateStaticParams() {
     },
   });
 
-  const params = pages.docs.flatMap(({ slug }) => {
+  const params: {
+    lang: "en" | "pt";
+    slug: string[];
+  }[] = pages.docs.flatMap(({ slug }) => {
     return i18n.locales.map((lang) => ({
       lang,
-      slug,
+      slug: [slug || ""],
     }));
   });
 

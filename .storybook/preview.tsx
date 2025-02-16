@@ -5,7 +5,7 @@ import type { Preview } from "@storybook/react";
 import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
-import "../src/app/(frontend)/global.css";
+import "../src/app/(frontend)/[lang]/global.css";
 import { ThemeProvider } from "../src/theme";
 
 const inter = Inter({ subsets: ["latin"] });

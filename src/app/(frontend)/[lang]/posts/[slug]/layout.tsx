@@ -10,8 +10,7 @@ import { PayloadRedirects } from "@/components/ui/PayloadRedirects";
 import { formatDateTime } from "@/utilities/formatDateTime";
 import { getClientSideURL } from "@/utilities/getURL";
 import { Category } from "@/types/payload";
-import { i18n } from "@/i18n-config";
-import { QueryPageBySlugArgs } from "@/utilities/queryPageBySlug";
+import { i18n, Locale } from "@/i18n-config";
 
 function filter<T>(categories: (number | T)[]): T[] {
   return categories.filter(
@@ -29,7 +28,10 @@ function isCategory(value: unknown): value is Category {
 }
 
 type Args = {
-  params: Promise<QueryPageBySlugArgs>;
+  params: Promise<{
+    slug: string;
+    lang: Locale | "all";
+  }>;
 };
 
 type LayoutProps = Readonly<
@@ -46,8 +48,7 @@ export default async function Layout(props: LayoutProps) {
     slug,
   });
 
-  const path = `/posts/${slug}`;
-  if (!data) return <PayloadRedirects path={path} />;
+  if (!data) return <PayloadRedirects path={`/posts/${slug}`} />;
 
   const { categories, title, relatedPosts, publishedAt, timeToRead } = data;
   const currentUrl = `${getClientSideURL()}/posts/${slug}`;

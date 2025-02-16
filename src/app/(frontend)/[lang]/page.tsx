@@ -1,4 +1,4 @@
-import Page, { generateMetadata } from "./[slug]/page";
+import Page, { generateMetadata } from "./[...slug]/page";
 
 export default Page;
 

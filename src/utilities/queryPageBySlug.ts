@@ -5,7 +5,7 @@ import { draftMode } from "next/headers";
 import { Locale } from "@/i18n-config";
 
 export type QueryPageBySlugArgs = {
-  slug: string;
+  slug: string[];
   lang: Locale | "all";
 };
 
@@ -24,7 +24,7 @@ export const queryPageBySlug = cache(
       overrideAccess: draft,
       where: {
         slug: {
-          equals: slug,
+          equals: slug[0],
         },
       },
     });

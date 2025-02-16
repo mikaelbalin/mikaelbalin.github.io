@@ -27,11 +27,9 @@ export const PostItem = (props: PostCardProps) => {
     locale,
   } = props;
 
-  const href = `${locale}/${relationTo}/${slug}`;
-
   return (
     <Link
-      href={href}
+      href={`/${locale}/${relationTo}/${slug}`}
       className="group transition-colors duration-500 sm:hover:bg-appLightColorBeige dark:sm:hover:bg-appDarkColorCoalBlack"
     >
       <div className="flex py-8">
