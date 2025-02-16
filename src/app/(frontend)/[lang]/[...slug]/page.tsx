@@ -24,12 +24,14 @@ export default async function Page({
   params: paramsPromise,
   searchParams: searchParamsPromise,
 }: Args) {
-  const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
+  const { slug: slugs = ["home"], lang = i18n.defaultLocale } =
+    await paramsPromise;
   const { page = 1, category = "all" } = await searchParamsPromise;
-  const path = `/${slug[0]}`;
+  const slug = slugs[0];
+  const path = `/${slug}`;
 
   const pageData = await queryPageBySlug({
-    slug,
+    slug: slugs,
     lang,
   });
 
