@@ -66,7 +66,7 @@ export default async function RootLayout(
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </head>
       <body className={inter.className}>
