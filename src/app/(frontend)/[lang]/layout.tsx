@@ -20,23 +20,25 @@ import { Metadata } from "next";
 import { getServerSideURL } from "@/utilities/getURL";
 import { LocaleParams } from "@/i18n-config";
 
-const getHeader = cache(async () => {
+const getHeader = cache(async (lang: "en" | "pt") => {
   const payload = await getPayload({ config: configPromise });
 
   const global = await payload.findGlobal<"header", HeaderSelect>({
     slug: "header",
     depth: 0,
+    locale: lang,
   });
 
   return global;
 });
 
-const getFooter = cache(async () => {
+const getFooter = cache(async (lang: "en" | "pt") => {
   const payload = await getPayload({ config: configPromise });
 
   const global = await payload.findGlobal<"footer", FooterSelect>({
     slug: "footer",
     depth: 1,
+    locale: lang,
   });
 
   return global;
@@ -51,14 +53,14 @@ export default async function RootLayout(
   }>,
 ) {
   const { children } = props;
-  const params = await props.params;
+  const { lang } = await props.params;
 
   const { isEnabled } = await draftMode();
-  const header = await getHeader();
-  const footer = await getFooter();
+  const header = await getHeader(lang);
+  const footer = await getFooter(lang);
 
   return (
-    <html lang={params.lang} className="relative" suppressHydrationWarning>
+    <html lang={lang} className="relative" suppressHydrationWarning>
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
