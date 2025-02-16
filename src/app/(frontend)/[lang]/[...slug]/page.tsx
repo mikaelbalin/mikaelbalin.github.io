@@ -33,8 +33,6 @@ export default async function Page({
     lang,
   });
 
-  // console.log({ pageData });
-
   if (!pageData) {
     return <PayloadRedirects path={path} />;
   }
