@@ -1,34 +1,7 @@
-import { cache } from "react";
-import { draftMode } from "next/headers";
 import { ArticleContent } from "@/components/features/Article/ArticleContent";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
 import { Metadata } from "next";
 import { generateMeta } from "@/utilities/generateMeta";
-
-const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode();
-
-  const payload = await getPayload({ config: configPromise });
-
-  const result = await payload.find({
-    collection: "posts",
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-    select: {
-      content: true,
-    },
-  });
-
-  return result.docs?.[0] || null;
-});
+import { queryPostBySlug } from "@/utilities/queryPostBySlug";
 
 type Args = {
   params: Promise<{
@@ -36,6 +9,15 @@ type Args = {
     lang?: string;
   }>;
 };
+
+export default async function Page(props: Args) {
+  const params = await props.params;
+  const { slug = "" } = params;
+
+  const post = await queryPostBySlug({ slug });
+
+  return <ArticleContent content={post.content} />;
+}
 
 export async function generateMetadata({
   params: paramsPromise,
@@ -67,14 +49,3 @@ export async function generateMetadata({
 
 //   return params;
 // }
-
-type PageProps = Args;
-
-export default async function Page(props: PageProps) {
-  const params = await props.params;
-  const { slug = "" } = params;
-
-  const post = await queryPostBySlug({ slug });
-
-  return <ArticleContent content={post.content} />;
-}
