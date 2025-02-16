@@ -9,11 +9,13 @@ import { Pagination } from "@/components/ui/Pagination";
 export interface SearchBlockProps extends SearchBlock {
   category: string;
   page: unknown;
+  locale: "all" | "en" | "pt";
 }
 
 export const Search: React.FC<SearchBlockProps> = async ({
   category,
   page,
+  locale,
 }: SearchBlockProps) => {
   const sanitizedPageNumber = Number(page);
 
@@ -66,7 +68,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
   return (
     <>
       <PostSearch categories={filteredCategories} />
-      <PostList posts={posts.docs} />
+      <PostList posts={posts.docs} locale={locale} />
       <Pagination totalPages={posts.totalPages} />
     </>
   );

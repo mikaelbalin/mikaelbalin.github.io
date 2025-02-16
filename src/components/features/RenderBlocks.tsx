@@ -52,7 +52,7 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
           return <Block key={index} {...block} />;
         }
         if (blockType === "search" && Block === Search) {
-          return <Block key={index} {...block} {...rest} />;
+          return <Block key={index} {...block} {...rest} locale={locale} />;
         }
 
         return null;
