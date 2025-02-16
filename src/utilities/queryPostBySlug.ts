@@ -11,7 +11,7 @@ export const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   const result = await payload.find({
     collection: "posts",
     draft,
-    limit: 25,
+    limit: 1,
     overrideAccess: draft,
     pagination: false,
     where: {
