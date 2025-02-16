@@ -2,10 +2,12 @@ import type { ArchiveBlock } from "@/types/payload";
 import { Button, Stack, Title } from "@mantine/core";
 import Link from "next/link";
 
-type PostLatestProps = Pick<ArchiveBlock, "title" | "latestPostsLink">;
+type PostLatestProps = Pick<ArchiveBlock, "title" | "latestPostsLink"> & {
+  locale: "en" | "pt" | "all";
+};
 
 export const PostLatest = (props: PostLatestProps) => {
-  const { title, latestPostsLink } = props;
+  const { title, latestPostsLink, locale } = props;
   return (
     <Stack className="gap-4 items-start sm:flex-row sm:items-center sm:justify-between pt-16 sm:pt-24">
       <Title
@@ -16,7 +18,7 @@ export const PostLatest = (props: PostLatestProps) => {
       </Title>
       <Button
         component={Link}
-        href={latestPostsLink.url || ""}
+        href={`${locale}${latestPostsLink.url}`}
         variant="outline"
       >
         {latestPostsLink.label}

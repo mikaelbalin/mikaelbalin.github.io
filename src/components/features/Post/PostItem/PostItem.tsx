@@ -13,13 +13,21 @@ type PostCardProps = Pick<
   "slug" | "categories" | "meta" | "title" | "publishedAt" | "timeToRead"
 > & {
   relationTo?: "posts";
+  locale: "en" | "pt" | "all";
 };
 
 export const PostItem = (props: PostCardProps) => {
-  const { title, slug, categories, publishedAt, relationTo, timeToRead } =
-    props;
+  const {
+    title,
+    slug,
+    categories,
+    publishedAt,
+    relationTo,
+    timeToRead,
+    locale,
+  } = props;
 
-  const href = `/${relationTo}/${slug}`;
+  const href = `${locale}/${relationTo}/${slug}`;
 
   return (
     <Link
