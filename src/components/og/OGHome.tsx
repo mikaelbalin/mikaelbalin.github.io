@@ -1,4 +1,4 @@
-export const HomeOG = ({ title }: { title?: string }) => {
+export const OGHome = ({ title }: { title?: string }) => {
   return (
     <div
       style={{
@@ -8,7 +8,8 @@ export const HomeOG = ({ title }: { title?: string }) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#101010",
+        background:
+          "linear-gradient(45deg, rgba(16,16,16,1) 0%, rgba(203,193,174,1) 100%)",
       }}
     >
       <div
@@ -20,21 +21,10 @@ export const HomeOG = ({ title }: { title?: string }) => {
       >
         <div
           style={{
-            position: "relative",
-            top: "6px",
-            backgroundColor: "#FDFCF9",
-            width: "36px",
-            height: "36px",
-            boxShadow: "0px 0px 5px #FDFCF9",
-          }}
-        />
-        <div
-          style={{
             fontFamily: "Inter",
             fontSize: "64px",
             lineHeight: 1,
             color: "#FDFCF9",
-            textShadow: "0px 0px 5px #FDFCF9",
           }}
         >
           {title}

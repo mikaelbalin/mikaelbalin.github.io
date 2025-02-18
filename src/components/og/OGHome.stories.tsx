@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { HomeOG } from "./HomeOG";
+import { OGHome } from "./OGHome";
 
 const meta = {
-  title: "HomeOG",
-  component: HomeOG,
+  title: "OGHome",
+  component: OGHome,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -17,10 +17,10 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof HomeOG>;
+} satisfies Meta<typeof OGHome>;
 
 export default meta;
-type Story = StoryObj<typeof HomeOG>;
+type Story = StoryObj<typeof OGHome>;
 
 export const Default: Story = {
   args: {

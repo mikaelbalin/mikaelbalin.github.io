@@ -16,7 +16,7 @@ import { Page, Post } from "@/types/payload";
 import { getServerSideURL } from "@/utilities/getURL";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { HomeOG } from "@/components/og/HomeOG";
+import { OGHome } from "@/components/og/OGHome";
 import { ImageResponse } from "next/og";
 
 const TITLE = "Mikael's Blog";
@@ -46,7 +46,7 @@ const generateImage: GenerateImage<Post | Page> = async ({
 
   // Generate image directly
   const imageResponse = await new ImageResponse(
-    <HomeOG title={truncatedTitle} />,
+    <OGHome title={truncatedTitle} />,
     {
       width: 1200,
       height: 630,
