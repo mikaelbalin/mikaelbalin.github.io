@@ -86,7 +86,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@react-email/components": "0.0.33",
     "@react-email/render": "1.0.5",
-    "@react-three/drei": "^9.121.5",
+    "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "9.0.4",
     "@react-three/rapier": "^1.5.0",
     "@sindresorhus/slugify": "^2.2.1",
