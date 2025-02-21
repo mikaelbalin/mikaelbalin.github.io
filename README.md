@@ -57,6 +57,7 @@ After that Storybook will be deployed to GitHub pages and app to Vercel.
 pnpm up --interactive --latest
 ```
 
-Landing page design: [Canva](https://www.canva.com/design/DAF-waWoppc/ZR0oa4X3YnQuOHEo-85Hjw/view?utm_content=DAF-waWoppc&utm_campaign=designshare&utm_medium=link&utm_source=ed#7)
-`generate:importmap`
-`migrate:create`
+### Scripts
+
+- `generate:importmap`: Generates an import map for the admin panel to resolve imports correctly
+- `migrate:create`: Creates a new migration file for database schema changes
