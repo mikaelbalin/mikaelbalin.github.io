@@ -57,7 +57,7 @@ After that Storybook will be deployed to GitHub pages and app to Vercel.
 pnpm up --interactive --latest
 ```
 
-### Scripts
+## Scripts
 
 - `generate:importmap`: Generates an import map for the admin panel to resolve imports correctly
 - `migrate:create`: Creates a new migration file for database schema changes
