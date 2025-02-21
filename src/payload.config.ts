@@ -85,6 +85,10 @@ export default buildConfig({
         prodMigrations: migrations,
         pool: {
           connectionString: process.env.POSTGRES_URL || "",
+          min: 0,
+          max: 5,
+          idleTimeoutMillis: 30000,
+          connectionTimeoutMillis: 10000,
         },
       }),
   globals: [header, footer],

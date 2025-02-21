@@ -43,7 +43,6 @@ export const Search: React.FC<SearchBlockProps> = async ({
     collection: "posts",
     depth: 1,
     limit: 25,
-    overrideAccess: false,
     select: {
       title: true,
       slug: true,
