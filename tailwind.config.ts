@@ -70,20 +70,21 @@ export default {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(calc(-100% - var(--gap)))" },
         },
-        slide: {
+        slideDown: {
           from: { transform: "translateY(-100%)" },
           to: { transform: "translateY(0)" },
         },
-        show: {
+        fadeIn: {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
       },
       animation: {
         scroll: "scroll 30s linear infinite",
-        slide: "slide 1s ease-out",
-        show: "show 1s ease-out both",
-        showWithDelay: "show 1s ease-out 1s both",
+        slideDown: "slideDown 1s ease-out",
+        fadeInDelay300: "fadeIn 1s ease-out 0.3s both",
+        fadeInDelay500: "fadeIn 1s ease-out 0.5s both",
+        fadeInDelay700: "fadeIn 1s ease-out 0.7s both",
       },
     },
   },

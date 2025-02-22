@@ -9,7 +9,7 @@ import {
   useMotionTemplate,
 } from "motion/react";
 import { cn } from "@/utilities/cn";
-import { Fragment, useRef } from "react";
+import { Fragment, HTMLAttributes, useRef } from "react";
 import { Footer } from "@/types/payload";
 
 function isArrayOfStrings(texts: unknown): texts is string[] {
@@ -49,11 +49,12 @@ const Line = ({
 const BASE: number = 10;
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
-interface MarqueeProps {
+interface MarqueeProps
+  extends Pick<HTMLAttributes<HTMLDivElement>, "className"> {
   titles: Footer["titles"];
 }
 
-export const Marquee = ({ titles = [] }: MarqueeProps) => {
+export const Marquee = ({ titles = [], className }: MarqueeProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -79,7 +80,7 @@ export const Marquee = ({ titles = [] }: MarqueeProps) => {
           "gap-[--gap]",
           "overflow-hidden",
           "relative flex select-none",
-          "motion-safe:animate-show",
+          className,
         )}
       >
         {Array.from({ length: 2 }).map((_, index) => (
