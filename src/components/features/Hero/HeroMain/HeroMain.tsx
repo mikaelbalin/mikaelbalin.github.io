@@ -51,9 +51,7 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
     <Box className="my-auto" ref={ref}>
       <Marquee titles={titles} />
       <Container
-        className={cn("mt-6.5 sm:mt-8", {
-          "motion-safe:animate-showWithDelay": false,
-        })}
+        className={cn("mt-6.5 sm:mt-8", "motion-safe:animate-showWithDelay")}
       >
         <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <Text className="relative" size="lg">
@@ -94,11 +92,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
               description={description}
               contactLink={contactLink}
             />
-            <Box
-              className={cn("mb-14", {
-                "motion-safe:animate-showWithDelay": false,
-              })}
-            >
+            <Box className={cn("mb-14", "motion-safe:animate-showWithDelay")}>
               <Container className="relative text-right">
                 <Text size="lg">{location}</Text>
                 <LiveTime />

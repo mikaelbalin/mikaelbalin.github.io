@@ -140,11 +140,7 @@ export function Header(props: Readonly<HeaderProps>) {
   const logoElement = <Logo text={logo.link.label} lang={lang} />;
 
   return (
-    <header
-      className={cn("absolute w-full z-10", {
-        "motion-safe:animate-slide": false,
-      })}
-    >
+    <header className={cn("absolute w-full z-10", "motion-safe:animate-slide")}>
       <Container className="h-16 sm:h-19.5">
         <Group justify="space-between" className="h-full">
           {logoElement}
