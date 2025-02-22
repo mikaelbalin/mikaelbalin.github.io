@@ -92,7 +92,11 @@ export const ContactForm = (props: ContactFormProps) => {
   };
 
   return (
-    <form id={formID} onSubmit={form.onSubmit(handleSubmit, handleError)}>
+    <form
+      id={formID}
+      onSubmit={form.onSubmit(handleSubmit, handleError)}
+      autoComplete="on"
+    >
       <div className="flex flex-col gap-6">
         {formFromProps?.fields?.map((field) => {
           const Field = fields?.[field.blockType];
@@ -104,7 +108,6 @@ export const ContactForm = (props: ContactFormProps) => {
                 {...form.getInputProps(field.name, {
                   type: "checkbox",
                 })}
-                autoComplete={field.name}
               />
             ) : field.blockType === "textarea" ? (
               <Field
@@ -113,7 +116,6 @@ export const ContactForm = (props: ContactFormProps) => {
                 label={field.label}
                 {...form.getInputProps(field.name)}
                 resize="vertical"
-                autoComplete={field.name}
               />
             ) : (
               <Field
@@ -121,7 +123,6 @@ export const ContactForm = (props: ContactFormProps) => {
                 key={form.key(field.name)}
                 label={field.label}
                 {...form.getInputProps(field.name)}
-                autoComplete={field.name}
               />
             );
           }

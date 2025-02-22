@@ -95,7 +95,11 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
   };
 
   return (
-    <form id={formID} onSubmit={form.onSubmit(handleSubmit, handleError)}>
+    <form
+      id={formID}
+      onSubmit={form.onSubmit(handleSubmit, handleError)}
+      autoComplete="on"
+    >
       <Grid className="mt-8 sm:mt-14">
         <GridCol
           span={{ base: 12, sm: 8, lg: 7 }}
@@ -125,7 +129,6 @@ export const SubscriptionForm = (props: SubscriptionFormProps) => {
                   onBlur={onBlur}
                   onFocus={onFocus}
                   value={value}
-                  autoComplete="email"
                 />
               );
             }
