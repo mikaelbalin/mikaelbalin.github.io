@@ -102,7 +102,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
             >
               <Container className="relative text-right">
                 <Text size="lg">{location}</Text>
-                <LiveTime />
+                {/* <LiveTime /> */}
               </Container>
             </Box>
           </>
