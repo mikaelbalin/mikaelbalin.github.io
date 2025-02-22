@@ -65,6 +65,9 @@ interface AppProps {
   debug: boolean;
 }
 
+/**
+ * https://vercel.com/blog/building-an-interactive-3d-event-badge-with-react-three-fiber
+ */
 export default function App({ debug }: AppProps) {
   return (
     <Canvas camera={{ position: [0, 0, 13], fov: 25 }}>
