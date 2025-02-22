@@ -13,13 +13,13 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
 
-type Args = {
+type Args = Readonly<{
   params: Promise<Partial<QueryPageBySlugArgs>>;
   searchParams: Promise<{
     category: string;
     page: unknown;
   }>;
-};
+}>;
 
 export default async function Page({
   params: paramsPromise,
