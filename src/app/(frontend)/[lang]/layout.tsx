@@ -1,12 +1,12 @@
 import { cache } from "react";
-import { draftMode } from "next/headers";
+// import { draftMode } from "next/headers";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { ThemeProvider } from "@/theme";
-import { AdminBar } from "@/components/ui/AdminBar";
+// import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -55,7 +55,7 @@ export default async function RootLayout(
   const { children } = props;
   const { lang } = await props.params;
 
-  const { isEnabled } = await draftMode();
+  // const { isEnabled } = await draftMode();
   const header = await getHeader(lang);
   const footer = await getFooter(lang);
 
@@ -71,11 +71,11 @@ export default async function RootLayout(
       </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <AdminBar
+          {/* <AdminBar
             adminBarProps={{
               preview: isEnabled,
             }}
-          />
+          /> */}
           <LivePreviewListener />
           <div className="relative flex flex-col min-h-screen">
             <Header {...header} />
