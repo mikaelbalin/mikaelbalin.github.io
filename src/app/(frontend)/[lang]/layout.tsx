@@ -49,7 +49,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: LocaleParams;
+    params: Promise<LocaleParams>;
   }>,
 ) {
   const { children } = props;
