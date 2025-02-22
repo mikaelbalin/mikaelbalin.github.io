@@ -94,7 +94,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
               description={description}
               contactLink={contactLink}
             />
-
+            {/* 
             <Box
               className={cn("mb-14", {
                 "motion-safe:animate-showWithDelay": false,
@@ -102,9 +102,9 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
             >
               <Container className="relative text-right">
                 <Text size="lg">{location}</Text>
-                {/* <LiveTime /> */}
+                <LiveTime />
               </Container>
-            </Box>
+            </Box> */}
           </>
         )}
       </HeroBackground>
