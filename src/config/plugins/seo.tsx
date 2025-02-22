@@ -45,21 +45,18 @@ const generateImage: GenerateImage<Post | Page> = async ({
   const fontData = await readFile(fontPath);
 
   // Generate image directly
-  const imageResponse = await new ImageResponse(
-    <OGHome title={truncatedTitle} />,
-    {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: "Inter",
-          data: fontData,
-          style: "normal",
-          weight: 400,
-        },
-      ],
-    },
-  );
+  const imageResponse = new ImageResponse(<OGHome title={truncatedTitle} />, {
+    width: 1200,
+    height: 630,
+    fonts: [
+      {
+        name: "Inter",
+        data: fontData,
+        style: "normal",
+        weight: 400,
+      },
+    ],
+  });
 
   // Convert response to buffer
   const arrayBuffer = await imageResponse.arrayBuffer();
@@ -93,6 +90,9 @@ export const meta: Tab = {
     }),
     MetaTitleField({
       hasGenerateFn: true,
+      overrides: {
+        required: true,
+      },
     }),
     MetaImageField({
       relationTo: "media",
@@ -100,6 +100,9 @@ export const meta: Tab = {
     }),
     MetaDescriptionField({
       hasGenerateFn: false,
+      overrides: {
+        required: true,
+      },
     }),
     PreviewField({
       hasGenerateFn: true,
