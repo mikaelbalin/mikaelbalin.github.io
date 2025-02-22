@@ -79,17 +79,21 @@ export const Marquee = ({ titles = [] }: MarqueeProps) => {
           "gap-[--gap]",
           "overflow-hidden",
           "relative flex select-none",
-          "motion-safe:animate-show",
+          {
+            "motion-safe:animate-show": false,
+          },
         )}
       >
         {Array.from({ length: 2 }).map((_, index) => (
           <ul
             key={index}
             className={cn(
-              "motion-safe:animate-scroll",
               "gap-[--gap]",
               "flex shrink-0 justify-around items-center min-w-full p-0 m-0",
               "list-none",
+              {
+                "motion-safe:animate-scroll": false,
+              },
             )}
             aria-hidden={index === 1}
           >

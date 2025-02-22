@@ -16,6 +16,7 @@ import { MotionProvider, useMotionContext } from "@/context/motion-context";
 import { Page } from "@/types/payload";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { cn } from "@/utilities/cn";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
@@ -49,7 +50,11 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
   return (
     <Box className="my-auto" ref={ref}>
       <Marquee titles={titles} />
-      <Container className="mt-6.5 sm:mt-8 motion-safe:animate-showWithDelay">
+      <Container
+        className={cn("mt-6.5 sm:mt-8", {
+          "motion-safe:animate-showWithDelay": false,
+        })}
+      >
         <SimpleGrid cols={{ base: 1, sm: 2 }}>
           <Text className="relative" size="lg">
             {description}
@@ -90,7 +95,11 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
               contactLink={contactLink}
             />
 
-            <Box className="mb-14 motion-safe:animate-showWithDelay">
+            <Box
+              className={cn("mb-14", {
+                "motion-safe:animate-showWithDelay": false,
+              })}
+            >
               <Container className="relative text-right">
                 <Text size="lg">{location}</Text>
                 <LiveTime />
