@@ -36,11 +36,11 @@ const languageMenuItems: MenuItem[] = i18n.locales.map((locale) => ({
 
 const redirectedPathName = (pathName: string, locale?: null | string) => {
   const segments = pathName.split("/");
-  segments[1] = locale || i18n.defaultLocale;
+  segments[1] = locale ?? i18n.defaultLocale;
   return segments.join("/");
 };
 
-export function Header(props: HeaderProps) {
+export function Header(props: Readonly<HeaderProps>) {
   const { logo, navItems: navLinks } = props;
 
   const pathName = usePathname();
@@ -97,13 +97,7 @@ export function Header(props: HeaderProps) {
           closeDelay={400}
           position="bottom-start"
           withinPortal
-          onChange={(opened) => {
-            if (!opened) {
-              closeLinks();
-            } else {
-              openLinks();
-            }
-          }}
+          onChange={(opened) => (opened ? openLinks() : closeLinks())}
         >
           <Menu.Target>
             <UnstyledButton
