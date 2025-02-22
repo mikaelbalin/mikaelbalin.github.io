@@ -151,7 +151,7 @@ export function Header(props: HeaderProps) {
         "motion-safe:animate-slide": false,
       })}
     >
-      {/* <Container className="h-16 sm:h-19.5">
+      <Container className="h-16 sm:h-19.5">
         <Group justify="space-between" className="h-full">
           {logoElement}
           <Group gap="xl">
@@ -205,7 +205,7 @@ export function Header(props: HeaderProps) {
             </ScrollArea>
           </Drawer.Body>
         </Drawer.Content>
-      </Drawer.Root> */}
+      </Drawer.Root>
     </header>
   );
 }

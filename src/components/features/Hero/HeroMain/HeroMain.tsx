@@ -2,7 +2,7 @@
 
 import { HeroBackground } from "@/components/features/Hero/HeroBackground";
 import { LiveTime } from "@/components/ui/LiveTime";
-// import { Marquee } from "@/components/ui/Marquee";
+import { Marquee } from "@/components/ui/Marquee";
 import { Box, Button, Container, SimpleGrid, Text } from "@mantine/core";
 import { useEffect, useState, useRef } from "react";
 import {
@@ -49,7 +49,7 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
 
   return (
     <Box className="my-auto" ref={ref}>
-      {/* <Marquee titles={titles} /> */}
+      <Marquee titles={titles} />
       <Container
         className={cn("mt-6.5 sm:mt-8", {
           "motion-safe:animate-showWithDelay": false,
@@ -94,7 +94,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
               description={description}
               contactLink={contactLink}
             />
-            {/* <Box
+            <Box
               className={cn("mb-14", {
                 "motion-safe:animate-showWithDelay": false,
               })}
@@ -103,7 +103,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
                 <Text size="lg">{location}</Text>
                 <LiveTime />
               </Container>
-            </Box> */}
+            </Box>
           </>
         )}
       </HeroBackground>
