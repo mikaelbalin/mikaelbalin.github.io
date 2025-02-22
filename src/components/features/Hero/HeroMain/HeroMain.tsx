@@ -94,8 +94,7 @@ export const HeroMain: React.FC<Page["hero"]> = (props) => {
               description={description}
               contactLink={contactLink}
             />
-            {/* 
-            <Box
+            {/* <Box
               className={cn("mb-14", {
                 "motion-safe:animate-showWithDelay": false,
               })}
