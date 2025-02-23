@@ -63,6 +63,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
         ],
       },
     }),
+    sort: "-publishedAt",
   });
 
   return (

@@ -36,6 +36,7 @@ export const queryArchivePosts = cache(async (args: queryArchivePostsArgs) => {
           },
         },
       }),
+      sort: "-publishedAt",
     });
 
     posts = fetchedPosts.docs;
