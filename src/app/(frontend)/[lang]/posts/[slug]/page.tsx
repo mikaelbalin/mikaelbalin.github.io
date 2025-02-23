@@ -6,6 +6,7 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
 import { i18n } from "@/i18n-config";
+import { Content } from "@/components/ui/RichText/types";
 
 type Args = {
   params: Promise<{
@@ -20,7 +21,7 @@ export default async function Page(props: Args) {
 
   const post = await queryPostBySlug({ slug });
 
-  return <ArticleContent content={post.content} />;
+  return <ArticleContent content={post.content as Content} />;
 }
 
 export async function generateMetadata({

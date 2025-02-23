@@ -3,11 +3,11 @@
 import { useRef } from "react";
 import { Container, Grid, GridCol } from "@mantine/core";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
-import { Post } from "@/types/payload";
 import { RichText } from "@/components/ui/RichText";
+import { Content } from "@/components/ui/RichText/types";
 
 type ArticleContentProps = {
-  content: Post["content"];
+  content: Content;
 };
 
 export const ArticleContent = (props: ArticleContentProps) => {

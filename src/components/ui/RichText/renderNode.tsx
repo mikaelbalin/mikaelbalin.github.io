@@ -9,7 +9,7 @@ import {
   TitleOrder,
 } from "@mantine/core";
 import { CMSLink } from "@/components/ui/CMSLink";
-import { NodeType } from "./types";
+import { ContentChildren } from "./types";
 import { cn } from "@/utilities/cn";
 import { JSX } from "react";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export const renderNode = ({
   children,
   className,
 }: {
-  node: NodeType;
+  node: ContentChildren[number];
   index: number;
   children?: (JSX.Element | null)[];
   className?: string;
@@ -30,9 +30,7 @@ export const renderNode = ({
       const tag = node.tag;
 
       const fragmentID = slugify(
-        (node.children as NodeType[])
-          .map((n) => (n.type === "text" ? n.text : ""))
-          .join(""),
+        node.children.map((n) => (n.type === "text" ? n.text : "")).join(""),
       );
 
       const order = parseInt(tag.match(/\d+/)?.[0] || "1", 10);

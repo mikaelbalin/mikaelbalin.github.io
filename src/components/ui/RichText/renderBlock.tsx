@@ -2,15 +2,30 @@ import { cn } from "@/utilities/cn";
 import { MediaBlock } from "@/components/ui/MediaBlock";
 import { Kbd, Table, TableData, TableScrollContainer } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";
-import { KbdInlineBlockProps, NodeType, SerializeLexical } from "./types";
+import {
+  KbdInlineBlockProps,
+  SerializeLexical,
+} from "@/components/ui/RichText/types";
 import type {
   CalloutBlock,
   CodeBlock,
   MediaBlock as MediaBlockProps,
   TableBlock,
 } from "@/types/payload";
-import { BlockFields } from "@payloadcms/richtext-lexical";
-import { Callout } from "../Callout";
+import { BlockFields, SerializedTextNode } from "@payloadcms/richtext-lexical";
+import { Callout } from "@/components/ui/Callout";
+
+export const isValidNode = (node: unknown): node is SerializedTextNode => {
+  if (!node || typeof node !== "object") return false;
+  return "type" in node;
+};
+
+export const validateBlockChildren = (
+  children?: unknown[],
+): SerializedTextNode[] => {
+  if (!Array.isArray(children)) return [];
+  return children.filter(isValidNode);
+};
 
 export const renderBlock = ({
   index,
@@ -36,7 +51,7 @@ export const renderBlock = ({
           {serializeLexical({
             nodes:
               typeof block.media === "object"
-                ? (block.media.caption?.root.children as NodeType[])
+                ? validateBlockChildren(block.media.caption?.root.children)
                 : [],
             className: cn("!text-sm", className),
           })}
@@ -46,7 +61,7 @@ export const renderBlock = ({
       return (
         <Callout key={index} blockName={block.blockName} style={block.style}>
           {serializeLexical({
-            nodes: block.content.root.children as NodeType[],
+            nodes: validateBlockChildren(block.content.root.children),
             className: cn("mb-0", className),
           })}
         </Callout>

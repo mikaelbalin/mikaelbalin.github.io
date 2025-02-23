@@ -1,17 +1,19 @@
 import { JSX } from "react";
 import "@mantine/code-highlight/styles.css";
-import { NodeType, SerializeLexical } from "./types";
-import { renderText } from "./renderText";
-import { renderNode } from "./renderNode";
-import { renderBlock } from "./renderBlock";
+import {
+  ContentChildren,
+  SerializeLexical,
+} from "@/components/ui/RichText/types";
+import { renderText } from "@/components/ui/RichText/renderText";
+import { renderNode } from "@/components/ui/RichText/renderNode";
+import { renderBlock } from "@/components/ui/RichText/renderBlock";
 
-const getSerializedChildren = (node: NodeType, className?: string) => {
-  if (!("children" in node) || node.children == null) {
-    return undefined;
-  }
-
+const getSerializedChildren = (
+  node: ContentChildren[number],
+  className?: string,
+) => {
   return serializeLexical({
-    nodes: node.children as NodeType[],
+    nodes: node.children,
     className,
   });
 };

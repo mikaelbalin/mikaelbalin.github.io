@@ -1,7 +1,19 @@
 import { JsonObject } from "payload";
 import {
-  DefaultNodeTypes,
+  SerializedAutoLinkNode,
   SerializedBlockNode,
+  SerializedHeadingNode,
+  SerializedHorizontalRuleNode,
+  SerializedLineBreakNode,
+  SerializedLinkNode,
+  SerializedListItemNode,
+  SerializedListNode,
+  SerializedParagraphNode,
+  SerializedQuoteNode,
+  SerializedRelationshipNode,
+  SerializedTextNode,
+  SerializedUploadNode,
+  TypedEditorState,
 } from "@payloadcms/richtext-lexical";
 import type {
   CalloutBlock as CalloutBlockProps,
@@ -26,8 +38,19 @@ export type CustomBlockNode<T extends JsonObject = JsonObject> = Omit<
 
 export type BlockTypes = "mediaBlock" | "callout" | "code" | "table" | "kbd";
 
-export type NodeType =
-  | DefaultNodeTypes
+type NodeType =
+  | SerializedAutoLinkNode
+  | SerializedHeadingNode
+  | SerializedHorizontalRuleNode
+  | SerializedLineBreakNode
+  | SerializedLinkNode
+  | SerializedListItemNode
+  | SerializedListNode
+  | SerializedParagraphNode
+  | SerializedQuoteNode
+  | SerializedRelationshipNode
+  | SerializedTextNode
+  | SerializedUploadNode
   | CustomBlockNode<
       | MediaBlockProps
       | CalloutBlockProps
@@ -36,8 +59,12 @@ export type NodeType =
       | TableBlockProps
     >;
 
+export type Content = TypedEditorState<NodeType>;
+
+export type ContentChildren = Content["root"]["children"];
+
 type Args = {
-  nodes?: NodeType[];
+  nodes?: ContentChildren;
   className?: string;
 };
 

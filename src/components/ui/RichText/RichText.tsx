@@ -1,12 +1,11 @@
 import { FC } from "react";
-import { serializeLexical } from "./serialize";
-import { Post } from "@/types/payload";
-import { NodeType } from "./types";
+import { serializeLexical } from "@/components/ui/RichText/serialize";
+import { Content } from "@/components/ui/RichText/types";
 
 type RichTextProps = {
   className?: string;
   textClassName?: string;
-  content: Post["content"];
+  content: Content;
 };
 
 export const RichText: FC<RichTextProps> = ({
@@ -25,7 +24,7 @@ export const RichText: FC<RichTextProps> = ({
         typeof content === "object" &&
         "root" in content &&
         serializeLexical({
-          nodes: content.root.children as NodeType[],
+          nodes: content.root.children,
           className: textClassName,
         })}
     </div>
