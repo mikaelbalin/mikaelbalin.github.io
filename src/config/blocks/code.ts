@@ -34,6 +34,10 @@ export const code: Block = {
           value: "xml",
         },
         {
+          label: "JSON",
+          value: "json",
+        },
+        {
           label: "Bash",
           value: "bash",
         },

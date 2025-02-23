@@ -1575,7 +1575,7 @@ export interface CalloutBlock {
  * via the `definition` "CodeBlock".
  */
 export interface CodeBlock {
-  language?: ('typescript' | 'tsx' | 'javascript' | 'css' | 'html' | 'xml' | 'bash') | null;
+  language?: ('typescript' | 'tsx' | 'javascript' | 'css' | 'html' | 'xml' | 'json' | 'bash') | null;
   code: string;
   id?: string | null;
   blockName?: string | null;

@@ -23,7 +23,7 @@ import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { Content, ContentChildren } from "@/components/ui/RichText/types";
 
-const TITLE = "Mikael's Blog";
+const TITLE = "Mikael Balin";
 const SYSTEM = `You are an SEO meta description writer. Follow these rules strictly:
 - Keep descriptions between 100-150 characters
 - Make descriptions unique and descriptive
