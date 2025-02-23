@@ -10,7 +10,7 @@ import Link from "next/link";
 
 type PostCardProps = Pick<
   Post,
-  "slug" | "categories" | "meta" | "title" | "publishedAt" | "timeToRead"
+  "slug" | "categories" | "title" | "publishedAt" | "timeToRead"
 > & {
   relationTo?: "posts";
   locale: "en" | "pt" | "all";
