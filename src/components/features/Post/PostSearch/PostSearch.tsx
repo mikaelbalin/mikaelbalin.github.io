@@ -1,14 +1,14 @@
 "use client";
 
-import { Category } from "@/types/payload";
+import { Category, SearchBlock } from "@/types/payload";
 import { Box, Chip, ChipGroup, Container, Group, Text } from "@mantine/core";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-interface PostSearchProps {
+interface PostSearchProps extends Pick<SearchBlock, "title"> {
   categories: Pick<Category, "id" | "breadcrumbs">[];
 }
 
-export const PostSearch = ({ categories }: PostSearchProps) => {
+export const PostSearch = ({ categories, title }: PostSearchProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -31,7 +31,7 @@ export const PostSearch = ({ categories }: PostSearchProps) => {
   return (
     <Container component="section" className="pt-17">
       <Box>
-        <Text className="mb-8">Search by category</Text>
+        <Text className="mb-8">{title}</Text>
         <ChipGroup
           multiple={false}
           value={category || "all"}

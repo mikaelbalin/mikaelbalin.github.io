@@ -16,6 +16,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
   category,
   page,
   locale,
+  title,
 }: SearchBlockProps) => {
   const sanitizedPageNumber = Number(page);
 
@@ -66,7 +67,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
 
   return (
     <>
-      <PostSearch categories={filteredCategories} />
+      <PostSearch categories={filteredCategories} title={title} />
       <PostList posts={posts.docs} locale={locale} />
       <Pagination totalPages={posts.totalPages} />
     </>
