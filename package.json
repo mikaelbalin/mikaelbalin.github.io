@@ -63,6 +63,7 @@
     "webpack": "^5.98.0"
   },
   "dependencies": {
+    "@ai-sdk/google": "^1.1.16",
     "@formatjs/intl-localematcher": "^0.6.0",
     "@mantine/code-highlight": "^7.17.0",
     "@mantine/core": "^7.17.0",
@@ -97,6 +98,7 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/og": "^0.6.5",
     "@vercel/speed-insights": "^1.2.0",
+    "ai": "^4.1.45",
     "clsx": "^2.1.1",
     "graphql": "^16.10.0",
     "jsonwebtoken": "^9.0.2",

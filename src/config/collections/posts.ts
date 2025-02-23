@@ -1,6 +1,7 @@
 import type { CollectionConfig, CollectionAfterReadHook } from "payload";
 import {
   BlocksFeature,
+  EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
   HorizontalRuleFeature,
   InlineToolbarFeature,
@@ -121,6 +122,7 @@ export const posts: CollectionConfig<"posts"> = {
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
+                    EXPERIMENTAL_TableFeature(),
                   ];
                 },
               }),

@@ -13,6 +13,7 @@ import {
   SerializedRelationshipNode,
   SerializedTextNode,
   SerializedUploadNode,
+  SerializedTableNode,
   TypedEditorState,
 } from "@payloadcms/richtext-lexical";
 import type {
@@ -39,6 +40,7 @@ export type CustomBlockNode<T extends JsonObject = JsonObject> = Omit<
 export type BlockTypes = "mediaBlock" | "callout" | "code" | "table" | "kbd";
 
 type NodeType =
+  | SerializedTableNode
   | SerializedAutoLinkNode
   | SerializedHeadingNode
   | SerializedHorizontalRuleNode
