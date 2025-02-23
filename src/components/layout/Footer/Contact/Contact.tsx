@@ -19,7 +19,7 @@ export const Contact = (props: ContactProps) => {
           <Grid>
             {contacts && (
               <GridCol
-                span={{ base: 12, lg: 6 }}
+                span={{ base: 12, xl: 6 }}
                 className="flex flex-col gap-6 mb-10"
               >
                 <Text>{contacts.title}</Text>
@@ -32,7 +32,7 @@ export const Contact = (props: ContactProps) => {
 
             {social && (
               <GridCol
-                span={{ base: 12, lg: 6 }}
+                span={{ base: 12, xl: 6 }}
                 className="flex flex-col gap-6"
               >
                 <Text>{social.title}</Text>
