@@ -20,6 +20,7 @@ export const PostLatest = (props: PostLatestProps) => {
         component={Link}
         href={`${locale}${latestPostsLink.url}`}
         variant="outline"
+        className="shrink-0"
       >
         {latestPostsLink.label}
       </Button>
