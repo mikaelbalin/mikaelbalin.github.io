@@ -1,6 +1,8 @@
-# [mikaellbalin.github.io](mikaellbalin.github.io)
+# [Personal Blog](mikaellbalin.com)
 
 [![pages-build-deployment](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/pages/pages-build-deployment)
+
+![Vercel Status](https://vercelbadge.vercel.app/api/mikaelbalin/mikaelbalin.github.io?style=flat)
 
 ## Installing / Getting started
 
