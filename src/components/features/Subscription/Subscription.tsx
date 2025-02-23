@@ -16,7 +16,7 @@ export const Subscription = (props: ReusableBlock) => {
       <Box className="bg-appLightColorBeige dark:bg-appDarkColorCoalBlack py-14 px-4 mt-14 sm:py-20 sm:px-12 sm:mt-26">
         <Grid>
           <GridCol span={{ base: 12, sm: 8, lg: 7 }}>
-            <Title order={3}>{title}</Title>
+            <Title order={3}>{title} &#128126;</Title>
           </GridCol>
           <GridCol
             span={{ base: 12, sm: 4 }}
