@@ -112,7 +112,6 @@ export const Default: Story = {
             type: "paragraph",
             version: 1,
             textFormat: 0,
-            textStyle: "",
           },
 
           {
@@ -123,7 +122,6 @@ export const Default: Story = {
             type: "paragraph",
             version: 1,
             textFormat: 0,
-            textStyle: "",
           },
 
           {
