@@ -67,7 +67,7 @@ export async function generateMetadata({
     lang,
   });
 
-  return generateMeta({ doc: page });
+  return generateMeta({ doc: page, lang });
 }
 
 export async function generateStaticParams(): Promise<

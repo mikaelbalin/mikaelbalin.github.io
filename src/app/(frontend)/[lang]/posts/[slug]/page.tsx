@@ -15,8 +15,8 @@ type Args = {
   }>;
 };
 
-export default async function Page(props: Args) {
-  const params = await props.params;
+export default async function Page({ params: paramsPromise }: Args) {
+  const params = await paramsPromise;
   const { slug = "" } = params;
 
   const post = await queryPostBySlug({ slug });
@@ -31,7 +31,7 @@ export async function generateMetadata({
 
   const post = await queryPostBySlug({ slug });
 
-  return generateMeta({ doc: post });
+  return generateMeta({ doc: post, lang: i18n.defaultLocale });
 }
 
 export async function generateStaticParams() {

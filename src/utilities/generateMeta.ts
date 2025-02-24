@@ -8,8 +8,9 @@ import { getServerSideURL } from "./getURL";
 export const generateMeta = async (args: {
   /** A partial Page or Post object containing metadata information. */
   doc: Partial<Page> | Partial<Post>;
+  lang: string;
 }): Promise<Metadata> => {
-  const { doc } = args || {};
+  const { doc, lang } = args || {};
 
   if (!doc?.meta) return {};
 
@@ -26,9 +27,11 @@ export const generateMeta = async (args: {
     description: doc.meta.description,
     openGraph: {
       type: "website",
-      title: title || "",
-      description: doc.meta.description || "",
-      url: doc.slug ? `${getServerSideURL()}/${doc.slug}` : getServerSideURL(),
+      title: title,
+      description: doc.meta.description,
+      url: doc.slug
+        ? `${getServerSideURL()}/${lang}/${doc.slug}`
+        : `${getServerSideURL()}/${lang}`,
       images: ogImage
         ? [
             {
