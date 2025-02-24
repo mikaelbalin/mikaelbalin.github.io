@@ -8,10 +8,10 @@ import { Post } from "@/types/payload";
 export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   doc,
   previousDoc,
-  req: { payload, context, pathname },
+  req: { payload, context, i18n, locale },
 }) => {
   if (!context.disableRevalidate) {
-    console.log({ doc, pathname });
+    console.log({ doc, i18n, locale });
 
     if (doc._status === "published") {
       const path = `/en/posts/${doc.slug}`;
