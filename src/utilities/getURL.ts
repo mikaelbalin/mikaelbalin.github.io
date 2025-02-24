@@ -38,12 +38,12 @@ export const getClientSideURL = (): string => {
     const domain = window.location.hostname;
     const port = window.location.port;
 
-    return `${protocol}//${domain}${port ? `:3000` : ""}`;
+    return `${protocol}//${domain}${port ? ":3000" : ""}`;
   }
 
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }
 
-  return process.env.NEXT_PUBLIC_SERVER_URL || "";
+  return process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 };

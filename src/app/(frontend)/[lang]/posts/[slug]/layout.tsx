@@ -48,10 +48,10 @@ export default async function Layout(props: LayoutProps) {
     slug,
   });
 
-  if (!data) return <PayloadRedirects path={`/posts/${slug}`} />;
+  if (!data) return <PayloadRedirects path={`/${lang}/posts/${slug}`} />;
 
   const { categories, title, relatedPosts, publishedAt, timeToRead } = data;
-  const currentUrl = `${getClientSideURL()}/posts/${slug}`;
+  const currentUrl = `${getClientSideURL()}/${lang}/posts/${slug}`;
 
   return (
     <>
