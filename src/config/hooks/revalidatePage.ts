@@ -8,12 +8,12 @@ import { Page } from "@/types/payload";
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,
   previousDoc,
-  req: { payload, context, pathname },
+  req: { payload, context, locale },
 }) => {
   if (!context.disableRevalidate) {
-    console.log({ doc, pathname });
     if (doc._status === "published") {
-      const path = doc.slug === "home" ? "/" : `/${doc.slug}`;
+      const path =
+        doc.slug === "home" ? `/${locale}` : `/${locale}/${doc.slug}`;
 
       payload.logger.info(`Revalidating page at path: ${path}`);
 
@@ -23,7 +23,9 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
     // If the page was previously published, we need to revalidate the old path
     if (previousDoc?._status === "published" && doc._status !== "published") {
       const oldPath =
-        previousDoc.slug === "home" ? "/" : `/${previousDoc.slug}`;
+        previousDoc.slug === "home"
+          ? `/${locale}`
+          : `/${locale}/${previousDoc.slug}`;
 
       payload.logger.info(`Revalidating old page at path: ${oldPath}`);
 
@@ -35,10 +37,11 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
 export const revalidateDelete: CollectionAfterDeleteHook<Page> = ({
   doc,
-  req: { context },
+  req: { context, locale },
 }) => {
   if (!context.disableRevalidate) {
-    const path = doc?.slug === "home" ? "/" : `/${doc?.slug}`;
+    const path =
+      doc?.slug === "home" ? `/${locale}` : `/${locale}/${doc?.slug}`;
     revalidatePath(path);
   }
 

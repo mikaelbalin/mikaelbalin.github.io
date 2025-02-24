@@ -10,6 +10,10 @@ import { getServerSideURL } from "@/utilities/getURL";
 import { meta } from "@/config/plugins/seo";
 import { reusableBlock } from "@/config/blocks/reusableBlock";
 import { search } from "@/config/blocks/search";
+import {
+  revalidateDelete,
+  revalidatePage,
+} from "@/config/hooks/revalidatePage";
 
 export const pages: CollectionConfig<"pages"> = {
   slug: "pages",
@@ -87,6 +91,8 @@ export const pages: CollectionConfig<"pages"> = {
   ],
   hooks: {
     beforeChange: [populatePublishedAt],
+    afterChange: [revalidatePage],
+    afterDelete: [revalidateDelete],
   },
   versions: {
     drafts: {
