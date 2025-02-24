@@ -13,8 +13,6 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
 
-export const revalidate = 600;
-
 type Args = Readonly<{
   params: Promise<Partial<QueryPageBySlugArgs>>;
   searchParams: Promise<{
