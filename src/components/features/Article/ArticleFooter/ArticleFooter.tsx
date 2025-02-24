@@ -12,12 +12,12 @@ export const ArticleFooter = (props: ArticleFooterProps) => {
   const { url } = props;
 
   const shareOnLinkedIn = () => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent("Check out this interesting article: " + url)}`;
     window.open(linkedInUrl, "_blank", "noopener,noreferrer");
   };
 
   const shareOnBlueSky = () => {
-    const blueSkyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(url)}`;
+    const blueSkyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent("I just read this great post: " + url)}`;
     window.open(blueSkyUrl, "_blank", "noopener,noreferrer");
   };
 
