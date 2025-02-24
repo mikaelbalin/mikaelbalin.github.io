@@ -19,9 +19,6 @@ export const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
-    select: {
-      content: true,
-    },
   });
 
   return result.docs?.[0] || null;

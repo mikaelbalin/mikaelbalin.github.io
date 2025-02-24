@@ -9,9 +9,9 @@ import { i18n } from "@/i18n-config";
 import { Content } from "@/components/ui/RichText/types";
 
 type Args = {
-  params: Promise<{
-    slug?: string;
-    lang?: string;
+  readonly params: Promise<{
+    readonly slug?: string;
+    readonly lang?: string;
   }>;
 };
 

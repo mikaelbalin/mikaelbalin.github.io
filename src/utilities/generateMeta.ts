@@ -36,6 +36,7 @@ export const generateMeta = async (args: {
             },
           ]
         : undefined,
+      siteName: "Mikael Balin",
     },
   };
 };
