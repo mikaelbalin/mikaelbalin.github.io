@@ -19,6 +19,10 @@ import { kbd } from "@/config/blocks/kbd";
 import { table } from "@/config/blocks/table";
 import { timeToReadField } from "@/config/fields/time";
 import { meta } from "@/config/plugins/seo";
+import {
+  revalidatePost,
+  revalidateDelete,
+} from "@/config/hooks/revalidatePost";
 
 // The `user` collection has access control locked so that users are not publicly accessible
 // This means that we need to populate the authors manually here to protect user privacy
@@ -223,6 +227,8 @@ export const posts: CollectionConfig<"posts"> = {
   ],
   hooks: {
     afterRead: [populateAuthors],
+    afterChange: [revalidatePost],
+    afterDelete: [revalidateDelete],
   },
   versions: {
     drafts: {
