@@ -28,6 +28,7 @@ export const queryArchivePosts = cache(async (args: queryArchivePostsArgs) => {
       collection: "posts",
       depth: 1,
       limit: limit || 5,
+      draft: false,
       locale,
       ...(flattenedCategories?.length && {
         where: {

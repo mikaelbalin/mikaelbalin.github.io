@@ -44,6 +44,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
     collection: "posts",
     depth: 1,
     limit: 25,
+    draft: false,
     select: {
       title: true,
       slug: true,
