@@ -16,7 +16,7 @@ import { MotionProvider, useMotionContext } from "@/context/motion-context";
 import { Page } from "@/types/payload";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 

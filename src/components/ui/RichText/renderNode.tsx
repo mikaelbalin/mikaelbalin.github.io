@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { CMSLink } from "@/components/ui/CMSLink";
 import { ContentChildren } from "./types";
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { JSX } from "react";
 import Link from "next/link";
 

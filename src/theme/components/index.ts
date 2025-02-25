@@ -13,7 +13,7 @@ import { PasswordInput } from "./password-input";
 import { List } from "./list";
 import { Pagination } from "./pagination";
 import { Code, Kbd } from "@mantine/core";
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 
 export const components: MantineThemeComponents = {
   Anchor: Anchor.extend({

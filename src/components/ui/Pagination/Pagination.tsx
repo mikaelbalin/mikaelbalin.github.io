@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { Container, Pagination as MantinePagination } from "@mantine/core";
 import {
   IconArrowRight,

@@ -1,4 +1,4 @@
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { Chip } from "@mantine/core";
 
 export default Chip.extend({

@@ -1,4 +1,4 @@
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { MediaBlock } from "@/components/ui/MediaBlock";
 import { Kbd, Table, TableData, TableScrollContainer } from "@mantine/core";
 import { CodeHighlight } from "@mantine/code-highlight";

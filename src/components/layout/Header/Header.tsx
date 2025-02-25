@@ -15,7 +15,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { i18n, type LocaleParams, type Locale } from "@/i18n-config";
 import { usePathname, useParams } from "next/navigation";
 import { LangugeToggle } from "@/components/ui/LangugeToggle";

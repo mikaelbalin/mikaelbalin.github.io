@@ -1,4 +1,4 @@
-import { cn } from "@/utilities/cn";
+import { cn } from "@/lib/utils";
 import { PasswordInput } from "@mantine/core";
 
 export default PasswordInput.extend({
