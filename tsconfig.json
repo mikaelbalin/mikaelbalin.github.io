@@ -22,23 +22,14 @@
         "name": "next"
       }
     ],
-
     "paths": {
       "@/components/*": ["components/*"],
-      "@/theme": ["theme/index.ts"],
-      "@/context": ["context/index.ts"],
-      "@/data/*": ["data/*"],
-      "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"],
-      "@/context/*": ["context/*"],
-      "@/utilities/*": ["utilities/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/fields/*": ["fields/*"],
-      "@/blocks/*": ["blocks/*"],
-      "@/endpoints/*": ["endpoints/*"],
-      "@/heros/*": ["heros/*"],
-      "@/access/*": ["access/*"],
       "@/config/*": ["config/*"],
+      "@/context/*": ["context/*"],
+      "@/lib/*": ["lib/*"],
+      "@/theme": ["theme/index.ts"],
+      "@/types/*": ["types/*"],
+      "@/utilities/*": ["utilities/*"],
       "@/i18n-config": ["i18n-config.ts"],
       "@payload-config": ["payload.config.ts"]
     }
