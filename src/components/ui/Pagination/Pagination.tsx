@@ -12,10 +12,13 @@ import {
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export const Pagination: React.FC<{
+interface PaginationProps
+  extends Pick<React.ComponentProps<typeof Container>, "className"> {
   totalPages: number;
-}> = (props) => {
-  const { totalPages } = props;
+}
+
+export const Pagination: React.FC<PaginationProps> = (props) => {
+  const { totalPages, className } = props;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -56,7 +59,7 @@ export const Pagination: React.FC<{
   };
 
   return totalPages > 1 ? (
-    <Container className={cn("flex justify-center", "mt-14 sm:mt-26")}>
+    <Container className={cn(className)}>
       <MantinePagination
         total={totalPages}
         value={activePage}

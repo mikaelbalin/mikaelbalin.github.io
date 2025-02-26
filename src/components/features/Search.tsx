@@ -71,7 +71,10 @@ export const Search: React.FC<SearchBlockProps> = async ({
     <>
       <PostSearch categories={filteredCategories} title={title} />
       <PostList posts={posts.docs} locale={locale} />
-      <Pagination totalPages={posts.totalPages} />
+      <Pagination
+        totalPages={posts.totalPages}
+        className="flex justify-center mt-14 sm:mt-26"
+      />
     </>
   );
 };

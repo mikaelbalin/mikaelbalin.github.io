@@ -5,6 +5,12 @@ const meta = {
   title: "Pagination",
   component: Pagination,
   tags: ["autodocs"],
+  parameters: {
+    nextjs: {
+      // 👇 As in the Next.js application, next/navigation only works using App Router
+      appDirectory: true,
+    },
+  },
 } satisfies Meta<typeof Pagination>;
 
 export default meta;
