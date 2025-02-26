@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Textarea, TextareaProps } from "@mantine/core";
+import { fn } from "@storybook/test";
 
 const meta = {
   title: "Textarea",
   component: Textarea,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
   argTypes: {
     variant: {
@@ -14,7 +12,7 @@ const meta = {
       control: "radio",
     },
   },
-  // args: { onClick: fn() },
+  args: { onChange: fn() },
 } satisfies Meta<typeof Textarea>;
 
 export default meta;

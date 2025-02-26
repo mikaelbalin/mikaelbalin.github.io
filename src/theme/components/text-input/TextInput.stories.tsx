@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TextInput, TextInputProps } from "@mantine/core";
+import { fn } from "@storybook/test";
 
 const meta = {
   title: "TextInput",
   component: TextInput,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
   argTypes: {
     variant: {
@@ -14,7 +12,7 @@ const meta = {
       control: "radio",
     },
   },
-  // args: { onClick: fn() },
+  args: { onChange: fn() },
 } satisfies Meta<typeof TextInput>;
 
 export default meta;

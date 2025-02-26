@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PasswordInput, PasswordInputProps } from "@mantine/core";
+import { fn } from "@storybook/test";
 
 const meta = {
   title: "PasswordInput",
   component: PasswordInput,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
   argTypes: {
     variant: {
@@ -14,7 +12,7 @@ const meta = {
       control: "radio",
     },
   },
-  // args: { onClick: fn() },
+  args: { onChange: fn() },
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;
