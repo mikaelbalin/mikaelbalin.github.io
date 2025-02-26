@@ -17,7 +17,9 @@ export function Footer(props: FooterProps) {
           <Contact contacts={contacts} social={social} form={form} />
         )}
 
-      {navigation && <FooterNavigation navigation={navigation} />}
+      {navigation?.navItems && navigation.navItems.length > 0 && (
+        <FooterNavigation navigation={navigation} />
+      )}
     </footer>
   );
 }
