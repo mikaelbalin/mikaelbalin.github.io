@@ -2,8 +2,9 @@ import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { cache } from "react";
 import { draftMode } from "next/headers";
+import { PostQueryArgs } from "@/types/args";
 
-export const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
+export const getPostBySlug = cache(async ({ slug }: PostQueryArgs) => {
   const { isEnabled: draft } = await draftMode();
 
   const payload = await getPayload({ config: configPromise });

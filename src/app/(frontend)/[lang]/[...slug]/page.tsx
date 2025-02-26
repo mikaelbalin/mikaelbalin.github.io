@@ -4,17 +4,15 @@ import React from "react";
 import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
-import {
-  queryPageBySlug,
-  type QueryPageBySlugArgs,
-} from "@/utilities/queryPageBySlug";
+import { getPageBySlug } from "@/utilities/queryPageBySlug";
 import { i18n } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
+import { PageQueryArgs } from "@/types/args";
 
 type Args = Readonly<{
-  params: Promise<Partial<QueryPageBySlugArgs>>;
+  params: Promise<PageQueryArgs>;
   searchParams: Promise<{
     category: string;
     page: unknown;
@@ -31,7 +29,7 @@ export default async function Page({
   const slug = slugs[0];
   const path = `/${slug}`;
 
-  const pageData = await queryPageBySlug({
+  const pageData = await getPageBySlug({
     slug: slugs,
     lang,
   });
@@ -62,7 +60,7 @@ export async function generateMetadata({
   params: paramsPromise,
 }: Args): Promise<Metadata> {
   const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
-  const page = await queryPageBySlug({
+  const page = await getPageBySlug({
     slug,
     lang,
   });
@@ -70,12 +68,7 @@ export async function generateMetadata({
   return generateMeta({ doc: page, lang });
 }
 
-export async function generateStaticParams(): Promise<
-  {
-    lang: "pt" | "en";
-    slug?: string[];
-  }[]
-> {
+export async function generateStaticParams(): Promise<PageQueryArgs[]> {
   const payload = await getPayload({ config: configPromise });
   const pages = await payload.find({
     collection: "pages",
@@ -88,15 +81,14 @@ export async function generateStaticParams(): Promise<
     },
   });
 
-  const params: {
-    lang: "en" | "pt";
-    slug?: string[];
-  }[] = pages.docs.filter(hasSlug).flatMap(({ slug }) => {
-    return i18n.locales.map((lang) => ({
-      lang,
-      slug: slug === "home" ? undefined : [slug],
-    }));
-  });
+  const params: PageQueryArgs[] = pages.docs
+    .filter(hasSlug)
+    .flatMap(({ slug }) => {
+      return i18n.locales.map((lang) => ({
+        lang,
+        slug: slug === "home" ? undefined : [slug],
+      }));
+    });
 
   return params;
 }
