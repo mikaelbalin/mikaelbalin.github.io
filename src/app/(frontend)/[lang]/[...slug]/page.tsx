@@ -5,9 +5,6 @@ import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
 import { i18n } from "@/i18n-config";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
-import { hasSlug } from "@/utilities/hasSlug";
 import { PageQueryArgs } from "@/types/args";
 import { PageService } from "@/lib/services/PageService";
 
@@ -69,26 +66,6 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<PageQueryArgs[]> {
-  const payload = await getPayload({ config: configPromise });
-  const pages = await payload.find({
-    collection: "pages",
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  });
-
-  const params: PageQueryArgs[] = pages.docs
-    .filter(hasSlug)
-    .flatMap(({ slug }) => {
-      return i18n.locales.map((lang) => ({
-        lang,
-        slug: slug === "home" ? undefined : [slug],
-      }));
-    });
-
+  const params = await PageService.getAllSlugs();
   return params;
 }
