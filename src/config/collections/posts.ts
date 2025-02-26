@@ -111,6 +111,7 @@ export const posts: CollectionConfig<"posts"> = {
       type: "tabs",
       tabs: [
         {
+          label: "Content",
           fields: [
             {
               name: "content",
@@ -134,9 +135,9 @@ export const posts: CollectionConfig<"posts"> = {
               required: true,
             },
           ],
-          label: "Content",
         },
         {
+          label: "Meta",
           fields: [
             {
               name: "relatedPosts",
@@ -164,7 +165,6 @@ export const posts: CollectionConfig<"posts"> = {
               relationTo: "categories",
             },
           ],
-          label: "Meta",
         },
         meta,
       ],
