@@ -2,8 +2,10 @@ import { cache } from "react";
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import { PostQueryArgs } from "@/types/args";
+import { PostQueryArgs, PostQueryParams } from "@/types/args";
 import { Category } from "@/types/payload";
+import { hasSlug } from "@/utilities/hasSlug";
+import { i18n } from "@/i18n-config";
 
 function isCategory(value: unknown): value is Category {
   return (
@@ -96,4 +98,26 @@ export class PostService {
           : doc.relatedPosts,
     };
   });
+
+  static async getAllSlugs(): Promise<PostQueryParams[]> {
+    const payload = await this.getPayloadClient();
+
+    const posts = await payload.find({
+      collection: "posts",
+      draft: false,
+      limit: 100,
+      overrideAccess: false,
+      pagination: false,
+      select: {
+        slug: true,
+      },
+    });
+
+    return posts.docs.filter(hasSlug).flatMap(({ slug }) => {
+      return i18n.locales.map((lang) => ({
+        lang,
+        slug,
+      }));
+    });
+  }
 }

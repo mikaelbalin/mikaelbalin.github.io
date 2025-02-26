@@ -57,6 +57,7 @@ export async function generateMetadata({
   params: paramsPromise,
 }: Args): Promise<Metadata> {
   const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
+
   const page = await PageService.getBySlug({
     slug,
     lang,

@@ -5,11 +5,9 @@ export type PageQueryParams = {
   lang: Locale | "all";
 };
 
-export type PostQueryParams = Partial<
-  {
-    slug: string;
-  } & Pick<PageQueryParams, "lang">
->;
+export type PostQueryParams = {
+  slug: string;
+} & Pick<PageQueryParams, "lang">;
 
 export type PageQueryArgs = Partial<PageQueryParams>;
 export type PostQueryArgs = Partial<PostQueryParams>;
