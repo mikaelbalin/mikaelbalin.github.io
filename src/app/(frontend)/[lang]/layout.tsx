@@ -1,16 +1,12 @@
-import { cache } from "react";
 import { draftMode } from "next/headers";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { getPayload } from "payload";
-import configPromise from "@payload-config";
 import { ThemeProvider } from "@/theme";
 import { AdminBar } from "@/components/ui/AdminBar";
 import { LivePreviewListener } from "@/components/ui/LivePreviewListener";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import type { FooterSelect, HeaderSelect } from "@/types/payload";
 import { Notifications } from "@mantine/notifications";
 import { ColorSchemeScript } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -19,30 +15,7 @@ import "./global.css";
 import { Metadata } from "next";
 import { getServerSideURL } from "@/utilities/getURL";
 import { LocaleParams } from "@/i18n-config";
-
-const getHeader = cache(async (lang: "en" | "pt") => {
-  const payload = await getPayload({ config: configPromise });
-
-  const global = await payload.findGlobal<"header", HeaderSelect>({
-    slug: "header",
-    depth: 0,
-    locale: lang,
-  });
-
-  return global;
-});
-
-const getFooter = cache(async (lang: "en" | "pt") => {
-  const payload = await getPayload({ config: configPromise });
-
-  const global = await payload.findGlobal<"footer", FooterSelect>({
-    slug: "footer",
-    depth: 1,
-    locale: lang,
-  });
-
-  return global;
-});
+import { PageService } from "@/lib/services/PageService";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,8 +29,10 @@ export default async function RootLayout(
   const { lang } = await props.params;
 
   const { isEnabled } = await draftMode();
-  const header = await getHeader(lang);
-  const footer = await getFooter(lang);
+  const [header, footer] = await Promise.all([
+    PageService.getHeader(lang),
+    PageService.getFooter(lang),
+  ]);
 
   return (
     <html lang={lang} className="relative" suppressHydrationWarning>

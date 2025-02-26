@@ -5,6 +5,7 @@ import configPromise from "@payload-config";
 import { PageQueryArgs, PageQueryParams } from "@/types/args";
 import { hasSlug } from "@/utilities/hasSlug";
 import { i18n } from "@/i18n-config";
+import { FooterSelect, HeaderSelect } from "@/types/payload";
 
 export class PageService {
   private static async getPayloadClient() {
@@ -51,4 +52,28 @@ export class PageService {
       }));
     });
   }
+
+  static getHeader = cache(async (lang: "en" | "pt") => {
+    const payload = await this.getPayloadClient();
+
+    const global = await payload.findGlobal<"header", HeaderSelect>({
+      slug: "header",
+      depth: 0,
+      locale: lang,
+    });
+
+    return global;
+  });
+
+  static getFooter = cache(async (lang: "en" | "pt") => {
+    const payload = await this.getPayloadClient();
+
+    const global = await payload.findGlobal<"footer", FooterSelect>({
+      slug: "footer",
+      depth: 1,
+      locale: lang,
+    });
+
+    return global;
+  });
 }
