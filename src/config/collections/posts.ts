@@ -142,9 +142,6 @@ export const posts: CollectionConfig<"posts"> = {
             {
               name: "relatedPosts",
               type: "relationship",
-              admin: {
-                position: "sidebar",
-              },
               filterOptions: ({ id }) => {
                 return {
                   id: {
@@ -158,9 +155,6 @@ export const posts: CollectionConfig<"posts"> = {
             {
               name: "categories",
               type: "relationship",
-              admin: {
-                position: "sidebar",
-              },
               hasMany: true,
               relationTo: "categories",
             },
