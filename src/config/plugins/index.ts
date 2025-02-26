@@ -1,7 +1,6 @@
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
 import { Plugin, TextField } from "payload";
-import { revalidateRedirects } from "@/config/hooks/revalidateRedirects";
 import slugify from "@sindresorhus/slugify";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { formBuilderPluginConfig } from "./form";
@@ -30,9 +29,6 @@ export const plugins: Plugin[] = [
           }
           return field;
         });
-      },
-      hooks: {
-        afterChange: [revalidateRedirects],
       },
     },
   }),
