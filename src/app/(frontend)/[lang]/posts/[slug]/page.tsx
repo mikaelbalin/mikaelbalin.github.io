@@ -1,13 +1,13 @@
 import { ArticleContent } from "@/components/features/Article/ArticleContent";
 import { Metadata } from "next";
 import { generateMeta } from "@/utilities/generateMeta";
-import { getPostBySlug } from "@/utilities/queryPostBySlug";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
 import { i18n } from "@/i18n-config";
 import { Content } from "@/components/ui/RichText/types";
 import { PostQueryParams } from "@/types/args";
+import { PostService } from "@/lib/services/PostService";
 
 type Args = {
   readonly params: Promise<PostQueryParams>;
@@ -17,7 +17,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const params = await paramsPromise;
   const { slug = "" } = params;
 
-  const post = await getPostBySlug({ slug });
+  const post = await await PostService.getBySlug({ slug });
 
   return <ArticleContent content={post.content as Content} />;
 }
@@ -27,7 +27,7 @@ export async function generateMetadata({
 }: Args): Promise<Metadata> {
   const { slug = "" } = await paramsPromise;
 
-  const post = await getPostBySlug({ slug });
+  const post = await await PostService.getBySlug({ slug });
 
   return generateMeta({ doc: post, lang: i18n.defaultLocale });
 }

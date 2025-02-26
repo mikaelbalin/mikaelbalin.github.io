@@ -4,12 +4,12 @@ import React from "react";
 import { RenderBlocks } from "@/components/features/RenderBlocks";
 import { Hero } from "@/components/features/Hero";
 import { generateMeta } from "@/utilities/generateMeta";
-import { getPageBySlug } from "@/utilities/queryPageBySlug";
 import { i18n } from "@/i18n-config";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
 import { hasSlug } from "@/utilities/hasSlug";
 import { PageQueryArgs } from "@/types/args";
+import { PageService } from "@/lib/services/PageService";
 
 type Args = Readonly<{
   params: Promise<PageQueryArgs>;
@@ -29,7 +29,7 @@ export default async function Page({
   const slug = slugs[0];
   const path = `/${slug}`;
 
-  const pageData = await getPageBySlug({
+  const pageData = await PageService.getBySlug({
     slug: slugs,
     lang,
   });
@@ -60,7 +60,7 @@ export async function generateMetadata({
   params: paramsPromise,
 }: Args): Promise<Metadata> {
   const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
-  const page = await getPageBySlug({
+  const page = await PageService.getBySlug({
     slug,
     lang,
   });
