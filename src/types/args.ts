@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n-config";
+import { ArchiveBlock } from "@/types/payload";
 
 export type PageQueryParams = {
   slug: string[];
@@ -11,3 +12,11 @@ export type PostQueryParams = {
 
 export type PageQueryArgs = Partial<PageQueryParams>;
 export type PostQueryArgs = Partial<PostQueryParams>;
+
+export interface ArchivePostsArgs
+  extends Pick<
+    ArchiveBlock,
+    "categories" | "limit" | "populateBy" | "selectedDocs"
+  > {
+  locale: "en" | "pt" | "all";
+}

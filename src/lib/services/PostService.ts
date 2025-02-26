@@ -2,8 +2,8 @@ import { cache } from "react";
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import configPromise from "@payload-config";
-import { PostQueryArgs, PostQueryParams } from "@/types/args";
-import { Category } from "@/types/payload";
+import { ArchivePostsArgs, PostQueryArgs, PostQueryParams } from "@/types/args";
+import { Category, Post } from "@/types/payload";
 import { hasSlug } from "@/utilities/hasSlug";
 import { i18n } from "@/i18n-config";
 
@@ -120,4 +120,43 @@ export class PostService {
       }));
     });
   }
+
+  static queryArchivePosts = cache(async (args: ArchivePostsArgs) => {
+    const { categories, limit, populateBy, selectedDocs, locale } = args;
+
+    let posts: Post[] = [];
+
+    if (populateBy === "collection") {
+      const payload = await getPayload({ config: configPromise });
+
+      const flattenedCategories = categories?.map((category) => {
+        if (typeof category === "object") return category.id;
+        else return category;
+      });
+
+      const fetchedPosts = await payload.find({
+        collection: "posts",
+        depth: 1,
+        limit: limit || 5,
+        draft: false,
+        locale,
+        ...(flattenedCategories?.length && {
+          where: {
+            categories: {
+              in: flattenedCategories,
+            },
+          },
+        }),
+        sort: "-publishedAt",
+      });
+
+      posts = fetchedPosts.docs;
+    } else if (selectedDocs?.length) {
+      posts = selectedDocs
+        .map((post) => (typeof post.value === "object" ? post.value : null))
+        .filter((post): post is Post => post !== null);
+    }
+
+    return posts;
+  });
 }
