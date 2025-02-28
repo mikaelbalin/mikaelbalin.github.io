@@ -1,6 +1,6 @@
 import { SearchBlock } from "@/types/payload";
 import { PostSearch } from "@/components/features/Post/PostSearch";
-import { getPayload } from "payload";
+import { getPayload, Where } from "payload";
 import configPromise from "@payload-config";
 import { notFound } from "next/navigation";
 import { PostList } from "@/components/features/Post/PostList";
@@ -40,6 +40,22 @@ export const Search: React.FC<SearchBlockProps> = async ({
     (category) => category.relatedPosts?.docs?.length,
   );
 
+  const queryFilter: Where[] = [
+    {
+      _status: {
+        equals: "published",
+      },
+    },
+  ];
+
+  if (category !== "all") {
+    queryFilter.push({
+      "categories.breadcrumbs.url": {
+        equals: `/${category}`,
+      },
+    });
+  }
+
   const posts = await payload.find({
     collection: "posts",
     depth: 1,
@@ -53,17 +69,9 @@ export const Search: React.FC<SearchBlockProps> = async ({
       timeToRead: true,
     },
     page: sanitizedPageNumber,
-    ...(category !== "all" && {
-      where: {
-        and: [
-          {
-            "categories.breadcrumbs.url": {
-              equals: `/${category}`,
-            },
-          },
-        ],
-      },
-    }),
+    where: {
+      and: queryFilter,
+    },
     sort: "-publishedAt",
   });
 
