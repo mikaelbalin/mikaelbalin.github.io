@@ -16,7 +16,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const post = await await PostService.getBySlug({ slug });
 
-  return <ArticleContent content={post.content as Content} />;
+  return post ? <ArticleContent content={post.content as Content} /> : null;
 }
 
 export async function generateMetadata({
