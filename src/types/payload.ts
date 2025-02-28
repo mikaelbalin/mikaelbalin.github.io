@@ -239,9 +239,10 @@ export interface Category {
   id: number;
   title: string;
   relatedPosts?: {
-    docs?: (number | Post)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
+    docs?: (number | Post)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   parent?: (number | null) | Category;
   breadcrumbs?:
     | {
