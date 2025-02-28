@@ -34,6 +34,9 @@ export class PostService {
       where: {
         slug: { equals: slug },
       },
+      select: {
+        content: true,
+      },
     });
 
     return result.docs?.[0] || null;
