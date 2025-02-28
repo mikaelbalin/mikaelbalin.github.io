@@ -45,12 +45,14 @@ export class PageService {
       },
     });
 
-    return pages.docs.filter(hasSlug).flatMap(({ slug }) => {
+    const slugs = pages.docs.filter(hasSlug).flatMap(({ slug }) => {
       return i18n.locales.map((lang) => ({
         lang,
-        slug: slug === "home" ? undefined : [slug],
+        slug: [slug],
       }));
     });
+
+    return slugs;
   }
 
   static getHeader = cache(async (lang: "en" | "pt") => {
