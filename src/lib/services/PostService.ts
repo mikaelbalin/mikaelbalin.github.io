@@ -93,7 +93,7 @@ export class PostService {
     return {
       ...doc,
       relatedPosts:
-        Array.isArray(doc.relatedPosts) && doc.relatedPosts.length === 0
+        Array.isArray(doc?.relatedPosts) && doc.relatedPosts.length === 0
           ? similarPosts?.docs
           : doc.relatedPosts,
     };
