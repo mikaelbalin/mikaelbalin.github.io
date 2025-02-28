@@ -10,7 +10,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   devIndicators: {
-    buildActivityPosition: "bottom-right",
+    position: "bottom-right",
   },
   experimental: {
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
