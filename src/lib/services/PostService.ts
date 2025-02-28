@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { draftMode } from "next/headers";
-import { getPayload } from "payload";
+import { getPayload, Where } from "payload";
 import configPromise from "@payload-config";
 import { ArchivePostsArgs, PostQueryArgs, PostQueryParams } from "@/types/args";
 import { Category, Post } from "@/types/payload";
@@ -134,19 +134,31 @@ export class PostService {
         else return category;
       });
 
+      const queryFilter: Where[] = [
+        {
+          _status: {
+            equals: "published",
+          },
+        },
+      ];
+
+      if (flattenedCategories?.length) {
+        queryFilter.push({
+          categories: {
+            in: flattenedCategories,
+          },
+        });
+      }
+
       const fetchedPosts = await payload.find({
         collection: "posts",
         depth: 1,
         limit: limit || 5,
         draft: false,
         locale,
-        ...(flattenedCategories?.length && {
-          where: {
-            categories: {
-              in: flattenedCategories,
-            },
-          },
-        }),
+        where: {
+          and: queryFilter,
+        },
         sort: "-publishedAt",
       });
 
