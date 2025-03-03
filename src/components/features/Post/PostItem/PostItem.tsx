@@ -10,7 +10,7 @@ import Link from "next/link";
 
 type PostCardProps = Pick<
   Post,
-  "slug" | "categories" | "title" | "publishedAt" | "timeToRead"
+  "slug" | "relatedCategories" | "title" | "publishedAt" | "timeToRead"
 > & {
   relationTo?: "posts";
   locale: "en" | "pt" | "all";
@@ -20,7 +20,7 @@ export const PostItem = (props: PostCardProps) => {
   const {
     title,
     slug,
-    categories,
+    relatedCategories: categories,
     publishedAt,
     relationTo,
     timeToRead,

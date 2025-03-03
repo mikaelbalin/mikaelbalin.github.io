@@ -67,7 +67,7 @@ export class PostService {
       },
     });
 
-    const firstCategory = result.docs[0]?.categories?.[0];
+    const firstCategory = result.docs[0]?.relatedCategories?.[0];
 
     const similarPosts = isCategory(firstCategory)
       ? await payload.find({

@@ -33,7 +33,8 @@ export default async function Layout(props: LayoutProps) {
 
   if (!data) return <PayloadRedirects path={`/${lang}/posts/${slug}`} />;
 
-  const { categories, title, relatedPosts, publishedAt, timeToRead } = data;
+  const { relatedCategories, title, relatedPosts, publishedAt, timeToRead } =
+    data;
   const currentUrl = `${getClientSideURL()}/${lang}/posts/${slug}`;
 
   return (
@@ -42,7 +43,9 @@ export default async function Layout(props: LayoutProps) {
         <ArticleHeader
           title={title}
           categories={
-            Array.isArray(categories) ? filterPayloadRelations(categories) : []
+            Array.isArray(relatedCategories)
+              ? filterPayloadRelations(relatedCategories)
+              : []
           }
           date={formatDateTime(publishedAt)}
           timeToRead={timeToRead}
