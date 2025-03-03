@@ -72,7 +72,7 @@ export const posts: CollectionConfig<"posts"> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
+    relatedCategories: true,
     meta: {
       image: true,
       description: true,
@@ -105,7 +105,6 @@ export const posts: CollectionConfig<"posts"> = {
       name: "title",
       type: "text",
       required: true,
-      localized: true,
     },
     {
       type: "tabs",
@@ -153,7 +152,7 @@ export const posts: CollectionConfig<"posts"> = {
               relationTo: "posts",
             },
             {
-              name: "categories",
+              name: "relatedCategories",
               type: "relationship",
               hasMany: true,
               relationTo: "categories",

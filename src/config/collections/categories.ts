@@ -22,7 +22,7 @@ export const categories: CollectionConfig = {
       name: "relatedPosts",
       type: "join",
       collection: "posts",
-      on: "categories",
+      on: "relatedCategories",
     },
   ],
 };

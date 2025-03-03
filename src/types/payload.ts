@@ -278,7 +278,7 @@ export interface Post {
     [k: string]: unknown;
   };
   relatedPosts?: (number | Post)[] | null;
-  categories?: (number | Category)[] | null;
+  relatedCategories?: (number | Category)[] | null;
   meta: {
     title: string;
     /**
@@ -937,7 +937,7 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   content?: T;
   relatedPosts?: T;
-  categories?: T;
+  relatedCategories?: T;
   meta?:
     | T
     | {

@@ -57,7 +57,6 @@ export const pages: CollectionConfig<"pages"> = {
       name: "title",
       type: "text",
       required: true,
-      localized: true,
     },
     {
       type: "tabs",
