@@ -18,7 +18,7 @@ import { header } from "@/config/globals/header";
 import { defaultLexical } from "@/config/fields/defaultLexical";
 import { i18n } from "@/i18n-config";
 import { reusableBlocks } from "@/config/collections/reusableBlocks";
-// import { migrations } from "./migrations";
+import { migrations } from "./migrations";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);
@@ -82,7 +82,7 @@ export default buildConfig({
         },
       })
     : vercelPostgresAdapter({
-        // prodMigrations: migrations,
+        prodMigrations: migrations,
         pool: {
           connectionString: process.env.POSTGRES_URL || "",
           min: 0,
