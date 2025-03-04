@@ -6,6 +6,7 @@
     "dev:db": "pnpm db:up && wait-on tcp:5432 && pnpm dev",
     "dev": "next dev --turbopack",
     "build": "next build",
+    "ci": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload migrate && pnpm build",
     "start": "next start",
     "lint": "eslint .",
     "check-types": "tsc --noEmit",
