@@ -48,7 +48,7 @@ export const plugins: Plugin[] = [
   formBuilderPluginConfig,
   searchPluginConfig,
   vercelBlobStorage({
-    enabled: process.env.NODE_ENV !== "development", // Optional, defaults to true
+    enabled: true, // Optional, defaults to true
     // Specify which collections should use Vercel Blob
     collections: {
       media: true,
