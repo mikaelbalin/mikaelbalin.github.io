@@ -89,7 +89,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE IF NOT EXISTS "pages" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"title" varchar,
   	"hero_type" "enum_pages_hero_type",
   	"hero_titles" jsonb,
   	"hero_contact_link_link_type" "enum_pages_hero_contact_link_link_type" DEFAULT 'reference',
@@ -104,6 +103,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   
   CREATE TABLE IF NOT EXISTS "pages_locales" (
+  	"title" varchar,
   	"hero_title" varchar,
   	"hero_description" varchar,
   	"hero_location" varchar,
@@ -195,7 +195,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE IF NOT EXISTS "_pages_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
-  	"version_title" varchar,
   	"version_hero_type" "enum__pages_v_version_hero_type",
   	"version_hero_titles" jsonb,
   	"version_hero_contact_link_link_type" "enum__pages_v_version_hero_contact_link_link_type" DEFAULT 'reference',
@@ -216,6 +215,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   
   CREATE TABLE IF NOT EXISTS "_pages_v_locales" (
+  	"version_title" varchar,
   	"version_hero_title" varchar,
   	"version_hero_description" varchar,
   	"version_hero_location" varchar,
@@ -247,7 +247,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   CREATE TABLE IF NOT EXISTS "posts" (
   	"id" serial PRIMARY KEY NOT NULL,
-  	"title" varchar,
   	"content" jsonb,
   	"published_at" timestamp(3) with time zone,
   	"slug" varchar,
@@ -260,6 +259,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   
   CREATE TABLE IF NOT EXISTS "posts_locales" (
+  	"title" varchar,
   	"meta_title" varchar,
   	"meta_image_id" integer,
   	"meta_description" varchar,
@@ -289,7 +289,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE TABLE IF NOT EXISTS "_posts_v" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"parent_id" integer,
-  	"version_title" varchar,
   	"version_content" jsonb,
   	"version_published_at" timestamp(3) with time zone,
   	"version_slug" varchar,
@@ -308,6 +307,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   );
   
   CREATE TABLE IF NOT EXISTS "_posts_v_locales" (
+  	"version_title" varchar,
   	"version_meta_title" varchar,
   	"version_meta_image_id" integer,
   	"version_meta_description" varchar,
