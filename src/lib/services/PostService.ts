@@ -60,7 +60,7 @@ export class PostService {
       },
       select: {
         title: true,
-        categories: true,
+        relatedCategories: true,
         relatedPosts: true,
         publishedAt: true,
         timeToRead: true,
@@ -77,7 +77,7 @@ export class PostService {
           where: {
             and: [
               {
-                "categories.title": {
+                "relatedCategories.title": {
                   equals: firstCategory.title,
                 },
               },
