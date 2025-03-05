@@ -13,7 +13,11 @@ const nextConfig = {
     position: "bottom-right",
   },
   experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    optimizePackageImports: [
+      "@mantine/core",
+      "@mantine/hooks",
+      "@mantine/code-highlight",
+    ],
   },
   images: {
     remotePatterns: [
