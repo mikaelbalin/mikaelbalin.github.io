@@ -13,6 +13,7 @@
     "incremental": true,
     "jsx": "preserve",
     "module": "ESNext",
+    "allowImportingTsExtensions": true,
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "sourceMap": true,
