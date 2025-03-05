@@ -5,7 +5,7 @@ import { buildConfig } from "payload";
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
 import { resendAdapter } from "@payloadcms/email-resend";
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { plugins } from "./config/plugins/index.js";
+import { plugins } from "./config/plugins/index.ts";
 import { getServerSideURL } from "@/utilities/getURL";
 import { categories } from "./config/collections/categories";
 import { media } from "./config/collections/media";
