@@ -50,7 +50,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
 
   if (category !== "all") {
     queryFilter.push({
-      "categories.breadcrumbs.url": {
+      "relatedCategories.breadcrumbs.url": {
         equals: `/${category}`,
       },
     });
