@@ -64,7 +64,7 @@ export const Search: React.FC<SearchBlockProps> = async ({
     select: {
       title: true,
       slug: true,
-      categories: true,
+      relatedCategories: true,
       publishedAt: true,
       timeToRead: true,
     },
