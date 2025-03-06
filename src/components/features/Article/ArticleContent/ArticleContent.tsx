@@ -1,6 +1,3 @@
-"use client";
-
-import { useRef } from "react";
 import { Container, Grid, GridCol } from "@mantine/core";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
 import { RichText } from "@/components/ui/RichText";
@@ -12,12 +9,11 @@ type ArticleContentProps = {
 
 export const ArticleContent = (props: ArticleContentProps) => {
   const { content } = props;
-  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <Container>
       <Grid>
-        <GridCol span={{ base: 12, sm: 9 }} ref={ref}>
+        <GridCol span={{ base: 12, sm: 9 }} id="article-content">
           <RichText content={content} className="-mb-8" />
         </GridCol>
         <GridCol
@@ -26,7 +22,7 @@ export const ArticleContent = (props: ArticleContentProps) => {
           offset={2}
           className="hidden sm:block"
         >
-          <ProgressIndicator target={ref} />
+          <ProgressIndicator targetId="article-content" />
         </GridCol>
       </Grid>
     </Container>

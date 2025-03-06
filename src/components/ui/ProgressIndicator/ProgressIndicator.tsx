@@ -1,19 +1,25 @@
 "use client";
 
-import { RefObject } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { Text } from "@mantine/core";
 
 interface ProgressIndicatorProps {
-  target: RefObject<HTMLDivElement | null>;
+  targetId: string;
 }
 
 /**
  * `useMotionValueEvent` is a hook that allows you to listen to changes in a `motionValue` and execute a callback function when the value changes.
  */
-export const ProgressIndicator = ({ target }: ProgressIndicatorProps) => {
+export const ProgressIndicator = ({ targetId }: ProgressIndicatorProps) => {
+  const elementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    elementRef.current = document.getElementById(targetId);
+  }, [targetId]);
+
   const { scrollYProgress } = useScroll({
-    target,
+    target: elementRef,
     offset: ["start end", "end start"],
   });
 
