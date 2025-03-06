@@ -1,20 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { createHighlighter } from "shiki";
-
-const highlighter = createHighlighter({
-  themes: ["github-dark"],
-  langs: [
-    // "bash",
-    // "css",
-    // "html",
-    "javascript",
-    // "json",
-    // "tsx",
-    // "typescript",
-    // "xml",
-    // "text",
-  ],
-});
+import React from "react";
+import { codeToHtml } from "shiki";
 
 export interface CodeHighlightProps {
   code: string;
@@ -22,26 +7,17 @@ export interface CodeHighlightProps {
   className?: string;
 }
 
-export const CodeHighlight: React.FC<CodeHighlightProps> = ({
+export const CodeHighlight = async ({
   code,
   language,
   className,
-}) => {
-  const [html, setHtml] = useState<string>("");
-
-  useEffect(() => {
-    const loadHighlighter = async () => {
-      const highlightedCode = (await highlighter).codeToHtml(code, {
-        lang: language,
-        theme: "github-dark",
-      });
-      setHtml(highlightedCode);
-    };
-
-    loadHighlighter();
-  }, [code, language]);
+}: CodeHighlightProps) => {
+  const html = await codeToHtml(code, {
+    lang: language,
+    theme: "github-dark",
+  });
 
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: html }} />
+    <pre className={className} dangerouslySetInnerHTML={{ __html: html }} />
   );
 };

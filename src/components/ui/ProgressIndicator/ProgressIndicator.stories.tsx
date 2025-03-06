@@ -19,10 +19,11 @@ export const Default: Story = {
         <div className="flex h-screen">
           <div
             className="bg-[var(--mantine-color-blue-light)] w-32"
+            id="content"
             ref={ref}
           />
           <div className="px-2">
-            <ProgressIndicator target={ref} />
+            <ProgressIndicator targetId="content" />
           </div>
         </div>
         <div className="bg-[var(--mantine-color-blue-light)] w-full h-screen mt-2" />
