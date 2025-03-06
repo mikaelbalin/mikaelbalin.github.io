@@ -1,5 +1,4 @@
 import { JSX } from "react";
-import "@mantine/code-highlight/styles.css";
 import {
   ContentChildren,
   SerializeLexical,

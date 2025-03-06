@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { MediaBlock } from "@/components/ui/MediaBlock";
 import { Kbd, Table, TableData, TableScrollContainer } from "@mantine/core";
-import { CodeHighlight } from "@mantine/code-highlight";
 import {
   KbdInlineBlockProps,
   SerializeLexical,
@@ -14,6 +13,7 @@ import type {
 } from "@/types/payload";
 import { BlockFields, SerializedTextNode } from "@payloadcms/richtext-lexical";
 import { Callout } from "@/components/ui/Callout";
+import { CodeHighlight } from "@/components/ui/CodeHighlight";
 
 export const isValidNode = (node: unknown): node is SerializedTextNode => {
   if (!node || typeof node !== "object") return false;
@@ -72,7 +72,7 @@ export const renderBlock = ({
           key={index}
           className="mb-8"
           code={block.code}
-          language={block.language || undefined}
+          language={"javascript"}
         />
       );
     case "table":

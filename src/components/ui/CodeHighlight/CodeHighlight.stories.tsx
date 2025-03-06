@@ -1,5 +1,5 @@
-import { CodeHighlight, CodeHighlightProps } from "@mantine/code-highlight";
 import { Meta, StoryObj } from "@storybook/react";
+import { CodeHighlight, CodeHighlightProps } from "./CodeHighlight";
 
 export default {
   title: "CodeHighlight",

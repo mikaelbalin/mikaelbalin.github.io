@@ -1,4 +1,4 @@
-import { Anchor, MantineThemeComponents } from "@mantine/core";
+import { Anchor, MantineThemeComponents, Code, Kbd } from "@mantine/core";
 import { Button } from "./button";
 import { Badge } from "./badge";
 import { Chip } from "./chip";
@@ -8,11 +8,9 @@ import { TextInput } from "./text-input";
 import { Container } from "./container";
 import { Textarea } from "./textarea";
 import { TypographyStylesProvider } from "./typography-styles-provider";
-import { CodeHighlight } from "./code-highlight";
 import { PasswordInput } from "./password-input";
 import { List } from "./list";
 import { Pagination } from "./pagination";
-import { Code, Kbd } from "@mantine/core";
 import { cn } from "@/lib/utils";
 
 export const components: MantineThemeComponents = {
@@ -30,7 +28,6 @@ export const components: MantineThemeComponents = {
   TextInput,
   Container,
   Textarea,
-  CodeHighlight,
   PasswordInput,
   List,
   Pagination,
