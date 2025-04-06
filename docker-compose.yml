@@ -1,0 +1,19 @@
+name: payload_init
+
+services:
+  # Uncomment the following to use postgres
+  postgres:
+    container_name: payload_init_postgres
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: payload-init
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:

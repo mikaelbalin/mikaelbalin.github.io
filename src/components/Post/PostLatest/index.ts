@@ -1,0 +1,1 @@
+export { PostLatest } from "./PostLatest";

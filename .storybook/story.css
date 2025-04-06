@@ -1,0 +1,7 @@
+/**
+ * When using the useScroll hook from the motion library, elements need a non-static positioned container
+ * to properly calculate scroll offsets and handle scroll-based animations correctly.
+ */
+html {
+  position: relative;
+}
