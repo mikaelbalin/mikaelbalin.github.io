@@ -2,17 +2,25 @@ import { toJsxRuntime } from "hast-util-to-jsx-runtime";
 import { Fragment, PropsWithChildren } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { codeToHast, type BuiltinLanguage, type SpecialLanguage } from "shiki";
+import { CopyButton } from "#components/ui/CopyButton";
 
-const CustomPre = (props: React.HTMLAttributes<HTMLPreElement>) => {
-  const { children } = props;
+interface CustomPreProps extends React.HTMLAttributes<HTMLPreElement> {
+  code: string;
+}
+
+const CustomPre = (props: CustomPreProps) => {
+  const { children, code } = props;
 
   return (
-    <pre
-      data-custom-codeblock
-      className="bg-background mb-6 overflow-x-auto border p-4 text-sm sm:mb-8"
-    >
-      {children}
-    </pre>
+    <figure className="relative mb-6 sm:mb-8">
+      <pre
+        data-custom-codeblock
+        className="bg-deep-obsidian overflow-x-auto rounded border p-4 text-sm"
+      >
+        {children}
+      </pre>
+      <CopyButton code={code} />
+    </figure>
   );
 };
 
@@ -35,7 +43,7 @@ export async function CodeHighlight(props: CodeHighlightProps) {
     jsxs,
     components: {
       // your custom `pre` element
-      pre: CustomPre,
+      pre: (props) => <CustomPre {...props} code={children} />,
     },
   });
 }
