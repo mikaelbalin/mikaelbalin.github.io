@@ -6,6 +6,7 @@ import slugify from "@sindresorhus/slugify";
 import Link from "next/link";
 import { JSX } from "react";
 import { ContentChildren } from "./types";
+import { IconLink } from "@tabler/icons-react";
 
 const isSupportedTitleOrder = (order: number): order is 2 | 3 | 4 => {
   return order >= 2 && order <= 4;
@@ -47,15 +48,15 @@ export const renderNode = ({
           id={fragmentID}
           order={order}
           size={size}
-          className="group mb-4 sm:mb-6"
+          className="group relative mb-4 w-fit pr-[1em] hover:cursor-pointer sm:mb-6"
         >
           {children}&nbsp;
           <Link
             href={`#${fragmentID}`}
             aria-label={`Permalink: ${fragmentID}`}
-            className="ml-2 inline-flex text-[var(--mantine-color-blue-6)] opacity-0 transition-opacity group-hover:opacity-100"
+            className="absolute right-0 top-1/2 ml-2 inline-flex -translate-y-1/2 text-blue-500 opacity-0 transition-opacity group-hover:opacity-100"
           >
-            #
+            <IconLink className="h-[1em] w-[1em]" />
           </Link>
         </Title>
       );
