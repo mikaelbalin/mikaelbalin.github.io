@@ -47,7 +47,7 @@ export const renderNode = ({
           id={fragmentID}
           order={order}
           size={size}
-          className="group mb-4"
+          className="group mb-4 sm:mb-6"
         >
           {children}&nbsp;
           <Link
@@ -62,7 +62,7 @@ export const renderNode = ({
     }
     case "paragraph": {
       return (
-        <Text key={index} className={cn("mb-8 leading-6", className)}>
+        <Text key={index} className={cn("mb-6 leading-6 sm:mb-8", className)}>
           {children}
         </Text>
       );
@@ -78,7 +78,7 @@ export const renderNode = ({
         <List
           key={index}
           className={cn(
-            "my-8 ml-8 [&>li]:mt-2",
+            "mb-6 ml-8 sm:mb-8 [&>li]:mt-2",
             isOrdered ? "list-decimal" : "list-disc",
           )}
         >
@@ -99,7 +99,7 @@ export const renderNode = ({
     }
     case "quote": {
       return (
-        <blockquote key={index} className="my-8">
+        <blockquote key={index} className="my-6 sm:mb-8">
           {children}
         </blockquote>
       );
@@ -120,7 +120,7 @@ export const renderNode = ({
       );
     }
     case "horizontalrule": {
-      return <hr key={index} className="mb-8" />;
+      return <hr key={index} className="mb-6 sm:mb-8" />;
     }
     default:
       return null;

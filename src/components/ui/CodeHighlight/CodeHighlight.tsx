@@ -9,7 +9,7 @@ const CustomPre = (props: React.HTMLAttributes<HTMLPreElement>) => {
   return (
     <pre
       data-custom-codeblock
-      className="bg-background overflow-x-auto border p-4 text-sm"
+      className="bg-background mb-6 overflow-x-auto border p-4 text-sm sm:mb-8"
     >
       {children}
     </pre>

@@ -28,7 +28,7 @@ export const Callout = (props: CalloutProps) => {
   const Icon = getIcon(style);
 
   return (
-    <div className="bg-warm-porcelain dark:bg-shadow-earth mb-8 sm:mb-14">
+    <div className="bg-warm-porcelain dark:bg-shadow-earth mb-6 sm:mb-8">
       {blockName && (
         <div className="bg-foreground text-background flex items-center gap-2 px-4 py-2 text-base sm:px-6 sm:text-lg">
           <Icon /> {blockName}
