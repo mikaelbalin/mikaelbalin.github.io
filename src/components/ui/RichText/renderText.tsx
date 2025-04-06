@@ -26,7 +26,7 @@ export const formatMap = {
   [IS_CODE]: (text: string, key: number) => (
     <code
       key={key}
-      className="bg-muted border-muted-foreground/30 relative rounded border px-1 py-0.5 font-mono text-sm"
+      className="bg-muted border-muted-foreground/30 relative rounded border px-1 py-0.5 font-mono text-[0.7em]"
     >
       {text}
     </code>
