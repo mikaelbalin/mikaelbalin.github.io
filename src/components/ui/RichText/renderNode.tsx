@@ -1,11 +1,19 @@
 import { CMSLink } from "#components/ui/CMSLink";
 import { Text } from "#components/ui/Text";
-import { Title, type TitleProps } from "#components/ui/Title";
+import { Title } from "#components/ui/Title";
 import { cn } from "#lib/utils";
 import slugify from "@sindresorhus/slugify";
 import Link from "next/link";
 import { JSX } from "react";
 import { ContentChildren } from "./types";
+
+const isSupportedTitleOrder = (order: number): order is 2 | 3 | 4 => {
+  return order >= 2 && order <= 4;
+};
+
+const isSupportedTitleSize = (order: number): order is 4 | 5 | 6 => {
+  return order >= 2 && order <= 6;
+};
 
 export const renderNode = ({
   node,
@@ -26,13 +34,19 @@ export const renderNode = ({
         node.children.map((n) => (n.type === "text" ? n.text : "")).join(""),
       );
 
-      const order = parseInt(tag.match(/\d+/)?.[0] || "1", 10);
+      const headingLevel = parseInt(tag.match(/\d+/)?.[0] || "2", 10);
+      const order = isSupportedTitleOrder(headingLevel) ? headingLevel : 2;
+      const potentialSize = order + 2;
+      const size = isSupportedTitleSize(potentialSize)
+        ? potentialSize
+        : undefined;
 
       return (
         <Title
           key={index}
           id={fragmentID}
-          order={order as TitleProps["order"]}
+          order={order}
+          size={size}
           className="group mb-4"
         >
           {children}&nbsp;
