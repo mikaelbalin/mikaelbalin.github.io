@@ -70,6 +70,8 @@ pnpm up --interactive --latest
 # https://github.com/vercel/next.js/issues/68805 and https://pnpm.io/npmrc#public-hoist-pattern
 public-hoist-pattern[]=*@libsql*
 
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+registry=https://registry.npmjs.org
 @kaelui:registry=https://npm.pkg.github.com
+
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
