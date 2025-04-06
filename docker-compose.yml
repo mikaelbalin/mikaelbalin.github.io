@@ -1,13 +1,13 @@
-name: payload_init
+name: mikaelbalin_payload
 
 services:
   # Uncomment the following to use postgres
   postgres:
-    container_name: payload_init_postgres
+    container_name: mikaelbalin_payload_postgres
     restart: always
     image: postgres:latest
     environment:
-      POSTGRES_DB: payload-init
+      POSTGRES_DB: payload
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
