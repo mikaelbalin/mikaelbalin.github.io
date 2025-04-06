@@ -1,1 +1,0 @@
-export { ImageMedia } from "./ImageMedia";

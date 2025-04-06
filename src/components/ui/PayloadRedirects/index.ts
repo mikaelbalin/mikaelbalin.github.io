@@ -1,1 +1,0 @@
-export { PayloadRedirects } from "./PayloadRedirects";

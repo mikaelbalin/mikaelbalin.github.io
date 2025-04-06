@@ -1,1 +1,0 @@
-export { TimeToRead } from "./TimeToRead";
