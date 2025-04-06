@@ -29,7 +29,7 @@ const collectionLabels: Record<
   },
 };
 
-const Title: React.FC = () => <span>Dashboard</span>;
+const Logo: React.FC = () => <span>Dashboard</span>;
 
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps;
@@ -70,7 +70,7 @@ export const AdminBar: React.FC<{
             plural: collectionLabels[collection]?.plural || "Pages",
             singular: collectionLabels[collection]?.singular || "Page",
           }}
-          logo={<Title />}
+          logo={<Logo />}
           onAuthChange={onAuthChange}
           onPreviewExit={() => {
             fetch("/api/exit-preview").then(() => {
