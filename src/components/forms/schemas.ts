@@ -13,7 +13,7 @@ const email = z
   .string()
   .email({ message: "Invalid email" })
   .min(5, "Invalid email")
-  .max(20, "Invalid email");
+  .max(50, "Invalid email");
 
 export const signinSchema = z.object({
   identifier: z
@@ -45,7 +45,7 @@ export const contactFormSchema = z.object({
   name: z
     .string()
     .min(3, { message: "Name must be at least 3 characters long" })
-    .max(20, { message: "Name must be at most 20 characters long" }),
+    .max(50, { message: "Name must be at most 20 characters long" }),
   email,
   message: z.string().min(1, "Message is required").max(500),
   terms: z.boolean().refine((val) => val === true, {

@@ -188,7 +188,7 @@
   --muted-foreground: oklch(0.708 0 0);
   --accent: var(--color-shadow-earth);
   --accent-foreground: var(--color-soft-ivory);
-  --destructive: oklch(0.396 0.141 25.723);
+  --destructive: oklch(70.4% 0.191 22.216);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: var(--color-soft-ivory);
