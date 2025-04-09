@@ -15,11 +15,12 @@ import {
   SerializedUploadNode,
   SerializedTableNode,
   TypedEditorState,
+  SerializedTableRowNode,
+  SerializedTableCellNode,
 } from "@payloadcms/richtext-lexical";
 import type {
   CalloutBlock as CalloutBlockProps,
   MediaBlock as MediaBlockProps,
-  // TableBlock as TableBlockProps,
   CodeBlock as CodeBlockProps,
 } from "#types/payload";
 import { JSX } from "react";
@@ -41,6 +42,8 @@ export type BlockTypes = "mediaBlock" | "callout" | "code" | "table" | "kbd";
 
 type NodeType =
   | SerializedTableNode
+  | SerializedTableRowNode
+  | SerializedTableCellNode
   | SerializedAutoLinkNode
   | SerializedHeadingNode
   | SerializedHorizontalRuleNode
@@ -55,7 +58,6 @@ type NodeType =
   | SerializedUploadNode
   | CustomBlockNode<
       MediaBlockProps | CalloutBlockProps | CodeBlockProps | KbdInlineBlockProps
-      // | TableBlockProps
     >;
 
 export type Content = TypedEditorState<NodeType>;

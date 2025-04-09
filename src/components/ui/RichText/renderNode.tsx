@@ -7,6 +7,7 @@ import Link from "next/link";
 import { JSX } from "react";
 import { ContentChildren } from "./types";
 import { IconLink } from "@tabler/icons-react";
+import { Table, TableCell, TableRow, TableBody } from "#components/ui/Table";
 
 const isSupportedTitleOrder = (order: number): order is 2 | 3 | 4 => {
   return order >= 2 && order <= 4;
@@ -63,7 +64,13 @@ export const renderNode = ({
     }
     case "paragraph": {
       return (
-        <Text key={index} className={cn("mb-6 leading-6 sm:mb-8", className)}>
+        <Text
+          key={index}
+          className={cn(
+            "mb-6 leading-6 group-[&]:mb-0 sm:mb-8 group-[&]:sm:mb-0",
+            className,
+          )}
+        >
           {children}
         </Text>
       );
@@ -122,6 +129,23 @@ export const renderNode = ({
     }
     case "horizontalrule": {
       return <hr key={index} className="mb-6 sm:mb-8" />;
+    }
+    case "table": {
+      return (
+        <Table key={index} className="mb-6 sm:mb-8">
+          <TableBody>{children}</TableBody>
+        </Table>
+      );
+    }
+    case "tablerow": {
+      return <TableRow key={index}>{children}</TableRow>;
+    }
+    case "tablecell": {
+      return (
+        <TableCell key={index} className="group">
+          {children}
+        </TableCell>
+      );
     }
     default:
       return null;

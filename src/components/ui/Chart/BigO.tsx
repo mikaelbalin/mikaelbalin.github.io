@@ -71,7 +71,7 @@ const chartData = (() => {
 
 export const BigO = () => {
   return (
-    <Card>
+    <Card className="mb-6 sm:mb-8">
       <CardHeader>
         <CardTitle>Big O Complexity Chart</CardTitle>
         <CardDescription>
