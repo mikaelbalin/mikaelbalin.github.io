@@ -1,15 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  Area,
-  AreaChart,
-  Bar,
-  Line,
-  BarChart,
-  CartesianGrid,
-  LineChart,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { IconTrendingUp } from "@tabler/icons-react";
 import {
   ChartContainer,
@@ -27,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../Card";
+import { BigO } from "./BigO";
 
 export default {
   component: ChartContainer,
@@ -162,121 +153,9 @@ export const AreaStory: Story = {
   },
 };
 
-function factorial(n: number): number {
-  return n <= 1 ? 1 : n * factorial(n - 1);
-}
-
-const bigOChartConfig = {
-  O1: {
-    label: "O(1)",
-    color: "green",
-  },
-  OLogN: {
-    label: "O(log n)",
-    color: "blue",
-  },
-  ON: {
-    label: "O(n)",
-    color: "orange",
-  },
-  ONLogN: {
-    label: "O(n log n)",
-    color: "purple",
-  },
-  ON2: {
-    label: "O(n^2)",
-    color: "red",
-  },
-  O2N: {
-    label: "O(2^n)",
-    color: "brown",
-  },
-  ONFactorial: {
-    label: "O(n!)",
-    color: "black",
-  },
-};
-
-const getBigOData = () => {
-  const data = [];
-
-  for (let i = 1; i <= 20; i++) {
-    data.push({
-      elements: i,
-      O1: 1,
-      OLogN: Math.log(i),
-      ON: i - 1,
-      ONLogN: i * Math.log(i),
-      ON2: Math.pow(i - 1, 2),
-      O2N: Math.pow(2, i) - 2,
-      ONFactorial: factorial(i) - 1,
-    });
-  }
-
-  return data;
-};
-
 export const BigOComplexity: Story = {
   args: {},
   render: function Render() {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Area Chart - Stacked Expanded</CardTitle>
-          <CardDescription>
-            Showing total visitors for the last 6months
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer
-            config={bigOChartConfig}
-            className="min-h-[200px] w-full"
-          >
-            <LineChart data={getBigOData()}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="elements"
-                label={{
-                  value: "Elements",
-                  position: "insideBottom",
-                  offset: -5,
-                }}
-              />
-              <YAxis
-                label={{
-                  value: "Operations",
-                  angle: -90,
-                  position: "insideLeft",
-                }}
-                domain={[0, 20]}
-                type="number"
-                allowDataOverflow
-              />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Line type="monotone" dataKey="O1" stroke="green" />
-              <Line type="monotone" dataKey="OLogN" stroke="blue" />
-              <Line type="monotone" dataKey="ON" stroke="orange" />
-              <Line type="monotone" dataKey="ONLogN" stroke="purple" />
-              <Line type="monotone" dataKey="ON2" stroke="red" />
-              <Line type="monotone" dataKey="O2N" stroke="brown" />
-              <Line type="monotone" dataKey="ONFactorial" stroke="black" />
-            </LineChart>
-          </ChartContainer>
-        </CardContent>
-        <CardFooter>
-          <div className="flex w-full items-start gap-2 text-sm">
-            <div className="grid gap-2">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Trending up by 5.2% this month
-                <IconTrendingUp className="h-4 w-4" />
-              </div>
-              <div className="text-muted-foreground flex items-center gap-2 leading-none">
-                January - June 2024
-              </div>
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
-    );
+    return <BigO />;
   },
 };

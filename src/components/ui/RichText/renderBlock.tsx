@@ -4,6 +4,7 @@ import {
 } from "#components/ui/RichText/types";
 import type {
   CalloutBlock,
+  ChartBlock,
   CodeBlock,
   MediaBlock as MediaBlockProps,
   // TableBlock,
@@ -12,6 +13,7 @@ import { BlockFields, SerializedTextNode } from "@payloadcms/richtext-lexical";
 import { Callout } from "#components/ui/Callout";
 import { CodeHighlight } from "#components/ui/CodeHighlight";
 import { MediaBlock } from "#components/ui/MediaBlock";
+import { BigO } from "#components/ui/Chart/BigO";
 
 export const isValidNode = (node: unknown): node is SerializedTextNode => {
   if (!node || typeof node !== "object") return false;
@@ -32,7 +34,11 @@ export const renderBlock = ({
 }: {
   index: number;
   block?: BlockFields<
-    MediaBlockProps | CalloutBlock | CodeBlock | KbdInlineBlockProps
+    | MediaBlockProps
+    | CalloutBlock
+    | CodeBlock
+    | KbdInlineBlockProps
+    | ChartBlock
     // | TableBlock
   >;
   serializeLexical: SerializeLexical;
@@ -63,6 +69,8 @@ export const renderBlock = ({
           {block.code}
         </CodeHighlight>
       );
+    case "chart":
+      return block.style === "bigO" ? <BigO key={index} /> : null;
     case "kbd":
       return <kbd key={index}>{block.key}</kbd>;
     default:

@@ -18,6 +18,7 @@ import { code } from "#config/blocks/code";
 import { kbd } from "#config/blocks/kbd";
 import { timeToReadField } from "#config/fields/time";
 import { meta } from "#config/plugins/seo";
+import { chart } from "#config/blocks/chart";
 
 // The `user` collection has access control locked so that users are not publicly accessible
 // This means that we need to populate the authors manually here to protect user privacy
@@ -115,7 +116,7 @@ export const posts: CollectionConfig<"posts"> = {
                   return [
                     ...rootFeatures,
                     BlocksFeature({
-                      blocks: [callout, code, media],
+                      blocks: [callout, code, media, chart],
                       inlineBlocks: [kbd],
                     }),
                     FixedToolbarFeature(),
