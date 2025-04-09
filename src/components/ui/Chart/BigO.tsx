@@ -1,6 +1,6 @@
 "use client";
 
-import { Line, CartesianGrid, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -19,38 +19,38 @@ function factorial(n: number): number {
   return n <= 1 ? 1 : n * factorial(n - 1);
 }
 
-const bigOChartConfig: ChartConfig = {
+const chartConfig: ChartConfig = {
   O1: {
     label: "O(1)",
-    color: "green",
+    color: "var(--chart-1)",
   },
   OLogN: {
     label: "O(log n)",
-    color: "blue",
+    color: "var(--chart-2)",
   },
   ON: {
     label: "O(n)",
-    color: "orange",
+    color: "var(--chart-3)",
   },
   ONLogN: {
     label: "O(n log n)",
-    color: "purple",
+    color: "var(--chart-4)",
   },
   ON2: {
     label: "O(n^2)",
-    color: "red",
+    color: "var(--chart-5)",
   },
   O2N: {
     label: "O(2^n)",
-    color: "brown",
+    color: "var(--chart-6)",
   },
   ONFactorial: {
     label: "O(n!)",
-    color: "black",
+    color: "var(--chart-7)",
   },
 };
 
-const bigOData = (() => {
+const chartData = (() => {
   const data = [];
 
   for (let i = 1; i <= 20; i++) {
@@ -73,44 +73,43 @@ export const BigO = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked Expanded</CardTitle>
+        <CardTitle>Big O Complexity Chart</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6months
+          Visualizing algorithm time complexity growth rates
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={bigOChartConfig}
-          className="min-h-[200px] w-full"
-        >
-          <LineChart data={bigOData}>
-            <CartesianGrid strokeDasharray="3 3" />
+        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+          <LineChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} />
             <XAxis
               dataKey="elements"
               label={{
-                value: "Elements",
-                position: "insideBottom",
-                offset: -5,
+                value: "Input Size (n)",
               }}
+              tickLine={false}
+              tick={false}
             />
             <YAxis
               label={{
                 value: "Operations",
                 angle: -90,
-                position: "insideLeft",
               }}
               domain={[0, 20]}
-              type="number"
               allowDataOverflow
+              tick={false}
             />
             <ChartLegend content={<ChartLegendContent />} />
-            <Line type="monotone" dataKey="O1" stroke="green" />
-            <Line type="monotone" dataKey="OLogN" stroke="blue" />
-            <Line type="monotone" dataKey="ON" stroke="orange" />
-            <Line type="monotone" dataKey="ONLogN" stroke="purple" />
-            <Line type="monotone" dataKey="ON2" stroke="red" />
-            <Line type="monotone" dataKey="O2N" stroke="brown" />
-            <Line type="monotone" dataKey="ONFactorial" stroke="black" />
+            {Object.entries(chartConfig).map(([key]) => (
+              <Line
+                key={key}
+                type="monotone"
+                dataKey={key}
+                stroke={`var(--color-${key})`}
+                strokeWidth={2}
+                dot={false}
+              />
+            ))}
           </LineChart>
         </ChartContainer>
       </CardContent>

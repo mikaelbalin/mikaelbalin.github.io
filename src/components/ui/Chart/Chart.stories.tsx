@@ -26,7 +26,7 @@ export default {
 type Story = StoryObj<typeof ChartContainer>;
 
 const chartData = [
-  { month: "January", desktop: 0, mobile: 0, other: 0 },
+  { month: "January", desktop: 100, mobile: 125, other: 20 },
   { month: "February", desktop: 305, mobile: 200, other: 100 },
   { month: "March", desktop: 237, mobile: 120, other: 150 },
   { month: "April", desktop: 73, mobile: 190, other: 50 },
