@@ -1,9 +1,10 @@
+import { cn } from "#lib/utils";
+import type { CalloutBlock } from "#types/payload";
 import {
-  IconInfoCircle,
   IconBulb,
   IconExclamationCircle,
+  IconInfoCircle,
 } from "@tabler/icons-react";
-import type { CalloutBlock } from "#types/payload";
 import React from "react";
 
 function getIcon(type: CalloutBlock["style"]) {
@@ -21,14 +22,20 @@ function getIcon(type: CalloutBlock["style"]) {
 
 type CalloutProps = React.PropsWithChildren<
   Pick<CalloutBlock, "style" | "blockName">
->;
+> &
+  Pick<React.HTMLProps<HTMLDivElement>, "className">;
 
 export const Callout = (props: CalloutProps) => {
-  const { style, blockName, children } = props;
+  const { style, blockName, children, className } = props;
   const Icon = getIcon(style);
 
   return (
-    <div className="bg-warm-porcelain dark:bg-shadow-earth mb-6 sm:mb-8">
+    <div
+      className={cn(
+        "bg-warm-porcelain dark:bg-shadow-earth mb-6 sm:mb-8",
+        className,
+      )}
+    >
       {blockName && (
         <div className="bg-foreground text-background flex items-center gap-2 px-4 py-2 text-base sm:px-6 sm:text-lg">
           <Icon /> {blockName}

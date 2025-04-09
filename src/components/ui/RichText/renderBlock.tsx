@@ -55,7 +55,12 @@ export const renderBlock = ({
       );
     case "callout":
       return (
-        <Callout key={index} blockName={block.blockName} style={block.style}>
+        <Callout
+          key={index}
+          blockName={block.blockName}
+          style={block.style}
+          className="group"
+        >
           {serializeLexical({
             nodes: validateBlockChildren(block.content.root.children),
           })}
