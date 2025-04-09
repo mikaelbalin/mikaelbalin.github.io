@@ -7,7 +7,6 @@ import type {
   ChartBlock,
   CodeBlock,
   MediaBlock as MediaBlockProps,
-  // TableBlock,
 } from "#types/payload";
 import { BlockFields, SerializedTextNode } from "@payloadcms/richtext-lexical";
 import { Callout } from "#components/ui/Callout";
@@ -39,7 +38,6 @@ export const renderBlock = ({
     | CodeBlock
     | KbdInlineBlockProps
     | ChartBlock
-    // | TableBlock
   >;
   serializeLexical: SerializeLexical;
 }) => {
