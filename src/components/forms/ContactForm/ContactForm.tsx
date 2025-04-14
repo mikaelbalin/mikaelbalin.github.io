@@ -22,6 +22,8 @@ import {
   FormLabel,
   FormMessage,
 } from "#components/ui/Form";
+import { RichText } from "#components/ui/RichText/RichText";
+import { Content as RichTextContent } from "#components/ui/RichText/types";
 
 type ContactFormProps = FormBlock;
 
@@ -104,6 +106,16 @@ export const ContactForm = (props: ContactFormProps) => {
       <form id={formID} onSubmit={form.handleSubmit(onSubmit, onError)}>
         <div className="flex flex-col gap-6">
           {formProps?.fields?.map((field) => {
+            if (field.blockType === "message") {
+              return (
+                <RichText
+                  key={field.id}
+                  content={field.message as RichTextContent}
+                  className="-mb-6 sm:-mb-8"
+                />
+              );
+            }
+
             const Control = fields?.[field.blockType];
             if (!Control || !("name" in field)) return null;
 
@@ -129,7 +141,9 @@ export const ContactForm = (props: ContactFormProps) => {
                             checked={!!value}
                           />
                         </FormControl>
-                        <FormLabel htmlFor={name}>{field.label}</FormLabel>
+                        <FormLabel htmlFor={name} className="block">
+                          {field.label}
+                        </FormLabel>
                       </div>
                       <FormMessage />
                     </FormItem>

@@ -1,1 +1,1 @@
-export { RichText } from "./RichText";
+export { RichText, type RichTextProps } from "./RichText";

@@ -2,7 +2,7 @@ import { FC } from "react";
 import { serializeLexical } from "#components/ui/RichText/serialize";
 import { Content } from "#components/ui/RichText/types";
 
-type RichTextProps = {
+export type RichTextProps = {
   className?: string;
   textClassName?: string;
   content: Content;
