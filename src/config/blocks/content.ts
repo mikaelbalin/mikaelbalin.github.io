@@ -26,6 +26,7 @@ export const content: Block = {
         },
       }),
       required: true,
+      localized: true,
     },
   ],
   labels: {
