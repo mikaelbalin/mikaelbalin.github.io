@@ -1,15 +1,16 @@
-import type { CollectionConfig } from "payload";
-import { authenticated, authenticatedOrPublished } from "#lib/access";
-import { archive } from "#config/blocks/archive";
 import { about } from "#config/blocks/about";
+import { archive } from "#config/blocks/archive";
+import { content } from "#config/blocks/content";
+import { reusableBlock } from "#config/blocks/reusableBlock";
+import { search } from "#config/blocks/search";
 import { hero } from "#config/fields/hero";
 import { slugField } from "#config/fields/slug";
 import { populatePublishedAt } from "#config/hooks/populatePublishedAt";
+import { meta } from "#config/plugins/seo";
+import { authenticated, authenticatedOrPublished } from "#lib/access";
 import { generatePreviewPath } from "#lib/generatePreviewPath";
 import { getServerSideURL } from "#lib/getURL";
-import { meta } from "#config/plugins/seo";
-import { reusableBlock } from "#config/blocks/reusableBlock";
-import { search } from "#config/blocks/search";
+import type { CollectionConfig } from "payload";
 
 export const pages: CollectionConfig<"pages"> = {
   slug: "pages",
@@ -66,7 +67,7 @@ export const pages: CollectionConfig<"pages"> = {
             {
               name: "layout",
               type: "blocks",
-              blocks: [about, archive, search, reusableBlock],
+              blocks: [about, archive, search, reusableBlock, content],
               required: true,
             },
           ],

@@ -149,7 +149,7 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'main' | 'blog';
+    type: 'main' | 'blog' | 'simple';
     titles?:
       | {
           [k: string]: unknown;
@@ -175,7 +175,7 @@ export interface Page {
       };
     };
   };
-  layout: (AboutBlock | ArchiveBlock | SearchBlock | ReusableBlock)[];
+  layout: (AboutBlock | ArchiveBlock | SearchBlock | ReusableBlock | ContentBlock)[];
   meta: {
     title: string;
     /**
@@ -654,6 +654,30 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscribers".
  */
 export interface Subscriber {
@@ -865,6 +889,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         search?: T | SearchBlockSelect<T>;
         reusableBlock?: T | ReusableBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
       };
   meta?:
     | T
@@ -928,6 +953,15 @@ export interface SearchBlockSelect<T extends boolean = true> {
  */
 export interface ReusableBlockSelect<T extends boolean = true> {
   block?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  content?: T;
   id?: T;
   blockName?: T;
 }

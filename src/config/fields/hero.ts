@@ -20,6 +20,10 @@ export const hero: Field = {
           label: "Blog",
           value: "blog",
         },
+        {
+          label: "Simple",
+          value: "simple",
+        },
       ],
       required: true,
     },
@@ -34,7 +38,7 @@ export const hero: Field = {
       name: "title",
       type: "text",
       admin: {
-        condition: (data) => data.hero.type === "blog",
+        condition: (data) => ["blog", "simple"].includes(data.hero.type),
       },
       localized: true,
     },

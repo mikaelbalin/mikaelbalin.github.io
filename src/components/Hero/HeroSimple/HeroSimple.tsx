@@ -3,10 +3,8 @@ import { Container } from "#components/Container";
 
 export const HeroSimple = ({ title }: Page["hero"]) => {
   return (
-    <div className="relative pb-16 pt-6 sm:pb-24 sm:pt-24">
-      <Container>
-        <h1 className="text-13xl sm:text-15xl">{title}</h1>
-      </Container>
-    </div>
+    <Container className="sm:mt-19.5 mt-16 pb-16 pt-6 sm:pb-24 sm:pt-24">
+      <h1 className="sm:text-12xl text-8xl font-bold">{title}</h1>
+    </Container>
   );
 };

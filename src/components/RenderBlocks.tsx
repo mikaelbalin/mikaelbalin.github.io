@@ -1,9 +1,10 @@
 import React from "react";
 import type { AboutBlock, Page, ReusableBlock } from "#types/payload";
-import { Archive, ArchiveBlockProps } from "#components/Archive";
+import { Archive, type ArchiveBlockProps } from "#components/Archive";
 import { Subscription } from "#components/Subscription";
 import { About } from "#components/About";
-import { Search, SearchBlockProps } from "#components/Search";
+import { Search, type SearchBlockProps } from "#components/Search";
+import { TextContent, type ContentBlockProps } from "#components/TextContent";
 
 type Block = Page["layout"][0];
 type BlockType = Extract<Block, { blockType: string }>["blockType"];
@@ -14,11 +15,13 @@ const blockComponents: Record<
   | React.FC<ArchiveBlockProps>
   | React.FC<ReusableBlock>
   | React.FC<SearchBlockProps>
+  | React.FC<ContentBlockProps>
 > = {
   about: About,
   archive: Archive,
   reusableBlock: Subscription,
   search: Search,
+  content: TextContent,
 };
 
 type RenderBlocksProps = {
@@ -53,6 +56,9 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
         }
         if (blockType === "search" && Block === Search) {
           return <Block key={index} {...block} {...rest} locale={locale} />;
+        }
+        if (blockType === "content" && Block === TextContent) {
+          return <Block key={index} {...block} />;
         }
 
         return null;
