@@ -36,7 +36,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
     "@hookform/resolvers": "^5.0.1",
-    "@kaelui/hooks": "^0.2.3",
+    "@kaelui/hooks": "^0.3.1",
     "@payloadcms/db-postgres": "^3.34.0",
     "@payloadcms/db-vercel-postgres": "^3.34.0",
     "@payloadcms/email-resend": "^3.34.0",
@@ -71,7 +71,7 @@
     "graphql": "^16.8.1",
     "hast-util-to-jsx-runtime": "^2.3.6",
     "jsonwebtoken": "^9.0.2",
-    "motion": "^12.6.5",
+    "motion": "^12.7.0",
     "negotiator": "^1.0.0",
     "next": "15.3.0",
     "next-themes": "^0.4.6",
@@ -87,7 +87,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@ai-sdk/google": "^1.2.10",
+    "@ai-sdk/google": "^1.2.11",
     "@eslint/eslintrc": "^3.3.1",
     "@mdx-js/react": "^3.1.0",
     "@next/bundle-analyzer": "^15.3.0",
@@ -110,7 +110,7 @@
     "@types/react-dom": "19.1.2",
     "@vitest/browser": "^3.1.1",
     "@vitest/coverage-v8": "^3.1.1",
-    "ai": "^4.3.5",
+    "ai": "^4.3.6",
     "eslint": "^9.24.0",
     "eslint-config-next": "15.3.0",
     "eslint-plugin-storybook": "^0.12.0",
