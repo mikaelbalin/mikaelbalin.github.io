@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   ItalicFeature,
   lexicalEditor,
+  LexicalEditorProps,
   LinkFeature,
   OrderedListFeature,
   ParagraphFeature,
@@ -35,6 +36,25 @@ const afterErrorHook: CollectionAfterErrorHook = async ({
   };
 };
 
+const getStandardFeatures: LexicalEditorProps["features"] = ({
+  rootFeatures,
+}) => {
+  return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()];
+};
+
+const getEmailFeatures = () => {
+  return [
+    ParagraphFeature(),
+    BoldFeature(),
+    ItalicFeature(),
+    LinkFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
+    FixedToolbarFeature(),
+    InlineToolbarFeature(),
+  ];
+};
+
 export const formBuilderPluginConfig = formBuilderPlugin({
   fields: {
     payment: false,
@@ -46,14 +66,42 @@ export const formBuilderPluginConfig = formBuilderPlugin({
           return {
             ...field,
             editor: lexicalEditor({
-              features: ({ rootFeatures }) => {
-                return [
-                  ...rootFeatures,
-                  FixedToolbarFeature(),
-                  InlineToolbarFeature(),
-                ];
-              },
+              features: getStandardFeatures,
             }),
+          };
+        }
+
+        if (field.type === "blocks") {
+          const blocks = field.blocks.map((block) => {
+            if (block.slug === "message") {
+              const blockFileds = block.fields.map((blockField) => {
+                if (
+                  "name" in blockField &&
+                  blockField.name === "message" &&
+                  blockField.type === "richText"
+                ) {
+                  return {
+                    ...blockField,
+                    editor: lexicalEditor({
+                      features: getStandardFeatures,
+                    }),
+                  };
+                }
+                return blockField;
+              });
+
+              return {
+                ...block,
+                fields: blockFileds,
+              };
+            }
+
+            return block;
+          });
+
+          return {
+            ...field,
+            blocks,
           };
         }
 
@@ -71,18 +119,7 @@ export const formBuilderPluginConfig = formBuilderPlugin({
               return {
                 ...arrayField,
                 editor: lexicalEditor({
-                  features: () => {
-                    return [
-                      ParagraphFeature(),
-                      BoldFeature(),
-                      ItalicFeature(),
-                      LinkFeature(),
-                      OrderedListFeature(),
-                      UnorderedListFeature(),
-                      FixedToolbarFeature(),
-                      InlineToolbarFeature(),
-                    ];
-                  },
+                  features: getEmailFeatures,
                 }),
               };
             }
