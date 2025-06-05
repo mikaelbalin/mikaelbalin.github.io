@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { IconTrendingUp } from "@tabler/icons-react";
 import {

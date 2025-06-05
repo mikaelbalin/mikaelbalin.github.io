@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Subscription } from "./Subscription";
 import { Basic as SubscriptionForm } from "../forms/SubscriptionForm/SubscriptionForm.stories";
 import { FormBlock, ReusableBlock } from "#types/payload";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Footer } from "./Footer";
 import { Multiline as MarqueeStory } from "../Marquee/Marquee.stories";
 import { Basic as ContactStory } from "./Contact/Contact.stories";

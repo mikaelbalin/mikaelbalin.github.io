@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { ScrollTopButton } from "./ScrollTopButton";
 
 const meta: Meta<typeof ScrollTopButton> = {
