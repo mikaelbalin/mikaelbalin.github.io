@@ -8,10 +8,10 @@ const config: StorybookConfig = {
   },
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    "@storybook/addon-essentials",
     "@storybook/addon-links",
     "@storybook/addon-themes",
     "@storybook/addon-vitest",
+    "@storybook/addon-docs"
   ],
   framework: {
     name: "@storybook/nextjs-vite",
