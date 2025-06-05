@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-links",
     "@storybook/addon-themes",
-    "@storybook/experimental-addon-test",
+    "@storybook/addon-vitest",
   ],
   framework: {
     name: "@storybook/nextjs-vite",
