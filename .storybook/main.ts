@@ -11,22 +11,19 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-themes",
     "@storybook/addon-vitest",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
   ],
   framework: {
     name: "@storybook/nextjs-vite",
     options: {},
   },
   staticDirs: ["../public"],
-  docs: {
-    autodocs: "tag",
-  },
   features: {
     experimentalRSC: true,
-    viewportStoryGlobals: true,
   },
   typescript: {
     reactDocgen: "react-docgen-typescript",
   },
 };
+
 export default config;
