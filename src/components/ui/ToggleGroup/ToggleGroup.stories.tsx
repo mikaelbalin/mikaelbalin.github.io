@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ToggleGroup, ToggleGroupItem } from "./ToggleGroup";
 import { IconBold, IconItalic, IconUnderline } from "@tabler/icons-react";
-import { useArgs } from "@storybook/preview-api";
+import { useArgs } from "storybook/preview-api";
 
 const meta = {
   component: ToggleGroup,
