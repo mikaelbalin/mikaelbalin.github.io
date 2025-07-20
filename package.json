@@ -123,8 +123,8 @@
     "wait-on": "8.0.3"
   },
   "engines": {
-    "node": "20.11.1",
-    "pnpm": "^9"
+    "node": "^22.0.0",
+    "pnpm": ">=9"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
