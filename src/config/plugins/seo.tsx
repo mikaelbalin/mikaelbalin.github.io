@@ -16,6 +16,7 @@ import { Page, Post } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
 import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
 import { defaultModel } from "#lib/aiProvider";
+import { createSeoDescriptionPrompt } from "#lib/aiPrompts";
 import {
   SITE_TITLE,
   NO_DESCRIPTION_AVAILABLE,
@@ -50,14 +51,7 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
   try {
     const { text } = await generateText({
       model: defaultModel,
-      prompt: `Create a compelling SEO meta description (100-150 characters) for the following article content. The description should:
-- Summarize the main topic and key points
-- Be engaging for search engine users
-- Include relevant keywords naturally
-- Stay within 100-150 characters
-
-Article content:
-${textContent.slice(0, 2000)}`,
+      prompt: createSeoDescriptionPrompt(textContent),
     });
 
     return text;
