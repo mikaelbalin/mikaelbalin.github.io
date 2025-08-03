@@ -20,6 +20,41 @@ import { generateText } from "ai";
 
 const TITLE = "Mikael Balin";
 
+type PayloadNode = {
+  type: string;
+  version?: number;
+  text?: string;
+  children?: PayloadNode[];
+  [k: string]: unknown;
+};
+
+const extractTextFromPayloadContent = (nodes: PayloadNode[]): string => {
+  if (!nodes || !Array.isArray(nodes)) return "";
+
+  return nodes
+    .map((node) => {
+      if (!node || typeof node !== "object") return "";
+
+      if (node.type === "text" && typeof node.text === "string") {
+        return node.text;
+      }
+
+      if (node.type === "block" || node.type === "inlineBlock") {
+        // Skip block content for meta description
+        return "";
+      }
+
+      if (Array.isArray(node.children)) {
+        return extractTextFromPayloadContent(node.children);
+      }
+
+      return "";
+    })
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | ${TITLE}` : TITLE;
 };
@@ -34,14 +69,27 @@ const generateURL: GenerateURL<Post | Page> = ({ doc, collectionSlug }) => {
 const generateDescription: GenerateDescription<Post | Page> = async ({
   doc,
 }) => {
-  if (!("content" in doc)) return "No description available.";
+  if (!("content" in doc) || !doc.content?.root?.children) {
+    return "No description available.";
+  }
 
-  console.log({ doc: doc.content.root });
+  const textContent = extractTextFromPayloadContent(doc.content.root.children);
+
+  if (!textContent) {
+    return "No description available.";
+  }
 
   const { text } = await generateText({
     model: google("gemini-2.5-flash"),
-    prompt: ``,
+    prompt: `Create a concise SEO meta description (max 150 characters) for the following content. Focus on the main topic and key points:
+
+  ${textContent}
+
+  The description should be engaging and informative for search engine users.`,
+    maxOutputTokens: 150,
   });
+
+  console.log({ textContent, text });
 
   return text;
 };
