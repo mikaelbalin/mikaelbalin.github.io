@@ -16,7 +16,11 @@ import { Page, Post } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
 import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
 import { defaultModel } from "#lib/aiProvider";
-import { SITE_TITLE } from "#config/constants";
+import {
+  SITE_TITLE,
+  NO_DESCRIPTION_AVAILABLE,
+  SEO_DESCRIPTION_ERROR,
+} from "#config/constants";
 import { generateText } from "ai";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
@@ -34,13 +38,13 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
   doc,
 }) => {
   if (!("content" in doc) || !doc.content?.root?.children) {
-    return "No description available.";
+    return NO_DESCRIPTION_AVAILABLE;
   }
 
   const textContent = extractTextFromPayloadContent(doc.content.root.children);
 
   if (!textContent) {
-    return "No description available.";
+    return NO_DESCRIPTION_AVAILABLE;
   }
 
   try {
@@ -58,9 +62,9 @@ ${textContent.slice(0, 2000)}`,
 
     return text;
   } catch (error) {
-    console.error("Error generating SEO description:", error);
+    console.error(`${SEO_DESCRIPTION_ERROR}:`, error);
 
-    return "Error generating SEO description";
+    return SEO_DESCRIPTION_ERROR;
   }
 };
 
