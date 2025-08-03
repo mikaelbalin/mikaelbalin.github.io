@@ -15,10 +15,16 @@ import {
 import { Page, Post } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
 
-import { google } from "@ai-sdk/google";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
 
 const TITLE = "Mikael Balin";
+
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+});
+
+const model = google("gemini-2.5-flash");
 
 type PayloadNode = {
   type: string;
@@ -31,28 +37,40 @@ type PayloadNode = {
 const extractTextFromPayloadContent = (nodes: PayloadNode[]): string => {
   if (!nodes || !Array.isArray(nodes)) return "";
 
-  return nodes
-    .map((node) => {
-      if (!node || typeof node !== "object") return "";
+  const extractText = (node: PayloadNode): string => {
+    if (!node || typeof node !== "object") return "";
 
-      if (node.type === "text" && typeof node.text === "string") {
-        return node.text;
-      }
+    if (node.type === "text" && typeof node.text === "string") {
+      return node.text;
+    }
 
-      if (node.type === "block" || node.type === "inlineBlock") {
-        // Skip block content for meta description
-        return "";
-      }
-
-      if (Array.isArray(node.children)) {
-        return extractTextFromPayloadContent(node.children);
-      }
-
+    // Skip blocks but include some text from specific block types
+    if (node.type === "block" || node.type === "inlineBlock") {
       return "";
-    })
+    }
+
+    // Handle different node types
+    if (node.type === "paragraph" || node.type === "heading") {
+      if (Array.isArray(node.children)) {
+        return node.children.map(extractText).join(" ");
+      }
+    }
+
+    if (Array.isArray(node.children)) {
+      return node.children.map(extractText).join(" ");
+    }
+
+    return "";
+  };
+
+  const text = nodes
+    .map(extractText)
+    .filter(Boolean)
     .join(" ")
     .replace(/\s+/g, " ")
     .trim();
+
+  return text;
 };
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
@@ -79,19 +97,25 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
     return "No description available.";
   }
 
-  const { text } = await generateText({
-    model: google("gemini-2.5-flash"),
-    prompt: `Create a concise SEO meta description (max 150 characters) for the following content. Focus on the main topic and key points:
+  try {
+    const { text } = await generateText({
+      model,
+      prompt: `Create a compelling SEO meta description (100-150 characters) for the following article content. The description should:
+- Summarize the main topic and key points
+- Be engaging for search engine users
+- Include relevant keywords naturally
+- Stay within 100-150 characters
 
-  ${textContent}
+Article content:
+${textContent.slice(0, 2000)}`,
+    });
 
-  The description should be engaging and informative for search engine users.`,
-    maxOutputTokens: 150,
-  });
+    return text;
+  } catch (error) {
+    console.error("Error generating SEO description:", error);
 
-  console.log({ textContent, text });
-
-  return text;
+    return "Error generating SEO description";
+  }
 };
 
 export const meta: Tab = {
