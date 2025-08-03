@@ -1,10 +1,9 @@
 import { Tab } from "payload";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import {
-  // GenerateImage,
   GenerateTitle,
   GenerateURL,
-  // GenerateDescription,
+  GenerateDescription,
 } from "@payloadcms/plugin-seo/types";
 import {
   MetaDescriptionField,
@@ -16,8 +15,8 @@ import {
 import { Page, Post } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
 
-// import { google } from "@ai-sdk/google";
-// import { generateText } from "ai";
+import { google } from "@ai-sdk/google";
+import { generateText } from "ai";
 
 const TITLE = "Mikael Balin";
 
@@ -30,6 +29,21 @@ const generateURL: GenerateURL<Post | Page> = ({ doc, collectionSlug }) => {
   const slug = doc?.slug;
 
   return slug && slug !== "home" ? `${url}/${collectionSlug}/${slug}` : url;
+};
+
+const generateDescription: GenerateDescription<Post | Page> = async ({
+  doc,
+}) => {
+  if (!("content" in doc)) return "No description available.";
+
+  console.log({ doc: doc.content.root });
+
+  const { text } = await generateText({
+    model: google("gemini-2.5-flash"),
+    prompt: ``,
+  });
+
+  return text;
 };
 
 export const meta: Tab = {
@@ -69,6 +83,5 @@ export const meta: Tab = {
 export const seoPluginConfig = seoPlugin({
   generateTitle,
   generateURL,
-  // generateImage,
-  // generateDescription,
+  generateDescription,
 });
