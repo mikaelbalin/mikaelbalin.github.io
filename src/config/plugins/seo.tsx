@@ -4,6 +4,7 @@ import {
   GenerateTitle,
   GenerateURL,
   GenerateDescription,
+  GenerateImage,
 } from "@payloadcms/plugin-seo/types";
 import {
   MetaDescriptionField,
@@ -62,6 +63,10 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
   }
 };
 
+const generateImage: GenerateImage<Post | Page> = ({ doc, globalConfig }) => {
+  return "";
+};
+
 export const meta: Tab = {
   name: "meta",
   label: "SEO",
@@ -100,4 +105,5 @@ export const seoPluginConfig = seoPlugin({
   generateTitle,
   generateURL,
   generateDescription,
+  generateImage,
 });
