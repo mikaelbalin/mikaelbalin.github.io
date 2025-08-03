@@ -14,67 +14,13 @@ import {
 } from "@payloadcms/plugin-seo/fields";
 import { Page, Post } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
-
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
+import { defaultModel } from "#lib/aiProvider";
+import { SITE_TITLE } from "#config/constants";
 import { generateText } from "ai";
 
-const TITLE = "Mikael Balin";
-
-const google = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-});
-
-const model = google("gemini-2.5-flash");
-
-type PayloadNode = {
-  type: string;
-  version?: number;
-  text?: string;
-  children?: PayloadNode[];
-  [k: string]: unknown;
-};
-
-const extractTextFromPayloadContent = (nodes: PayloadNode[]): string => {
-  if (!nodes || !Array.isArray(nodes)) return "";
-
-  const extractText = (node: PayloadNode): string => {
-    if (!node || typeof node !== "object") return "";
-
-    if (node.type === "text" && typeof node.text === "string") {
-      return node.text;
-    }
-
-    // Skip blocks but include some text from specific block types
-    if (node.type === "block" || node.type === "inlineBlock") {
-      return "";
-    }
-
-    // Handle different node types
-    if (node.type === "paragraph" || node.type === "heading") {
-      if (Array.isArray(node.children)) {
-        return node.children.map(extractText).join(" ");
-      }
-    }
-
-    if (Array.isArray(node.children)) {
-      return node.children.map(extractText).join(" ");
-    }
-
-    return "";
-  };
-
-  const text = nodes
-    .map(extractText)
-    .filter(Boolean)
-    .join(" ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  return text;
-};
-
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | ${TITLE}` : TITLE;
+  return doc?.title ? `${doc.title} | ${SITE_TITLE}` : SITE_TITLE;
 };
 
 const generateURL: GenerateURL<Post | Page> = ({ doc, collectionSlug }) => {
@@ -99,7 +45,7 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
 
   try {
     const { text } = await generateText({
-      model,
+      model: defaultModel,
       prompt: `Create a compelling SEO meta description (100-150 characters) for the following article content. The description should:
 - Summarize the main topic and key points
 - Be engaging for search engine users
