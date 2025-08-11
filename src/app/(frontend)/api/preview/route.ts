@@ -26,11 +26,11 @@ export async function GET(req: NextRequest) {
     }
 
     if (!collection) {
-      return new Response("No path provided", { status: 404 });
+      return new Response("No collection provided", { status: 404 });
     }
 
     if (!slug) {
-      return new Response("No path provided", { status: 404 });
+      return new Response("No slug provided", { status: 404 });
     }
 
     if (!token) {

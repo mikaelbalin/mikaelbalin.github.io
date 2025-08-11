@@ -23,6 +23,33 @@ const nextConfig = {
   devIndicators: {
     position: "bottom-right",
   },
+  // Optimizations for cold start performance
+  experimental: {
+    // Use webpack cache for faster builds
+    webpackBuildWorker: true,
+    // Optimize memory usage
+    optimizePackageImports: ["@payloadcms/next", "@payloadcms/ui"],
+  },
+  // Reduce bundle size
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  // Configure runtime optimizations
+  poweredByHeader: false,
+  // Add headers for better caching
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60, stale-while-revalidate=600",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 const withBundleAnalyzer = nextBundleAnalyzer({
