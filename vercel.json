@@ -1,19 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "src/app/**/*.ts": {
-      "maxDuration": 30,
-      "memory": 1024
-    },
-    "src/app/**/*.tsx": {
-      "maxDuration": 30,
-      "memory": 1024
-    },
-    "src/app/api/**/*.ts": {
-      "maxDuration": 30,
-      "memory": 1024
-    }
-  },
   "crons": [
     {
       "path": "/api/cron/warmup",
