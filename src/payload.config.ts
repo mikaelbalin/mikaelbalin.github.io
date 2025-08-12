@@ -99,9 +99,9 @@ export default buildConfig({
         prodMigrations: migrations,
         pool: {
           connectionString: process.env.POSTGRES_URL || "",
-          min: 1, // Keep at least 1 connection warm
-          max: 10, // Increased pool size for better concurrency
-          idleTimeoutMillis: 60000, // Keep connections idle longer
+          min: 0, // No persistent connections for static generation
+          max: 5, // Reduced pool size for static generation
+          idleTimeoutMillis: 30000, // Shorter idle timeout
           connectionTimeoutMillis: 5000, // Faster timeout for failed connections
         },
         migrationDir: path.resolve(dirname, "config/migrations"),
