@@ -6,7 +6,7 @@ import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
 import { LocaleParams } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
-import { StaticPageService } from "#lib/services/StaticPageService";
+import { PageService } from "#lib/services/PageService";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
@@ -30,8 +30,8 @@ export default async function RootLayout(
 
   const { isEnabled } = await draftMode();
   const [header, footer] = await Promise.all([
-    StaticPageService.getHeader(lang),
-    StaticPageService.getFooter(lang),
+    PageService.getHeader(lang),
+    PageService.getFooter(lang),
   ]);
 
   return (
