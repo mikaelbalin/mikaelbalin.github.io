@@ -1,11 +1,11 @@
 import { Hero } from "#components/Hero";
 import { RenderBlocks } from "#components/RenderBlocks";
+import { PayloadRedirects } from "#components/ui/PayloadRedirects";
 import { i18n } from "#i18n-config";
 import { generateMeta } from "#lib/generateMeta";
 import { PageService } from "#lib/services/PageService";
 import { PageQueryArgs } from "#types/args";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 // Force static generation for all pages at build time
 export const dynamic = "force-static";
@@ -27,6 +27,8 @@ export default async function Page({
   const { slug: slugs = ["home"], lang = i18n.defaultLocale } =
     await paramsPromise;
   const { page = 1, category = "all" } = await searchParamsPromise;
+  const slug = slugs[0];
+  const path = `/${slug}`;
 
   const pageData = await PageService.getBySlug({
     slug: slugs,
@@ -34,13 +36,14 @@ export default async function Page({
   });
 
   if (!pageData) {
-    notFound();
+    return <PayloadRedirects path={path} />;
   }
 
   const { hero, layout } = pageData;
 
   return (
     <>
+      <PayloadRedirects disableNotFound path={path} />
       <Hero {...hero} />
       {layout && (
         <RenderBlocks
