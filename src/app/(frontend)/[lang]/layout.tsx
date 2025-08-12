@@ -6,7 +6,7 @@ import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
 import { LocaleParams } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
-import { PageService } from "#lib/services/PageService";
+import { StaticPageService } from "#lib/services/StaticPageService";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
@@ -17,6 +17,11 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// Force static generation for layout at build time
+export const dynamic = "force-static";
+// Revalidate header/footer data every 24 hours
+export const revalidate = 86400;
+
 export default async function RootLayout(
   props: Readonly<{ children: React.ReactNode; params: Promise<LocaleParams> }>,
 ) {
@@ -25,8 +30,8 @@ export default async function RootLayout(
 
   const { isEnabled } = await draftMode();
   const [header, footer] = await Promise.all([
-    PageService.getHeader(lang),
-    PageService.getFooter(lang),
+    StaticPageService.getHeader(lang),
+    StaticPageService.getFooter(lang),
   ]);
 
   return (

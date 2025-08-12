@@ -1,11 +1,16 @@
 import { Hero } from "#components/Hero";
 import { RenderBlocks } from "#components/RenderBlocks";
-import { PayloadRedirects } from "#components/ui/PayloadRedirects";
 import { i18n } from "#i18n-config";
 import { generateMeta } from "#lib/generateMeta";
-import { PageService } from "#lib/services/PageService";
+import { StaticPageService } from "#lib/services/StaticPageService";
 import { PageQueryArgs } from "#types/args";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+// Force static generation for all pages at build time
+export const dynamic = "force-static";
+// Revalidate static pages every 24 hours (86400 seconds)
+export const revalidate = 86400;
 
 type Args = Readonly<{
   params: Promise<PageQueryArgs>;
@@ -22,23 +27,20 @@ export default async function Page({
   const { slug: slugs = ["home"], lang = i18n.defaultLocale } =
     await paramsPromise;
   const { page = 1, category = "all" } = await searchParamsPromise;
-  const slug = slugs[0];
-  const path = `/${slug}`;
 
-  const pageData = await PageService.getBySlug({
+  const pageData = await StaticPageService.getBySlug({
     slug: slugs,
     lang,
   });
 
   if (!pageData) {
-    return <PayloadRedirects path={path} />;
+    notFound();
   }
 
   const { hero, layout } = pageData;
 
   return (
     <>
-      <PayloadRedirects disableNotFound path={path} />
       <Hero {...hero} />
       {layout && (
         <RenderBlocks
@@ -57,7 +59,7 @@ export async function generateMetadata({
 }: Args): Promise<Metadata> {
   const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
 
-  const page = await PageService.getBySlug({
+  const page = await StaticPageService.getBySlug({
     slug,
     lang,
   });
@@ -66,6 +68,6 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<PageQueryArgs[]> {
-  const params = await PageService.getAllSlugs();
+  const params = await StaticPageService.getAllSlugs();
   return params;
 }
