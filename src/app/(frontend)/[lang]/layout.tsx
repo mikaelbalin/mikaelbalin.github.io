@@ -4,7 +4,7 @@ import { ThemeProvider } from "#components/theme-provider";
 import { AdminBar } from "#components/ui/AdminBar";
 import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
-import { LocaleParams } from "#i18n-config";
+import { Locale } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
 import { PageService } from "#lib/services/PageService";
 import { Analytics } from "@vercel/analytics/react";
@@ -22,16 +22,14 @@ export const dynamic = "force-static";
 // Revalidate header/footer data every 24 hours
 export const revalidate = 86400;
 
-export default async function RootLayout(
-  props: Readonly<{ children: React.ReactNode; params: Promise<LocaleParams> }>,
-) {
+export default async function RootLayout(props: LayoutProps<"/[lang]">) {
   const { children } = props;
   const { lang } = await props.params;
 
   const { isEnabled } = await draftMode();
   const [header, footer] = await Promise.all([
-    PageService.getHeader(lang),
-    PageService.getFooter(lang),
+    PageService.getHeader(lang as Locale),
+    PageService.getFooter(lang as Locale),
   ]);
 
   return (

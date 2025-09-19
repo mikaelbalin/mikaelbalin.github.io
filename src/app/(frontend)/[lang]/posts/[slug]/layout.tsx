@@ -9,20 +9,9 @@ import { formatDateTime } from "#lib/formatDateTime";
 import { getClientSideURL } from "#lib/getURL";
 import { PostService } from "#lib/services/PostService";
 
-type Args = {
-  params: Promise<{
-    slug: string;
-    lang: Locale | "all";
-  }>;
-};
-
-type LayoutProps = Readonly<
-  {
-    children: React.ReactNode;
-  } & Args
->;
-
-export default async function Layout(props: LayoutProps) {
+export default async function Layout(
+  props: LayoutProps<"/[lang]/posts/[slug]">,
+) {
   const { children } = props;
   const params = await props.params;
   const { slug = "", lang = i18n.defaultLocale } = params;
@@ -58,7 +47,7 @@ export default async function Layout(props: LayoutProps) {
         <PostList
           posts={filterPayloadRelations(relatedPosts)}
           className="hidden py-24 sm:block"
-          locale={lang}
+          locale={lang as Locale | "all"}
         >
           <Title order={2}>Similar articles</Title>
         </PostList>
