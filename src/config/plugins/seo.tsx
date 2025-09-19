@@ -63,7 +63,7 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
   }
 };
 
-const generateImage: GenerateImage<Post | Page> = ({ doc, globalConfig }) => {
+const generateImage: GenerateImage<Post | Page> = () => {
   return "";
 };
 
