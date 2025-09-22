@@ -11,4 +11,8 @@ export default meta;
 
 type Story = StoryObj<typeof Switch>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  args: {
+    "aria-label": "Example switch",
+  },
+};

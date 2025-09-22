@@ -12,5 +12,6 @@ type Story = StoryObj<typeof Toggle>;
 export const Default: Story = {
   args: {
     children: <IconIceCream2 />,
+    "aria-label": "Example toggle",
   },
 };

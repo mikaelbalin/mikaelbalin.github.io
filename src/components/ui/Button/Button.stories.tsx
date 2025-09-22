@@ -26,6 +26,7 @@ export const Default: Story = {
   args: {
     variant: "default",
     children: "Button",
+    "aria-label": "Example button",
   },
 };
 

@@ -9,5 +9,7 @@ export default meta;
 type Story = StoryObj<typeof Textarea>;
 
 export const Basic: Story = {
-  args: {},
+  args: {
+    "aria-label": "Example textarea",
+  },
 };
