@@ -48,9 +48,6 @@ export default defineConfig({
             // The --ci flag will skip prompts and not open a browser
             storybookScript: "pnpm storybook --ci",
             storybookUrl: "http://localhost:6006",
-            tags: {
-              include: ["test"],
-            },
           }),
         ],
         test: {
