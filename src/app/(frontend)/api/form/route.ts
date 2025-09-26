@@ -11,14 +11,27 @@ const rateLimit = new Ratelimit({
 
 export async function POST(req: NextRequest) {
   const ip = ipAddress(req);
-  const { success } = await rateLimit.limit(ip || "127.0.0.1");
 
-  if (!success) {
+  try {
+    const { success } = await rateLimit.limit(ip || "127.0.0.1");
+
+    if (!success) {
+      return NextResponse.json(
+        {
+          error: "Too many requests",
+        },
+        { status: 429 },
+      );
+    }
+  } catch (error) {
     return NextResponse.json(
       {
-        error: "Too many requests",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Service temporarily unavailable",
       },
-      { status: 429 },
+      { status: 503 },
     );
   }
 
@@ -48,6 +61,7 @@ export async function POST(req: NextRequest) {
     const json = await response.json();
 
     if (!response.ok) {
+      console.error("Error submitting form:", json);
       return NextResponse.json(
         {
           error: json.errors?.[0] || "Internal Server Error",
