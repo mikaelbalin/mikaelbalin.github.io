@@ -7,6 +7,12 @@ import "../src/app/(frontend)/[lang]/globals.css";
 import "./story.css";
 import { ThemeProvider } from "../src/components/theme-provider";
 import { Toaster } from "../src/components/ui/Toaster";
+import { initialize, mswLoader } from "msw-storybook-addon";
+
+initialize({
+  quiet: true,
+  onUnhandledRequest: "bypass",
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +43,7 @@ const preview: Preview = {
       appDirectory: true,
     },
   },
+  loaders: [mswLoader],
   decorators: [
     // https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#writing-a-custom-decorator
     withThemeByClassName({

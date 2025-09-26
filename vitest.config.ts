@@ -1,7 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { defineConfig } from "vitest/config";
+import { defineConfig, defineProject } from "vitest/config";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { storybookNextJsPlugin } from "@storybook/nextjs-vite/vite-plugin";
 
 const dirname =
   typeof __dirname !== "undefined"
@@ -10,26 +11,85 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/writing-tests/test-addon
 export default defineConfig({
+  resolve: {
+    alias: {
+      "#components": path.resolve(dirname, "src/components"),
+      "#lib": path.resolve(dirname, "src/lib"),
+      "#types": path.resolve(dirname, "src/types"),
+      "#config": path.resolve(dirname, "src/config"),
+      "#i18n-config": path.resolve(dirname, "src/i18n-config.ts"),
+      "@payload-config": path.resolve(dirname, "src/payload.config.ts"),
+    },
+  },
   test: {
-    workspace: [
-      {
-        extends: true,
+    globals: true,
+    includeTaskLocation: true,
+    coverage: {
+      enabled: true,
+      provider: "istanbul",
+      reporter: ["html", "lcov", "text", "json"],
+      include: ["src"],
+      exclude: [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "**/*.stories.*",
+        "**/*.story.*",
+      ],
+    },
+    projects: [
+      defineProject({
         plugins: [
           // The plugin will run tests for the stories defined in your Storybook config
           // See options at: https://storybook.js.org/docs/writing-tests/test-addon#storybooktest
-          storybookTest({ configDir: path.join(dirname, ".storybook") }),
+          storybookTest({
+            // The location of your Storybook config, main.js|ts
+            configDir: path.join(dirname, ".storybook"),
+            // This should match your package.json script to run Storybook
+            // The --ci flag will skip prompts and not open a browser
+            storybookScript: "pnpm storybook --ci",
+            storybookUrl: "http://localhost:6006",
+            tags: {
+              include: ["test"],
+            },
+          }),
         ],
         test: {
           name: "storybook",
           browser: {
             enabled: true,
             headless: true,
-            name: "chromium",
             provider: "playwright",
+            instances: [
+              {
+                browser: "chromium",
+              },
+            ],
           },
           setupFiles: [".storybook/vitest.setup.ts"],
+          exclude: ["node_modules", "dist", ".next"],
         },
-      },
+      }),
+      // Workspace for unit tests (non-Storybook) using Playwright browser
+      defineProject({
+        // check https://github.com/storybookjs/storybook/pull/32014
+        plugins: [storybookNextJsPlugin()],
+        test: {
+          name: "unit",
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: "playwright",
+            instances: [
+              {
+                browser: "chromium",
+              },
+            ],
+          },
+          include: ["src/**/*.test.{js,jsx,ts,tsx}"],
+          exclude: ["src/**/*.stories.{js,jsx,ts,tsx}"],
+          setupFiles: ["tests/vitest.setup.ts"],
+        },
+      }),
     ],
   },
 });

@@ -131,7 +131,12 @@ export const SubscriptionForm = ({
               disabled={isLoading || hasSubmitted}
               className="w-full sm:w-auto"
             >
-              {isLoading && <IconLoader2 className="animate-spin" />}
+              {isLoading && (
+                <>
+                  <IconLoader2 className="animate-spin" />
+                  <span className="sr-only">Loading, please wait...</span>
+                </>
+              )}
               {submitButtonLabel}
             </Button>
           </div>
