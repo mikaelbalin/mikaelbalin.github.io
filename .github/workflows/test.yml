@@ -50,11 +50,11 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      #   - name: Run unit tests
-      #     run: pnpm test:unit run
+      - name: Run unit tests
+        run: pnpm test:unit run
 
       - name: Run Storybook tests
-        run: pnpm test-storybook run
+        run: pnpm test-storybook:coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -62,4 +62,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./coverage/
           fail_ci_if_error: true
-          slug: mikaelbalin/mikaelbalin.github.io

@@ -23,13 +23,11 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
-    "test-storybook": "vitest --project=storybook",
+    "test-storybook": "vitest --project=storybook --coverage.enabled=false",
     "test-storybook:ui": "vitest --project=storybook --ui",
-    "test-storybook:coverage": "vitest run --project=storybook --coverage",
-    "test:unit": "vitest --project=unit",
+    "test-storybook:coverage": "vitest run --project=storybook",
+    "test:unit": "vitest --project=unit --coverage.enabled=false",
     "test:unit:ui": "vitest --project=unit --ui",
-    "test:unit:coverage": "vitest run --project=unit --coverage",
-    "test": "pnpm test-storybook run && pnpm test:unit run",
     "backup": "./backup.sh"
   },
   "imports": {
