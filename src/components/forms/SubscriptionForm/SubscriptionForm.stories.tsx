@@ -38,7 +38,6 @@ export const FilledEmail: Story = {
   args: {
     ...Basic.args,
   },
-  tags: ["test"],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

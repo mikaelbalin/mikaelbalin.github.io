@@ -10,7 +10,6 @@ const password = z
   });
 
 const email = z
-  .string()
   .email({ message: "Invalid email" })
   .min(5, "Invalid email")
   .max(50, "Invalid email");
@@ -51,7 +50,7 @@ export const contactFormSchema = z.object({
   terms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms of service",
   }),
-  newsletter: z.boolean(),
+  newsletter: z.boolean().optional(),
 });
 
 export type ContactFormSchema = z.infer<typeof contactFormSchema>;

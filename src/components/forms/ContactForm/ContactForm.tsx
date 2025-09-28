@@ -69,7 +69,7 @@ export const ContactForm = (props: ContactFormProps) => {
 
         const json = await response.json();
 
-        if (response.status >= 400) {
+        if (!response.ok) {
           setIsLoading(false);
 
           toast(`Form submit error: ${json.status}`, {
