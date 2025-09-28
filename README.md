@@ -1,4 +1,4 @@
-[![Pages Build Deployment](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/pages/pages-build-deployment)
+[![Deploy Storybook to Pages](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/storybook.yml/badge.svg?branch=main)](https://github.com/mikaelbalin/mikaelbalin.github.io/actions/workflows/storybook.yml)
 ![Vercel Status](https://vercelbadge.vercel.app/api/mikaelbalin/mikaelbalin.github.io?style=flat)
 [![codecov](https://codecov.io/gh/mikaelbalin/mikaelbalin.github.io/branch/main/graph/badge.svg)](https://codecov.io/gh/mikaelbalin/mikaelbalin.github.io)
 
