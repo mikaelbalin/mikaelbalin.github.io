@@ -29,14 +29,18 @@ const nextConfig = {
   },
   poweredByHeader: false,
   webpack: (config, options) => {
-    config.plugins.push(
-      codecovNextJSWebpackPlugin({
-        enableBundleAnalysis: true,
-        bundleName: "mikaelbalin-website-bundle",
-        uploadToken: process.env.CODECOV_TOKEN,
-        webpack: options.webpack,
-      }),
-    );
+    // Only enable Codecov plugin in production environment
+    if (process.env.NODE_ENV === "production") {
+      config.plugins.push(
+        codecovNextJSWebpackPlugin({
+          enableBundleAnalysis: true,
+          bundleName: "mikaelbalin-website-bundle",
+          uploadToken: process.env.CODECOV_TOKEN,
+          webpack: options.webpack,
+          telemetry: false,
+        }),
+      );
+    }
 
     return config;
   },
