@@ -5,15 +5,6 @@ import { SubscriptionForm } from "./SubscriptionForm";
 
 const meta: Meta<typeof SubscriptionForm> = {
   component: SubscriptionForm,
-  parameters: {
-    backgrounds: {
-      default: "Shadow earth",
-      values: [
-        // 👇 Add a new value
-        { name: "Shadow earth", value: "var(--color-shadow-earth)" },
-      ],
-    },
-  },
 };
 export default meta;
 
