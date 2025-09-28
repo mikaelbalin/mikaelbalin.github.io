@@ -1,0 +1,65 @@
+name: Tests
+
+on:
+  # Run tests on pull requests
+  pull_request:
+    branches: ["main", "develop"]
+
+  # Run tests on pushes to main and develop
+  push:
+    branches: ["main", "develop"]
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+# Cancel in-progress runs on new pushes to the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@kaelui"
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      #   - name: Install Playwright browsers
+      #     run: pnpm playwright install --with-deps chromium
+
+      - name: Type check
+        run: pnpm check-types
+
+      - name: Lint
+        run: pnpm lint
+
+      #   - name: Run unit tests
+      #     run: pnpm test:unit run
+
+      - name: Run Storybook tests
+        run: pnpm test-storybook run
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          fail_ci_if_error: true
+          slug: mikaelbalin/mikaelbalin.github.io
