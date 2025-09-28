@@ -16,7 +16,16 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   ...storybook.configs["flat/recommended"],
   {
-    ignores: [".next/*", "node_modules/*", "src/config/migrations/*"],
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+      "src/config/migrations/*",
+      "coverage/**",
+      "public/mockServiceWorker.js",
+    ],
   },
   {
     rules: {

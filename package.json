@@ -17,7 +17,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "check-types": "tsc --noEmit",
     "check-types:watch": "pnpm check-types --watch",
-    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_CONFIG_PATH=src/payload.config.ts payload",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
