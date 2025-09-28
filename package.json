@@ -94,6 +94,7 @@
   },
   "devDependencies": {
     "@ai-sdk/google": "2.0.17",
+    "@codecov/nextjs-webpack-plugin": "^1.9.1",
     "@eslint/eslintrc": "3.3.1",
     "@mdx-js/react": "3.1.1",
     "@next/bundle-analyzer": "15.5.4",

@@ -1,5 +1,6 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import nextBundleAnalyzer from "@next/bundle-analyzer";
+import { codecovNextJSWebpackPlugin } from "@codecov/nextjs-webpack-plugin";
 
 const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
@@ -27,6 +28,18 @@ const nextConfig = {
     optimizePackageImports: ["@payloadcms/next", "@payloadcms/ui"],
   },
   poweredByHeader: false,
+  webpack: (config, options) => {
+    config.plugins.push(
+      codecovNextJSWebpackPlugin({
+        enableBundleAnalysis: true,
+        bundleName: "mikaelbalin-website-bundle",
+        uploadToken: process.env.CODECOV_TOKEN,
+        webpack: options.webpack,
+      }),
+    );
+
+    return config;
+  },
 };
 
 const withBundleAnalyzer = nextBundleAnalyzer({
