@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import { Text } from "#components/ui/Text";
 
+const sanitizeLanguageTag = (lang: string) => {
+  // Remove @posix or other invalid suffixes
+  return lang.split("@")[0];
+};
+
 const options: Intl.DateTimeFormatOptions = {
   hour: "2-digit",
   minute: "2-digit",
@@ -12,13 +17,19 @@ const options: Intl.DateTimeFormatOptions = {
 
 export const LiveTime = () => {
   const [currentTime, setCurrentTime] = useState<string>(
-    new Date().toLocaleTimeString(window.navigator.language, options),
+    new Date().toLocaleTimeString(
+      sanitizeLanguageTag(window.navigator.language),
+      options,
+    ),
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(
-        new Date().toLocaleTimeString(window.navigator.language, options),
+        new Date().toLocaleTimeString(
+          sanitizeLanguageTag(window.navigator.language),
+          options,
+        ),
       );
     }, 1000);
 
