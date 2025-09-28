@@ -2,7 +2,7 @@
 ![Vercel Status](https://vercelbadge.vercel.app/api/mikaelbalin/mikaelbalin.github.io?style=flat)
 [![codecov](https://codecov.io/gh/mikaelbalin/mikaelbalin.github.io/branch/main/graph/badge.svg)](https://codecov.io/gh/mikaelbalin/mikaelbalin.github.io)
 
-## Installing / Getting started
+## Installing
 
 A quick introduction of the minimal setup you need to get a hello world up & running.
 
