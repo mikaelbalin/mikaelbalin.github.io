@@ -1,9 +1,10 @@
 import { beforeAll, afterEach, vi } from "vitest";
+import { setProjectAnnotations } from "@storybook/nextjs-vite";
+import * as previewAnnotations from "../.storybook/preview";
 
-beforeAll(() => {
-  // Setup code that runs before all tests
-  console.log("Setting up Playwright browser tests...");
-});
+const project = setProjectAnnotations([previewAnnotations]);
+
+beforeAll(project.beforeAll);
 
 afterEach(() => {
   // Cleanup after each test
