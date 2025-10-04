@@ -62,6 +62,10 @@ pnpm up --interactive --latest
 - `generate:importmap`: Generates an import map for the admin panel to resolve imports correctly
 - `migrate:create`: Creates a new migration file for database schema changes
 
+## Known Issues
+
+**⚠️ Do not update `eslint-plugin-react-hooks` to version `6.1.1`** - this version contains a bug that affects the project functionality.
+
 ## `npmrc`
 
 ```
