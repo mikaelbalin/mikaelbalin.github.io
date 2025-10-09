@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import {
   useScroll,
   useSpring,
@@ -48,14 +48,18 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
   const ySpring = useSpring(y, springConfig);
 
   const { y: yRef } = useMotionContext(); // Access the motion value ref
-  yRef.current = ySpring; // Set the motion value
+
+  // Update the ref in an effect to avoid updating during render
+  useEffect(() => {
+    yRef.current = ySpring;
+  }, [yRef, ySpring]);
 
   return (
     <div className="my-auto" ref={ref}>
       <Marquee titles={titles} className="motion-safe:animate-fadeInDelay300" />
       <Container
         className={cn(
-          "relative my-6.5 sm:my-8",
+          "my-6.5 relative sm:my-8",
           "motion-safe:animate-fadeInDelay500",
         )}
       >
