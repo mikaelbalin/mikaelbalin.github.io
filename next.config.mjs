@@ -2,24 +2,15 @@ import { withPayload } from "@payloadcms/next/withPayload";
 import nextBundleAnalyzer from "@next/bundle-analyzer";
 import { codecovNextJSWebpackPlugin } from "@codecov/nextjs-webpack-plugin";
 
-const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
+const serverSideURL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
-
-console.warn({
-  NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
-  NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
-  NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL:
-    process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL,
-  VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
-  env: process.env,
-});
+  : "http://localhost:3000";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
+      ...[serverSideURL].map((item) => {
         const url = new URL(item);
 
         return {

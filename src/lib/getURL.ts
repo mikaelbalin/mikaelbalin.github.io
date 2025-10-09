@@ -1,5 +1,7 @@
 import canUseDOM from "#lib/canUseDOM";
 
+const LOCAL_URL = "http://localhost:3000";
+
 /**
  * Retrieves the server-side URL based on environment variables.
  *
@@ -11,14 +13,14 @@ import canUseDOM from "#lib/canUseDOM";
  * @returns The server-side URL.
  */
 export const getServerSideURL = (): string => {
-  let url = process.env.NEXT_PUBLIC_SERVER_URL;
+  let url = null;
 
   if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }
 
   if (!url) {
-    url = "http://localhost:3000";
+    url = LOCAL_URL;
   }
 
   return url;
@@ -45,5 +47,5 @@ export const getClientSideURL = (): string => {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   }
 
-  return process.env.NEXT_PUBLIC_SERVER_URL ?? "";
+  return LOCAL_URL;
 };

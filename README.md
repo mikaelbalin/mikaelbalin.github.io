@@ -19,8 +19,6 @@ Some projects require initial configuration (e.g. access tokens or keys).
 POSTGRES_URL=postgres://postgres:<password>@127.0.0.1:5432/payload
 # Used to encrypt JWT tokens
 PAYLOAD_SECRET=secret
-# Used to configure CORS, format links and more. No trailing slash
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ```
 
 ## Developing
