@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import React from "react";
 
 const BASE_FONT_SIZE = 16;
 
 export const useRootFontSize = () => {
-  const [rootFontSize, setRootFontSize] = useState(BASE_FONT_SIZE);
+  const getRootFontSize = React.useCallback(() => {
+    if (typeof window === "undefined") return BASE_FONT_SIZE;
+    return parseFloat(getComputedStyle(document.documentElement).fontSize);
+  }, []);
 
-  useEffect(() => {
-    const getRootFontSize = () => {
-      if (typeof window === "undefined") return BASE_FONT_SIZE;
-      return parseFloat(getComputedStyle(document.documentElement).fontSize);
-    };
+  const [rootFontSize, setRootFontSize] = React.useState(() =>
+    getRootFontSize(),
+  );
 
-    setRootFontSize(getRootFontSize());
-
+  React.useEffect(() => {
     // Watch for style attribute changes
     const mutationObserver = new MutationObserver(() => {
       setRootFontSize(getRootFontSize());
@@ -32,7 +32,7 @@ export const useRootFontSize = () => {
       mutationObserver.disconnect();
       mediaQuery.removeEventListener("change", handleZoom);
     };
-  }, []);
+  }, [getRootFontSize]);
 
   return rootFontSize;
 };
