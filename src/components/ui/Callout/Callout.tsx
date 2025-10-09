@@ -7,14 +7,14 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 
-function getIcon(type: CalloutBlock["style"]) {
+function renderIcon(type: CalloutBlock["style"]) {
   switch (type) {
     case "note":
-      return IconInfoCircle;
+      return <IconInfoCircle />;
     case "tip":
-      return IconBulb;
+      return <IconBulb />;
     case "important":
-      return IconExclamationCircle;
+      return <IconExclamationCircle />;
     default:
       throw new Error(`Unknown type: ${type}`);
   }
@@ -27,7 +27,6 @@ type CalloutProps = React.PropsWithChildren<
 
 export const Callout = (props: CalloutProps) => {
   const { style, blockName, children, className } = props;
-  const Icon = getIcon(style);
 
   return (
     <div
@@ -38,7 +37,7 @@ export const Callout = (props: CalloutProps) => {
     >
       {blockName && (
         <div className="bg-foreground text-background flex items-center gap-2 px-4 py-2 text-base sm:px-6 sm:text-lg">
-          <Icon /> {blockName}
+          {renderIcon(style)} {blockName}
         </div>
       )}
       <div className="px-4 py-6 text-lg sm:px-6 sm:py-8 sm:text-5xl">
