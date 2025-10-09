@@ -109,6 +109,7 @@ export default buildConfig({
   sharp,
   plugins,
   cors: [getServerSideURL()].filter(Boolean),
+  csrf: [getServerSideURL()].filter(Boolean),
   email: resendAdapter({
     defaultFromAddress: "notifications@updates.mikaelbalin.com",
     defaultFromName: "Mikael Balin",
