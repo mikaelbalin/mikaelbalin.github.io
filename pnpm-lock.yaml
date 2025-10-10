@@ -29,6 +29,9 @@ importers:
       '@payloadcms/email-resend':
         specifier: 3.59.1
         version: 3.59.1(payload@3.59.1(bufferutil@4.0.9)(graphql@16.11.0)(typescript@5.9.3)(utf-8-validate@5.0.10))
+      '@payloadcms/graphql':
+        specifier: ^3.59.1
+        version: 3.59.1(graphql@16.11.0)(payload@3.59.1(bufferutil@4.0.9)(graphql@16.11.0)(typescript@5.9.3)(utf-8-validate@5.0.10))(typescript@5.9.3)
       '@payloadcms/live-preview-react':
         specifier: 3.59.1
         version: 3.59.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)

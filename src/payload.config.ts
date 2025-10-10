@@ -29,6 +29,19 @@ export default buildConfig({
     defaultLocale: i18n.defaultLocale,
     locales: [...i18n.locales],
   },
+  // GraphQL configuration with GraphiQL instead of default playground
+  graphQL: {
+    // Disable the default GraphQL playground - we use our custom GraphiQL instead
+    disablePlaygroundInProduction: true,
+    // Also disable playground in development since we have our custom GraphiQL
+    disable: false, // Keep GraphQL API enabled
+    // Enable introspection for GraphiQL in development, disable in production for security
+    disableIntrospectionInProduction: true,
+    // Set reasonable complexity limits for GraphiQL exploration
+    maxComplexity: 100,
+    // Output schema file for reference and GraphiQL schema introspection
+    schemaOutputFile: "schema.graphql",
+  },
   admin: {
     // https://payloadcms.com/docs/admin/components#root-components
     components: {
