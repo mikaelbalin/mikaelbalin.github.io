@@ -72,7 +72,7 @@ export interface Config {
     users: User;
     media: Media;
     categories: Category;
-    reusableBlocks: ReusableBlock1;
+    reusableBlocks: ReusableBlock;
     subscribers: Subscriber;
     redirects: Redirect;
     forms: Form;
@@ -175,7 +175,7 @@ export interface Page {
       };
     };
   };
-  layout: (AboutBlock | ArchiveBlock | SearchBlock | ReusableBlock | ContentBlock)[];
+  layout: (AboutBlock | ArchiveBlock | SearchBlock | ReusableBlockType | ContentBlock)[];
   meta: {
     title: string;
     /**
@@ -397,7 +397,8 @@ export interface Media {
  */
 export interface User {
   id: number;
-  name?: string | null;
+  username?: string | null;
+  roles?: ('admin' | 'user')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -428,10 +429,10 @@ export interface SearchBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ReusableBlock".
+ * via the `definition` "ReusableBlockType".
  */
-export interface ReusableBlock {
-  block: number | ReusableBlock1;
+export interface ReusableBlockType {
+  block: number | ReusableBlock;
   id?: string | null;
   blockName?: string | null;
   blockType: 'reusableBlock';
@@ -440,7 +441,7 @@ export interface ReusableBlock {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "reusableBlocks".
  */
-export interface ReusableBlock1 {
+export interface ReusableBlock {
   id: number;
   name: string;
   blockType: Subscription[];
@@ -797,7 +798,7 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'reusableBlocks';
-        value: number | ReusableBlock1;
+        value: number | ReusableBlock;
       } | null)
     | ({
         relationTo: 'subscribers';
@@ -895,7 +896,7 @@ export interface PagesSelect<T extends boolean = true> {
         about?: T | AboutBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         search?: T | SearchBlockSelect<T>;
-        reusableBlock?: T | ReusableBlockSelect<T>;
+        reusableBlock?: T | ReusableBlockTypeSelect<T>;
         content?: T | ContentBlockSelect<T>;
       };
   meta?:
@@ -956,9 +957,9 @@ export interface SearchBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ReusableBlock_select".
+ * via the `definition` "ReusableBlockType_select".
  */
-export interface ReusableBlockSelect<T extends boolean = true> {
+export interface ReusableBlockTypeSelect<T extends boolean = true> {
   block?: T;
   id?: T;
   blockName?: T;
@@ -1009,7 +1010,8 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
+  username?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
