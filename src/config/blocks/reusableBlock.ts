@@ -2,7 +2,7 @@ import { Block } from "payload";
 
 export const reusableBlock: Block = {
   slug: "reusableBlock",
-  interfaceName: "ReusableBlock",
+  interfaceName: "ReusableBlockType",
   fields: [
     {
       name: "block",
