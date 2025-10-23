@@ -30,7 +30,7 @@ const nextConfig = {
   poweredByHeader: false,
   webpack: (config, options) => {
     // Only enable Codecov plugin in production environment
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === "production" && process.env.CI === "true") {
       config.plugins.push(
         codecovNextJSWebpackPlugin({
           enableBundleAnalysis: true,
