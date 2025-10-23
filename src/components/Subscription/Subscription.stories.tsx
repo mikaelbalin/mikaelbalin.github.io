@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Subscription } from "./Subscription";
 import { Basic as SubscriptionForm } from "../forms/SubscriptionForm/SubscriptionForm.stories";
-import { FormBlock, ReusableBlock } from "#types/payload";
+import { FormBlock, ReusableBlockType } from "#types/payload";
 
 const meta: Meta<typeof Subscription> = {
   component: Subscription,
@@ -11,7 +11,7 @@ const meta: Meta<typeof Subscription> = {
 };
 export default meta;
 
-type Story = StoryObj<ReusableBlock>;
+type Story = StoryObj<ReusableBlockType>;
 
 export const Basic: Story = {
   args: {
