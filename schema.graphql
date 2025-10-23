@@ -326,7 +326,7 @@ type User {
   roles: [User_roles!]
   updatedAt: DateTime
   createdAt: DateTime
-  email: EmailAddress
+  email: EmailAddress!
   resetPasswordToken: String
   resetPasswordExpiration: DateTime
   salt: String
@@ -16892,7 +16892,7 @@ input mutationUserInput {
   roles: [User_roles_MutationInput]
   updatedAt: String
   createdAt: String
-  email: String
+  email: String!
   resetPasswordToken: String
   resetPasswordExpiration: String
   salt: String
