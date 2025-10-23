@@ -79,7 +79,7 @@ export async function GET(req: NextRequest) {
         return new Response("Document not found", { status: 404 });
       }
     } catch (error) {
-      payload.logger.error("Error verifying token for live preview:", error);
+      payload.logger.error(error, "Error verifying token for live preview:");
     }
 
     draft.enable();
