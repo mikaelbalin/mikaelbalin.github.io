@@ -23,7 +23,7 @@ export async function verifyPayloadUser(): Promise<{
 
     return { user, token };
   } catch (error) {
-    payload.logger.error("Error verifying token for live preview:", error);
+    payload.logger.error(error, "Error verifying token for live preview:");
 
     return {};
   }
