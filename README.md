@@ -12,14 +12,7 @@ pnpm install
 
 ### Initial Configuration
 
-Some projects require initial configuration (e.g. access tokens or keys).
-
-```shell
-# Database connection string
-POSTGRES_URL=postgres://postgres:<password>@127.0.0.1:5432/payload
-# Used to encrypt JWT tokens
-PAYLOAD_SECRET=secret
-```
+Before running the project, you need to set up environment variables. See the `.env.example` file for the required variables and their descriptions. Copy this file to `.env.development` and fill in the necessary values (e.g., database connection string, secrets, etc.).
 
 ## Developing
 
