@@ -1,5 +1,5 @@
 import React from "react";
-import type { AboutBlock, Page, ReusableBlock } from "#types/payload";
+import type { AboutBlock, Page,  ReusableBlockType } from "#types/payload";
 import { Archive, type ArchiveBlockProps } from "#components/Archive";
 import { Subscription } from "#components/Subscription";
 import { About } from "#components/About";
@@ -13,7 +13,7 @@ const blockComponents: Record<
   BlockType,
   | React.FC<AboutBlock>
   | React.FC<ArchiveBlockProps>
-  | React.FC<ReusableBlock>
+  | React.FC<ReusableBlockType>
   | React.FC<SearchBlockProps>
   | React.FC<ContentBlockProps>
 > = {

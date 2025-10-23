@@ -1,9 +1,9 @@
 import { Container } from "#components/Container";
 import { Text } from "#components/ui/Text";
-import { ReusableBlock } from "#types/payload";
+import {   ReusableBlockType } from "#types/payload";
 import { SubscriptionForm } from "#components/forms/SubscriptionForm";
 
-export const Subscription = (props: ReusableBlock) => {
+export const Subscription = (props: ReusableBlockType) => {
   const { block } = props;
 
   if (!block || typeof block === "number" || block.blockType.length === 0) {
