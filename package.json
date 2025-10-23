@@ -118,9 +118,9 @@
     "@types/node": "24.9.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@vitest/browser": "3.2.4",
-    "@vitest/coverage-istanbul": "3.2.4",
-    "@vitest/ui": "3.2.4",
+    "@vitest/browser": "4.0.1",
+    "@vitest/coverage-istanbul": "4.0.1",
+    "@vitest/ui": "4.0.1",
     "ai": "5.0.77",
     "eslint": "9.38.0",
     "eslint-config-next": "15.5.4",
@@ -140,7 +140,7 @@
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.9.3",
     "utf-8-validate": "^6.0.5",
-    "vitest": "3.2.4",
+    "vitest": "4.0.1",
     "wait-on": "9.0.1"
   },
   "engines": {
