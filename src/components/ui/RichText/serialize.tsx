@@ -10,11 +10,14 @@ import { renderBlock } from "#components/ui/RichText/renderBlock";
 const getSerializedChildren = (
   node: ContentChildren[number],
   className?: string,
-) => {
-  return serializeLexical({
-    nodes: node.children,
-    className,
-  });
+): (JSX.Element | null)[] | undefined => {
+  if ("children" in node && Array.isArray(node.children)) {
+    return serializeLexical({
+      nodes: node.children,
+      className,
+    });
+  }
+  return undefined;
 };
 
 export const serializeLexical: SerializeLexical = ({ nodes, className }) => {
