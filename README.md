@@ -14,6 +14,12 @@ pnpm install
 
 Before running the project, you need to set up environment variables. See the `.env.example` file for the required variables and their descriptions. Copy this file to `.env.development` and fill in the necessary values (e.g., database connection string, secrets, etc.).
 
+You will need to use the environment variables [defined in `.env.example`](.env.example). It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables).
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
+3. Download your environment variables: `vercel env pull`
+
 ## Developing
 
 Here's a brief intro about what a developer must do in order to start developing the project further:
@@ -52,10 +58,6 @@ pnpm up --interactive --latest
 
 - `generate:importmap`: Generates an import map for the admin panel to resolve imports correctly
 - `migrate:create`: Creates a new migration file for database schema changes
-
-## Known Issues
-
-**⚠️ Do not update `eslint-plugin-react-hooks` to version `6.1.1`** - this version contains a bug that affects the project functionality.
 
 ## `npmrc`
 
