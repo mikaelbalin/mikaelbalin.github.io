@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 import * as access from "#lib/access";
 import { getServerSideURL } from "#lib/getURL";
-import { protectRoles } from "#config/hooks/protectRoles";
+// import { protectRoles } from "#config/hooks/protectRoles";
 
 /**
  * https://payloadcms.com/docs/admin/overview#the-admin-user-collection
@@ -9,13 +9,13 @@ import { protectRoles } from "#config/hooks/protectRoles";
 export const users: CollectionConfig = {
   slug: "users",
   access: {
-    read: access.adminsAndUser,
-    update: access.adminsAndUser,
-    admin: ({ req: { user } }) => access.checkRole(["admin"], user),
-    create: access.admins,
-    delete: access.admins,
-    unlock: access.admins,
-    readVersions: access.admins,
+    read: access.authenticated,
+    update: access.authenticated,
+    // admin: ({ req: { user } }) => access.checkRole(["admin"], user),
+    create: access.authenticated,
+    delete: access.authenticated,
+    unlock: access.authenticated,
+    readVersions: access.authenticated,
   },
   admin: {
     defaultColumns: ["username", "email"],
@@ -65,10 +65,10 @@ export const users: CollectionConfig = {
       type: "email",
       required: true,
       unique: true,
-      access: {
-        read: access.adminsAndUserField,
-        update: access.adminsAndUserField,
-      },
+      // access: {
+      //   read: access.adminsAndUserField,
+      //   update: access.adminsAndUserField,
+      // },
     },
     {
       name: "resetPasswordToken",
@@ -85,14 +85,14 @@ export const users: CollectionConfig = {
       type: "select",
       hasMany: true,
       saveToJWT: true,
-      access: {
-        read: access.adminsField,
-        update: access.adminsField,
-        create: access.adminsField,
-      },
-      hooks: {
-        beforeChange: [protectRoles],
-      },
+      // access: {
+      //   read: access.adminsField,
+      //   update: access.adminsField,
+      //   create: access.adminsField,
+      // },
+      // hooks: {
+      //   beforeChange: [protectRoles],
+      // },
       options: [
         {
           label: "Admin",
