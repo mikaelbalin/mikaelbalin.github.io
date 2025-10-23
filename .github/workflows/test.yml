@@ -41,14 +41,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Lint
-        run: pnpm lint
-
       - name: Run unit tests
-        run: pnpm test:unit run
-
-      - name: Run Storybook tests
-        run: pnpm test-storybook:coverage
+        run: pnpm test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
