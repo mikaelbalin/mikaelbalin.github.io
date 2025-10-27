@@ -40,7 +40,7 @@
     ]
   },
   "dependencies": {
-    "@atproto/api": "^0.17.4",
+    "@atproto/api": "^0.17.5",
     "@formatjs/intl-localematcher": "0.6.2",
     "@hookform/resolvers": "5.2.2",
     "@kaelui/hooks": "0.3.2",
@@ -90,12 +90,12 @@
     "react-hook-form": "7.65.0",
     "recharts": "3.3.0",
     "sharp": "0.34.4",
-    "shiki": "3.13.0",
+    "shiki": "3.14.0",
     "sonner": "2.0.7",
     "zod": "4.1.12"
   },
   "devDependencies": {
-    "@ai-sdk/google": "2.0.23",
+    "@ai-sdk/google": "2.0.24",
     "@codecov/nextjs-webpack-plugin": "^1.9.1",
     "@eslint/eslintrc": "3.3.1",
     "@mdx-js/react": "3.1.1",
@@ -119,7 +119,7 @@
     "@vitest/browser": "3.2.4",
     "@vitest/coverage-istanbul": "3.2.4",
     "@vitest/ui": "3.2.4",
-    "ai": "5.0.78",
+    "ai": "5.0.81",
     "eslint": "9.38.0",
     "eslint-config-next": "15.5.4",
     "eslint-plugin-react-hooks": "7.0.1",
