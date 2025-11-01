@@ -5,3 +5,7 @@
 html {
   position: relative;
 }
+
+body {
+  font-family: "Inter", sans-serif;
+}

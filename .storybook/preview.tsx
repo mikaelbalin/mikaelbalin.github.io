@@ -2,19 +2,16 @@ import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import type { Preview } from "@storybook/nextjs-vite";
-import { Inter } from "next/font/google";
-import "../src/app/(frontend)/[lang]/globals.css";
-import "./story.css";
 import { ThemeProvider } from "../src/components/theme-provider";
 import { Toaster } from "../src/components/ui/Toaster";
 import { initialize, mswLoader } from "msw-storybook-addon";
+import "../src/app/(frontend)/[lang]/globals.css";
+import "./story.css";
 
 initialize({
   quiet: true,
   onUnhandledRequest: "bypass",
 });
-
-const inter = Inter({ subsets: ["latin"] });
 
 const preview: Preview = {
   parameters: {
@@ -54,13 +51,11 @@ const preview: Preview = {
       defaultTheme: "light",
     }),
     (Story) => (
-      <div className={inter.className}>
-        <ThemeProvider>
-          {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-          <Story />
-          <Toaster />
-        </ThemeProvider>
-      </div>
+      <ThemeProvider>
+        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+        <Story />
+        <Toaster />
+      </ThemeProvider>
     ),
   ],
   tags: ["autodocs"],
