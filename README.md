@@ -56,7 +56,7 @@ Alternatively, you can use Vercel Environment Variables:
 pnpm dev
 ```
 
-### Initial Configuration
+## Initial Configuration
 
 Before running the project, you need to set up environment variables. See the `.env.example` file for the required variables and their descriptions. Copy this file to `.env.development` and fill in the necessary values (e.g., database connection string, secrets, etc.).
 
