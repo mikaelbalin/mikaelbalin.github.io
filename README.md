@@ -4,16 +4,56 @@
 
 ## Installing
 
-A quick introduction of the minimal setup you need to get a hello world up & running.
+A quick introduction of the minimal setup you need to get an app up & running.
+
+### 1. Configure `.npmrc`
+
+Create a `.npmrc` file in the project root with the following content:
+
+```
+# https://github.com/vercel/next.js/issues/68805 and https://pnpm.io/npmrc#public-hoist-pattern
+public-hoist-pattern[]=*@libsql*
+
+registry=https://registry.npmjs.org
+@kaelui:registry=https://npm.pkg.github.com
+
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+### 2. Install dependencies
 
 ```shell
 pnpm install
 ```
 
-Setup Postgres
+### 3. Setup Postgres
+
+Start the PostgreSQL database using Podman:
 
 ```sh
 podman compose --file docker-compose.yml up --detach
+```
+
+### 4. Configure environment variables
+
+Copy the example environment file and fill in the required values:
+
+```sh
+cp .env.example .env.development
+```
+
+See the `.env.example` file for the required variables and their descriptions (e.g., database connection string, secrets, etc.).
+
+Alternatively, you can use Vercel Environment Variables:
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
+3. Download your environment variables: `vercel env pull`
+
+### 5. Start development server
+
+```shell
+pnpm dev
 ```
 
 ### Initial Configuration
@@ -64,15 +104,3 @@ pnpm up --interactive --latest
 
 - `generate:importmap`: Generates an import map for the admin panel to resolve imports correctly
 - `migrate:create`: Creates a new migration file for database schema changes
-
-## `npmrc`
-
-```
-# https://github.com/vercel/next.js/issues/68805 and https://pnpm.io/npmrc#public-hoist-pattern
-public-hoist-pattern[]=*@libsql*
-
-registry=https://registry.npmjs.org
-@kaelui:registry=https://npm.pkg.github.com
-
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
