@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "postinstall": "playwright install",
+    "postinstall": "playwright install --with-deps",
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down",
     "dev:db": "pnpm db:up && wait-on tcp:5432 && pnpm dev",
