@@ -169,11 +169,11 @@ importers:
         version: 4.2.1
     devDependencies:
       '@ai-sdk/google':
-        specifier: 2.0.46
-        version: 2.0.46(zod@4.2.1)
+        specifier: 3.0.1
+        version: 3.0.1(zod@4.2.1)
       '@codecov/nextjs-webpack-plugin':
         specifier: ^1.9.1
-        version: 1.9.1(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.77.4))(webpack@5.101.3(esbuild@0.25.11))
+        version: 1.9.1(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.77.4))(webpack@5.101.3(esbuild@0.25.12))
       '@eslint/eslintrc':
         specifier: 3.3.3
         version: 3.3.3
@@ -241,8 +241,8 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(vitest@3.2.4)
       ai:
-        specifier: 5.0.113
-        version: 5.0.113(zod@4.2.1)
+        specifier: 6.0.3
+        version: 6.0.3(zod@4.2.1)
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -324,26 +324,26 @@ packages:
   '@adobe/css-tools@4.4.4':
     resolution: {integrity: sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg==}
 
-  '@ai-sdk/gateway@2.0.21':
-    resolution: {integrity: sha512-BwV7DU/lAm3Xn6iyyvZdWgVxgLu3SNXzl5y57gMvkW4nGhAOV5269IrJzQwGt03bb107sa6H6uJwWxc77zXoGA==}
+  '@ai-sdk/gateway@3.0.2':
+    resolution: {integrity: sha512-giJEg9ob45htbu3iautK+2kvplY2JnTj7ir4wZzYSQWvqGatWfBBfDuNCU5wSJt9BCGjymM5ZS9ziD42JGCZBw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
 
-  '@ai-sdk/google@2.0.46':
-    resolution: {integrity: sha512-8PK6u4sGE/kXebd7ZkTp+0aya4kNqzoqpS5m7cHY2NfTK6fhPc6GNvE+MZIZIoHQTp5ed86wGBdeBPpFaaUtyg==}
+  '@ai-sdk/google@3.0.1':
+    resolution: {integrity: sha512-gh7i4lEvd1CElmefkq7+RoUhNkhP2OTshzVxSt7/Vh2AV5wTPLhduKJMg1c7SFwErytqffO3el/M/LlfCsqzEw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
 
-  '@ai-sdk/provider-utils@3.0.19':
-    resolution: {integrity: sha512-W41Wc9/jbUVXVwCN/7bWa4IKe8MtxO3EyA0Hfhx6grnmiYlCvpI8neSYWFE0zScXJkgA/YK3BRybzgyiXuu6JA==}
+  '@ai-sdk/provider-utils@4.0.1':
+    resolution: {integrity: sha512-de2v8gH9zj47tRI38oSxhQIewmNc+OZjYIOOaMoVWKL65ERSav2PYYZHPSPCrfOeLMkv+Dyh8Y0QGwkO29wMWQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
 
-  '@ai-sdk/provider@2.0.0':
-    resolution: {integrity: sha512-6o7Y2SeO9vFKB8lArHXehNuusnpddKPk7xqL7T2/b+OvXMRIXUO1rR4wcv1hAFUAT9avGZshty3Wlua/XA7TvA==}
+  '@ai-sdk/provider@3.0.0':
+    resolution: {integrity: sha512-m9ka3ptkPQbaHHZHqDXDF9C9B5/Mav0KTdky1k2HZ3/nrW2t1AgObxIVPyGDWQNS9FXT/FS6PIoSjpcP/No8rQ==}
     engines: {node: '>=18'}
 
   '@alloc/quick-lru@5.2.0':
@@ -2674,9 +2674,6 @@ packages:
   '@types/negotiator@0.6.4':
     resolution: {integrity: sha512-elf6BsTq+AkyNsb2h5cGNst2Mc7dPliVoAPm1fXglC/BM3f2pFA40BaSSv3E5lyHteEawVKLP+8TwiY1DMNb3A==}
 
-  '@types/node@24.10.1':
-    resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
-
   '@types/node@25.0.3':
     resolution: {integrity: sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==}
 
@@ -3137,8 +3134,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  ai@5.0.113:
-    resolution: {integrity: sha512-26vivpSO/mzZj0k1Si2IpsFspp26ttQICHRySQiMrtWcRd5mnJMX2a8sG28vmZ38C+JUn1cWmfZrsLMxkSMw9g==}
+  ai@6.0.3:
+    resolution: {integrity: sha512-OOo+/C+sEyscoLnbY3w42vjQDICioVNyS+F+ogwq6O5RJL/vgWGuiLzFwuP7oHTeni/MkmX8tIge48GTdaV7QQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -6780,27 +6777,27 @@ snapshots:
 
   '@adobe/css-tools@4.4.4': {}
 
-  '@ai-sdk/gateway@2.0.21(zod@4.2.1)':
+  '@ai-sdk/gateway@3.0.2(zod@4.2.1)':
     dependencies:
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
+      '@ai-sdk/provider': 3.0.0
+      '@ai-sdk/provider-utils': 4.0.1(zod@4.2.1)
       '@vercel/oidc': 3.0.5
       zod: 4.2.1
 
-  '@ai-sdk/google@2.0.46(zod@4.2.1)':
+  '@ai-sdk/google@3.0.1(zod@4.2.1)':
     dependencies:
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
+      '@ai-sdk/provider': 3.0.0
+      '@ai-sdk/provider-utils': 4.0.1(zod@4.2.1)
       zod: 4.2.1
 
-  '@ai-sdk/provider-utils@3.0.19(zod@4.2.1)':
+  '@ai-sdk/provider-utils@4.0.1(zod@4.2.1)':
     dependencies:
-      '@ai-sdk/provider': 2.0.0
-      '@standard-schema/spec': 1.0.0
+      '@ai-sdk/provider': 3.0.0
+      '@standard-schema/spec': 1.1.0
       eventsource-parser: 3.0.6
       zod: 4.2.1
 
-  '@ai-sdk/provider@2.0.0':
+  '@ai-sdk/provider@3.0.0':
     dependencies:
       json-schema: 0.4.0
 
@@ -7006,19 +7003,19 @@ snapshots:
       unplugin: 1.16.1
       zod: 3.25.76
 
-  '@codecov/nextjs-webpack-plugin@1.9.1(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.77.4))(webpack@5.101.3(esbuild@0.25.11))':
+  '@codecov/nextjs-webpack-plugin@1.9.1(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.77.4))(webpack@5.101.3(esbuild@0.25.12))':
     dependencies:
       '@codecov/bundler-plugin-core': 1.9.1
-      '@codecov/webpack-plugin': 1.9.1(webpack@5.101.3(esbuild@0.25.11))
+      '@codecov/webpack-plugin': 1.9.1(webpack@5.101.3(esbuild@0.25.12))
       next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.77.4)
       unplugin: 1.16.1
-      webpack: 5.101.3(esbuild@0.25.11)
+      webpack: 5.101.3(esbuild@0.25.12)
 
-  '@codecov/webpack-plugin@1.9.1(webpack@5.101.3(esbuild@0.25.11))':
+  '@codecov/webpack-plugin@1.9.1(webpack@5.101.3(esbuild@0.25.12))':
     dependencies:
       '@codecov/bundler-plugin-core': 1.9.1
       unplugin: 1.16.1
-      webpack: 5.101.3(esbuild@0.25.11)
+      webpack: 5.101.3(esbuild@0.25.12)
 
   '@csstools/color-helpers@5.1.0':
     optional: true
@@ -9231,10 +9228,6 @@ snapshots:
 
   '@types/negotiator@0.6.4': {}
 
-  '@types/node@24.10.1':
-    dependencies:
-      undici-types: 7.16.0
-
   '@types/node@25.0.3':
     dependencies:
       undici-types: 7.16.0
@@ -9722,11 +9715,11 @@ snapshots:
   agent-base@7.1.4:
     optional: true
 
-  ai@5.0.113(zod@4.2.1):
+  ai@6.0.3(zod@4.2.1):
     dependencies:
-      '@ai-sdk/gateway': 2.0.21(zod@4.2.1)
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.19(zod@4.2.1)
+      '@ai-sdk/gateway': 3.0.2(zod@4.2.1)
+      '@ai-sdk/provider': 3.0.0
+      '@ai-sdk/provider-utils': 4.0.1(zod@4.2.1)
       '@opentelemetry/api': 1.9.0
       zod: 4.2.1
 
@@ -11365,7 +11358,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.10.1
+      '@types/node': 25.0.3
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -13118,16 +13111,16 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  terser-webpack-plugin@5.3.16(esbuild@0.25.11)(webpack@5.101.3(esbuild@0.25.11)):
+  terser-webpack-plugin@5.3.16(esbuild@0.25.12)(webpack@5.101.3(esbuild@0.25.12)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       serialize-javascript: 6.0.2
       terser: 5.44.1
-      webpack: 5.101.3(esbuild@0.25.11)
+      webpack: 5.101.3(esbuild@0.25.12)
     optionalDependencies:
-      esbuild: 0.25.11
+      esbuild: 0.25.12
 
   terser@5.44.1:
     dependencies:
@@ -13643,7 +13636,7 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
-  webpack@5.101.3(esbuild@0.25.11):
+  webpack@5.101.3(esbuild@0.25.12):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
@@ -13667,7 +13660,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.0
-      terser-webpack-plugin: 5.3.16(esbuild@0.25.11)(webpack@5.101.3(esbuild@0.25.11))
+      terser-webpack-plugin: 5.3.16(esbuild@0.25.12)(webpack@5.101.3(esbuild@0.25.12))
       watchpack: 2.5.0
       webpack-sources: 3.3.3
     transitivePeerDependencies:
