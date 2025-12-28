@@ -1,5 +1,10 @@
 import type { StorybookConfig } from "@storybook/nextjs-vite";
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   core: {
@@ -18,7 +23,7 @@ const config: StorybookConfig = {
   framework: {
     name: "@storybook/nextjs-vite",
     options: {
-      nextConfigPath: path.resolve(__dirname, "../next.config.mjs"),
+      nextConfigPath: resolve(__dirname, "../next.config.mjs"),
     },
   },
   staticDirs: ["../public"],

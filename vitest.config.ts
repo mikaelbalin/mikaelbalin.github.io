@@ -5,6 +5,7 @@ import {
   defineConfig,
   defineProject,
 } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { storybookNextJsPlugin } from "@storybook/nextjs-vite/vite-plugin";
 
@@ -58,7 +59,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: "playwright",
+            provider: playwright(),
             instances: [
               {
                 browser: "chromium",
@@ -78,7 +79,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: "playwright",
+            provider: playwright(),
             instances: [
               {
                 browser: "chromium",

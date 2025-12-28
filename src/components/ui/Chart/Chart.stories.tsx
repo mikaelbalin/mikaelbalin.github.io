@@ -53,7 +53,7 @@ export const Default: Story = {
   args: {},
   render: function Render() {
     return (
-      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+      <ChartContainer config={chartConfig} className="min-h-50 w-full">
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis
@@ -138,11 +138,11 @@ export const AreaStory: Story = {
         <CardFooter>
           <div className="flex w-full items-start gap-2 text-sm">
             <div className="grid gap-2">
-              <div className="flex items-center gap-2 font-medium leading-none">
+              <div className="flex items-center gap-2 leading-none font-medium">
                 Trending up by 5.2% this month{" "}
                 <IconTrendingUp className="h-4 w-4" />
               </div>
-              <div className="text-muted-foreground flex items-center gap-2 leading-none">
+              <div className="flex items-center gap-2 leading-none text-muted-foreground">
                 January - June 2024
               </div>
             </div>
