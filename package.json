@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "postinstall": "if [ -z \"$VERCEL\" ]; then playwright install --with-deps; else playwright install; fi",
+    "postinstall": "[ -z \"$VERCEL\" ] && playwright install --with-deps || true",
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down",
     "dev:db": "pnpm db:up && wait-on tcp:5432 && pnpm dev",
