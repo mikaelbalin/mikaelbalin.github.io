@@ -78,7 +78,7 @@ export const Marquee = ({ titles = [], className }: MarqueeProps) => {
         ref={ref}
         className={cn(
           "[--gap:calc(var(--spacing)*8)] sm:[--gap:calc(var(--spacing)*20)]",
-          "relative flex gap-[var(--gap)] overflow-hidden select-none sm:h-67.5",
+          "relative flex gap-(--gap) overflow-hidden select-none sm:h-67.5",
           className,
         )}
       >
@@ -86,7 +86,7 @@ export const Marquee = ({ titles = [], className }: MarqueeProps) => {
           <ul
             key={index}
             className={cn(
-              "gap-[var(--gap)]",
+              "gap-(--gap)",
               "m-0 flex min-w-full shrink-0 items-center justify-around p-0",
               "list-none",
               "motion-safe:animate-scroll-left",
