@@ -1,5 +1,5 @@
-import { expect, test } from "vitest";
 import { composeStories } from "@storybook/nextjs-vite";
+import { expect, test } from "vitest";
 import * as stories from "./SubscriptionForm.stories";
 
 // Compose all stories from the stories file

@@ -2,15 +2,15 @@
 
 import {
   motion,
-  useScroll,
-  useTransform,
-  useSpring,
   type SpringOptions,
   useMotionTemplate,
+  useScroll,
+  useSpring,
+  useTransform,
 } from "motion/react";
-import { Fragment, HTMLAttributes, useRef } from "react";
+import { Fragment, type HTMLAttributes, useRef } from "react";
 import { cn } from "#lib/utils";
-import { Footer } from "#types/payload";
+import type { Footer } from "#types/payload";
 
 function isSingleLine(texts: unknown): texts is string[] {
   return (

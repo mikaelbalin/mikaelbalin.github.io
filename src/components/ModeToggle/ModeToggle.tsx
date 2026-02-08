@@ -2,7 +2,7 @@
 
 import { useMounted } from "@kaelui/hooks/useMounted";
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
-import { useTheme } from "next-themes"; 
+import { useTheme } from "next-themes";
 import { Label } from "#components/ui/Label";
 import { Switch } from "#components/ui/Switch";
 

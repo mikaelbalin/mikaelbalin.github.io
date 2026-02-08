@@ -1,5 +1,9 @@
 "use client";
 
+import { useDisclosure } from "@kaelui/hooks/useDisclosure";
+import { IconChevronDown } from "@tabler/icons-react";
+import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
 import { Burger } from "#components/Burger";
 import { Container } from "#components/Container";
 import { ModeToggle } from "#components/ModeToggle";
@@ -9,26 +13,22 @@ import {
   CollapsibleTrigger,
 } from "#components/ui/Collapsible";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "#components/ui/DropdownMenu";
+import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "#components/ui/Sheet";
-import { useDisclosure } from "@kaelui/hooks/useDisclosure";
-import Link from "next/link";
-import { i18n, Locale, LocaleParams } from "#i18n-config";
-import { cn } from "#lib/utils";
-import { useParams, usePathname } from "next/navigation";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
-import { IconChevronDown } from "@tabler/icons-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "#components/ui/DropdownMenu";
-import { Header } from "#types/payload";
+import { i18n, type Locale, type LocaleParams } from "#i18n-config";
+import { cn } from "#lib/utils";
+import type { Header } from "#types/payload";
 
 const labels: Record<Locale, string> = {
   en: "English",

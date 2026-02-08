@@ -1,5 +1,5 @@
 "use client";
- 
+
 import { Container } from "#components/Container";
 import { HeroBackground } from "#components/Hero/HeroBackground";
 import { MotionProvider } from "#context/motion-context";
