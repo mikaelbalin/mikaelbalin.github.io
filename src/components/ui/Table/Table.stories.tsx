@@ -4,10 +4,10 @@ import {
   TableBody,
   TableCaption,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
-  TableFooter,
 } from "#components/ui/Table";
 
 const meta: Meta<typeof Table> = {

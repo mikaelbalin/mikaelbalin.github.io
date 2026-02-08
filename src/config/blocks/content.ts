@@ -1,4 +1,3 @@
-import type { Block } from "payload";
 import {
   EXPERIMENTAL_TableFeature,
   FixedToolbarFeature,
@@ -6,6 +5,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
+import type { Block } from "payload";
 
 export const content: Block = {
   slug: "content",

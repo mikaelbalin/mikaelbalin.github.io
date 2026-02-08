@@ -1,7 +1,7 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 import type { BeforeEmail } from "@payloadcms/plugin-form-builder/types";
-import { FormSubmission } from "#types/payload";
 import { getServerSideURL } from "#lib/getURL";
+import type { FormSubmission } from "#types/payload";
 
 export const beforeEmail: BeforeEmail<FormSubmission> = async (
   emailsToSend,

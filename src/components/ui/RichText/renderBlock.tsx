@@ -1,4 +1,12 @@
-import {
+import type {
+  BlockFields,
+  SerializedTextNode,
+} from "@payloadcms/richtext-lexical";
+import { Callout } from "#components/ui/Callout";
+import { BigO } from "#components/ui/Chart/BigO";
+import { CodeHighlight } from "#components/ui/CodeHighlight";
+import { MediaBlock } from "#components/ui/MediaBlock";
+import type {
   KbdInlineBlockProps,
   SerializeLexical,
 } from "#components/ui/RichText/types";
@@ -8,11 +16,6 @@ import type {
   CodeBlock,
   MediaBlock as MediaBlockProps,
 } from "#types/payload";
-import { BlockFields, SerializedTextNode } from "@payloadcms/richtext-lexical";
-import { Callout } from "#components/ui/Callout";
-import { CodeHighlight } from "#components/ui/CodeHighlight";
-import { MediaBlock } from "#components/ui/MediaBlock";
-import { BigO } from "#components/ui/Chart/BigO";
 
 export const isValidNode = (node: unknown): node is SerializedTextNode => {
   if (!node || typeof node !== "object") return false;

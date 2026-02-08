@@ -1,5 +1,5 @@
 import { searchPlugin } from "@payloadcms/plugin-search";
-import { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
+import type { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 
 const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc }) => {
   const {
@@ -34,10 +34,10 @@ const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc }) => {
       });
 
       modifiedDoc.categories = mappedCategories;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch (error) {
       console.error(
         `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`,
+        error,
       );
     }
   }

@@ -9,10 +9,10 @@ import {
   CardTitle,
 } from "#components/ui/Card";
 import {
+  type ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
-  type ChartConfig,
 } from "./Chart";
 
 function factorial(n: number): number {
@@ -60,8 +60,8 @@ const chartData = (() => {
       OLogN: Math.log(i),
       ON: i - 1,
       ONLogN: i * Math.log(i),
-      ON2: Math.pow(i - 1, 2),
-      O2N: Math.pow(2, i) - 2,
+      ON2: (i - 1) ** 2,
+      O2N: 2 ** i - 2,
       ONFactorial: factorial(i) - 1,
     });
   }
@@ -79,7 +79,7 @@ export const BigO = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+        <ChartContainer config={chartConfig} className="min-h-50 w-full">
           <LineChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
             <XAxis

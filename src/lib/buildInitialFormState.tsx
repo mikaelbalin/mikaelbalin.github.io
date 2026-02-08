@@ -1,43 +1,31 @@
-import { Form } from "#types/payload";
+import type { Form } from "#types/payload";
 
 export const buildInitialFormState = (fields?: Form["fields"] | null) => {
   return fields?.reduce<Record<string, string | boolean>>(
     (initialSchema, field) => {
       if (field.blockType === "checkbox") {
-        return {
-          ...initialSchema,
-          [field.name]: Boolean(field.defaultValue),
-        };
+        initialSchema[field.name] = Boolean(field.defaultValue);
+        return initialSchema;
       }
       if (field.blockType === "textarea") {
-        return {
-          ...initialSchema,
-          [field.name]: "",
-        };
+        initialSchema[field.name] = "";
+        return initialSchema;
       }
       if (field.blockType === "email") {
-        return {
-          ...initialSchema,
-          [field.name]: "",
-        };
+        initialSchema[field.name] = "";
+        return initialSchema;
       }
       if (field.blockType === "text") {
-        return {
-          ...initialSchema,
-          [field.name]: "",
-        };
+        initialSchema[field.name] = "";
+        return initialSchema;
       }
       if (field.blockType === "select") {
-        return {
-          ...initialSchema,
-          [field.name]: "",
-        };
+        initialSchema[field.name] = "";
+        return initialSchema;
       }
       if (field.blockType === "state") {
-        return {
-          ...initialSchema,
-          [field.name]: "",
-        };
+        initialSchema[field.name] = "";
+        return initialSchema;
       }
 
       return initialSchema;

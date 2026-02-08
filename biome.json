@@ -11,7 +11,9 @@
       "**/*",
       "!**/mockServiceWorker.js",
       "!**/node_modules",
-      "!src/app/(payload)"
+      "!src/app/(payload)",
+      "!src/config/migrations",
+      "!src/types/payload.ts"
     ]
   },
   "formatter": {

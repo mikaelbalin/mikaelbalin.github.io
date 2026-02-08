@@ -1,3 +1,10 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { postgresAdapter } from "@payloadcms/db-postgres";
+import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
+import { resendAdapter } from "@payloadcms/email-resend";
+import { buildConfig } from "payload";
+import sharp from "sharp";
 import { categories } from "#config/collections/categories";
 import { media } from "#config/collections/media";
 import { pages } from "#config/collections/pages";
@@ -12,13 +19,6 @@ import { migrations } from "#config/migrations";
 import { plugins } from "#config/plugins";
 import { i18n } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
-import { postgresAdapter } from "@payloadcms/db-postgres";
-import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
-import { resendAdapter } from "@payloadcms/email-resend";
-import path from "path";
-import { buildConfig } from "payload";
-import sharp from "sharp";
-import { fileURLToPath } from "url";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 const filename = fileURLToPath(import.meta.url);

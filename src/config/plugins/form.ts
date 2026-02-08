@@ -1,19 +1,19 @@
-import { CollectionAfterErrorHook } from "payload";
 import { formBuilderPlugin } from "@payloadcms/plugin-form-builder";
 import {
   BoldFeature,
   FixedToolbarFeature,
   InlineToolbarFeature,
   ItalicFeature,
-  lexicalEditor,
-  LexicalEditorProps,
+  type LexicalEditorProps,
   LinkFeature,
+  lexicalEditor,
   OrderedListFeature,
   ParagraphFeature,
   UnorderedListFeature,
 } from "@payloadcms/richtext-lexical";
-import { handleSubscriber } from "#config/hooks/handleSubscriber";
+import type { CollectionAfterErrorHook } from "payload";
 import { beforeEmail } from "#config/hooks/beforeEmail";
+import { handleSubscriber } from "#config/hooks/handleSubscriber";
 
 const afterErrorHook: CollectionAfterErrorHook = async ({
   error,
@@ -24,7 +24,7 @@ const afterErrorHook: CollectionAfterErrorHook = async ({
     return {
       status: 409,
       response: {
-        errors: ["The email address is already subscribed."],
+        errors: [{ message: "The email address is already subscribed." }],
       },
     };
   }

@@ -1,6 +1,6 @@
+import type { CollectionConfig } from "payload";
 import { subscription } from "#config/blocks/subscription";
 import { anyone, authenticated } from "#lib/access";
-import { CollectionConfig } from "payload";
 
 export const reusableBlocks: CollectionConfig = {
   slug: "reusableBlocks",

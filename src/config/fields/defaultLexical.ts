@@ -1,19 +1,19 @@
-import { Config } from "payload";
 import {
   BoldFeature,
+  HeadingFeature,
+  InlineCodeFeature,
   ItalicFeature,
   LinkFeature,
-  ParagraphFeature,
   lexicalEditor,
-  UnderlineFeature,
-  InlineCodeFeature,
-  HeadingFeature,
-  SuperscriptFeature,
-  SubscriptFeature,
   OrderedListFeature,
-  UnorderedListFeature,
+  ParagraphFeature,
   StrikethroughFeature,
+  SubscriptFeature,
+  SuperscriptFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
 } from "@payloadcms/richtext-lexical";
+import type { Config } from "payload";
 
 export const defaultLexical: Config["editor"] = lexicalEditor({
   features: () => {

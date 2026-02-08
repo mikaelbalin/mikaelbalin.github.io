@@ -1,13 +1,13 @@
-import type { Block } from "payload";
 import {
   BoldFeature,
   FixedToolbarFeature,
+  InlineCodeFeature,
   InlineToolbarFeature,
   ItalicFeature,
   lexicalEditor,
   ParagraphFeature,
-  InlineCodeFeature,
 } from "@payloadcms/richtext-lexical";
+import type { Block } from "payload";
 
 export const callout: Block = {
   slug: "callout",

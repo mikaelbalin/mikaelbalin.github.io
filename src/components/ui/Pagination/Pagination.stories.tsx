@@ -4,9 +4,9 @@ import {
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
+  PaginationLink,
   PaginationNext,
   PaginationPrevious,
-  PaginationLink,
 } from "./Pagination";
 
 const meta = {

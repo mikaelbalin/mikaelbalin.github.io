@@ -1,8 +1,8 @@
-import type React from "react";
-import type { Redirect } from "#types/payload";
 import { notFound, redirect } from "next/navigation";
+import type React from "react";
 import { getCachedDocument } from "#lib/getDocument";
 import { getCachedRedirects } from "#lib/getRedirects";
+import type { Redirect } from "#types/payload";
 
 type Reference = NonNullable<Redirect["to"]>["reference"];
 

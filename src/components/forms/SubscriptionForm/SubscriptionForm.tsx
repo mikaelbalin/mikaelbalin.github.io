@@ -1,8 +1,19 @@
 "use client";
 
-import { FormBlock } from "#types/payload";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { IconLoader2 } from "@tabler/icons-react";
+import { useState } from "react";
+import {
+  type SubmitErrorHandler,
+  type SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { toast } from "sonner";
+import { fields } from "#components/forms/fields";
+import {
+  type SubscriptionSchema,
+  subscriptionSchema,
+} from "#components/forms/schemas";
 import { Button } from "#components/ui/Button";
 import {
   Form,
@@ -11,16 +22,9 @@ import {
   FormItem,
   FormLabel,
 } from "#components/ui/Form";
-import {
-  subscriptionSchema,
-  SubscriptionSchema,
-} from "#components/forms/schemas";
-import { isValidForm } from "#lib/isValidForm";
 import { buildInitialFormState } from "#lib/buildInitialFormState";
-import { useState } from "react";
-import { toast } from "sonner";
-import { fields } from "#components/forms/fields";
-import { IconLoader2 } from "@tabler/icons-react";
+import { isValidForm } from "#lib/isValidForm";
+import type { FormBlock } from "#types/payload";
 
 type SubscriptionFormProps = FormBlock;
 

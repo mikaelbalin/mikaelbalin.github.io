@@ -1,4 +1,3 @@
-import type { CollectionConfig, CollectionAfterReadHook } from "payload";
 import {
   BlocksFeature,
   EXPERIMENTAL_TableFeature,
@@ -7,18 +6,19 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
-import { authenticated, authenticatedOrPublished } from "#lib/access";
+import type { CollectionAfterReadHook, CollectionConfig } from "payload";
 import { callout } from "#config/blocks/callout";
-import { media } from "#config/blocks/media";
-import { generatePreviewPath } from "#lib/generatePreviewPath";
-import { slugField } from "#config/fields/slug";
-import { getServerSideURL } from "#lib/getURL";
-import { User } from "#types/payload";
+import { chart } from "#config/blocks/chart";
 import { code } from "#config/blocks/code";
 import { kbd } from "#config/blocks/kbd";
+import { media } from "#config/blocks/media";
+import { slugField } from "#config/fields/slug";
 import { timeToReadField } from "#config/fields/time";
 import { meta } from "#config/plugins/seo";
-import { chart } from "#config/blocks/chart";
+import { authenticated, authenticatedOrPublished } from "#lib/access";
+import { generatePreviewPath } from "#lib/generatePreviewPath";
+import { getServerSideURL } from "#lib/getURL";
+import type { User } from "#types/payload";
 
 // The `user` collection has access control locked so that users are not publicly accessible
 // This means that we need to populate the authors manually here to protect user privacy

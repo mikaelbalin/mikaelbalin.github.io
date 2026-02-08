@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ToggleGroup, ToggleGroupItem } from "./ToggleGroup";
 import { IconBold, IconItalic, IconUnderline } from "@tabler/icons-react";
 import { useArgs } from "storybook/preview-api";
+import { ToggleGroup, ToggleGroupItem } from "./ToggleGroup";
 
 const meta = {
   component: ToggleGroup,

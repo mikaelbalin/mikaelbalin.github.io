@@ -1,5 +1,5 @@
-import { link } from "#config/fields/link";
 import type { Block } from "payload";
+import { link } from "#config/fields/link";
 
 export const archive: Block = {
   slug: "archive",

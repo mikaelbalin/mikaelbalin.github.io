@@ -1,13 +1,13 @@
+import slugify from "@sindresorhus/slugify";
+import { IconLink } from "@tabler/icons-react";
+import Link from "next/link";
+import type { JSX } from "react";
 import { CMSLink } from "#components/ui/CMSLink";
+import { Table, TableBody, TableCell, TableRow } from "#components/ui/Table";
 import { Text } from "#components/ui/Text";
 import { Title } from "#components/ui/Title";
 import { cn } from "#lib/utils";
-import slugify from "@sindresorhus/slugify";
-import Link from "next/link";
-import { JSX } from "react";
-import { ContentChildren } from "./types";
-import { IconLink } from "@tabler/icons-react";
-import { Table, TableCell, TableRow, TableBody } from "#components/ui/Table";
+import type { ContentChildren } from "./types";
 
 const isSupportedTitleOrder = (order: number): order is 2 | 3 | 4 => {
   return order >= 2 && order <= 4;

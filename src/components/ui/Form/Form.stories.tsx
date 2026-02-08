@@ -1,4 +1,9 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "../Button";
+import { Input } from "../Input";
 import {
   Form,
   FormControl,
@@ -8,11 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "./Form";
-import { useForm } from "react-hook-form";
-import { Input } from "../Input";
-import { Button } from "../Button";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const meta: Meta<typeof Form> = {
   component: Form,

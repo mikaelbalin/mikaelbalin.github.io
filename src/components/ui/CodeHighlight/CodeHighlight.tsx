@@ -1,7 +1,7 @@
 import { toJsxRuntime } from "hast-util-to-jsx-runtime";
-import { Fragment, PropsWithChildren } from "react";
+import { Fragment, type PropsWithChildren } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { codeToHast, type BuiltinLanguage, type SpecialLanguage } from "shiki";
+import { type BuiltinLanguage, codeToHast, type SpecialLanguage } from "shiki";
 import { CopyButton } from "#components/ui/CopyButton";
 
 interface CustomPreProps extends React.HTMLAttributes<HTMLPreElement> {

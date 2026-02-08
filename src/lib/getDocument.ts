@@ -1,7 +1,7 @@
-import { cache } from "react";
-import { getPayload } from "payload";
-import type { Config } from "#types/payload";
 import configPromise from "@payload-config";
+import { getPayload } from "payload";
+import { cache } from "react";
+import type { Config } from "#types/payload";
 
 type Collection = Extract<keyof Config["collections"], "pages" | "posts">;
 

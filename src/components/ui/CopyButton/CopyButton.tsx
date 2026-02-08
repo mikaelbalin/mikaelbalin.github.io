@@ -1,9 +1,9 @@
 "use client";
 
+import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { useState } from "react";
-import { IconCopy, IconCheck } from "@tabler/icons-react";
-import { UnstyledButton } from "#components/ui/UnstyledButton";
 import { toast } from "sonner";
+import { UnstyledButton } from "#components/ui/UnstyledButton";
 import { cn } from "#lib/utils";
 
 interface CopyButtonProps

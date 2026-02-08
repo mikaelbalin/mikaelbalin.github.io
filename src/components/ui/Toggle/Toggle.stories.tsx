@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Toggle } from "./Toggle";
 import { IconIceCream2 } from "@tabler/icons-react";
+import { Toggle } from "./Toggle";
 
 const meta = {
   component: Toggle,

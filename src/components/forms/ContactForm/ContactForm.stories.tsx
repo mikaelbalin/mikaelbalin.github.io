@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { delay, HttpResponse, http } from "msw";
 import { expect, userEvent, within } from "storybook/test";
-import { http, HttpResponse, delay } from "msw";
 import { ContactForm } from "./ContactForm";
 
 const meta: Meta<typeof ContactForm> = {

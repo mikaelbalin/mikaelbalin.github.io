@@ -1,3 +1,4 @@
+import type { SerializedTextNode } from "@payloadcms/richtext-lexical";
 import {
   IS_BOLD,
   IS_CODE,
@@ -7,8 +8,7 @@ import {
   IS_SUPERSCRIPT,
   IS_UNDERLINE,
 } from "@payloadcms/richtext-lexical/lexical";
-import { SerializedTextNode } from "@payloadcms/richtext-lexical";
-import { Fragment, JSX } from "react";
+import { Fragment, type JSX } from "react";
 
 export const formatMap = {
   [IS_BOLD]: (text: string, key: number) => <strong key={key}>{text}</strong>,

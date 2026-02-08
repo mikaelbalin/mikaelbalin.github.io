@@ -1,12 +1,12 @@
+import type { MotionValue } from "motion/react";
 import {
   createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
+  type RefObject,
   useContext,
-  useRef,
-  RefObject,
   useMemo,
+  useRef,
 } from "react";
-import { MotionValue } from "motion/react";
 
 interface MotionContextProps {
   y: RefObject<MotionValue<number> | undefined>;
@@ -24,7 +24,7 @@ export const useMotionContext = () => {
 
 export const MotionProvider = ({ children }: PropsWithChildren) => {
   const y = useRef<MotionValue<number> | undefined>(undefined);
-  const value = useMemo(() => ({ y }), [y]);
+  const value = useMemo(() => ({ y }), []);
   return (
     <MotionContext.Provider value={value}>{children}</MotionContext.Provider>
   );

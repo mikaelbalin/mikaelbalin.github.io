@@ -1,6 +1,6 @@
-import React from "react";
-import type { Props } from "#components/ui/Media/types";
+import type React from "react";
 import { ImageMedia } from "#components/ui/Media/ImageMedia";
+import type { Props } from "#components/ui/Media/types";
 import { VideoMedia } from "#components/ui/Media/VideoMedia";
 
 export const Media: React.FC<Props> = (props) => {

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { getCssVariable } from "#lib/getCssVariable";
 import { useRootFontSize } from "#hooks/useRootFontSize";
+import { getCssVariable } from "#lib/getCssVariable";
 
 // Default breakpoint values that match your CSS variables
 // These will be used for SSR to avoid hydration mismatch
@@ -47,6 +47,6 @@ export function useBreakpointSizes(customSizes?: string): string {
     });
 
     // Add default case for larger viewports
-    return sizesArray.join(", ") + ", 100vw";
+    return `${sizesArray.join(", ")}, 100vw`;
   }, [customSizes, rootFontSize]);
 }

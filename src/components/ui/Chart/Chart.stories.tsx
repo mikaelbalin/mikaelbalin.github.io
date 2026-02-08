@@ -1,14 +1,6 @@
-import { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { IconTrendingUp } from "@tabler/icons-react";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
-  type ChartConfig,
-} from "./Chart";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -18,6 +10,14 @@ import {
   CardTitle,
 } from "../Card";
 import { BigO } from "./BigO";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "./Chart";
 
 export default {
   component: ChartContainer,

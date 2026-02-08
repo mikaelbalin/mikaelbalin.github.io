@@ -1,11 +1,11 @@
-import { JSX } from "react";
-import {
+import type { JSX } from "react";
+import { renderBlock } from "#components/ui/RichText/renderBlock";
+import { renderNode } from "#components/ui/RichText/renderNode";
+import { renderText } from "#components/ui/RichText/renderText";
+import type {
   ContentChildren,
   SerializeLexical,
 } from "#components/ui/RichText/types";
-import { renderText } from "#components/ui/RichText/renderText";
-import { renderNode } from "#components/ui/RichText/renderNode";
-import { renderBlock } from "#components/ui/RichText/renderBlock";
 
 const getSerializedChildren = (
   node: ContentChildren[number],

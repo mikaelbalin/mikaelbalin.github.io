@@ -1,4 +1,4 @@
-import { Form } from "#types/payload";
+import type { Form } from "#types/payload";
 
 export const isValidForm = (form: unknown): form is Form => {
   return (

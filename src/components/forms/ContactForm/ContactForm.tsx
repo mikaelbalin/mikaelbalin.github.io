@@ -1,18 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { toast } from "sonner";
-import { IconLoader2 } from "@tabler/icons-react";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconLoader2 } from "@tabler/icons-react";
+import { useState } from "react";
 import {
-  ContactFormSchema,
+  type SubmitErrorHandler,
+  type SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { toast } from "sonner";
+import { fields } from "#components/forms/fields";
+import {
+  type ContactFormSchema,
   contactFormSchema,
 } from "#components/forms/schemas";
-import { fields } from "#components/forms/fields";
-import { FormBlock } from "#types/payload";
-import { isValidForm } from "#lib/isValidForm";
-import { buildInitialFormState } from "#lib/buildInitialFormState";
 import { Button } from "#components/ui/Button";
 import {
   Form,
@@ -23,7 +24,10 @@ import {
   FormMessage,
 } from "#components/ui/Form";
 import { RichText } from "#components/ui/RichText/RichText";
-import { Content as RichTextContent } from "#components/ui/RichText/types";
+import type { Content as RichTextContent } from "#components/ui/RichText/types";
+import { buildInitialFormState } from "#lib/buildInitialFormState";
+import { isValidForm } from "#lib/isValidForm";
+import type { FormBlock } from "#types/payload";
 
 type ContactFormProps = FormBlock;
 

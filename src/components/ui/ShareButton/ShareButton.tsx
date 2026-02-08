@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
 
 type ShareButtonProps = React.PropsWithChildren<

@@ -1,6 +1,6 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { serializeLexical } from "#components/ui/RichText/serialize";
-import { Content } from "#components/ui/RichText/types";
+import type { Content } from "#components/ui/RichText/types";
 
 export type RichTextProps = {
   className?: string;

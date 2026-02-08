@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload";
+import type { CollectionConfig } from "payload";
 import { authenticated } from "#lib/access";
 
 export const subscribers: CollectionConfig = {

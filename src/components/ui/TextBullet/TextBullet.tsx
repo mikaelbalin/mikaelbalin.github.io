@@ -1,6 +1,6 @@
-import { cn } from "#lib/utils";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { Text, type TextProps } from "#components/ui/Text";
+import { cn } from "#lib/utils";
 
 interface TextBulletProps
   extends PropsWithChildren,

@@ -1,11 +1,11 @@
-import { Plugin, TextField } from "payload";
 import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 import { redirectsPlugin } from "@payloadcms/plugin-redirects";
-import slugify from "@sindresorhus/slugify";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
+import slugify from "@sindresorhus/slugify";
+import type { Plugin, TextField } from "payload";
 import { formBuilderPluginConfig } from "./form";
-import { seoPluginConfig } from "./seo";
 import { searchPluginConfig } from "./search";
+import { seoPluginConfig } from "./seo";
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
@@ -35,7 +35,7 @@ export const plugins: Plugin[] = [
   // See https://payloadcms.com/docs/plugins/nested-docs
   nestedDocsPlugin({
     collections: ["categories"],
-    generateLabel: (docs, currentDoc) =>
+    generateLabel: (_, currentDoc) =>
       typeof currentDoc.title === "string" ? currentDoc.title : "",
     generateURL: (docs) =>
       docs.reduce(

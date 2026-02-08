@@ -1,22 +1,21 @@
-import { FieldHook } from "payload";
+/** biome-ignore-all lint/suspicious/noExplicitAny: fix later */
+import type { FieldHook } from "payload";
 
 /**
  * Assuming average reading speed of 200 words per minute
  */
 const WORDS_PER_MINUTE = 200;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const calculateReadingTime = (content: any): number => {
   let textContent = "";
 
   // Recursive function to extract text from nodes
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const extractText = (nodes: any[]) => {
     if (!nodes) return;
 
     nodes.forEach((node) => {
       if (node.type === "text") {
-        textContent += " " + node.text;
+        textContent += ` ${node.text}`;
       }
       // Recursively process child nodes
       if (node.children) {

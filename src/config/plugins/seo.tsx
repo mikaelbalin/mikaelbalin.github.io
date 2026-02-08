@@ -1,11 +1,4 @@
-import { Tab } from "payload";
 import { seoPlugin } from "@payloadcms/plugin-seo";
-import {
-  GenerateTitle,
-  GenerateURL,
-  GenerateDescription,
-  GenerateImage,
-} from "@payloadcms/plugin-seo/types";
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -13,17 +6,24 @@ import {
   OverviewField,
   PreviewField,
 } from "@payloadcms/plugin-seo/fields";
-import { Page, Post } from "#types/payload";
-import { getServerSideURL } from "#lib/getURL";
-import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
-import { defaultModel } from "#lib/aiProvider";
-import { createSeoDescriptionPrompt } from "#lib/aiPrompts";
+import type {
+  GenerateDescription,
+  GenerateImage,
+  GenerateTitle,
+  GenerateURL,
+} from "@payloadcms/plugin-seo/types";
+import { generateText } from "ai";
+import type { Tab } from "payload";
 import {
-  SITE_TITLE,
   NO_DESCRIPTION_AVAILABLE,
   SEO_DESCRIPTION_ERROR,
+  SITE_TITLE,
 } from "#config/constants";
-import { generateText } from "ai";
+import { createSeoDescriptionPrompt } from "#lib/aiPrompts";
+import { defaultModel } from "#lib/aiProvider";
+import { getServerSideURL } from "#lib/getURL";
+import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
+import type { Page, Post } from "#types/payload";
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | ${SITE_TITLE}` : SITE_TITLE;

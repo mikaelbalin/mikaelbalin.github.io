@@ -1,5 +1,4 @@
-import { JsonObject } from "payload";
-import {
+import type {
   SerializedAutoLinkNode,
   SerializedBlockNode,
   SerializedHeadingNode,
@@ -11,19 +10,20 @@ import {
   SerializedParagraphNode,
   SerializedQuoteNode,
   SerializedRelationshipNode,
+  SerializedTableCellNode,
+  SerializedTableNode,
+  SerializedTableRowNode,
   SerializedTextNode,
   SerializedUploadNode,
-  SerializedTableNode,
   TypedEditorState,
-  SerializedTableRowNode,
-  SerializedTableCellNode,
 } from "@payloadcms/richtext-lexical";
+import type { JsonObject } from "payload";
+import type { JSX } from "react";
 import type {
   CalloutBlock as CalloutBlockProps,
-  MediaBlock as MediaBlockProps,
   CodeBlock as CodeBlockProps,
+  MediaBlock as MediaBlockProps,
 } from "#types/payload";
-import { JSX } from "react";
 
 export type KbdInlineBlockProps = {
   key: string;

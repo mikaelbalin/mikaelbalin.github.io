@@ -1,5 +1,5 @@
-import { Locale } from "#i18n-config";
-import { ArchiveBlock } from "#types/payload";
+import type { Locale } from "#i18n-config";
+import type { ArchiveBlock } from "#types/payload";
 
 export type PageQueryParams = {
   slug: string[];

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import type React from "react";
+import { useEffect, useRef } from "react";
 import type { Props as MediaProps } from "#components/ui/Media/types";
 import { getClientSideURL } from "#lib/getURL";
 import { cn } from "#lib/utils";

@@ -1,5 +1,5 @@
-import { CollectionBeforeChangeHook } from "payload";
-import { FormSubmission } from "#types/payload";
+import type { CollectionBeforeChangeHook } from "payload";
+import type { FormSubmission } from "#types/payload";
 
 export const handleSubscriber: CollectionBeforeChangeHook<
   FormSubmission

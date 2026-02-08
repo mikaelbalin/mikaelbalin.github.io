@@ -1,8 +1,8 @@
 "use client";
 
-import { Text } from "#components/ui/Text";
 import { motion, useScroll, useSpring } from "motion/react";
 import { useEffect, useRef } from "react";
+import { Text } from "#components/ui/Text";
 
 interface ProgressIndicatorProps {
   targetId: string;

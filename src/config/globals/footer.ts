@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
+import { formBlock } from "#config/blocks/formBlock";
 import { link } from "#config/fields/link";
 import { anyone } from "#lib/access";
-import { formBlock } from "#config/blocks/formBlock";
 
 export const footer: GlobalConfig = {
   slug: "footer",

@@ -1,3 +1,4 @@
+import type { CollectionConfig } from "payload";
 import { about } from "#config/blocks/about";
 import { archive } from "#config/blocks/archive";
 import { content } from "#config/blocks/content";
@@ -10,7 +11,6 @@ import { meta } from "#config/plugins/seo";
 import { authenticated, authenticatedOrPublished } from "#lib/access";
 import { generatePreviewPath } from "#lib/generatePreviewPath";
 import { getServerSideURL } from "#lib/getURL";
-import type { CollectionConfig } from "payload";
 
 export const pages: CollectionConfig<"pages"> = {
   slug: "pages",

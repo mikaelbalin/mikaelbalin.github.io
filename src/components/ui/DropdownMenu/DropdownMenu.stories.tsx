@@ -1,6 +1,6 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/test";
+import { Button } from "#components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +15,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "#components/ui/DropdownMenu";
-import { Button } from "#components/ui/Button";
 
 const meta: Meta<typeof DropdownMenu> = {
   component: DropdownMenu,

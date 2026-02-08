@@ -1,7 +1,7 @@
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { getPayload } from "payload";
 
 const payloadToken = "payload-token";
 
