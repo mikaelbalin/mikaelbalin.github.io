@@ -1,5 +1,5 @@
 import { Canvas } from "#components/Hero/HeroBackground/Canvas";
-import { SquareConfig, Square } from "#components/Hero/HeroBackground/Square";
+import { Square, SquareConfig } from "#components/Hero/HeroBackground/Square";
 
 /**
  * Represents a canvas for the blog background.
@@ -107,13 +107,13 @@ export class BlogCanvas extends Canvas {
       const parameter = i / samplePoints;
 
       const curveX =
-        Math.pow(1 - parameter, 2) * this.startingX +
+        (1 - parameter) ** 2 * this.startingX +
         2 * (1 - parameter) * parameter * this.cpx +
-        Math.pow(parameter, 2) * this.canvas.width;
+        parameter ** 2 * this.canvas.width;
       const curveY =
-        Math.pow(1 - parameter, 2) * 0 +
+        (1 - parameter) ** 2 * 0 +
         2 * (1 - parameter) * parameter * this.cpy +
-        Math.pow(parameter, 2) * this.canvas.height;
+        parameter ** 2 * this.canvas.height;
 
       const distance = Math.sqrt(
         (xPos - curveX) * (xPos - curveX) + (yPos - curveY) * (yPos - curveY),
