@@ -1,7 +1,7 @@
 import { Container } from "#components/Container";
 import { ProgressIndicator } from "#components/ui/ProgressIndicator";
 import { RichText } from "#components/ui/RichText";
-import { Content } from "#components/ui/RichText/types";
+import type { Content } from "#components/ui/RichText/types";
 
 type ArticleContentProps = {
   content: Content;

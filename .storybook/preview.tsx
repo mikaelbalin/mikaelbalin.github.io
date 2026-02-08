@@ -1,10 +1,11 @@
-import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import type { Preview } from "@storybook/nextjs-vite";
+import { initialize, mswLoader } from "msw-storybook-addon";
+// biome-ignore lint/correctness/noUnusedImports: import is not used directly in the code.
+import React from "react";
+import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import { ThemeProvider } from "../src/components/theme-provider";
 import { Toaster } from "../src/components/ui/Toaster";
-import { initialize, mswLoader } from "msw-storybook-addon";
 import "../src/app/(frontend)/[lang]/globals.css";
 import "./story.css";
 

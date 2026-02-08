@@ -1,8 +1,8 @@
 "use client";
 
 import { IconBugFilled } from "@tabler/icons-react";
-import { Title } from "#components/ui/Title";
 import { Text } from "#components/ui/Text";
+import { Title } from "#components/ui/Title";
 
 export default function ErrorPage({ error }: Readonly<{ error: Error }>) {
   return (

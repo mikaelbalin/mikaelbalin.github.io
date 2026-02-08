@@ -3,7 +3,7 @@ import { ArticleHeader } from "#components/Article/ArticleHeader";
 import { PostList } from "#components/Post/PostList";
 import { PayloadRedirects } from "#components/ui/PayloadRedirects";
 import { Title } from "#components/ui/Title";
-import { i18n, Locale } from "#i18n-config";
+import { i18n, type Locale } from "#i18n-config";
 import { filterPayloadRelations } from "#lib/filterPayloadRelations";
 import { formatDateTime } from "#lib/formatDateTime";
 import { getClientSideURL } from "#lib/getURL";

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Contact } from "./Contact";
+import type { FormBlock } from "#types/payload";
 import { Basic as ContactFormProps } from "../../forms/ContactForm/ContactForm.stories";
-import { FormBlock } from "#types/payload";
+import { Contact } from "./Contact";
 
 const meta: Meta<typeof Contact> = {
   component: Contact,

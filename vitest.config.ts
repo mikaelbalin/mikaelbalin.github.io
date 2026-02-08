@@ -1,13 +1,13 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+import { storybookNextJsPlugin } from "@storybook/nextjs-vite/vite-plugin";
+import { playwright } from "@vitest/browser-playwright";
 import {
   coverageConfigDefaults,
   defineConfig,
   defineProject,
 } from "vitest/config";
-import { playwright } from "@vitest/browser-playwright";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
-import { storybookNextJsPlugin } from "@storybook/nextjs-vite/vite-plugin";
 
 const dirname =
   typeof __dirname !== "undefined"

@@ -1,18 +1,17 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
+import { draftMode } from "next/headers";
+import type { Metadata } from "next/types";
 import { Footer } from "#components/Footer";
 import { Header } from "#components/Header";
 import { ThemeProvider } from "#components/theme-provider";
 import { AdminBar } from "#components/ui/AdminBar";
 import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
-import { Locale } from "#i18n-config";
+import type { Locale } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
 import { PageService } from "#lib/services/PageService";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
-import { draftMode } from "next/headers";
-import { Metadata } from "next/types";
-import React from "react";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

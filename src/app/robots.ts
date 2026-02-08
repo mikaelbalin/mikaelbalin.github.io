@@ -1,5 +1,5 @@
-import { getServerSideURL } from "#lib/getURL";
 import type { MetadataRoute } from "next";
+import { getServerSideURL } from "#lib/getURL";
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -1,10 +1,10 @@
 "use client";
 import { useMounted } from "@kaelui/hooks";
 import { motion } from "motion/react";
-import type { AboutBlock as AboutBlockProps } from "#types/payload";
 import { Container } from "#components/Container";
-import { Title } from "#components/ui/Title";
 import { Text } from "#components/ui/Text";
+import { Title } from "#components/ui/Title";
+import type { AboutBlock as AboutBlockProps } from "#types/payload";
 
 const splitText = (text: string) => {
   return text.split("").map((char, index) => {
@@ -33,7 +33,7 @@ export const About = (props: AboutBlockProps) => {
   const isClient = useMounted();
 
   return (
-    <Container id="about" className="pt-26 sm:pt-34 pb-16 sm:pb-24">
+    <Container id="about" className="pt-26 pb-16 sm:pt-34 sm:pb-24">
       <motion.div
         initial={{
           opacity: 0,

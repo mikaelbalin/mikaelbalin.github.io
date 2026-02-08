@@ -1,8 +1,8 @@
-import React from "react";
-import type { ArchiveBlock } from "#types/payload";
-import { PostList } from "#components/Post/PostList";
+import type React from "react";
 import { PostLatest } from "#components/Post/PostLatest";
+import { PostList } from "#components/Post/PostList";
 import { PostService } from "#lib/services/PostService";
+import type { ArchiveBlock } from "#types/payload";
 
 export interface ArchiveBlockProps extends ArchiveBlock {
   locale: "en" | "pt" | "all";

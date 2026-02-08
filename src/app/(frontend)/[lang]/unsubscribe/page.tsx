@@ -1,8 +1,8 @@
-import { Unsubscribe } from "#components/Unsubscribe";
-import type { LocaleParams } from "#i18n-config";
 import configPromise from "@payload-config";
 import { notFound } from "next/navigation";
 import { getPayload } from "payload";
+import { Unsubscribe } from "#components/Unsubscribe";
+import type { LocaleParams } from "#i18n-config";
 
 type PageProps = {
   params: Promise<LocaleParams>;

@@ -1,6 +1,6 @@
-import { withPayload } from "@payloadcms/next/withPayload";
-import nextBundleAnalyzer from "@next/bundle-analyzer";
 import { codecovNextJSWebpackPlugin } from "@codecov/nextjs-webpack-plugin";
+import nextBundleAnalyzer from "@next/bundle-analyzer";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const serverSideURL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`

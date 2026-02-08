@@ -1,8 +1,8 @@
 "use client";
 
-import { redirectToWhatsApp } from "#lib/redirectToWhatsApp";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
+import { redirectToWhatsApp } from "#lib/redirectToWhatsApp";
 
 export const Phone = (props: { phone: string }) => {
   const { phone } = props;

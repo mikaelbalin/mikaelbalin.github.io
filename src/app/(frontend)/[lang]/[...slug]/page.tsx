@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
 import { Hero } from "#components/Hero";
 import { RenderBlocks } from "#components/RenderBlocks";
 import { PayloadRedirects } from "#components/ui/PayloadRedirects";
 import { i18n } from "#i18n-config";
 import { generateMeta } from "#lib/generateMeta";
 import { PageService } from "#lib/services/PageService";
-import { PageQueryArgs } from "#types/args";
-import type { Metadata } from "next";
+import type { PageQueryArgs } from "#types/args";
 
 // Force static generation for all pages at build time
 export const dynamic = "force-static";

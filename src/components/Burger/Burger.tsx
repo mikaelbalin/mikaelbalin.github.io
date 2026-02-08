@@ -1,7 +1,7 @@
-import React from "react";
-import { cn } from "#lib/utils";
-import { UnstyledButton } from "#components/ui/UnstyledButton";
 import { Slot } from "@radix-ui/react-slot";
+import type React from "react";
+import { UnstyledButton } from "#components/ui/UnstyledButton";
+import { cn } from "#lib/utils";
 
 const classNames: string[] = [
   "transform-(--burger-line-top-transform) motion-reduce:transition-transform",

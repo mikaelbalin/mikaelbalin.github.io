@@ -1,6 +1,6 @@
 import { Contact } from "#components/Footer/Contact";
 import { Marquee } from "#components/Marquee";
-import { Footer as FooterProps } from "#types/payload";
+import type { Footer as FooterProps } from "#types/payload";
 import { FooterNavigation } from "./FooterNavigation";
 
 export function Footer(props: Readonly<FooterProps>) {

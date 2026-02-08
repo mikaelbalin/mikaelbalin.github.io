@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { IconBug } from "@tabler/icons-react";
-import { Title } from "#components/ui/Title";
-import { Text } from "#components/ui/Text";
+import Link from "next/link";
 import { Button } from "#components/ui/Button";
+import { Text } from "#components/ui/Text";
+import { Title } from "#components/ui/Title";
 
 export default function NotFoundPage() {
   return (

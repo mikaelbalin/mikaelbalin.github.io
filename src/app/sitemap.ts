@@ -1,7 +1,7 @@
-import type { MetadataRoute } from "next";
-import { Languages } from "next/dist/lib/metadata/types/alternative-urls-types";
-import { getPayload } from "payload";
 import configPromise from "@payload-config";
+import type { MetadataRoute } from "next";
+import type { Languages } from "next/dist/lib/metadata/types/alternative-urls-types";
+import { getPayload } from "payload";
 import { i18n } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
 

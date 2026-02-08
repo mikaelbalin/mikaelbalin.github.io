@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getClientSideURL } from "#lib/getURL";
 import { Ratelimit } from "@upstash/ratelimit";
-import { kv } from "@vercel/kv";
 import { ipAddress } from "@vercel/functions";
+import { kv } from "@vercel/kv";
+import { type NextRequest, NextResponse } from "next/server";
+import { getClientSideURL } from "#lib/getURL";
 
 const rateLimit = new Ratelimit({
   redis: kv,

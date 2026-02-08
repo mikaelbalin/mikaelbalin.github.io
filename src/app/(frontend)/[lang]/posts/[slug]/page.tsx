@@ -1,10 +1,10 @@
+import type { Metadata } from "next";
 import { ArticleContent } from "#components/Article/ArticleContent";
-import { Content } from "#components/ui/RichText/types";
+import type { Content } from "#components/ui/RichText/types";
 import { i18n } from "#i18n-config";
 import { generateMeta } from "#lib/generateMeta";
 import { PostService } from "#lib/services/PostService";
-import { PostQueryArgs } from "#types/args";
-import { Metadata } from "next";
+import type { PostQueryArgs } from "#types/args";
 
 type Args = {
   params: Promise<PostQueryArgs>;
