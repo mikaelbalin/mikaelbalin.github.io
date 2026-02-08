@@ -5,10 +5,6 @@ import { Square, SquareConfig } from "#components/Hero/HeroBackground/Square";
  * Represents a canvas for the blog background.
  */
 export class BlogCanvas extends Canvas {
-  constructor(canvas: HTMLCanvasElement, colorScheme: string) {
-    super(canvas, colorScheme);
-  }
-
   /**
    * Runs the animation loop for the BlogCanvas.
    * @param timeStamp - The current timestamp.

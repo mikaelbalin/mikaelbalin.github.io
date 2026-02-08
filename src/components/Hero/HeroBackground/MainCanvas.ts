@@ -1,7 +1,4 @@
-import {
-  Canvas,
-  type MousePosition,
-} from "#components/Hero/HeroBackground/Canvas";
+import { Canvas } from "#components/Hero/HeroBackground/Canvas";
 import {
   HOVER_ANIMATION_DURATION,
   LINE_ANIMATION_DURATION,
@@ -20,14 +17,6 @@ export class MainCanvas extends Canvas {
   private readonly durationFactor = 3;
   fadeInStartTime: number | null = null;
   fadeOutStartTime: number | null = null;
-
-  constructor(
-    canvas: HTMLCanvasElement,
-    colorScheme: string,
-    mousePos?: MousePosition,
-  ) {
-    super(canvas, colorScheme, mousePos);
-  }
 
   /**
    * Runs the animation loop for the MainCanvas.
