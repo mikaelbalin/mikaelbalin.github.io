@@ -1,4 +1,4 @@
-import { Square } from "#components/Hero/HeroBackground/Square";
+import type { Square } from "#components/Hero/HeroBackground/Square";
 import { getCssVariable } from "#lib/getCssVariable";
 
 export type BackgroundVariant = "default" | "blog";

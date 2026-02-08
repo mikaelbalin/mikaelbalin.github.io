@@ -1,7 +1,7 @@
-import { PropsWithChildren } from "react";
-import { PostItem } from "#components/Post/PostItem";
-import { Post } from "#types/payload";
+import type { PropsWithChildren } from "react";
 import { Container } from "#components/Container";
+import { PostItem } from "#components/Post/PostItem";
+import type { Post } from "#types/payload";
 
 type PostSummary = Pick<
   Post,

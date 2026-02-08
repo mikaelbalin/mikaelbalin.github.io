@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import { IconMoon, IconSunHigh } from "@tabler/icons-react";
-import { useTheme } from "next-themes";
-import { Switch } from "#components/ui/Switch";
-import { Label } from "#components/ui/Label";
 import { useMounted } from "@kaelui/hooks/useMounted";
+import { IconMoon, IconSunHigh } from "@tabler/icons-react";
+import { useTheme } from "next-themes"; 
+import { Label } from "#components/ui/Label";
+import { Switch } from "#components/ui/Switch";
 
 export function ModeToggle() {
   const { resolvedTheme, setTheme } = useTheme();

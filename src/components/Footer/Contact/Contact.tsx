@@ -1,9 +1,9 @@
-import { ContactForm } from "#components/forms/ContactForm";
-import { Footer as FooterProps } from "#types/payload";
-import { Phone } from "./Phone";
-import { Container } from "#components/Container";
-import { Text } from "#components/ui/Text";
 import Link from "next/link";
+import { Container } from "#components/Container";
+import { ContactForm } from "#components/forms/ContactForm";
+import { Text } from "#components/ui/Text";
+import type { Footer as FooterProps } from "#types/payload";
+import { Phone } from "./Phone";
 
 type ContactProps = {
   contacts: FooterProps["contacts"];

@@ -1,12 +1,12 @@
 "use client";
 
-import { ScrollTopButton } from "#components/ui/ScrollTopButton";
-import { Footer } from "#types/payload";
 import Link from "next/link";
-import type { LocaleParams } from "#i18n-config";
-import { usePathname, useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { Container } from "#components/Container/Container";
+import { ScrollTopButton } from "#components/ui/ScrollTopButton";
 import { Text } from "#components/ui/Text";
+import type { LocaleParams } from "#i18n-config";
+import type { Footer } from "#types/payload";
 
 interface FooterNavigationProps {
   navigation: NonNullable<Footer["navigation"]>;

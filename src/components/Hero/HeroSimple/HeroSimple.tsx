@@ -1,5 +1,5 @@
-import { Page } from "#types/payload";
 import { Container } from "#components/Container";
+import type { Page } from "#types/payload";
 
 export const HeroSimple = ({ title }: Page["hero"]) => {
   return (

@@ -1,8 +1,8 @@
-import React from "react";
-import type { Page } from "#types/payload";
-import { HeroMain } from "#components/Hero/HeroMain";
+import type React from "react";
 import { HeroBlog } from "#components/Hero/HeroBlog";
+import { HeroMain } from "#components/Hero/HeroMain";
 import { HeroSimple } from "#components/Hero/HeroSimple";
+import type { Page } from "#types/payload";
 
 type RenderHeroProps = Page["hero"];
 

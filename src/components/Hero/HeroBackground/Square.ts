@@ -1,15 +1,15 @@
-import { alpha, lerp } from "#lib/utils";
 import { ANIMATION_DURATION } from "#components/Hero/HeroBackground/HeroBackground.constants";
+import { alpha, lerp } from "#lib/utils";
 
 export class SquareConfig {
   private static _squareSize: number = 50; // Default size
 
   static get squareSize(): number {
-    return this._squareSize;
+    return SquareConfig._squareSize;
   }
 
   static set squareSize(size: number) {
-    this._squareSize = size;
+    SquareConfig._squareSize = size;
   }
 }
 

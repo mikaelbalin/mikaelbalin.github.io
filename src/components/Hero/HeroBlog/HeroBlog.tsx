@@ -1,10 +1,9 @@
 "use client";
-
-import React from "react";
-import { MotionProvider } from "#context/motion-context";
-import { HeroBackground } from "#components/Hero/HeroBackground";
+ 
 import { Container } from "#components/Container";
-import { Page } from "#types/payload";
+import { HeroBackground } from "#components/Hero/HeroBackground";
+import { MotionProvider } from "#context/motion-context";
+import type { Page } from "#types/payload";
 
 export const HeroBlog = ({ title }: Page["hero"]) => {
   return (

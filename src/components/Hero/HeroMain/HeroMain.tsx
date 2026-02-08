@@ -1,25 +1,25 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useMounted as useIsClient } from "@kaelui/hooks/useMounted";
 import {
+  type MotionValue,
+  type SpringOptions,
   useScroll,
   useSpring,
   useTransform,
-  MotionValue,
-  SpringOptions,
 } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MotionProvider, useMotionContext } from "#context/motion-context";
-import { cn } from "#lib/utils";
-import { Marquee } from "#components/Marquee";
+import { useEffect, useRef } from "react";
+import { Container } from "#components/Container";
 import { HeroBackground } from "#components/Hero/HeroBackground";
 import { LiveTime } from "#components/LiveTime";
-import { Container } from "#components/Container";
-import { Page } from "#types/payload";
+import { Marquee } from "#components/Marquee";
 import { Button } from "#components/ui/Button";
-import { useMounted as useIsClient } from "@kaelui/hooks/useMounted";
 import { Text } from "#components/ui/Text";
+import { MotionProvider, useMotionContext } from "#context/motion-context";
+import { cn } from "#lib/utils";
+import type { Page } from "#types/payload";
 
 const springConfig: SpringOptions = { stiffness: 100, damping: 30 };
 
