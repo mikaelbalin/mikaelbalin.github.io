@@ -13,7 +13,8 @@
       "!**/node_modules",
       "!src/app/(payload)",
       "!src/config/migrations",
-      "!src/types/payload.ts"
+      "!src/types/payload.ts",
+      "!schema.graphql"
     ]
   },
   "formatter": {
