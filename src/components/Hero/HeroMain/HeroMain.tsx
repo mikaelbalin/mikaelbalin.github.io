@@ -8,8 +8,6 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { Container } from "#components/Container";
 import { HeroBackground } from "#components/Hero/HeroBackground";
