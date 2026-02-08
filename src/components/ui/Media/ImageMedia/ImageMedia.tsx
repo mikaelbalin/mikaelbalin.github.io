@@ -48,7 +48,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         alt={alt || ""}
         fill={fill}
         height={!fill ? height : undefined}
-        placeholder="blur"
         priority={priority}
         quality={100}
         loading={loading}
