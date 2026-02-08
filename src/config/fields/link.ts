@@ -101,13 +101,15 @@ export const link: LinkType = ({
   ];
 
   if (!disableLabel) {
-    linkTypes.forEach((linkType) => ({
-      ...linkType,
-      admin: {
-        ...linkType.admin,
-        width: "50%",
-      },
-    }));
+    linkTypes.forEach((linkType) => {
+      ({
+        ...linkType,
+        admin: {
+          ...linkType.admin,
+          width: "50%",
+        },
+      });
+    });
 
     linkResult.fields.push({
       type: "row",
