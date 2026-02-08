@@ -37,8 +37,6 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
   const url = contactLink?.link.url;
   const label = contactLink?.link.label;
 
-  const pathname = usePathname();
-
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -68,9 +66,9 @@ const HeroDescription: React.FC<HeroDescriptionProps> = (props) => {
         </div>
         {url && (
           <Button asChild size="lg">
-            <Link className="mt-7 sm:mt-8" href={`${pathname}${url}`}>
+            <a className="mt-7 sm:mt-8" href={url}>
               {label}
-            </Link>
+            </a>
           </Button>
         )}
       </Container>
