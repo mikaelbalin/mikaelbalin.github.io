@@ -1,12 +1,12 @@
 "use client";
 
-import { TextBullet } from "#components/ui/TextBullet";
-import { formatDateTime } from "#lib/formatDateTime";
-import { Post } from "#types/payload";
+import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Badge } from "#components/ui/Badge";
+import { TextBullet } from "#components/ui/TextBullet";
+import { formatDateTime } from "#lib/formatDateTime";
+import type { Post } from "#types/payload";
 
 type PostCardProps = Pick<
   Post,
@@ -36,11 +36,11 @@ export const PostItem = (props: PostCardProps) => {
         <div className="flex flex-col gap-6 transition-transform duration-500 sm:w-1/2 sm:group-hover:translate-x-6">
           <h3 className="text-2xl sm:text-7xl">{title}</h3>
           <div className="flex gap-4">
-            {categories?.map((category, index) => {
+            {categories?.map((category) => {
               if (typeof category === "object") {
-                const { title: titleFromCategory } = category;
+                const { id, title: titleFromCategory } = category;
                 const categoryTitle = titleFromCategory || "Untitled category";
-                return <Badge key={index}>{categoryTitle}</Badge>;
+                return <Badge key={id}>{categoryTitle}</Badge>;
               }
 
               return null;
