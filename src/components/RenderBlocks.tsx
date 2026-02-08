@@ -1,10 +1,10 @@
-import React from "react";
-import type { AboutBlock, Page,  ReusableBlockType } from "#types/payload";
-import { Archive, type ArchiveBlockProps } from "#components/Archive";
-import { Subscription } from "#components/Subscription";
+import type React from "react";
 import { About } from "#components/About";
+import { Archive, type ArchiveBlockProps } from "#components/Archive";
 import { Search, type SearchBlockProps } from "#components/Search";
-import { TextContent, type ContentBlockProps } from "#components/TextContent";
+import { Subscription } from "#components/Subscription";
+import { type ContentBlockProps, TextContent } from "#components/TextContent";
+import type { AboutBlock, Page, ReusableBlockType } from "#types/payload";
 
 type Block = Page["layout"][0];
 type BlockType = Extract<Block, { blockType: string }>["blockType"];
@@ -40,25 +40,25 @@ export const RenderBlocks: React.FC<RenderBlocksProps> = (props) => {
 
   return (
     <>
-      {blocks.map((block, index) => {
-        const { blockType } = block;
+      {blocks.map((block) => {
+        const { blockType, id } = block;
 
         const Block = blockComponents[blockType];
 
         if (blockType === "archive" && Block === Archive) {
-          return <Block key={index} {...block} locale={locale} />;
+          return <Block key={id} {...block} locale={locale} />;
         }
         if (blockType === "about" && Block === About) {
-          return <Block key={index} {...block} />;
+          return <Block key={id} {...block} />;
         }
         if (blockType === "reusableBlock" && Block === Subscription) {
-          return <Block key={index} {...block} />;
+          return <Block key={id} {...block} />;
         }
         if (blockType === "search" && Block === Search) {
-          return <Block key={index} {...block} {...rest} locale={locale} />;
+          return <Block key={id} {...block} {...rest} locale={locale} />;
         }
         if (blockType === "content" && Block === TextContent) {
-          return <Block key={index} {...block} />;
+          return <Block key={id} {...block} />;
         }
 
         return null;
