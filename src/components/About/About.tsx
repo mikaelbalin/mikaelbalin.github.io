@@ -9,11 +9,12 @@ import type { AboutBlock as AboutBlockProps } from "#types/payload";
 const splitText = (text: string) => {
   return text.split("").map((char, index) => {
     const shouldAnimate = Math.random() > 0.8;
+    const key = `char-${index}-${char.charCodeAt(0)}`;
 
     if (shouldAnimate) {
       return (
         <motion.span
-          key={index}
+          key={key}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 2, delay: index * 0.005 }}
@@ -23,7 +24,7 @@ const splitText = (text: string) => {
         </motion.span>
       );
     } else {
-      return <span key={index}>{char}</span>;
+      return <span key={key}>{char}</span>;
     }
   });
 };
