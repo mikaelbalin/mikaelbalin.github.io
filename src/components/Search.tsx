@@ -1,10 +1,10 @@
-import { SearchBlock } from "#types/payload";
-import { getPayload, Where } from "payload";
 import configPromise from "@payload-config";
 import { notFound } from "next/navigation";
-import { PostSearch } from "#components/Post/PostSearch";
+import { getPayload, type Where } from "payload";
 import { PostList } from "#components/Post/PostList";
+import { PostSearch } from "#components/Post/PostSearch";
 import { Pagination } from "#components/ui/Pagination";
+import type { SearchBlock } from "#types/payload";
 
 export interface SearchBlockProps extends SearchBlock {
   category: string;

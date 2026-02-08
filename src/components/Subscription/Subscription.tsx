@@ -1,7 +1,7 @@
 import { Container } from "#components/Container";
-import { Text } from "#components/ui/Text";
-import {   ReusableBlockType } from "#types/payload";
 import { SubscriptionForm } from "#components/forms/SubscriptionForm";
+import { Text } from "#components/ui/Text";
+import type { ReusableBlockType } from "#types/payload";
 
 export const Subscription = (props: ReusableBlockType) => {
   const { block } = props;

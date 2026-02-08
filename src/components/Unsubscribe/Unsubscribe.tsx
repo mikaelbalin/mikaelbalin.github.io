@@ -1,8 +1,8 @@
+import Link from "next/link";
 import { Container } from "#components/Container";
 import { Button } from "#components/ui/Button";
 import { Text } from "#components/ui/Text";
 import { Title } from "#components/ui/Title";
-import Link from "next/link";
 
 export const Unsubscribe = () => {
   return (

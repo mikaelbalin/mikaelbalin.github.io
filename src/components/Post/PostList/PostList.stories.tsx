@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { PostList } from "#components/Post/PostList/PostList";
 import { Default as PostItem } from "#components/Post/PostItem/PostItem.stories";
+import { PostList } from "#components/Post/PostList/PostList";
 import { PostLatest } from "../PostLatest";
 import { Default as PostLatestDefault } from "../PostLatest/PostLatest.stories";
 

@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { Button } from "#components/ui/Button";
 import { cn } from "#lib/utils";
 import type { ArchiveBlock } from "#types/payload";
-import Link from "next/link";
 
 type PostLatestProps = Pick<ArchiveBlock, "title" | "latestPostsLink"> & {
   locale?: "en" | "pt" | "all";

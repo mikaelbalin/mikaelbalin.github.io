@@ -1,16 +1,17 @@
 "use client";
 
 import { useElementSize, useMediaQuery } from "@kaelui/hooks";
+import { motion } from "motion/react";
+import { useTheme } from "next-themes";
 import {
   forwardRef,
-  PropsWithChildren,
+  type PropsWithChildren,
   useEffect,
   useImperativeHandle,
   useRef,
 } from "react";
-import { motion } from "motion/react";
 import { BlogCanvas } from "#components/Hero/HeroBackground/BlogCanvas";
-import {
+import type {
   BackgroundVariant,
   MousePosition,
 } from "#components/Hero/HeroBackground/Canvas";
@@ -22,8 +23,6 @@ import { MainCanvas } from "#components/Hero/HeroBackground/MainCanvas";
 import { SquareConfig } from "#components/Hero/HeroBackground/Square";
 import { useMotionContext } from "#context/motion-context";
 import { cn } from "#lib/utils";
-// import { getCssVariable } from "#lib/getCssVariable";
-import { useTheme } from "next-themes";
 
 interface HeroBackgroundProps {
   variant?: BackgroundVariant;
@@ -142,6 +141,7 @@ export const HeroBackground = forwardRef<
     };
   }, [colorScheme, variant]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: despendencies are handled in the effect above
   useEffect(() => {
     utilsRef.current?.setSquares();
   }, [width, height, colorScheme, variant]);

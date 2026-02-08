@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 /**
  * https://payloadcms.com/docs/admin/components#root-components

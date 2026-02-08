@@ -1,10 +1,10 @@
 "use client";
 
-import { Container } from "#components/Container";
-import { Category, SearchBlock } from "#types/payload";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Container } from "#components/Container";
 import { Text } from "#components/ui/Text";
 import { ToggleGroup, ToggleGroupItem } from "#components/ui/ToggleGroup";
+import type { Category, SearchBlock } from "#types/payload";
 
 interface PostSearchProps extends Pick<SearchBlock, "title"> {
   categories: Pick<Category, "id" | "breadcrumbs">[];
