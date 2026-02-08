@@ -4,7 +4,7 @@ import { RenderBlocks } from "#components/RenderBlocks";
 import { PayloadRedirects } from "#components/ui/PayloadRedirects";
 import { i18n } from "#i18n-config";
 import { generateMeta } from "#lib/generateMeta";
-import { PageService } from "#lib/services/PageService";
+import { getAllSlugs, getBySlug } from "#lib/services/PageService";
 import type { PageQueryArgs } from "#types/args";
 
 // Force static generation for all pages at build time
@@ -30,7 +30,7 @@ export default async function Page({
   const slug = slugs[0];
   const path = `/${slug}`;
 
-  const pageData = await PageService.getBySlug({
+  const pageData = await getBySlug({
     slug: slugs,
     lang,
   });
@@ -62,7 +62,7 @@ export async function generateMetadata({
 }: Args): Promise<Metadata> {
   const { slug = ["home"], lang = i18n.defaultLocale } = await paramsPromise;
 
-  const page = await PageService.getBySlug({
+  const page = await getBySlug({
     slug,
     lang,
   });
@@ -71,6 +71,6 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<PageQueryArgs[]> {
-  const params = await PageService.getAllSlugs();
+  const params = await getAllSlugs();
   return params;
 }
