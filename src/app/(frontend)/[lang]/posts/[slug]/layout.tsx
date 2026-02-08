@@ -7,7 +7,7 @@ import { i18n, type Locale } from "#i18n-config";
 import { filterPayloadRelations } from "#lib/filterPayloadRelations";
 import { formatDateTime } from "#lib/formatDateTime";
 import { getClientSideURL } from "#lib/getURL";
-import { PostService } from "#lib/services/PostService";
+import { getPostLayoutData } from "#lib/services/PostService";
 
 export default async function Layout(
   props: LayoutProps<"/[lang]/posts/[slug]">,
@@ -16,7 +16,7 @@ export default async function Layout(
   const params = await props.params;
   const { slug = "", lang = i18n.defaultLocale } = params;
 
-  const data = await PostService.getPostLayoutData({
+  const data = await getPostLayoutData({
     slug,
   });
 

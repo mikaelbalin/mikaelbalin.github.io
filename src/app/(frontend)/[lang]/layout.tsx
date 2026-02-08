@@ -11,7 +11,7 @@ import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
 import type { Locale } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
-import { PageService } from "#lib/services/PageService";
+import { getFooter, getHeader } from "#lib/services/PageService";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,8 +27,8 @@ export default async function RootLayout(props: LayoutProps<"/[lang]">) {
 
   const { isEnabled } = await draftMode();
   const [header, footer] = await Promise.all([
-    PageService.getHeader(lang as Locale),
-    PageService.getFooter(lang as Locale),
+    getHeader(lang as Locale),
+    getFooter(lang as Locale),
   ]);
 
   return (
