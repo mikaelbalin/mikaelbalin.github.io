@@ -1,12 +1,15 @@
-import { getCssVariable } from "#lib/getCssVariable";
-import { alpha } from "#lib/utils";
-import { Canvas, MousePosition } from "#components/Hero/HeroBackground/Canvas";
+import {
+  Canvas,
+  type MousePosition,
+} from "#components/Hero/HeroBackground/Canvas";
 import {
   HOVER_ANIMATION_DURATION,
   LINE_ANIMATION_DURATION,
   SQUARE_SIZE_SMALL,
 } from "#components/Hero/HeroBackground/HeroBackground.constants";
-import { SquareConfig, Square } from "#components/Hero/HeroBackground/Square";
+import { Square, SquareConfig } from "#components/Hero/HeroBackground/Square";
+import { getCssVariable } from "#lib/getCssVariable";
+import { alpha } from "#lib/utils";
 
 export class MainCanvas extends Canvas {
   private startTime: DOMHighResTimeStamp = 0;

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import React from "react";
-import { DefaultDocumentIDType, JsonValue } from "payload";
+import type { DefaultDocumentIDType, JsonValue } from "payload";
+import type React from "react";
 import { cn } from "#lib/utils";
 
 type CMSLinkProps = {

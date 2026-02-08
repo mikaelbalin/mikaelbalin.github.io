@@ -1,11 +1,11 @@
-import { cn } from "#lib/utils";
-import type { CalloutBlock } from "#types/payload";
 import {
   IconBulb,
   IconExclamationCircle,
   IconInfoCircle,
 } from "@tabler/icons-react";
-import React from "react";
+import type React from "react";
+import { cn } from "#lib/utils";
+import type { CalloutBlock } from "#types/payload";
 
 function renderIcon(type: CalloutBlock["style"]) {
   switch (type) {
