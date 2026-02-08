@@ -11,10 +11,12 @@ function generateLanguageAlternates(path: string): Languages<string> {
   return i18n.locales.reduce<Languages<string>>((acc, lang) => {
     // For home page
     if (path === "") {
-      return { ...acc, [lang]: `${baseUrl}/${lang}` };
+      acc[lang] = `${baseUrl}/${lang}`;
+      return acc;
     }
     // For other pages
-    return { ...acc, [lang]: `${baseUrl}/${lang}/${path}` };
+    acc[lang] = `${baseUrl}/${lang}/${path}`;
+    return acc;
   }, {});
 }
 
