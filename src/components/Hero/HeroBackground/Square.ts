@@ -1,17 +1,17 @@
 import { ANIMATION_DURATION } from "#components/Hero/HeroBackground/HeroBackground.constants";
 import { alpha, lerp } from "#lib/utils";
 
-export class SquareConfig {
-  private static _squareSize: number = 50; // Default size
+let squareSize: number = 50; // Default size
 
-  static get squareSize(): number {
-    return SquareConfig._squareSize;
-  }
+export const SquareConfig = {
+  get squareSize(): number {
+    return squareSize;
+  },
 
-  static set squareSize(size: number) {
-    SquareConfig._squareSize = size;
-  }
-}
+  set squareSize(size: number) {
+    squareSize = size;
+  },
+};
 
 const ANIMATION_MIDDLE_POINT = ANIMATION_DURATION / 2;
 
