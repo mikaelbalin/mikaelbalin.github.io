@@ -100,6 +100,7 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
             <DropdownMenu open={dropdownOpen} onOpenChange={toggleDropdown}>
               <DropdownMenuTrigger asChild>
                 <UnstyledButton
+                  suppressHydrationWarning
                   className={cn("flex items-center text-lg sm:px-4 sm:py-2")}
                 >
                   <span className="mr-1">{labels[lang]}</span>
