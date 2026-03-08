@@ -31,7 +31,7 @@ pnpm install
 Start the PostgreSQL database using Podman:
 
 ```sh
-podman compose --file docker-compose.yml up --detach
+distrobox-host-exec podman compose --file docker-compose.yml up --detach
 ```
 
 ### 4. Configure environment variables
