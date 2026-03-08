@@ -143,6 +143,7 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@kaelui/hooks",
       "@tailwindcss/oxide",
       "@vercel/speed-insights",
       "bufferutil",
