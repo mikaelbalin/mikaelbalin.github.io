@@ -8,7 +8,7 @@ A quick introduction of the minimal setup you need to get an app up & running.
 
 ### 1. Configure `.npmrc`
 
-Create a `.npmrc` file in the project root with the following content:
+Create token at [Personal access tokens](https://github.com/settings/tokens) page and create a `.npmrc` file in the project root with the following content:
 
 ```
 # https://github.com/vercel/next.js/issues/68805 and https://pnpm.io/npmrc#public-hoist-pattern
@@ -17,7 +17,7 @@ public-hoist-pattern[]=*@libsql*
 registry=https://registry.npmjs.org
 @kaelui:registry=https://npm.pkg.github.com
 
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+//npm.pkg.github.com/:_authToken=<GITHUB_TOKEN>
 ```
 
 ### 2. Install dependencies
