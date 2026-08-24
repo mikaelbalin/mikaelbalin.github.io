@@ -12,9 +12,13 @@ type PageProps = {
 };
 
 export default async function Page({
+  params: paramsPromise,
   searchParams: searchParamsPromise,
 }: Readonly<PageProps>) {
+  const { lang } = await paramsPromise;
   const { ut } = await searchParamsPromise;
+
+  console.log({ut})
 
   if (!ut) notFound();
 
@@ -37,5 +41,5 @@ export default async function Page({
     data: { subscribed: false },
   });
 
-  return <Unsubscribe />;
+  return <Unsubscribe lang={lang} />;
 }

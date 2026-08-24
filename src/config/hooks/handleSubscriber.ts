@@ -35,6 +35,9 @@ export const handleSubscriber: CollectionBeforeChangeHook<
 
   if (subscribersData.totalDocs > 0) {
     context.subscriberExisted = true;
+    // Reuse the subscriber's existing token so the unsubscribe link in the
+    // email matches the token stored in the database.
+    context.token = subscriber.token;
     if (!subscriber.subscribed) {
       await payload.update({
         collection: "subscribers",

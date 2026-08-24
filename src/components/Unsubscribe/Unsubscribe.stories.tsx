@@ -12,5 +12,7 @@ export default meta;
 type Story = StoryObj<typeof Unsubscribe>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    lang: "en",
+  },
 };
