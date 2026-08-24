@@ -94,6 +94,48 @@ git push
 
 After that Storybook will be deployed to GitHub pages and app to Vercel.
 
+## Testing
+
+The project uses [Vitest](https://vitest.dev/) in browser mode together with
+[Storybook's test addon](https://storybook.js.org/docs/writing-tests/test-addon).
+Tests run in a real Chromium browser via Playwright.
+
+```shell
+pnpm test            # run unit + storybook tests
+pnpm test:unit       # unit tests only
+pnpm test:storybook  # storybook tests only
+pnpm test:ui         # interactive UI
+```
+
+### Playwright on Fedora / Bazzite (immutable distros)
+
+Playwright's bundled Chromium is an Ubuntu build linked against Ubuntu-specific
+libraries, so it can't run on Fedora-based immutable distros like Bazzite — the
+`playwright install --with-deps` step fails and the browser won't launch. The
+project works around this by detecting a system-installed Chromium and using it
+instead (see `vitest.config.ts`).
+
+To run tests locally on such a system:
+
+1. Install Chromium via layering (requires a reboot):
+
+   ```sh
+   rpm-ostree install chromium
+   ```
+
+2. Run the tests as usual:
+
+   ```sh
+   pnpm test
+   ```
+
+The config auto-detects `/usr/bin/chromium-browser`.
+If Chromium is installed elsewhere, add its path to the `systemChromiumPath`
+array in `vitest.config.ts`.
+
+On CI (Ubuntu) the bundled browser is used automatically, so no changes are
+needed there.
+
 ## Update dependencies
 
 ```shell
