@@ -1,11 +1,16 @@
 import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { ipAddress } from "@vercel/functions";
-import { kv } from "@vercel/kv";
 import { type NextRequest, NextResponse } from "next/server";
 import { getClientSideURL } from "#lib/getURL";
 
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL!,
+  token: process.env.KV_REST_API_TOKEN!,
+});
+
 const rateLimit = new Ratelimit({
-  redis: kv,
+  redis,
   limiter: Ratelimit.fixedWindow(2, "60 s"),
 });
 
