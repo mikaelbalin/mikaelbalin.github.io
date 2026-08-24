@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
@@ -13,6 +14,18 @@ const dirname =
   typeof __dirname !== "undefined"
     ? __dirname
     : path.dirname(fileURLToPath(import.meta.url));
+
+// On Fedora/Bazzite, Playwright's bundled Chromium is an Ubuntu build that
+// can't run (it's linked against Ubuntu-specific libraries). Detect a
+// system-installed Chromium and use it instead; fall back to the bundled
+// browser elsewhere (e.g. CI on Ubuntu).
+const systemChromiumPath = [
+  "/usr/bin/chromium-browser",
+].find((candidate) => existsSync(candidate));
+
+const chromiumLaunchOptions = systemChromiumPath
+  ? { executablePath: systemChromiumPath }
+  : {};
 
 // More info at: https://storybook.js.org/docs/writing-tests/test-addon
 export default defineConfig({
@@ -59,7 +72,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: playwright(),
+            provider: playwright({ launchOptions: chromiumLaunchOptions }),
             instances: [
               {
                 browser: "chromium",
@@ -79,7 +92,7 @@ export default defineConfig({
           browser: {
             enabled: true,
             headless: true,
-            provider: playwright(),
+            provider: playwright({ launchOptions: chromiumLaunchOptions }),
             instances: [
               {
                 browser: "chromium",
