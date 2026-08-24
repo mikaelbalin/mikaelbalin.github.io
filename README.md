@@ -31,7 +31,7 @@ pnpm install
 Start the PostgreSQL database using Podman:
 
 ```sh
-distrobox-host-exec podman compose --file docker-compose.yml up --detach
+podman compose --file docker-compose.yml up --detach
 ```
 
 ### 4. Configure environment variables
@@ -46,7 +46,7 @@ See the `.env.example` file for the required variables and their descriptions (e
 
 Alternatively, you can use Vercel Environment Variables:
 
-1. Install Vercel CLI: `npm i -g vercel`
+1. Install Vercel CLI: `pnpm i -g vercel`
 2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
 3. Download your environment variables: `vercel env pull`
 
