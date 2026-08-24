@@ -16,7 +16,7 @@ export const Container = ({
   return (
     <Comp
       data-slot="container"
-      className={cn("mx-auto max-w-320 px-4 sm:px-20", className)}
+      className={cn("mx-auto max-w-7xl px-4 sm:px-20", className)}
       {...props}
     >
       {children}
