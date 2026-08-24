@@ -1,0 +1,14 @@
+allowBuilds:
+  '@kaelui/hooks': false
+  "@tailwindcss/oxide": true
+  "@vercel/speed-insights": true
+  bufferutil: true
+  esbuild: true
+  msw: true
+  sharp: true
+  unrs-resolver: true
+  utf-8-validate: true
+
+overrides:
+  "@types/react": 19.2.7
+  "@types/react-dom": 19.2.3
