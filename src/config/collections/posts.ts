@@ -153,6 +153,14 @@ export const posts: CollectionConfig<"posts"> = {
               hasMany: true,
               relationTo: "categories",
             },
+            {
+              name: "bskyPostUri",
+              type: "text",
+              admin: {
+                description:
+                  "AT-URI of the corresponding BlueSky post (at://did:.../app.bsky.feed.post/...)",
+              },
+            },
           ],
         },
         meta,
