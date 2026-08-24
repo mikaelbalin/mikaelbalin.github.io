@@ -3,6 +3,7 @@ allowBuilds:
   "@tailwindcss/oxide": true
   "@vercel/speed-insights": true
   bufferutil: true
+  core-js: true
   esbuild: true
   msw: true
   sharp: true
