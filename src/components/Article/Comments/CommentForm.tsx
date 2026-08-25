@@ -25,7 +25,8 @@ const commentSchema = z.object({
 type CommentSchema = z.infer<typeof commentSchema>;
 
 type CommentFormProps = {
-  onSubmit: (text: string) => void | Promise<void>;
+  /** Returns `true` when the comment was submitted successfully. */
+  onSubmit: (text: string) => boolean | Promise<boolean>;
   isSubmitting?: boolean;
   initialText?: string;
 };
@@ -50,7 +51,12 @@ export function CommentForm({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((values) => onSubmit(values.text))}
+        onSubmit={form.handleSubmit(async (values) => {
+          const ok = await onSubmit(values.text);
+          if (ok) {
+            form.reset();
+          }
+        })}
         className="flex flex-col gap-3"
       >
         <FormField

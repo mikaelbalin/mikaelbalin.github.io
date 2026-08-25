@@ -119,14 +119,14 @@ export function Comments({ uri }: CommentsProps) {
     }
   }, [uri, loadComments, loadUser]);
 
-  const handleSubmitComment = async (text: string) => {
+  const handleSubmitComment = async (text: string): Promise<boolean> => {
     if (!user) {
       sessionStorage.setItem(
         PENDING_COMMENT_KEY,
         JSON.stringify({ uri, text }),
       );
       setAuthDialog({ open: true, status: "idle" });
-      return;
+      return false;
     }
 
     setSubmitting(true);
@@ -140,16 +140,36 @@ export function Comments({ uri }: CommentsProps) {
 
       if (!res.ok) {
         toast("Failed to post comment", { description: json.error });
-        return;
+        return false;
       }
 
       toast("Comment posted");
-      await loadComments();
+
+      // Optimistically add the new comment so it appears immediately, without
+      // waiting for the Bluesky AppView to index the reply (which can lag).
+      const result = json.comment as { uri: string; cid: string } | undefined;
+      if (result) {
+        const newComment: Comment = {
+          uri: result.uri,
+          cid: result.cid,
+          author: {
+            did: user.did,
+            handle: user.handle,
+            displayName: user.displayName,
+          },
+          text,
+          indexedAt: new Date().toISOString(),
+        };
+        setComments((prev) => [...prev, newComment]);
+      }
+
+      return true;
     } catch (error) {
       toast("Failed to post comment", {
         description:
           error instanceof Error ? error.message : "An error occurred",
       });
+      return false;
     } finally {
       setSubmitting(false);
     }
