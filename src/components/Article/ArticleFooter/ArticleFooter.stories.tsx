@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AuthProvider } from "#context/auth-context";
 import { ArticleFooter } from "./ArticleFooter";
 
 const meta: Meta<typeof ArticleFooter> = {
@@ -6,6 +7,11 @@ const meta: Meta<typeof ArticleFooter> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: (Story) => (
+    <AuthProvider>
+      <Story />
+    </AuthProvider>
+  ),
 };
 
 export default meta;

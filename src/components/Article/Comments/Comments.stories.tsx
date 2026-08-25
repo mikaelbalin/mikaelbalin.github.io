@@ -1,9 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { expect, userEvent, within } from "storybook/test";
+import { AuthProvider } from "#context/auth-context";
 import { Comments } from "./Comments";
 
 const meta: Meta<typeof Comments> = {
   component: Comments,
+  decorators: (Story) => (
+    <AuthProvider>
+      <Story />
+    </AuthProvider>
+  ),
 };
 
 export default meta;
@@ -28,6 +34,8 @@ export const OpensDrawer: Story = {
 
     // The drawer renders in a portal, so query the document body.
     const body = within(document.body);
-    await expect(body.getByText("Comments")).toBeInTheDocument();
+    await expect(
+      body.getByRole("heading", { name: "Comments" }),
+    ).toBeInTheDocument();
   },
 };

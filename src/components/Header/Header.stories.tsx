@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { Header } from "#components/Header";
+import { AuthProvider } from "#context/auth-context";
 
 const meta: Meta<typeof Header> = {
   component: Header,
@@ -9,9 +10,11 @@ const meta: Meta<typeof Header> = {
   },
   decorators: [
     (Story) => (
-      <div className="relative min-h-20">
-        <Story />
-      </div>
+      <AuthProvider>
+        <div className="relative min-h-20">
+          <Story />
+        </div>
+      </AuthProvider>
     ),
   ],
 };

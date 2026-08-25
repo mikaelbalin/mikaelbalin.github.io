@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AuthProvider } from "#context/auth-context";
 import { Navbar } from "./Navbar";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -7,6 +8,11 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: (Story) => (
+    <AuthProvider>
+      <Story />
+    </AuthProvider>
+  ),
 } satisfies Meta<typeof Navbar>;
 
 export default meta;
