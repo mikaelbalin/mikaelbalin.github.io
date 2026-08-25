@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
@@ -29,6 +29,7 @@ type CommentsProps = {
 
 export function Comments({ uri }: CommentsProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const { user, refresh: refreshUser } = useAuth();
 
@@ -69,8 +70,7 @@ export function Comments({ uri }: CommentsProps) {
   // Handle returning from the OAuth flow (?auth=success|error). The toast is
   // shown by the AuthProvider; here we only react to the redirect locally.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const auth = params.get("auth");
+    const auth = searchParams.get("auth");
 
     if (auth === "success" || auth === "error") {
       setOpen(true);
@@ -91,7 +91,7 @@ export function Comments({ uri }: CommentsProps) {
         sessionStorage.removeItem(PENDING_COMMENT_KEY);
       }
     }
-  }, [uri, loadComments, refreshUser]);
+  }, [searchParams, uri, loadComments, refreshUser]);
 
   const handleSubmitComment = async (text: string): Promise<boolean> => {
     if (!user) {

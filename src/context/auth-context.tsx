@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -33,6 +34,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<BskyUser | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const refresh = useCallback(async () => {
     try {
       const res = await fetch("/api/oauth/me");
@@ -55,8 +60,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // the <Toaster /> in the layout, so the toast is dispatched after Sonner has
   // subscribed and renders correctly.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const auth = params.get("auth");
+    const auth = searchParams.get("auth");
 
     if (auth === "success" || auth === "error") {
       if (auth === "error") {
@@ -68,15 +72,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
 
       // Remove the ?auth param from the URL without a full navigation.
+      const params = new URLSearchParams(searchParams.toString());
       params.delete("auth");
       const query = params.toString();
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}${query ? `?${query}` : ""}`,
-      );
+      router.replace(`${pathname}${query ? `?${query}` : ""}`, {
+        scroll: false,
+      });
     }
-  }, []);
+  }, [searchParams, pathname, router]);
 
   const signOut = useCallback(async (): Promise<void> => {
     try {
