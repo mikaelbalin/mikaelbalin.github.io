@@ -1,71 +1,122 @@
+"use client";
 
-import { Button } from "#components/ui/Button"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { IconLoader2 } from "@tabler/icons-react";
+import { useState } from "react";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "#components/ui/Card"
+  type SubmitErrorHandler,
+  type SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { toast } from "sonner";
 import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "#components/ui/Field"
-import { Input } from "#components/ui/Input"
-import { cn } from "#lib/utils"
+  type BskyLoginSchema,
+  bskyLoginSchema,
+} from "#components/forms/schemas";
+import { Button } from "#components/ui/Button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "#components/ui/Form";
+import { Input } from "#components/ui/Input";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+type LoginFormProps = {
+  /** Relative path to return to after the OAuth flow (e.g. `/en/posts/slug`). */
+  returnTo?: string;
+};
+
+export function LoginForm({ returnTo = "/" }: LoginFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const form = useForm<BskyLoginSchema>({
+    resolver: zodResolver(bskyLoginSchema),
+    defaultValues: { handle: "" },
+  });
+
+  const onSubmit: SubmitHandler<BskyLoginSchema> = async (values) => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/oauth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ handle: values.handle, returnTo }),
+      });
+
+      const json = await response.json();
+
+      if (!response.ok || !json.redirectUrl) {
+        setIsLoading(false);
+
+        toast("Login error", {
+          description: json.error || "Failed to start login",
+        });
+
+        return;
+      }
+
+      // Redirect the user to the Bluesky authorization page.
+      window.location.href = json.redirectUrl;
+    } catch (error) {
+      setIsLoading(false);
+
+      toast("Login error", {
+        description:
+          error instanceof Error ? error.message : "An error occurred",
+      });
+    }
+  };
+
+  const onError: SubmitErrorHandler<BskyLoginSchema> = (errors) => {
+    const firstErrorPath = Object.keys(errors)[0];
+    form.setFocus(firstErrorPath as keyof BskyLoginSchema);
+  };
+
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onError)}
+        className="flex flex-col gap-6"
+      >
+        <FormField
+          control={form.control}
+          name="handle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Bluesky handle</FormLabel>
+              <FormControl>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
+                  placeholder="you.bsky.social"
+                  autoComplete="username"
+                  {...field}
                 />
-              </Field>
-              <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
-                <Input id="password" type="password" required />
-              </Field>
-              <Field>
-                <Button type="submit">Login</Button>
-                <Button variant="outline" type="button">
-                  Login with Google
-                </Button>
-                <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="#">Sign up</a>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
-  )
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" disabled={isLoading}>
+          {isLoading && <IconLoader2 className="animate-spin" />}
+          Sign in with BlueSky
+        </Button>
+
+        <p className="text-center text-sm text-muted-foreground">
+          Don&apos;t have an account?{" "}
+          <a
+            href="https://bsky.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4 hover:no-underline"
+          >
+            Create one on bsky.app
+          </a>
+        </p>
+      </form>
+    </Form>
+  );
 }
