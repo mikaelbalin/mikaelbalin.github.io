@@ -17,6 +17,7 @@ import { AuthDialog, type AuthStatus } from "./AuthDialog";
 import { CommentForm } from "./CommentForm";
 import { CommentItem } from "./CommentItem";
 import { Button } from "#components/ui/Button";
+import { ScrollArea } from "#components/ui/ScrollArea";
 import { useMediaQuery } from "@kaelui/hooks";
 
 const PENDING_COMMENT_KEY = "pendingComment";
@@ -194,28 +195,30 @@ export function Comments({ uri }: CommentsProps) {
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="flex flex-col gap-6 p-4">
+          <div className="flex flex-1 min-h-0 flex-col gap-6 p-4">
             <CommentForm
               onSubmitAction={handleSubmitComment}
               isSubmitting={submitting}
               initialText={pendingText}
             />
 
-            <div className="flex flex-col gap-8">
-              {loadingComments ? (
-                <p className="text-sm text-muted-foreground">
-                  Loading comments...
-                </p>
-              ) : comments.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  No comments yet. Be the first to comment!
-                </p>
-              ) : (
-                comments.map((comment) => (
-                  <CommentItem key={comment.uri} comment={comment} />
-                ))
-              )}
-            </div>
+            <ScrollArea className="flex-1 min-h-0">
+              <div className="flex flex-col gap-8 pr-4">
+                {loadingComments ? (
+                  <p className="text-sm text-muted-foreground">
+                    Loading comments...
+                  </p>
+                ) : comments.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">
+                    No comments yet. Be the first to comment!
+                  </p>
+                ) : (
+                  comments.map((comment) => (
+                    <CommentItem key={comment.uri} comment={comment} />
+                  ))
+                )}
+              </div>
+            </ScrollArea>
           </div>
         </DrawerContent>
       </Drawer>
