@@ -19,6 +19,7 @@ import { CommentItem } from "./CommentItem";
 import { Button } from "#components/ui/Button";
 import { ScrollArea } from "#components/ui/ScrollArea";
 import { useMediaQuery } from "@kaelui/hooks";
+import { Separator } from "#components/ui/Separator";
 
 const PENDING_COMMENT_KEY = "pendingComment";
 
@@ -195,15 +196,17 @@ export function Comments({ uri }: CommentsProps) {
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="flex flex-1 min-h-0 flex-col gap-6 p-4">
+          <div className="flex flex-1 min-h-0 flex-col">
             <CommentForm
               onSubmitAction={handleSubmitComment}
               isSubmitting={submitting}
               initialText={pendingText}
             />
 
-            <ScrollArea className="flex-1 min-h-0">
-              <div className="flex flex-col gap-8 pr-4">
+            <Separator className="mt-6" />
+
+            <ScrollArea className="flex-1 min-h-0 px-4">
+              <div className="flex flex-col gap-8 py-4">
                 {loadingComments ? (
                   <p className="text-sm text-muted-foreground">
                     Loading comments...

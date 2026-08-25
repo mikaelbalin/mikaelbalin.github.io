@@ -57,7 +57,7 @@ export function CommentForm({
             form.reset();
           }
         })}
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-3 p-4"
       >
         <FormField
           control={form.control}
