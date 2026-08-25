@@ -76,6 +76,14 @@ export function Comments({ uri }: CommentsProps) {
       loadComments();
       refreshUser();
 
+      if (auth === "error") {
+        toast("Sign in failed", {
+          description: "Something went wrong. Please try again.",
+        });
+      } else {
+        toast("Signed in");
+      }
+
       // Restore the pending draft.
       const raw = sessionStorage.getItem(PENDING_COMMENT_KEY);
       if (raw) {
@@ -170,9 +178,20 @@ export function Comments({ uri }: CommentsProps) {
           <DrawerHeader>
             <DrawerTitle>Comments</DrawerTitle>
             <DrawerDescription>
-              {user
-                ? `Signed in as @${user.handle}`
-                : "Sign in with BlueSky to join the conversation"}
+              {user ? (
+                `Signed in as @${user.handle}`
+              ) : (
+                <>
+                  <Button
+                    variant="link"
+                    className="h-auto p-0 text-sm"
+                    onClick={() => setAuthDialogOpen(true)}
+                  >
+                    Sign in
+                  </Button>{" "}
+                  with BlueSky to join the conversation
+                </>
+              )}
             </DrawerDescription>
           </DrawerHeader>
 
