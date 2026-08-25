@@ -1,0 +1,194 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "#components/ui/Drawer";
+import { ShareButton } from "#components/ui/ShareButton";
+import type { BskyUser } from "#lib/auth/types";
+import type { Comment } from "#lib/services/CommentService";
+import { AuthDialog, type AuthStatus } from "./AuthDialog";
+import { CommentForm } from "./CommentForm";
+import { CommentItem } from "./CommentItem";
+
+const PENDING_COMMENT_KEY = "pendingComment";
+
+type CommentsProps = {
+  uri: string;
+};
+
+export function Comments({ uri }: CommentsProps) {
+  const pathname = usePathname();
+
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<BskyUser | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loadingComments, setLoadingComments] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [pendingText, setPendingText] = useState("");
+  const [authDialog, setAuthDialog] = useState<{
+    open: boolean;
+    status: AuthStatus;
+  }>({ open: false, status: "idle" });
+
+  const loadComments = useCallback(async () => {
+    setLoadingComments(true);
+    try {
+      const res = await fetch(`/api/comments?uri=${encodeURIComponent(uri)}`);
+      const json = await res.json();
+      if (res.ok) {
+        setComments(json.comments ?? []);
+      }
+    } catch {
+      // ignore
+    } finally {
+      setLoadingComments(false);
+    }
+  }, [uri]);
+
+  const loadUser = useCallback(async () => {
+    try {
+      const res = await fetch("/api/oauth/me");
+      const json = await res.json();
+      setUser(json.user ?? null);
+    } catch {
+      setUser(null);
+    }
+  }, []);
+
+  const openDrawer = useCallback(() => {
+    setOpen(true);
+    loadComments();
+    loadUser();
+  }, [loadComments, loadUser]);
+
+  // Handle returning from the OAuth flow (?auth=success|error).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const auth = params.get("auth");
+
+    if (auth === "success" || auth === "error") {
+      setOpen(true);
+      setAuthDialog({ open: true, status: auth });
+      loadComments();
+      loadUser();
+
+      // Restore the pending draft.
+      const raw = sessionStorage.getItem(PENDING_COMMENT_KEY);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed?.uri === uri && typeof parsed.text === "string") {
+            setPendingText(parsed.text);
+          }
+        } catch {
+          // ignore
+        }
+        sessionStorage.removeItem(PENDING_COMMENT_KEY);
+      }
+
+      // Remove the ?auth param from the URL without a full navigation.
+      params.delete("auth");
+      const query = params.toString();
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${query ? `?${query}` : ""}`,
+      );
+    }
+  }, [uri, loadComments, loadUser]);
+
+  const handleSubmitComment = async (text: string) => {
+    if (!user) {
+      sessionStorage.setItem(
+        PENDING_COMMENT_KEY,
+        JSON.stringify({ uri, text }),
+      );
+      setAuthDialog({ open: true, status: "idle" });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uri, text }),
+      });
+      const json = await res.json();
+
+      if (!res.ok) {
+        toast("Failed to post comment", { description: json.error });
+        return;
+      }
+
+      toast("Comment posted");
+      await loadComments();
+    } catch (error) {
+      toast("Failed to post comment", {
+        description:
+          error instanceof Error ? error.message : "An error occurred",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <ShareButton onClick={openDrawer}>Comments</ShareButton>
+
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Comments</DrawerTitle>
+            <DrawerDescription>
+              {user
+                ? `Signed in as @${user.handle}`
+                : "Sign in with BlueSky to join the conversation"}
+            </DrawerDescription>
+          </DrawerHeader>
+
+          <div className="flex flex-col gap-6 p-4">
+            <CommentForm
+              onSubmit={handleSubmitComment}
+              isSubmitting={submitting}
+              initialText={pendingText}
+            />
+
+            <div className="flex flex-col gap-4">
+              {loadingComments ? (
+                <p className="text-sm text-muted-foreground">
+                  Loading comments...
+                </p>
+              ) : comments.length === 0 ? (
+                <p className="text-sm text-muted-foreground">
+                  No comments yet. Be the first to comment!
+                </p>
+              ) : (
+                comments.map((comment) => (
+                  <CommentItem key={comment.uri} comment={comment} />
+                ))
+              )}
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+
+      <AuthDialog
+        open={authDialog.open}
+        status={authDialog.status}
+        returnTo={pathname}
+        onOpenChange={(nextOpen) =>
+          setAuthDialog((prev) => ({ ...prev, open: nextOpen }))
+        }
+      />
+    </>
+  );
+}
