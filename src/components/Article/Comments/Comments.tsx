@@ -205,7 +205,7 @@ export function Comments({ uri }: CommentsProps) {
 
             <Separator className="mt-6" />
 
-            <ScrollArea className="flex-1 min-h-0 px-4">
+            <ScrollArea className="flex-1 min-h-0 px-4 mask-[linear-gradient(to_bottom,transparent,black_1rem,black_calc(100%-1rem),transparent)]">
               <div className="flex flex-col gap-8 py-4">
                 {loadingComments ? (
                   <p className="text-sm text-muted-foreground">
