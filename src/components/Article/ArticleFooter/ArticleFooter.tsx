@@ -25,7 +25,7 @@ export const ArticleFooter = (props: ArticleFooterProps) => {
 
   return (
     <Container className="p-10 sm:p-24">
-      <div className="flex justify-between border-b border-foreground pb-14">
+      <div className="flex flex-col gap-10 sm:flex-row justify-between border-b border-foreground pb-14">
         {bskyPostUri && <Comments uri={bskyPostUri} />}
 
         <div

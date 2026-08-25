@@ -9,6 +9,7 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from "#components/ui/Drawer";
 import type { BskyUser } from "#lib/auth/types";
 import type { Comment } from "#lib/services/CommentService";
@@ -16,6 +17,7 @@ import { AuthDialog, type AuthStatus } from "./AuthDialog";
 import { CommentForm } from "./CommentForm";
 import { CommentItem } from "./CommentItem";
 import { Button } from "#components/ui/Button";
+import { useMediaQuery } from "@kaelui/hooks";
 
 const PENDING_COMMENT_KEY = "pendingComment";
 
@@ -36,6 +38,8 @@ export function Comments({ uri }: CommentsProps) {
     open: boolean;
     status: AuthStatus;
   }>({ open: false, status: "idle" });
+
+  const isDesktop = useMediaQuery(`(min-width: 48rem)`);
 
   const loadComments = useCallback(async () => {
     setLoadingComments(true);
@@ -62,10 +66,13 @@ export function Comments({ uri }: CommentsProps) {
     }
   }, []);
 
-  const openDrawer = useCallback(() => {
-    setOpen(true);
-    loadComments();
-    loadUser();
+  const handleOpenChange = useCallback((open: boolean) => {
+    setOpen(open);
+
+    if (open) {
+      loadComments();
+      loadUser();
+    }
   }, [loadComments, loadUser]);
 
   // Handle returning from the OAuth flow (?auth=success|error).
@@ -142,9 +149,13 @@ export function Comments({ uri }: CommentsProps) {
 
   return (
     <>
-      <Button variant="outline" onClick={openDrawer}>Comments</Button>
-
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer
+        open={open}
+        onOpenChange={handleOpenChange}
+        showSwipeHandle={!isDesktop}
+        swipeDirection={isDesktop ? "right" : "down"}
+      >
+        <DrawerTrigger render={<Button variant="outline">Comments</Button>} />
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Comments</DrawerTitle>
