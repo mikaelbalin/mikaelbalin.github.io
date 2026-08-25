@@ -7,7 +7,13 @@ import {
   CardTitle,
 } from "#components/ui/Card";
 
-export default function Page() {
+export default async function Page(props: PageProps<"/[lang]/login">) {
+  const searchParams = await props.searchParams;
+  const returnTo =
+    typeof searchParams.returnTo === "string"
+      ? searchParams.returnTo
+      : undefined;
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
@@ -19,7 +25,7 @@ export default function Page() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <LoginForm />
+            <LoginForm returnTo={returnTo} />
           </CardContent>
         </Card>
       </div>

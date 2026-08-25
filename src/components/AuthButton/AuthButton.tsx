@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
@@ -10,6 +10,7 @@ import type { BskyUser } from "#lib/auth/types";
 
 export function AuthButton() {
   const { lang = "en" } = useParams<LocaleParams>();
+  const pathname = usePathname();
   const [user, setUser] = useState<BskyUser | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +53,10 @@ export function AuthButton() {
   }
 
   return (
-    <Link href={`/${lang}/login`} className="text-lg sm:px-4 sm:py-2">
+    <Link
+      href={`/${lang}/login?returnTo=${encodeURIComponent(pathname)}`}
+      className="text-lg sm:px-4 sm:py-2"
+    >
       Sign in
     </Link>
   );
