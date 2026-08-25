@@ -160,7 +160,7 @@ export function Comments({ uri }: CommentsProps) {
           text,
           indexedAt: new Date().toISOString(),
         };
-        setComments((prev) => [...prev, newComment]);
+        setComments((prev) => [newComment, ...prev]);
       }
 
       return true;
@@ -196,7 +196,7 @@ export function Comments({ uri }: CommentsProps) {
 
           <div className="flex flex-col gap-6 p-4">
             <CommentForm
-              onSubmit={handleSubmitComment}
+              onSubmitAction={handleSubmitComment}
               isSubmitting={submitting}
               initialText={pendingText}
             />

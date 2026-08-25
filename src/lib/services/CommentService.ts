@@ -93,20 +93,23 @@ export async function getComments(uri: string): Promise<Comment[]> {
 
   const replies = (thread as { replies?: unknown[] }).replies ?? [];
 
-  return replies.filter(isThreadViewPost).map((reply) => ({
-    uri: reply.post.uri,
-    cid: reply.post.cid,
-    author: {
-      did: reply.post.author.did,
-      handle: reply.post.author.handle,
-      displayName: reply.post.author.displayName,
-      avatar: reply.post.author.avatar,
-    },
-    text: reply.post.record.text ?? "",
-    indexedAt: reply.post.indexedAt,
-    likeCount: reply.post.likeCount,
-    replyCount: reply.post.replyCount,
-  }));
+  return replies
+    .filter(isThreadViewPost)
+    .map((reply) => ({
+      uri: reply.post.uri,
+      cid: reply.post.cid,
+      author: {
+        did: reply.post.author.did,
+        handle: reply.post.author.handle,
+        displayName: reply.post.author.displayName,
+        avatar: reply.post.author.avatar,
+      },
+      text: reply.post.record.text ?? "",
+      indexedAt: reply.post.indexedAt,
+      likeCount: reply.post.likeCount,
+      replyCount: reply.post.replyCount,
+    }))
+    .sort((a, b) => b.indexedAt.localeCompare(a.indexedAt));
 }
 
 export async function postComment(
