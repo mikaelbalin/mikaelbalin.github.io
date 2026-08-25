@@ -4,6 +4,43 @@ import { getOAuthClient } from "#lib/auth/atproto";
 // Public Bluesky AppView. Reading threads is public and does not require OAuth.
 const PUBLIC_BSKY_API = "https://public.api.bsky.app";
 
+// Matches a bsky.app post URL, e.g.
+// https://bsky.app/profile/mikaelbalin.bsky.social/post/3mtw6ik5pec2f
+const BSKY_POST_URL_RE =
+  /^https?:\/\/bsky\.app\/profile\/([^/?#]+)\/post\/([^/?#]+)/;
+
+/**
+ * Normalizes a post reference into an `at://` URI.
+ *
+ * Accepts either an `at://` URI directly, or a bsky.app post URL (which is
+ * what the Bluesky UI lets you copy). For a URL we resolve the handle to a DID
+ * via the public AppView and rebuild the canonical `at://` URI.
+ */
+async function resolvePostUri(input: string): Promise<string> {
+  if (input.startsWith("at://")) {
+    return input;
+  }
+
+  const match = input.match(BSKY_POST_URL_RE);
+  if (!match) {
+    throw new Error(
+      "Invalid post reference. Expected an at:// URI or a bsky.app post URL.",
+    );
+  }
+
+  const [, actor, rkey] = match;
+
+  // If the actor is already a DID, no resolution is needed.
+  if (actor.startsWith("did:")) {
+    return `at://${actor}/app.bsky.feed.post/${rkey}`;
+  }
+
+  const agent = new Agent(PUBLIC_BSKY_API);
+  const { data } = await agent.getProfile({ actor });
+
+  return `at://${data.did}/app.bsky.feed.post/${rkey}`;
+}
+
 export type Comment = {
   uri: string;
   cid: string;
@@ -44,8 +81,9 @@ function isThreadViewPost(value: unknown): value is {
 }
 
 export async function getComments(uri: string): Promise<Comment[]> {
+  const resolvedUri = await resolvePostUri(uri);
   const agent = new Agent(PUBLIC_BSKY_API);
-  const { data } = await agent.getPostThread({ uri, depth: 1 });
+  const { data } = await agent.getPostThread({ uri: resolvedUri, depth: 1 });
 
   const thread = data.thread;
 
@@ -80,10 +118,12 @@ export async function postComment(
   const session = await client.restore(did);
   const agent = new Agent(session);
 
+  const resolvedUri = await resolvePostUri(uri);
+
   // Resolve the parent post's CID via the public AppView. `getPosts` is a
   // public endpoint and does not require the OAuth session's scopes.
   const publicAgent = new Agent(PUBLIC_BSKY_API);
-  const { data } = await publicAgent.getPosts({ uris: [uri] });
+  const { data } = await publicAgent.getPosts({ uris: [resolvedUri] });
   const parent = data.posts[0];
 
   if (!parent) {

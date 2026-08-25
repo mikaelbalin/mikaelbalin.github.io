@@ -67,6 +67,7 @@ export const getPostLayoutData = cache(async ({ slug }: { slug: string }) => {
       relatedPosts: true,
       publishedAt: true,
       timeToRead: true,
+      bskyPostUri: true,
     },
   });
 

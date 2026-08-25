@@ -16,3 +16,10 @@ export const Default: Story = {
     url: "https://example.com/article",
   },
 };
+
+export const WithComments: Story = {
+  args: {
+    url: "https://example.com/article",
+    bskyPostUri: "at://did:plc:example/app.bsky.feed.post/123",
+  },
+};

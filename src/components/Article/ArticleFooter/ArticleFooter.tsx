@@ -1,5 +1,6 @@
 "use client";
 
+import { Comments } from "#components/Article/Comments";
 import { Container } from "#components/Container";
 import { ShareButton } from "#components/ui/ShareButton";
 import { Text } from "#components/ui/Text";
@@ -7,10 +8,11 @@ import { cn } from "#lib/utils";
 
 interface ArticleFooterProps {
   url: string;
+  bskyPostUri?: string | null;
 }
 
 export const ArticleFooter = (props: ArticleFooterProps) => {
-  const { url } = props;
+  const { url, bskyPostUri } = props;
 
   const shareOnLinkedIn = () => {
     const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`Check out this interesting article: ${url}`)}`;
@@ -32,6 +34,7 @@ export const ArticleFooter = (props: ArticleFooterProps) => {
       >
         <Text>Share this article</Text>
         <div className="flex gap-6">
+          {bskyPostUri && <Comments uri={bskyPostUri} />}
           <ShareButton onClick={shareOnBlueSky}>BlueSky</ShareButton>
           <ShareButton onClick={shareOnLinkedIn}>LinkedIn</ShareButton>
         </div>

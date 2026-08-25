@@ -158,7 +158,7 @@ export const posts: CollectionConfig<"posts"> = {
               type: "text",
               admin: {
                 description:
-                  "AT-URI of the corresponding BlueSky post (at://did:.../app.bsky.feed.post/...)",
+                  "Link to the corresponding BlueSky post. Paste either a bsky.app URL (https://bsky.app/profile/.../post/...) or an AT-URI (at://did:.../app.bsky.feed.post/...).",
               },
             },
           ],

@@ -285,7 +285,7 @@ export interface Post {
   relatedPosts?: (number | Post)[] | null;
   relatedCategories?: (number | Category)[] | null;
   /**
-   * AT-URI of the corresponding BlueSky post (at://did:.../app.bsky.feed.post/...)
+   * Link to the corresponding BlueSky post. Paste either a bsky.app URL (https://bsky.app/profile/.../post/...) or an AT-URI (at://did:.../app.bsky.feed.post/...).
    */
   bskyPostUri?: string | null;
   meta: {
