@@ -10,17 +10,16 @@ export function CommentItem({ comment }: CommentItemProps) {
   const displayName = author.displayName || author.handle;
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex flex-wrap items-center gap-x-2">
-        <span className="truncate font-semibold">{displayName}</span>
-        <span className="truncate text-sm text-muted-foreground">
-          @{author.handle}
-        </span>
-        <span className="text-sm text-muted-foreground">
-          · {formatDateTime(indexedAt)}
-        </span>
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <div className="truncate text-base font-bold">{displayName}</div>
+
+        <div className="text-sm text-muted-foreground flex gap-1 items-center">
+          <div className="inline-flex w-2 h-2 bg-urban-fog" /> {formatDateTime(indexedAt)}
+        </div>
       </div>
-      <p className="whitespace-pre-wrap text-sm">{text}</p>
+
+      <p className="text-base leading-5 whitespace-pre-wrap">{text}</p>
     </div>
   );
 }

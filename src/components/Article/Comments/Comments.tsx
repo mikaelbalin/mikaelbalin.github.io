@@ -201,7 +201,7 @@ export function Comments({ uri }: CommentsProps) {
               initialText={pendingText}
             />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-8">
               {loadingComments ? (
                 <p className="text-sm text-muted-foreground">
                   Loading comments...
