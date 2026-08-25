@@ -47,9 +47,12 @@ export async function POST(request: NextRequest) {
   }
 
   const ip = ipAddress(request);
+  // Fall back to the authenticated DID so a missing IP (non-Vercel runtime or
+  // header edge case) never collapses every request into a shared bucket.
+  const key = ip ?? did;
 
   try {
-    const { success } = await rateLimit.limit(ip || "127.0.0.1");
+    const { success } = await rateLimit.limit(key);
 
     if (!success) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 });
