@@ -13,7 +13,7 @@ import {
 } from "#components/ui/Drawer";
 import { useAuth } from "#context/auth-context";
 import type { Comment } from "#lib/services/CommentService";
-import { AuthDialog, type AuthStatus } from "./AuthDialog";
+import { AuthDialog } from "./AuthDialog";
 import { CommentForm } from "./CommentForm";
 import { CommentItem } from "./CommentItem";
 import { Button } from "#components/ui/Button";
@@ -37,10 +37,7 @@ export function Comments({ uri }: CommentsProps) {
   const [loadingComments, setLoadingComments] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [pendingText, setPendingText] = useState("");
-  const [authDialog, setAuthDialog] = useState<{
-    open: boolean;
-    status: AuthStatus;
-  }>({ open: false, status: "idle" });
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
 
   const isDesktop = useMediaQuery(`(min-width: 48rem)`);
 
@@ -76,7 +73,6 @@ export function Comments({ uri }: CommentsProps) {
 
     if (auth === "success" || auth === "error") {
       setOpen(true);
-      setAuthDialog({ open: true, status: auth });
       loadComments();
       refreshUser();
 
@@ -111,7 +107,7 @@ export function Comments({ uri }: CommentsProps) {
         PENDING_COMMENT_KEY,
         JSON.stringify({ uri, text }),
       );
-      setAuthDialog({ open: true, status: "idle" });
+      setAuthDialogOpen(true);
       return false;
     }
 
@@ -211,12 +207,9 @@ export function Comments({ uri }: CommentsProps) {
       </Drawer>
 
       <AuthDialog
-        open={authDialog.open}
-        status={authDialog.status}
+        open={authDialogOpen}
         returnTo={pathname}
-        onOpenChange={(nextOpen) =>
-          setAuthDialog((prev) => ({ ...prev, open: nextOpen }))
-        }
+        onOpenChangeAction={setAuthDialogOpen}
       />
     </>
   );
