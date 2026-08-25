@@ -68,13 +68,6 @@ export function Comments({ uri }: CommentsProps) {
     }
   }, []);
 
-  // Preload comments and the current user as soon as the component mounts,
-  // so the data is already available before the Drawer is opened.
-  useEffect(() => {
-    loadComments();
-    loadUser();
-  }, [loadComments, loadUser]);
-
   const handleOpenChange = useCallback((open: boolean) => {
     setOpen(open);
 
