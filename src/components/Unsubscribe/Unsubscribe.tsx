@@ -3,15 +3,16 @@ import { Container } from "#components/Container";
 import { Button } from "#components/ui/Button";
 import { Text } from "#components/ui/Text";
 import { Title } from "#components/ui/Title";
+import type { Locale } from "#i18n-config";
 
-export const Unsubscribe = () => {
+export const Unsubscribe = ({ lang }: { lang: Locale }) => {
   return (
     <Container className="flex min-h-screen flex-col items-center justify-center">
-      <div className="border-foreground flex flex-col gap-6 border p-8 shadow-lg">
-        <Title size={3}>Successfully unsubscribed</Title>
+      <div className="border-foreground flex flex-col gap-6 border p-8 shadow-lg max-w-100">
+        <Title size={4}>Successfully unsubscribed</Title>
         <Text>You have been unsubscribed from future emails.</Text>
         <Button asChild>
-          <Link href={"/#subscription"}>Subscribe back</Link>
+          <Link href={`/${lang}/#subscription`}>Subscribe back</Link>
         </Button>
       </div>
     </Container>

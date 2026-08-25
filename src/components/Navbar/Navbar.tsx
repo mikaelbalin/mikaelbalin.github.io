@@ -4,6 +4,7 @@ import { useDisclosure } from "@kaelui/hooks/useDisclosure";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { AuthButton } from "#components/AuthButton";
 import { Burger } from "#components/Burger";
 import { Container } from "#components/Container";
 import { ModeToggle } from "#components/ModeToggle";
@@ -62,7 +63,7 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
   const languageButtons = languageMenuItems.map((item) => (
     <Link
       key={item.label}
-      className={cn("flex w-full items-center text-sm")}
+      className={cn("flex w-full items-center text-sm sm:text-lg")}
       onClick={closeSheet}
       href={redirectedPathName(pathName, item.url)}
     >
@@ -74,7 +75,7 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
     <Sheet open={sheetOpen}>
       <Container
         asChild
-        className="sm:h-19.5 pointer-events-auto relative z-50 flex h-16 items-center gap-x-8 sm:gap-x-4"
+        className="sm:h-19.5 pointer-events-auto relative z-50 flex h-16 items-center gap-x-4"
       >
         <nav>
           <Link
@@ -84,7 +85,7 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
             {logo.link.label}
           </Link>
 
-          <div className="hidden sm:flex sm:gap-4">
+          <div className="hidden md:flex sm:gap-4">
             {navItems?.map(({ link }) => (
               <Link
                 key={link.label}
@@ -127,21 +128,23 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
             </DropdownMenu>
           </div>
 
+          <AuthButton />
+
           <ModeToggle />
 
           {/* Mobile menu button*/}
           <Burger
             opened={sheetOpen}
             onClick={toggleSheet}
-            className="sm:hidden"
+            className="md:hidden"
           />
         </nav>
       </Container>
 
       <SheetContent
         side="top"
-        className="sm:hidden"
-        overlayClassName="sm:hidden"
+        className="md:hidden"
+        overlayClassName="md:hidden"
         onInteractOutside={(event) => {
           event.preventDefault();
           if (!(event.target instanceof HTMLElement)) return;
@@ -158,7 +161,7 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
           </SheetDescription>
         </SheetHeader>
 
-        <nav className="mt-16 flex flex-col gap-6 px-4 py-10">
+        <nav className="mt-16 flex flex-col gap-6 py-10 max-w-7xl px-4 sm:px-20">
           {navItems?.map(({ link }) => (
             <Link
               key={link.label}
@@ -166,14 +169,14 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
               aria-current={
                 pathName === `/${lang}${link.url}` ? "page" : undefined
               }
-              className="text-sm"
+              className="text-sm sm:text-lg"
             >
               {link.label}
             </Link>
           ))}
           <Collapsible open={collapsibleOpen} onOpenChange={toggleCollapsible}>
             <CollapsibleTrigger
-              className={cn("mb-6 flex w-full items-center text-sm")}
+              className={cn("mb-6 flex w-full items-center text-sm sm:text-lg")}
             >
               <span className="mr-1">{labels[lang]}</span>
               <IconChevronDown

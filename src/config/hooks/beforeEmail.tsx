@@ -8,31 +8,25 @@ export const beforeEmail: BeforeEmail<FormSubmission> = async (
   beforeChangeParams,
 ) => {
   const {
-    req: { context, payload },
+    req: { context },
     data,
   } = beforeChangeParams;
 
-  const token = crypto.randomBytes(150).toString("hex");
+  const token =
+    typeof context.token === "string"
+      ? context.token
+      : crypto.randomBytes(150).toString("hex");
   context.token = token;
 
   const submissionData = data?.submissionData;
   const email = submissionData?.find((field) => field.field === "email")?.value;
 
   if (email) {
-    const subscribersData = await payload.find({
-      collection: "subscribers",
-      where: {
-        email: {
-          equals: email,
-        },
-      },
-    });
-
     const newsletterField = submissionData?.find(
       (field) => field.field === "newsletter",
     );
 
-    if (!newsletterField && subscribersData.totalDocs > 0) {
+    if (!newsletterField && context.subscriberExisted) {
       return [];
     }
   }

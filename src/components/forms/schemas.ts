@@ -1,40 +1,22 @@
 import { z } from "zod";
 
-const password = z
-  .string({ message: "Invalid password" })
-  .min(6, {
-    message: "Password must have at least 6 or more characters",
-  })
-  .max(100, {
-    message: "Password must be between 6 and 100 characters",
-  });
-
 const email = z
   .email({ message: "Invalid email" })
   .min(5, "Invalid email")
   .max(50, "Invalid email");
 
-export const signinSchema = z.object({
-  identifier: z
+export const bskyLoginSchema = z.object({
+  handle: z
     .string()
-    .min(3, {
-      message: "Identifier must have at least 3 or more characters",
-    })
-    .max(20, {
-      message: "Please enter a valid username or email address",
-    }),
-  password,
+    .min(3, { message: "Handle must be at least 3 characters" })
+    .max(100, { message: "Handle must be at most 100 characters" })
+    .regex(
+      /^@?[a-zA-Z0-9.-]+$/,
+      "Handle can only contain letters, numbers, dots and hyphens (an optional leading @ is allowed)",
+    ),
 });
 
-export type SigninSchema = z.infer<typeof signinSchema>;
-
-export const signupSchema = z.object({
-  username: z.string().min(3).max(20),
-  email,
-  password,
-});
-
-export type SignupSchema = z.infer<typeof signupSchema>;
+export type BskyLoginSchema = z.infer<typeof bskyLoginSchema>;
 
 export const subscriptionSchema = z.object({ email });
 

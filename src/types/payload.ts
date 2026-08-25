@@ -284,6 +284,10 @@ export interface Post {
   };
   relatedPosts?: (number | Post)[] | null;
   relatedCategories?: (number | Category)[] | null;
+  /**
+   * Link to the corresponding BlueSky post. Paste either a bsky.app URL (https://bsky.app/profile/.../post/...) or an AT-URI (at://did:.../app.bsky.feed.post/...).
+   */
+  bskyPostUri?: string | null;
   meta: {
     title: string;
     /**
@@ -1004,6 +1008,7 @@ export interface PostsSelect<T extends boolean = true> {
   content?: T;
   relatedPosts?: T;
   relatedCategories?: T;
+  bskyPostUri?: T;
   meta?:
     | T
     | {

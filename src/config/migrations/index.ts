@@ -3,6 +3,7 @@ import * as migration_20250414_171557 from './20250414_171557';
 import * as migration_20250414_174811 from './20250414_174811';
 import * as migration_20250729_210554 from './20250729_210554';
 import * as migration_20251023_145843 from './20251023_145843';
+import * as migration_20260824_225454_add_bsky_post_uri from './20260824_225454_add_bsky_post_uri';
 
 export const migrations = [
   {
@@ -29,5 +30,10 @@ export const migrations = [
     up: migration_20251023_145843.up,
     down: migration_20251023_145843.down,
     name: '20251023_145843',
+  },
+  {
+    up: migration_20260824_225454_add_bsky_post_uri.up,
+    down: migration_20260824_225454_add_bsky_post_uri.down,
+    name: '20260824_225454_add_bsky_post_uri'
   },
 ];

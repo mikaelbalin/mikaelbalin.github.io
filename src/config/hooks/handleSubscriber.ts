@@ -1,10 +1,10 @@
+import crypto from "node:crypto";
 import type { CollectionBeforeChangeHook } from "payload";
 import type { FormSubmission } from "#types/payload";
 
 export const handleSubscriber: CollectionBeforeChangeHook<
   FormSubmission
 > = async ({ data, req: { payload, context } }) => {
-  const { token } = context;
   const submissionData = data?.submissionData;
 
   const email = submissionData?.find((field) => field.field === "email")?.value;
@@ -13,9 +13,15 @@ export const handleSubscriber: CollectionBeforeChangeHook<
   );
   const shouldSubscribe = !newsletterField || newsletterField.value;
 
-  if (!token || typeof token !== "string" || !email || !shouldSubscribe) {
+  if (!email || !shouldSubscribe) {
     return data;
   }
+
+  const token =
+    typeof context.token === "string"
+      ? context.token
+      : crypto.randomBytes(150).toString("hex");
+  context.token = token;
 
   const subscribersData = await payload.find({
     collection: "subscribers",
@@ -28,6 +34,10 @@ export const handleSubscriber: CollectionBeforeChangeHook<
   const subscriber = subscribersData.docs[0];
 
   if (subscribersData.totalDocs > 0) {
+    context.subscriberExisted = true;
+    // Reuse the subscriber's existing token so the unsubscribe link in the
+    // email matches the token stored in the database.
+    context.token = subscriber.token;
     if (!subscriber.subscribed) {
       await payload.update({
         collection: "subscribers",
@@ -36,6 +46,7 @@ export const handleSubscriber: CollectionBeforeChangeHook<
       });
     }
   } else {
+    context.subscriberExisted = false;
     await payload.create({
       collection: "subscribers",
       data: {
