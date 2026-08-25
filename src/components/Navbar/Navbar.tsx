@@ -4,6 +4,7 @@ import { useDisclosure } from "@kaelui/hooks/useDisclosure";
 import { IconChevronDown } from "@tabler/icons-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { AuthButton } from "#components/AuthButton";
 import { Burger } from "#components/Burger";
 import { Container } from "#components/Container";
 import { ModeToggle } from "#components/ModeToggle";
@@ -128,6 +129,8 @@ export const Navbar = ({ logo, navItems }: NavbarProps) => {
           </div>
 
           <ModeToggle />
+
+          <AuthButton />
 
           {/* Mobile menu button*/}
           <Burger
