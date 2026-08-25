@@ -22,8 +22,14 @@ export default async function Layout(
 
   if (!data) return <PayloadRedirects path={`/${lang}/posts/${slug}`} />;
 
-  const { relatedCategories, title, relatedPosts, publishedAt, timeToRead } =
-    data;
+  const {
+    relatedCategories,
+    title,
+    relatedPosts,
+    publishedAt,
+    timeToRead,
+    bskyPostUri,
+  } = data;
   const currentUrl = `${getClientSideURL()}/${lang}/posts/${slug}`;
 
   return (
@@ -40,7 +46,7 @@ export default async function Layout(
           timeToRead={timeToRead}
         />
         {children}
-        <ArticleFooter url={currentUrl} />
+        <ArticleFooter url={currentUrl} bskyPostUri={bskyPostUri} />
       </article>
 
       {Array.isArray(relatedPosts) && relatedPosts.length > 0 && (

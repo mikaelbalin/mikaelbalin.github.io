@@ -29,7 +29,7 @@ const inputVariants = cva(
 export type InputProps = React.ComponentProps<"input"> &
   VariantProps<typeof inputVariants>;
 
-function Input({ className, variant, type, ...props }: InputProps) {
+function Input({ className, variant, type = "text", ...props }: InputProps) {
   return (
     <input
       type={type}

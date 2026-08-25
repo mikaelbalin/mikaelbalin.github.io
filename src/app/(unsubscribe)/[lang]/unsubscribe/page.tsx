@@ -18,8 +18,6 @@ export default async function Page({
   const { lang } = await paramsPromise;
   const { ut } = await searchParamsPromise;
 
-  console.log({ut})
-
   if (!ut) notFound();
 
   const payload = await getPayload({ config: configPromise });

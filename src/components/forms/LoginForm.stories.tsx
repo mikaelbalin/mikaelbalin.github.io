@@ -18,14 +18,11 @@ export const FilledForm: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const emailInput = canvas.getByLabelText(/email/i);
-    const passwordInput = canvas.getByLabelText(/password/i);
+    const handleInput = canvas.getByLabelText(/bluesky handle/i);
 
-    await userEvent.type(emailInput, "john@example.com");
-    await userEvent.type(passwordInput, "supersecret");
+    await userEvent.type(handleInput, "mikaelbalin.bsky.social");
 
-    await expect(emailInput).toHaveValue("john@example.com");
-    await expect(passwordInput).toHaveValue("supersecret");
+    await expect(handleInput).toHaveValue("mikaelbalin.bsky.social");
   },
 };
 
@@ -35,23 +32,20 @@ export const AccessibilityTest: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const emailInput = canvas.getByLabelText(/email/i);
-    const passwordInput = canvas.getByLabelText(/password/i);
-    const loginButton = canvas.getByRole("button", { name: /login/i });
+    const handleInput = canvas.getByLabelText(/bluesky handle/i);
+    const loginButton = canvas.getByRole("button", {
+      name: /sign in with bluesky/i,
+    });
 
     // Check that the form can be navigated with keyboard
     await userEvent.tab();
-    await expect(emailInput).toHaveFocus();
-
-    await userEvent.tab();
-    await expect(passwordInput).toHaveFocus();
+    await expect(handleInput).toHaveFocus();
 
     await userEvent.tab();
     await expect(loginButton).toHaveFocus();
 
     // Check ARIA labels and roles
-    await expect(emailInput).toHaveAttribute("type", "email");
-    await expect(passwordInput).toHaveAttribute("type", "password");
+    await expect(handleInput).toHaveAttribute("type", "text");
     await expect(loginButton).toHaveAttribute("type", "submit");
   },
 };
