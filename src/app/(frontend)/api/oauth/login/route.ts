@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { getOAuthClient, SCOPE } from "#lib/auth/atproto";
+import { getOAuthClient, SCOPE, sanitizeReturnTo } from "#lib/auth/atproto";
 
 export async function POST(request: Request) {
   try {
-    const { handle: rawHandle } = await request.json();
+    const { handle: rawHandle, returnTo } = await request.json();
 
     if (!rawHandle || typeof rawHandle !== "string") {
       return NextResponse.json(
@@ -15,8 +15,12 @@ export async function POST(request: Request) {
     // Strip a leading "@" if the user typed it (e.g. "@mikaelbalin.com").
     const handle = rawHandle.replace(/^@/, "");
 
+    // `returnTo` is carried through the OAuth flow as the `state` parameter
+    // (the client stores it as `appState` and returns it in the callback).
+    const state = sanitizeReturnTo(returnTo);
+
     const client = await getOAuthClient();
-    const url = await client.authorize(handle, { scope: SCOPE });
+    const url = await client.authorize(handle, { scope: SCOPE, state });
 
     return NextResponse.json({ redirectUrl: url.toString() });
   } catch (error) {

@@ -38,6 +38,30 @@ export function getOAuthBaseURL(): string {
   return getServerSideURL();
 }
 
+/**
+ * Sanitizes a `returnTo` value so it can be safely used as a redirect target
+ * after the OAuth flow. We only ever accept a same-origin relative path (e.g.
+ * `/en/posts/my-post`), never a full URL, to prevent open redirects.
+ */
+export function sanitizeReturnTo(value: unknown): string {
+  if (typeof value !== "string" || value.length === 0) {
+    return "/";
+  }
+
+  // Must be a root-relative path, not a protocol-relative URL (`//evil.com`).
+  if (!value.startsWith("/") || value.startsWith("//")) {
+    return "/";
+  }
+
+  // Reject anything that could be interpreted as a scheme (`http:`) or a
+  // backslash-based path (Windows-style).
+  if (value.includes(":") || value.includes("\\")) {
+    return "/";
+  }
+
+  return value;
+}
+
 const redis = new Redis({
   url: process.env.KV_REST_API_URL!,
   token: process.env.KV_REST_API_TOKEN!,
