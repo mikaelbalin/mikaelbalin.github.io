@@ -38,24 +38,19 @@ export function AuthButton() {
 
   if (user) {
     return (
-      <div className="flex items-center gap-2">
-        <span className="hidden text-sm text-muted-foreground sm:inline">
-          @{user.handle}
-        </span>
         <UnstyledButton
           onClick={handleSignOut}
-          className="text-lg sm:px-4 sm:py-2"
+          className="text-sm sm:text-lg sm:px-4 sm:py-2"
         >
           Sign out
         </UnstyledButton>
-      </div>
     );
   }
 
   return (
     <Link
       href={`/${lang}/login?returnTo=${encodeURIComponent(pathname)}`}
-      className="text-lg sm:px-4 sm:py-2"
+      className="text-sm sm:text-lg sm:px-4 sm:py-2"
     >
       Sign in
     </Link>
