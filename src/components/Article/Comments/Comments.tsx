@@ -10,12 +10,12 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "#components/ui/Drawer";
-import { ShareButton } from "#components/ui/ShareButton";
 import type { BskyUser } from "#lib/auth/types";
 import type { Comment } from "#lib/services/CommentService";
 import { AuthDialog, type AuthStatus } from "./AuthDialog";
 import { CommentForm } from "./CommentForm";
 import { CommentItem } from "./CommentItem";
+import { Button } from "#components/ui/Button";
 
 const PENDING_COMMENT_KEY = "pendingComment";
 
@@ -142,7 +142,7 @@ export function Comments({ uri }: CommentsProps) {
 
   return (
     <>
-      <ShareButton onClick={openDrawer}>Comments</ShareButton>
+      <Button variant="outline" onClick={openDrawer}>Comments</Button>
 
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerContent>
