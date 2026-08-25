@@ -9,6 +9,7 @@ import { ThemeProvider } from "#components/theme-provider";
 import { AdminBar } from "#components/ui/AdminBar";
 import { LivePreviewListener } from "#components/ui/LivePreviewListener";
 import { Toaster } from "#components/ui/Toaster";
+import { AuthProvider } from "#context/auth-context";
 import type { Locale } from "#i18n-config";
 import { getServerSideURL } from "#lib/getURL";
 import { getFooter, getHeader } from "#lib/services/PageService";
@@ -44,20 +45,22 @@ export default async function RootLayout(props: LayoutProps<"/[lang]">) {
       </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-          <LivePreviewListener />
-          <main>
-            <div className="relative flex min-h-screen flex-col">
-              <Header {...header} />
-              <main className="flex-1">{children}</main>
-              <Footer {...footer} />
-            </div>
-          </main>
-          <Toaster />
+          <AuthProvider>
+            <AdminBar
+              adminBarProps={{
+                preview: isEnabled,
+              }}
+            />
+            <LivePreviewListener />
+            <main>
+              <div className="relative flex min-h-screen flex-col">
+                <Header {...header} />
+                <main className="flex-1">{children}</main>
+                <Footer {...footer} />
+              </div>
+            </main>
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

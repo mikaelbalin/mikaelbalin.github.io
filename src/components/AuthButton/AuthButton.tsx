@@ -2,32 +2,21 @@
 
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
+import { useAuth } from "#context/auth-context";
 import type { LocaleParams } from "#i18n-config";
-import type { BskyUser } from "#lib/auth/types";
 
 export function AuthButton() {
   const { lang = "en" } = useParams<LocaleParams>();
   const pathname = usePathname();
-  const [user, setUser] = useState<BskyUser | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/oauth/me")
-      .then((res) => res.json())
-      .then((json) => setUser(json.user ?? null))
-      .catch(() => setUser(null))
-      .finally(() => setLoading(false));
-  }, []);
+  const { user, loading, signOut } = useAuth();
 
   const handleSignOut = async () => {
-    try {
-      await fetch("/api/oauth/logout", { method: "POST" });
-      setUser(null);
+    const ok = await signOut();
+    if (ok) {
       toast("Signed out");
-    } catch {
+    } else {
       toast("Failed to sign out");
     }
   };

@@ -11,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "#components/ui/Drawer";
-import type { BskyUser } from "#lib/auth/types";
+import { useAuth } from "#context/auth-context";
 import type { Comment } from "#lib/services/CommentService";
 import { AuthDialog, type AuthStatus } from "./AuthDialog";
 import { CommentForm } from "./CommentForm";
@@ -30,8 +30,9 @@ type CommentsProps = {
 export function Comments({ uri }: CommentsProps) {
   const pathname = usePathname();
 
+  const { user, refresh: refreshUser } = useAuth();
+
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<BskyUser | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loadingComments, setLoadingComments] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -58,25 +59,15 @@ export function Comments({ uri }: CommentsProps) {
     }
   }, [uri]);
 
-  const loadUser = useCallback(async () => {
-    try {
-      const res = await fetch("/api/oauth/me");
-      const json = await res.json();
-      setUser(json.user ?? null);
-    } catch {
-      setUser(null);
-    }
-  }, []);
-
   const handleOpenChange = useCallback((open: boolean) => {
     setOpen(open);
 
     if (open) {
       // Refresh on open so the list reflects the latest replies.
       loadComments();
-      loadUser();
+      refreshUser();
     }
-  }, [loadComments, loadUser]);
+  }, [loadComments, refreshUser]);
 
   // Handle returning from the OAuth flow (?auth=success|error).
   useEffect(() => {
@@ -87,7 +78,7 @@ export function Comments({ uri }: CommentsProps) {
       setOpen(true);
       setAuthDialog({ open: true, status: auth });
       loadComments();
-      loadUser();
+      refreshUser();
 
       // Restore the pending draft.
       const raw = sessionStorage.getItem(PENDING_COMMENT_KEY);
@@ -112,7 +103,7 @@ export function Comments({ uri }: CommentsProps) {
         `${window.location.pathname}${query ? `?${query}` : ""}`,
       );
     }
-  }, [uri, loadComments, loadUser]);
+  }, [uri, loadComments, refreshUser]);
 
   const handleSubmitComment = async (text: string): Promise<boolean> => {
     if (!user) {
