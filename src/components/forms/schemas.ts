@@ -11,8 +11,8 @@ export const bskyLoginSchema = z.object({
     .min(3, { message: "Handle must be at least 3 characters" })
     .max(100, { message: "Handle must be at most 100 characters" })
     .regex(
-      /^[a-zA-Z0-9.-]+$/,
-      "Handle can only contain letters, numbers, dots and hyphens",
+      /^@?[a-zA-Z0-9.-]+$/,
+      "Handle can only contain letters, numbers, dots and hyphens (an optional leading @ is allowed)",
     ),
 });
 
