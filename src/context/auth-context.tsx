@@ -9,13 +9,14 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
+import { toast } from "sonner";
 import type { BskyUser } from "#lib/auth/types";
 
 interface AuthContextProps {
   user: BskyUser | null;
   loading: boolean;
   refresh: () => Promise<void>;
-  signOut: () => Promise<boolean>;
+  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -48,13 +49,42 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     refresh().finally(() => setLoading(false));
   }, [refresh]);
 
-  const signOut = useCallback(async (): Promise<boolean> => {
+  // Handle the OAuth redirect result (?auth=success|error). This lives here
+  // (rather than in a specific page/component) so the toast shows regardless of
+  // which page the user is redirected back to. The provider also mounts before
+  // the <Toaster /> in the layout, so the toast is dispatched after Sonner has
+  // subscribed and renders correctly.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const auth = params.get("auth");
+
+    if (auth === "success" || auth === "error") {
+      if (auth === "error") {
+        toast("Sign in failed", {
+          description: "Something went wrong. Please try again.",
+        });
+      } else {
+        toast("Signed in");
+      }
+
+      // Remove the ?auth param from the URL without a full navigation.
+      params.delete("auth");
+      const query = params.toString();
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${query ? `?${query}` : ""}`,
+      );
+    }
+  }, []);
+
+  const signOut = useCallback(async (): Promise<void> => {
     try {
       await fetch("/api/oauth/logout", { method: "POST" });
       setUser(null);
-      return true;
+      toast("Signed out");
     } catch {
-      return false;
+      toast("Failed to sign out");
     }
   }, []);
 

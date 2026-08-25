@@ -66,7 +66,8 @@ export function Comments({ uri }: CommentsProps) {
     }
   }, [loadComments, refreshUser]);
 
-  // Handle returning from the OAuth flow (?auth=success|error).
+  // Handle returning from the OAuth flow (?auth=success|error). The toast is
+  // shown by the AuthProvider; here we only react to the redirect locally.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const auth = params.get("auth");
@@ -75,14 +76,6 @@ export function Comments({ uri }: CommentsProps) {
       setOpen(true);
       loadComments();
       refreshUser();
-
-      if (auth === "error") {
-        toast("Sign in failed", {
-          description: "Something went wrong. Please try again.",
-        });
-      } else {
-        toast("Signed in");
-      }
 
       // Restore the pending draft.
       const raw = sessionStorage.getItem(PENDING_COMMENT_KEY);
@@ -97,15 +90,6 @@ export function Comments({ uri }: CommentsProps) {
         }
         sessionStorage.removeItem(PENDING_COMMENT_KEY);
       }
-
-      // Remove the ?auth param from the URL without a full navigation.
-      params.delete("auth");
-      const query = params.toString();
-      window.history.replaceState(
-        null,
-        "",
-        `${window.location.pathname}${query ? `?${query}` : ""}`,
-      );
     }
   }, [uri, loadComments, refreshUser]);
 

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { toast } from "sonner";
 import { UnstyledButton } from "#components/ui/UnstyledButton";
 import { useAuth } from "#context/auth-context";
 import type { LocaleParams } from "#i18n-config";
@@ -13,12 +12,7 @@ export function AuthButton() {
   const { user, loading, signOut } = useAuth();
 
   const handleSignOut = async () => {
-    const ok = await signOut();
-    if (ok) {
-      toast("Signed out");
-    } else {
-      toast("Failed to sign out");
-    }
+    await signOut();
   };
 
   if (loading) {
