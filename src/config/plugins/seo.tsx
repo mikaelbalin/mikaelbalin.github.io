@@ -12,7 +12,6 @@ import type {
   GenerateTitle,
   GenerateURL,
 } from "@payloadcms/plugin-seo/types";
-import { generateText } from "ai";
 import type { Tab } from "payload";
 import {
   NO_DESCRIPTION_AVAILABLE,
@@ -20,7 +19,7 @@ import {
   SITE_TITLE,
 } from "#config/constants";
 import { createSeoDescriptionPrompt } from "#lib/aiPrompts";
-import { defaultModel } from "#lib/aiProvider";
+import { defaultModel, ollama } from "#lib/aiProvider";
 import { getServerSideURL } from "#lib/getURL";
 import { extractTextFromPayloadContent } from "#lib/payloadContentExtractor";
 import type { Page, Post } from "#types/payload";
@@ -50,12 +49,15 @@ const generateDescription: GenerateDescription<Post | Page> = async ({
   }
 
   try {
-    const { text } = await generateText({
+    const { message } = await ollama.chat({
       model: defaultModel,
-      prompt: createSeoDescriptionPrompt(textContent),
+      messages: [
+        { role: "user", content: createSeoDescriptionPrompt(textContent) },
+      ],
+      stream: false,
     });
 
-    return text;
+    return message.content;
   } catch (error) {
     console.error(`${SEO_DESCRIPTION_ERROR}:`, error);
 
