@@ -75,7 +75,13 @@ const FormItemContext = React.createContext<FormItemContextValue>(
 );
 
 function FormItem({ className, ...props }: React.ComponentProps<"div">) {
-  const id = React.useId();
+  // Use the field name as a stable, data-driven id instead of `useId()`.
+  // `useId()` derives its value from the component's position in the tree,
+  // which differs between the server and client for Client Components rendered
+  // inside Server Components, causing hydration mismatches on `aria-describedby`.
+  const generatedId = React.useId();
+  const fieldContext = React.useContext(FormFieldContext);
+  const id = fieldContext?.name ?? generatedId;
   const value = React.useMemo(() => ({ id }), [id]);
 
   return (
