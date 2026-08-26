@@ -158,7 +158,7 @@ export function Comments({ uri }: CommentsProps) {
         swipeDirection={isDesktop ? "right" : "down"}
       >
         <DrawerTrigger render={<Button variant="outline">Comments</Button>} />
-        <DrawerContent>
+        <DrawerContent className="data-[swipe-axis=y]:h-[calc(100dvh-6rem)]">
           <DrawerHeader>
             <DrawerTitle>Comments</DrawerTitle>
             <DrawerDescription>
