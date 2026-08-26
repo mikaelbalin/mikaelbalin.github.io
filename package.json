@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "postinstall": "[ -n \"$CI\" ] && [ -z \"$VERCEL\" ] && playwright install --with-deps || true",
-    "db:up": "docker-compose up -d",
-    "db:down": "docker-compose down",
+    "db:up": "podman compose up -d",
+    "db:down": "podman compose down",
     "dev:db": "pnpm db:up && wait-on tcp:5432 && pnpm dev",
     "dev": "next dev",
     "devsafe": "rm -rf .next && next dev",
@@ -86,6 +86,7 @@
     "negotiator": "1.0.0",
     "next": "16.1.6",
     "next-themes": "0.4.6",
+    "ollama": "^0.6.3",
     "payload": "3.79.0",
     "payload-admin-bar": "1.0.7",
     "radix-ui": "1.6.7",
@@ -100,7 +101,6 @@
     "zod": "4.3.6"
   },
   "devDependencies": {
-    "@ai-sdk/google": "3.0.43",
     "@biomejs/biome": "2.4.6",
     "@codecov/nextjs-webpack-plugin": "^1.9.1",
     "@mdx-js/react": "3.1.1",
@@ -124,7 +124,6 @@
     "@vitest/browser-playwright": "4.0.18",
     "@vitest/coverage-istanbul": "4.0.18",
     "@vitest/ui": "4.0.18",
-    "ai": "6.0.116",
     "markdown-to-jsx": "9.7.8",
     "msw": "2.12.10",
     "msw-storybook-addon": "2.0.6",

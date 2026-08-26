@@ -1,14 +1,17 @@
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { Ollama } from "ollama";
 
 /**
- * Google Generative AI provider instance.
- * Configured with API key from environment variables.
+ * Ollama Cloud client instance.
+ * Configured with the API key from environment variables.
  */
-export const googleAI = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+export const ollama = new Ollama({
+  host: "https://ollama.com",
+  headers: {
+    Authorization: `Bearer ${process.env.OLLAMA_API_KEY}`,
+  },
 });
 
 /**
- * Default Google AI model for text generation tasks.
+ * Default Ollama Cloud model for text generation tasks.
  */
-export const defaultModel = googleAI("gemini-2.5-flash");
+export const defaultModel = "deepseek-v4-flash";
