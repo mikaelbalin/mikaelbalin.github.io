@@ -1,6 +1,7 @@
 import configPromise from "@payload-config";
 import { notFound } from "next/navigation";
 import { getPayload, type Where } from "payload";
+import { Suspense } from "react";
 import { PostList } from "#components/Post/PostList";
 import { PostSearch } from "#components/Post/PostSearch";
 import { Pagination } from "#components/ui/Pagination";
@@ -77,7 +78,9 @@ export const Search: React.FC<SearchBlockProps> = async ({
 
   return (
     <>
-      <PostSearch categories={filteredCategories} title={title} />
+      <Suspense fallback={null}>
+        <PostSearch categories={filteredCategories} title={title} />
+      </Suspense>
       <PostList posts={posts.docs} locale={locale} />
       <Pagination
       // totalPages={posts.totalPages}
