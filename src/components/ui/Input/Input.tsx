@@ -35,6 +35,7 @@ function Input({ className, variant, type = "text", ...props }: InputProps) {
       type={type}
       data-slot="input"
       className={cn(inputVariants({ variant, className }))}
+      suppressHydrationWarning
       {...props}
     />
   );
