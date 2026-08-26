@@ -7,11 +7,6 @@ import { generateMeta } from "#lib/generateMeta";
 import { getAllSlugs, getBySlug } from "#lib/services/PageService";
 import type { PageQueryArgs } from "#types/args";
 
-// Force static generation for all pages at build time
-export const dynamic = "force-static";
-// Revalidate static pages every 24 hours (86400 seconds)
-export const revalidate = 86400;
-
 type Args = Readonly<{
   params: Promise<PageQueryArgs>;
   searchParams: Promise<{
