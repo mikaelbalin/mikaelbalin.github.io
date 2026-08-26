@@ -39,6 +39,8 @@ export const getBySlug = cache(async ({ slug }: PostQueryArgs) => {
     },
     select: {
       content: true,
+      meta: true,
+      slug: true,
     },
   });
 
