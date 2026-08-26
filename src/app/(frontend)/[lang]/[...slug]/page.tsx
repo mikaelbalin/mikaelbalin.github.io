@@ -7,6 +7,9 @@ import { generateMeta } from "#lib/generateMeta";
 import { getAllSlugs, getBySlug } from "#lib/services/PageService";
 import type { PageQueryArgs } from "#types/args";
 
+// This catch-all route reads `searchParams` (category/page), so it must render dynamically.
+export const dynamic = "force-dynamic";
+
 type Args = Readonly<{
   params: Promise<PageQueryArgs>;
   searchParams: Promise<{
